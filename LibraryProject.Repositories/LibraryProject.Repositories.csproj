@@ -10,9 +10,4 @@
     <ProjectReference Include="..\LibraryProject.Entities\LibraryProject.Entities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Contract\" />
-    <Folder Include="Concrete\" />
-  </ItemGroup>
-
 </Project>

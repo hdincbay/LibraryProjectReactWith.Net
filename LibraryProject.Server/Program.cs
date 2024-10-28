@@ -1,5 +1,7 @@
 using LibraryProject.Entities.Model;
 using LibraryProject.Repositories;
+using LibraryProject.Repositories.Concrete;
+using LibraryProject.Repositories.Contract;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -33,6 +35,11 @@ builder.Services.AddIdentity<User, Role>(options =>
     options.Password.RequireDigit = false;
 
 }).AddEntityFrameworkStores<RepositoryContext>();
+
+builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<ILoanRepository, LoanRepository>();
+builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

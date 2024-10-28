@@ -1,4 +1,6 @@
-﻿using LibraryProject.Repositories;
+﻿using LibraryProject.Entities.Model;
+using LibraryProject.Repositories;
+using LibraryProject.Server.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,8 +22,14 @@ namespace LibraryProject.Server.Controllers
         {
             try
             {
-
-                _context.Book!.Add(new() { Name = "Beyaz Diş", SerialNumber = "B00001", AuthorId = 1});
+                Tool tool = new Tool(_context);
+                var book = new Book()
+                {
+                    SerialNumber = tool.GetSerialNumber(),
+                    Name = "Çalıkuşu"
+                };
+                
+                _context.Book!.Add(book);
                 await _context.SaveChangesAsync();
                 return Ok();
             }

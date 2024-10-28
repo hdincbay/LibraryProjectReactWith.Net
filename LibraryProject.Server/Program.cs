@@ -2,6 +2,8 @@ using LibraryProject.Entities.Model;
 using LibraryProject.Repositories;
 using LibraryProject.Repositories.Concrete;
 using LibraryProject.Repositories.Contract;
+using LibraryProject.Services.Concrete;
+using LibraryProject.Services.Contract;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -14,11 +16,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllOrigins",
-        builder =>
+        corspolicybuilder =>
         {
-            builder.AllowAnyOrigin()
-                   .AllowAnyMethod()
-                   .AllowAnyHeader();
+            corspolicybuilder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
         });
 });
 builder.Services.AddDbContext<RepositoryContext>(option =>
@@ -40,6 +40,11 @@ builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<ILoanRepository, LoanRepository>();
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
+
+builder.Services.AddScoped<IAuthorService, AuthorService>();
+builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<ILoanService, LoanService>();
+builder.Services.AddScoped<IServiceManager, ServiceManager>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -38,9 +38,9 @@ namespace LibraryProject.Services.Concrete
 
         public Loan? GetOne(int id, bool trackChanges) => _manager.Loan.GetOneLoan(id, trackChanges);
 
-        public void UpdateOne(int id)
+        public void UpdateOne(Loan loan)
         {
-            var model = _manager.Loan.GetOneLoan(id, true);
+            var model = _manager.Loan.GetOneLoan(loan.LoanId, true);
             if (model is not null)
             {
                 _manager.Loan.UpdateOneLoan(model);

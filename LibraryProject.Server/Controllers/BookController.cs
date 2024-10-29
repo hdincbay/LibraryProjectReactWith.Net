@@ -5,6 +5,7 @@ using LibraryProject.Services.Contract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
+using System.Xml.Linq;
 
 namespace LibraryProject.Server.Controllers
 {
@@ -48,12 +49,59 @@ namespace LibraryProject.Server.Controllers
                 return BadRequest(ex.ToString());
             }
         }
-        [HttpPut("UpdatedBook")]
+        [HttpPut("UpdateBook")]
         public async Task<IActionResult> UpdateBook()
         {
             try
             {
-                return Ok();
+                Tool tool = new Tool(_context);
+                var bodyContent = "";
+                using (var reader = new StreamReader(Request.Body))
+                {
+                    bodyContent = await reader.ReadToEndAsync();
+                    var requestJObj = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(bodyContent)!;
+                    var book = _manager.BookService.GetOne(Convert.ToInt32(requestJObj["bookId"]?.ToString()), true);
+                    if(book is not null)
+                    {
+                        book.Name = requestJObj["name"]?.ToString();
+                        book.AuthorId = Convert.ToInt32(requestJObj["authorId"]?.ToString());
+                        _manager.BookService.UpdateOne(book!);
+                        return Ok("Book Updated successfully.");
+                    }
+                    else
+                    {
+                        return BadRequest("Book undefined");
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
+        [HttpDelete("DeleteBook")]
+        public async Task<IActionResult> DeleteBook()
+        {
+            try
+            {
+                Tool tool = new Tool(_context);
+                var bodyContent = "";
+                using (var reader = new StreamReader(Request.Body))
+                {
+                    bodyContent = await reader.ReadToEndAsync();
+                    var requestJObj = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(bodyContent)!;
+                    var bookId = Convert.ToInt32(requestJObj["bookId"]?.ToString());
+                    var book = _manager.BookService.GetOne(bookId, true);
+                    if (book is not null)
+                    {
+                        _manager.BookService.DeleteOne(bookId);
+                        return Ok("Book Deleted successfully.");
+                    }
+                    else
+                    {
+                        return BadRequest("Book undefined");
+                    }
+                }
             }
             catch(Exception ex)
             {

@@ -38,9 +38,9 @@ namespace LibraryProject.Services.Concrete
 
         public Book? GetOne(int id, bool trackChanges) => _manager.Book.GetOneBook(id, trackChanges);
 
-        public void UpdateOne(int id)
+        public void UpdateOne(Book book)
         {
-            var model = _manager.Book.GetOneBook(id, true);
+            var model = _manager.Book.GetOneBook(book.BookId, true);
             if(model is not null)
             {
                 _manager.Book.UpdateOneBook(model);

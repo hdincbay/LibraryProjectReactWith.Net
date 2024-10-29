@@ -12,7 +12,7 @@ namespace LibraryProject.Services.Contract
         public IEnumerable<Author?> GetAll(bool trackChanges);
         public Author? GetOne(int id, bool trackChanges);
         public void CreateOne(Author author);
-        public void UpdateOne(int id);
+        public void UpdateOne(Author author);
         public void DeleteOne(int id);
     }
 }

@@ -8,6 +8,10 @@ namespace LibraryProject.Entities.Model
 {
     public class Book
     {
+        public Book()
+        {
+            CreatedDate = DateTime.UtcNow;
+        }
         public int BookId { get; set; }
         public string? Name { get; set; }
         public string? SerialNumber { get; set; }
@@ -15,5 +19,6 @@ namespace LibraryProject.Entities.Model
         public Author? Author { get; set; }
         public bool Available { get; set; } = true;
         public DateTime LoanDate { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 }

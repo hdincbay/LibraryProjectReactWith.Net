@@ -1,7 +1,11 @@
-﻿using LibraryProject.Repositories;
+﻿using LibraryProject.Entities.Model;
+using LibraryProject.Repositories;
+using LibraryProject.Server.Helpers;
+using LibraryProject.Services.Contract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 
 namespace LibraryProject.Server.Controllers
 {
@@ -9,23 +13,135 @@ namespace LibraryProject.Server.Controllers
     [ApiController]
     public class AuthorController : ControllerBase
     {
-        private readonly RepositoryContext _context;
-        public AuthorController(RepositoryContext context)
+        private readonly IServiceManager _manager;
+        public AuthorController(IServiceManager manager)
         {
-            _context = context;
+            _manager = manager;
+        }
+        [HttpGet("GetById/{id:int}")]
+        public async Task<IActionResult> GetById([FromRoute] int id)
+        {
+            try
+            {
+                var author = await Task.Run(() =>
+                {
+                    return _manager.AuthorService.GetOne(id, true);
+                });
+                if (author is not null)
+                    return Ok(author);
+                else
+                    return BadRequest("Author Undefined.");
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAll()
+        {
+            try
+            {
+                var authorList = await Task.Run(() =>
+                {
+                    return _manager.AuthorService.GetAll(false);
+                });
+                return Ok(authorList);
+
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
         }
         [HttpPost("Create")]
         public async Task<IActionResult> Create()
         {
             try
             {
-                _context.Author!.Add(new() { Name = "Harun", Surname = "Kaya" });
-                await _context.SaveChangesAsync();
-                return Ok();
+                var bodyContent = "";
+                using (var reader = new StreamReader(Request.Body))
+                {
+                    bodyContent = await reader.ReadToEndAsync();
+                    var requestJObj = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(bodyContent)!;
+                    var author = new Author()
+                    {
+                        Name = requestJObj["name"]?.ToString(),
+                        Surname = requestJObj["surName"]?.ToString()
+                    };
+
+                    await Task.Run(() =>
+                    {
+                        _manager.AuthorService.CreateOne(author);
+                    });
+                    return Ok("Author Created successfully.");
+                }
             }
             catch(Exception ex)
             {
                 return BadRequest(ex.ToString());
+            }
+        }
+        [HttpPut("Update")]
+        public async Task<IActionResult> Update()
+        {
+            try
+            {
+                var bodyContent = "";
+                using (var stream = new StreamReader(Request.Body))
+                {
+                    bodyContent = await stream.ReadToEndAsync();
+                    var requestJObj = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(bodyContent)!;
+                    var author = await Task.Run(() =>
+                    {
+                        return _manager.AuthorService.GetOne(Convert.ToInt32(requestJObj["authorId"]?.ToString()), true);
+
+                    });
+                    if (author is not null)
+                    {
+                        await Task.Run(() =>
+                        {
+                            _manager.AuthorService.UpdateOne(author);
+                        });
+                        return Ok("Author Updated successfully.");
+                    }
+                    else
+                    {
+                        return BadRequest("Author Undefined");
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
+        [HttpDelete("DeleteById/{id:int}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            try
+            {
+                var author = await Task.Run(() =>
+                {
+                    return _manager.AuthorService.GetOne(id, true);
+                });
+                if (author is not null)
+                {
+                    await Task.Run(() =>
+                    {
+                        _manager.AuthorService.DeleteOne(id);
+                    });
+                    return Ok("Author Deleted succesfully.");
+                }
+                else
+                {
+                    return BadRequest("Author Undefined");
+                }
+            }
+            
+            catch(Exception ex)
+            {
+                return BadRequest(ex.ToString());   
             }
         }
         [HttpGet("GetBookListByAuthorId/{id:int}")]
@@ -33,7 +149,11 @@ namespace LibraryProject.Server.Controllers
         {
             try
             {
-                var bookList = await _context.Book!.Where(b => b.AuthorId.Equals(id)).ToListAsync();
+                var author = await Task.Run(() =>
+                {
+                    return _manager.AuthorService.GetOne(id, true);
+                });
+                var bookList = author!.Books!.ToList();
                 return Ok("bookList: " + bookList.Count + bookList.First().Name);
             }
             catch (Exception ex)

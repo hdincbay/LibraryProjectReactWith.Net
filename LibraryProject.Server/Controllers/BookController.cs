@@ -21,9 +21,44 @@ namespace LibraryProject.Server.Controllers
             _context = context;
             _manager = manager;
         }
+        [HttpGet("GetById/{id:int}")]
+        public async Task<IActionResult> GetById([FromRoute] int id)
+        {
+            try
+            {
+                var book = await Task.Run(() =>
+                {
+                    return _manager.BookService.GetOne(id, true);
+                });
+                if (book is not null)
+                    return Ok(book);
+                else
+                    return BadRequest("Book Undefined.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAll()
+        {
+            try
+            {
+                var bookList = await Task.Run(() =>
+                {
+                    return _manager.BookService.GetAll(false);
+                });
+                return Ok(bookList);
 
-        [HttpPost("CreateBook")]
-        public async Task<IActionResult> CreateBook()
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
+        [HttpPost("Create")]
+        public async Task<IActionResult> Create()
         {
             try
             {
@@ -40,7 +75,10 @@ namespace LibraryProject.Server.Controllers
                         AuthorId = Convert.ToInt32(requestJObj["authorId"]?.ToString())
                     };
 
-                    _manager.BookService.CreateOne(book);
+                    await Task.Run(() =>
+                    {
+                        _manager.BookService.CreateOne(book);
+                    });
                     return Ok("Book Created successfully.");
                 }
             }
@@ -49,8 +87,8 @@ namespace LibraryProject.Server.Controllers
                 return BadRequest(ex.ToString());
             }
         }
-        [HttpPut("UpdateBook")]
-        public async Task<IActionResult> UpdateBook()
+        [HttpPut("Update")]
+        public async Task<IActionResult> Update()
         {
             try
             {
@@ -60,12 +98,19 @@ namespace LibraryProject.Server.Controllers
                 {
                     bodyContent = await reader.ReadToEndAsync();
                     var requestJObj = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(bodyContent)!;
-                    var book = _manager.BookService.GetOne(Convert.ToInt32(requestJObj["bookId"]?.ToString()), true);
+                    var book = await Task.Run(() =>
+                    {
+                        return _manager.BookService.GetOne(Convert.ToInt32(requestJObj["bookId"]?.ToString()), true);
+                    });
+
                     if(book is not null)
                     {
                         book.Name = requestJObj["name"]?.ToString();
                         book.AuthorId = Convert.ToInt32(requestJObj["authorId"]?.ToString());
-                        _manager.BookService.UpdateOne(book!);
+                        await Task.Run(() =>
+                        {
+                            _manager.BookService.UpdateOne(book!);
+                        });
                         return Ok("Book Updated successfully.");
                     }
                     else
@@ -79,28 +124,23 @@ namespace LibraryProject.Server.Controllers
                 return BadRequest(ex.ToString());
             }
         }
-        [HttpDelete("DeleteBook")]
-        public async Task<IActionResult> DeleteBook()
+        [HttpDelete("Delete/{id:int}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
         {
             try
             {
-                Tool tool = new Tool(_context);
-                var bodyContent = "";
-                using (var reader = new StreamReader(Request.Body))
+                var book = await Task.Run(() =>
                 {
-                    bodyContent = await reader.ReadToEndAsync();
-                    var requestJObj = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(bodyContent)!;
-                    var bookId = Convert.ToInt32(requestJObj["bookId"]?.ToString());
-                    var book = _manager.BookService.GetOne(bookId, true);
-                    if (book is not null)
-                    {
-                        _manager.BookService.DeleteOne(bookId);
-                        return Ok("Book Deleted successfully.");
-                    }
-                    else
-                    {
-                        return BadRequest("Book undefined");
-                    }
+                    return _manager.BookService.GetOne(id, true);
+                });
+                if (book is not null)
+                {
+                    _manager.BookService.DeleteOne(id);
+                    return Ok("Book Deleted successfully.");
+                }
+                else
+                {
+                    return BadRequest("Book undefined");
                 }
             }
             catch(Exception ex)

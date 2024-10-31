@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryProject.Repositories
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryProject.Services", "LibraryProject.Services\LibraryProject.Services.csproj", "{844F302F-95B5-4709-84A1-200771BBA642}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryProject.WebSocketServer", "LibraryProject.WebSocketServer\LibraryProject.WebSocketServer.csproj", "{5D74CA93-F22B-4534-9EB7-44A1A19CAE41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{844F302F-95B5-4709-84A1-200771BBA642}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{844F302F-95B5-4709-84A1-200771BBA642}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{844F302F-95B5-4709-84A1-200771BBA642}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D74CA93-F22B-4534-9EB7-44A1A19CAE41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D74CA93-F22B-4534-9EB7-44A1A19CAE41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D74CA93-F22B-4534-9EB7-44A1A19CAE41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D74CA93-F22B-4534-9EB7-44A1A19CAE41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

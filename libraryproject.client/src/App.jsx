@@ -5,7 +5,7 @@ function App() {
     const [forecasts, setForecasts] = useState();
 
     useEffect(() => {
-        populateWeatherData();
+        bookList();
     }, []);
 
     const contents = forecasts === undefined
@@ -33,13 +33,12 @@ function App() {
 
     return (
         <div>
-            <h1 id="tableLabel">Weather forecast</h1>
-            <p>This component demonstrates fetching data from the server.</p>
+            <h1 id="tableLabel">Book List</h1>
             {contents}
         </div>
     );
     
-    async function populateWeatherData() {
+    async function bookList() {
         const response = await fetch('https://localhost:7275/api/Book/GetAll');
         const data = await response.json();
         setForecasts(data);

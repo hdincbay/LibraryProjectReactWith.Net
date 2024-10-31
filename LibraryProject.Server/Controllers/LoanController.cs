@@ -24,8 +24,15 @@ namespace LibraryProject.Server.Controllers
                 {
                     return _manager.LoanService.GetOne(id, false);
                 });
-                var book = loan!.Book!.Name!.ToString();
-                return Ok(book);
+                if(loan is not null)
+                {
+                    var book = loan!.Book!.Name!.ToString();
+                    return Ok(book);
+                }
+                else
+                {
+                    return BadRequest("Loan Undefined.");
+                }
             }
             catch (Exception ex)
             {

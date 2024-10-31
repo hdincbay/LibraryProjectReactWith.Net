@@ -116,7 +116,7 @@ namespace LibraryProject.Server.Controllers
                 return BadRequest(ex.ToString());
             }
         }
-        [HttpDelete("DeleteById/{id:int}")]
+        [HttpDelete("Delete/{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             try

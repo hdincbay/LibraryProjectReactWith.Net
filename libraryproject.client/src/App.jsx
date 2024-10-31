@@ -13,19 +13,19 @@ function App() {
         : <table className="table table-striped" aria-labelledby="tableLabel">
             <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Temp. (C)</th>
-                    <th>Temp. (F)</th>
-                    <th>Summary</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Serial No</th>
+                    <th>Available</th>
                 </tr>
             </thead>
             <tbody>
                 {forecasts.map(forecast =>
-                    <tr key={forecast.date}>
-                        <td>{forecast.date}</td>
-                        <td>{forecast.temperatureC}</td>
-                        <td>{forecast.temperatureF}</td>
-                        <td>{forecast.summary}</td>
+                    <tr key={forecast.bookId}>
+                        <td>{forecast.bookId}</td>
+                        <td>{forecast.name}</td>
+                        <td>{forecast.serialNumber}</td>
+                        <td>{forecast.available}</td>
                     </tr>
                 )}
             </tbody>
@@ -40,7 +40,7 @@ function App() {
     );
     
     async function populateWeatherData() {
-        const response = await fetch('https://localhost:7275/WeatherForecast/Get');
+        const response = await fetch('https://localhost:7275/api/Book/GetAll');
         const data = await response.json();
         setForecasts(data);
     }

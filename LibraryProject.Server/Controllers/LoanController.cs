@@ -15,7 +15,7 @@ namespace LibraryProject.Server.Controllers
         {
             _manager = manager;
         }
-        [HttpGet("GetById/{id:int}")]
+        [HttpGet("GetBookByLoanId/{id:int}")]
         public async Task<IActionResult> GetBookByLoanId([FromRoute] int id)
         {
             try

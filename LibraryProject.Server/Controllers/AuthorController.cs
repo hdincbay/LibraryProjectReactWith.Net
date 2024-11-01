@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
+using RestSharp;
 
 namespace LibraryProject.Server.Controllers
 {
@@ -14,9 +15,11 @@ namespace LibraryProject.Server.Controllers
     public class AuthorController : ControllerBase
     {
         private readonly IServiceManager _manager;
-        public AuthorController(IServiceManager manager)
+        private readonly IConfiguration _configuration;
+        public AuthorController(IServiceManager manager, IConfiguration configuration)
         {
             _manager = manager;
+            _configuration = configuration;
         }
         [HttpGet("GetById/{id:int}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
@@ -74,6 +77,11 @@ namespace LibraryProject.Server.Controllers
                     {
                         _manager.AuthorService.CreateOne(author);
                     });
+                    var client = new RestClient();
+                    string websocketurl = _configuration["websocketurl"]?.ToString()!;
+                    var endpoint = websocketurl + "/api/Author/Control";
+                    var request = new RestRequest(endpoint, Method.Post);
+                    await client.ExecuteAsync(request);
                     return Ok("Author Created successfully.");
                 }
             }
@@ -103,6 +111,10 @@ namespace LibraryProject.Server.Controllers
                         {
                             _manager.AuthorService.UpdateOne(author);
                         });
+                        var client = new RestClient();
+                        string websocketurl = _configuration["websocketurl"]?.ToString()!;
+                        var endpoint = websocketurl + "/api/Author/Control";
+                        var request = new RestRequest(endpoint, Method.Post);
                         return Ok("Author Updated successfully.");
                     }
                     else

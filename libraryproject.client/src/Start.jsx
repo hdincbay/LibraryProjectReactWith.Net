@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import './Start.css';
 
 function Start() {
-    const [forecasts, setForecasts] = useState([]);
+    const [authors, setAuthors] = useState([]);
     const [error, setError] = useState(null);
     const [socket, setSocket] = useState(null);
 
     const connectWebSocket = () => {
-        const newSocket = new WebSocket('ws://localhost:7276/');
+        const newSocket = new WebSocket('ws://localhost:7276/AuthorList/');
 
         newSocket.onopen = () => {
             console.log('WebSocket baðlantýsý açýldý.');
@@ -17,12 +17,13 @@ function Start() {
             console.log('Gelen mesaj:', event.data);
             try {
                 const data = JSON.parse(event.data);
-                // Eðer gelen veri bir dizi ise, doðrudan setForecasts ile güncelle
-                if (Array.isArray(data)) {
-                    setForecasts(prevForecasts => [...prevForecasts, ...data]);
-                } else {
-                    setForecasts(prevForecasts => [...prevForecasts, data]);
-                }
+                setAuthors(prevAuthors => {
+                    const existingIds = new Set(prevAuthors.map(author => author.authorId));
+                    const newAuthors = Array.isArray(data) ? data : [data];
+
+                    // Yeni yazarlarý mevcut listeden filtreleyerek güncelle
+                    return [...prevAuthors, ...newAuthors.filter(author => !existingIds.has(author.authorId))];
+                });
             } catch (e) {
                 console.error('JSON parse hatasý:', e);
                 setError('Veri iþleme hatasý.');
@@ -32,15 +33,12 @@ function Start() {
         newSocket.onerror = (error) => {
             console.error('WebSocket hatasý:', error);
             setError('WebSocket baðlantý hatasý. Yeniden deniyor...');
-            // Yeniden baðlanmayý dene
-            setTimeout(connectWebSocket, 5000);
         };
 
         newSocket.onclose = () => {
             console.log('WebSocket baðlantýsý kapandý. Yeniden deniyor...');
-            // Yeniden baðlanmayý dene
             setError('WebSocket baðlantýsý kapandý. Yeniden deniyor...');
-            setTimeout(connectWebSocket, 5000);
+            setTimeout(connectWebSocket, 5000); // Baðlantý kapandýðýnda yeniden baðlanmayý dene
         };
 
         setSocket(newSocket);
@@ -48,18 +46,16 @@ function Start() {
 
     useEffect(() => {
         connectWebSocket();
-
-        // Temizleme iþlemi
         return () => {
             if (socket) {
                 socket.close();
             }
         };
-    }, []);
+    }, []); // Boþ baðýmlýlýk dizisi ile yalnýzca ilk render'da baðlanýr
 
     const contents = error ? (
         <p><em>{error}</em></p>
-    ) : forecasts.length === 0 ? (
+    ) : authors.length === 0 ? (
         <p><em>Loading...</em></p>
     ) : (
         <table className="table table-striped" aria-labelledby="tableLabel">
@@ -70,10 +66,10 @@ function Start() {
                 </tr>
             </thead>
             <tbody>
-                {forecasts.map(forecast => (
-                    <tr key={forecast.authorId}>
-                        <td>{forecast.authorId}</td>
-                        <td>{forecast.name}</td>
+                {authors.map(author => (
+                    <tr key={author.authorId}>
+                        <td>{author.authorId}</td>
+                        <td>{author.name}</td>
                     </tr>
                 ))}
             </tbody>

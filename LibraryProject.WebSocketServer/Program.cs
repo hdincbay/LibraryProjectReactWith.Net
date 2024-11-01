@@ -5,40 +5,25 @@ using Microsoft.Extensions.Hosting;
 using RestSharp;
 using System.Net.WebSockets;
 using System.Text;
+using System.Collections.Concurrent;
 
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-// WebSocket middleware'ini ekleyin
 app.UseWebSockets();
 
-app.Map("/", async context =>
+var clients = new ConcurrentDictionary<WebSocket, string>(); // Ýstemci baðlantýlarýný saklamak için
+
+
+app.Map("/AuthorList/", async context =>
 {
     if (context.WebSockets.IsWebSocketRequest)
     {
         using var webSocket = await context.WebSockets.AcceptWebSocketAsync();
+        clients.TryAdd(webSocket, null);
         Console.WriteLine("Yeni bir istemci baðlandý.");
+        await SendAllAuthors(webSocket);
 
-        // REST API'den veri çekme
-        var client = new RestClient();
-        string endpoint = "https://localhost:7275/api/Author/GetAll";
-        var request = new RestRequest(endpoint, Method.Get);
-        var response = await client.ExecuteAsync(request);
-
-        if (response.IsSuccessful)
-        {
-            // Gelen veriyi WebSocket üzerinden gönderme
-            var bytes = Encoding.UTF8.GetBytes(response.Content!);
-            await webSocket.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
-        }
-        else
-        {
-            Console.WriteLine("API isteði baþarýsýz oldu: " + response.ErrorMessage);
-            var errorMessage = Encoding.UTF8.GetBytes("API isteði baþarýsýz oldu: " + response.ErrorMessage);
-            await webSocket.SendAsync(new ArraySegment<byte>(errorMessage), WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
-        }
-
-        // Mesaj alma döngüsü
         var buffer = new byte[1024 * 4];
         WebSocketReceiveResult result = null;
 
@@ -57,7 +42,8 @@ app.Map("/", async context =>
         }
         finally
         {
-            if (result != null && result.CloseStatus.HasValue)
+            clients.TryRemove(webSocket, out _);
+            if (result?.CloseStatus.HasValue == true)
             {
                 await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, System.Threading.CancellationToken.None);
                 Console.WriteLine("Ýstemci baðlantýsý kapandý.");
@@ -66,29 +52,39 @@ app.Map("/", async context =>
     }
     else
     {
-        context.Response.StatusCode = 400; // Bad Request
+        context.Response.StatusCode = 400;
     }
 });
 
-// API endpoint'leri
-app.MapGet("/api/Author/GetAll", async context =>
+app.MapPost("/api/Author/Control", async context =>
+{
+    var restclient = new RestClient();
+    string endpoint = "https://localhost:7275/api/Author/GetAll";
+    var request = new RestRequest(endpoint, Method.Get);
+    var response = await restclient.ExecuteAsync(request);
+    // Tüm istemcilere yeni veriyi gönder
+    var bytes = Encoding.UTF8.GetBytes(response.Content!);
+    foreach (var client in clients.Keys)
+    {
+        await client.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
+    }
+
+    context.Response.StatusCode = 200;
+});
+
+async Task SendAllAuthors(WebSocket webSocket)
 {
     var client = new RestClient();
     string endpoint = "https://localhost:7275/api/Author/GetAll";
     var request = new RestRequest(endpoint, Method.Get);
     var response = await client.ExecuteAsync(request);
 
-    context.Response.ContentType = "application/json";
     if (response.IsSuccessful)
     {
-        await context.Response.WriteAsync(response.Content!);
+        var bytes = Encoding.UTF8.GetBytes(response.Content!);
+        await webSocket.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
     }
-    else
-    {
-        context.Response.StatusCode = (int)response.StatusCode;
-        await context.Response.WriteAsync("API isteði baþarýsýz oldu.");
-    }
-});
-
-// Sunucuyu baþlat
-app.Run("http://localhost:7276");
+}
+var configuration = builder.Configuration;
+var url = configuration["url"];
+app.Run(url);

@@ -17,13 +17,17 @@ function Start() {
             console.log('Gelen mesaj:', event.data);
             try {
                 const data = JSON.parse(event.data);
-                setAuthors(prevAuthors => {
-                    const existingIds = new Set(prevAuthors.map(author => author.authorId));
-                    const newAuthors = Array.isArray(data) ? data : [data];
 
-                    // Yeni yazarlarý mevcut listeden filtreleyerek güncelle
-                    return [...prevAuthors, ...newAuthors.filter(author => !existingIds.has(author.authorId))];
-                });
+                // Eðer gelen veri bir dizi ise, yazar listesini güncelle
+                if (Array.isArray(data)) {
+                    setAuthors(data);
+                } else {
+                    // Tekil yazar verisi gelirse, mevcut listeyi güncelle
+                    setAuthors(prevAuthors => {
+                        const existingIds = new Set(prevAuthors.map(author => author.authorId));
+                        return [...prevAuthors, data].filter(author => !existingIds.has(author.authorId));
+                    });
+                }
             } catch (e) {
                 console.error('JSON parse hatasý:', e);
                 setError('Veri iþleme hatasý.');
@@ -38,7 +42,7 @@ function Start() {
         newSocket.onclose = () => {
             console.log('WebSocket baðlantýsý kapandý. Yeniden deniyor...');
             setError('WebSocket baðlantýsý kapandý. Yeniden deniyor...');
-            setTimeout(connectWebSocket, 5000); // Baðlantý kapandýðýnda yeniden baðlanmayý dene
+            setTimeout(connectWebSocket, 5000);
         };
 
         setSocket(newSocket);
@@ -51,7 +55,7 @@ function Start() {
                 socket.close();
             }
         };
-    }, []); // Boþ baðýmlýlýk dizisi ile yalnýzca ilk render'da baðlanýr
+    }, []);
 
     const contents = error ? (
         <p><em>{error}</em></p>

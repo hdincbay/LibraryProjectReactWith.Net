@@ -79,7 +79,7 @@ namespace LibraryProject.Server.Controllers
                     });
                     var client = new RestClient();
                     string websocketurl = _configuration["websocketurl"]?.ToString()!;
-                    var endpoint = websocketurl + "/api/Author/Control";
+                    var endpoint = websocketurl + "/api/Author/Data";
                     var request = new RestRequest(endpoint, Method.Post);
                     await client.ExecuteAsync(request);
                     return Ok("Author Created successfully.");
@@ -107,14 +107,17 @@ namespace LibraryProject.Server.Controllers
                     });
                     if (author is not null)
                     {
+                        author.Name = requestJObj["name"]?.ToString();
+                        author.Surname = requestJObj["surName"]?.ToString();
                         await Task.Run(() =>
                         {
                             _manager.AuthorService.UpdateOne(author);
                         });
                         var client = new RestClient();
                         string websocketurl = _configuration["websocketurl"]?.ToString()!;
-                        var endpoint = websocketurl + "/api/Author/Control";
+                        var endpoint = websocketurl + "/api/Author/Data";
                         var request = new RestRequest(endpoint, Method.Post);
+                        await client.ExecuteAsync(request);
                         return Ok("Author Updated successfully.");
                     }
                     else
@@ -143,6 +146,11 @@ namespace LibraryProject.Server.Controllers
                     {
                         _manager.AuthorService.DeleteOne(id);
                     });
+                    var client = new RestClient();
+                    string websocketurl = _configuration["websocketurl"]?.ToString()!;
+                    var endpoint = websocketurl + "/api/Author/Data";
+                    var request = new RestRequest(endpoint, Method.Post);
+                    var response = await client.ExecuteAsync(request);
                     return Ok("Author Deleted succesfully.");
                 }
                 else

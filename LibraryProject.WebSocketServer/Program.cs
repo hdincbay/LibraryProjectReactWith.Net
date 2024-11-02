@@ -56,7 +56,7 @@ app.Map("/AuthorList/", async context =>
     }
 });
 
-app.MapPost("/api/Author/Control", async context =>
+app.MapPost("/api/Author/Data", async context =>
 {
     var restclient = new RestClient();
     string endpoint = "https://localhost:7275/api/Author/GetAll";

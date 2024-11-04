@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
-import './Start.css';
+import './User.css';
 
-function Start() {
-    const [authors, setAuthors] = useState([]);
+function User() {
+    const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
     const [socket, setSocket] = useState(null);
 
     const connectWebSocket = () => {
-        const newSocket = new WebSocket('ws://localhost:7276/AuthorList/');
+        const newSocket = new WebSocket('ws://localhost:7276/UserList/');
 
         newSocket.onopen = () => {
-            console.log('WebSocket baglantisi acildi.');
-            // Yazar listesini talep eden bir mesaj gönderebilirsiniz
+            console.log('WebSocket baðlantýsý açýldý.');
+            // Kullanýcý listesini talep eden bir mesaj gönderebilirsiniz
             newSocket.send(JSON.stringify("Hello"));
         };
 
@@ -19,34 +19,33 @@ function Start() {
             console.log('Gelen mesaj:', event.data);
             try {
                 const data = JSON.parse(event.data);
-                if (data != null || data != [] || data != "")
-                {
-                    // Eðer gelen veri bir dizi ise, yazar listesini güncelle
+                if (data) {
+                    // Eðer gelen veri bir dizi ise, kullanýcý listesini güncelle
                     if (Array.isArray(data)) {
-                        setAuthors(data);
+                        setUsers(data);
                     } else {
-                        // Tekil yazar verisi gelirse, mevcut listeyi güncelle
-                        setAuthors(prevAuthors => {
-                            const existingIds = new Set(prevAuthors.map(author => author.authorId));
-                            return [...prevAuthors, data].filter(author => !existingIds.has(author.authorId));
+                        // Tekil kullanýcý verisi gelirse, mevcut listeyi güncelle
+                        setUsers(prevUsers => {
+                            const existingIds = new Set(prevUsers.map(user => user.userId));
+                            return [...prevUsers, data].filter(user => !existingIds.has(user.userId));
                         });
                     }
                 }
-                
+
             } catch (e) {
                 console.error('JSON parse hatasý:', e);
-                setError('Veri isleme hatasi.');
+                setError('Veri iþleme hatasý.');
             }
         };
 
         newSocket.onerror = (error) => {
-            console.error('WebSocket hatasi:', error);
-            setError('WebSocket baglanti hatasi. Yeniden deniyor...');
+            console.error('WebSocket hatasý:', error);
+            setError('WebSocket baðlantý hatasý. Yeniden deniyor...');
         };
 
         newSocket.onclose = () => {
-            console.log('WebSocket baglantisi kapandi. Yeniden deniyor...');
-            setError('WebSocket baglantisi kapandi. Yeniden deniyor...');
+            console.log('WebSocket baðlantýsý kapandý. Yeniden deniyor...');
+            setError('WebSocket baðlantýsý kapandý. Yeniden deniyor...');
             setTimeout(connectWebSocket, 5000);
         };
 
@@ -64,8 +63,8 @@ function Start() {
 
     const contents = error ? (
         <p><em>{error}</em></p>
-    ) : authors.length === 0 ? (
-        <p><em>Book Undefined...</em></p>
+    ) : users.length === 0 ? (
+        <p><em>User Undefined...</em></p>
     ) : (
         <table className="table" aria-labelledby="tableLabel">
             <thead>
@@ -75,10 +74,10 @@ function Start() {
                 </tr>
             </thead>
             <tbody>
-                {authors.map(author => (
-                    <tr key={author.authorId}>
-                        <td>{author.authorId}</td>
-                        <td>{author.name}</td>
+                {users.map(user => (
+                    <tr key={user.userId}>
+                        <td>{user.userId}</td>
+                        <td>{user.name}</td>
                     </tr>
                 ))}
             </tbody>
@@ -87,10 +86,10 @@ function Start() {
 
     return (
         <div>
-            <h1 id="tableLabel">Author List</h1>
+            <h1 id="tableLabel">User List</h1>
             {contents}
         </div>
     );
 }
 
-export default Start;
+export default User;

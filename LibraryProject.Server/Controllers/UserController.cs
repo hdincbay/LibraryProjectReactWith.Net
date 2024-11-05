@@ -1,5 +1,6 @@
 ﻿using LibraryProject.Entities.Model;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,10 +13,12 @@ namespace LibraryProject.Server.Controllers
     public class UserController : ControllerBase
     {
         private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public UserController(UserManager<User> userManager)
+        public UserController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
         [HttpGet("GetAll")]
 
@@ -62,6 +65,36 @@ namespace LibraryProject.Server.Controllers
                 }
             }
             catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login()
+        {
+            try
+            {
+                using(var reader = new StreamReader(Request.Body))
+                {
+                    var requestContent = await reader.ReadToEndAsync();
+                    var requestJObj = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(requestContent);
+                    var userName = requestJObj!["userName"]?.ToString();
+                    var password = requestJObj!["password"]?.ToString();
+                    var user = await _userManager.FindByNameAsync(userName!);
+                    if (user is null)
+                        return Unauthorized("Invalid username or password.");
+                    var isLoggedin = await _signInManager.PasswordSignInAsync(user!, password!, true, true);
+                    if (isLoggedin.Succeeded)
+                    {
+                        return Ok("Login successful.");
+                    }
+                    else
+                    {
+                        return Unauthorized("Invalid username or password.");
+                    }
+                }
+            }
+            catch(Exception ex)
             {
                 return BadRequest(ex.ToString());
             }

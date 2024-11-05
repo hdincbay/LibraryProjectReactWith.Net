@@ -1,4 +1,5 @@
 ﻿using LibraryProject.Entities.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
@@ -20,6 +21,16 @@ namespace LibraryProject.Server.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
+        [HttpGet("GetCurrentUser")]
+        public async Task<IActionResult> GetCurrentUser()
+        {
+            var userName = await Task.Run(() =>
+            {
+                return User!.Identity!.Name;
+            }); // Giriş yapmış kullanıcının adını alır.
+            return Ok(new { UserName = userName });
+        }
+        [Authorize]
         [HttpGet("GetAll")]
 
         public async Task<IActionResult> GetAll()
@@ -98,6 +109,12 @@ namespace LibraryProject.Server.Controllers
             {
                 return BadRequest(ex.ToString());
             }
+        }
+        [HttpPost("Logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync(); // Çıkış işlemi yapılır
+            return Ok("User has been logged out successfully.");
         }
     }
 }

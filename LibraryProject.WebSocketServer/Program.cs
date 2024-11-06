@@ -6,14 +6,18 @@ using RestSharp;
 using System.Net.WebSockets;
 using System.Text;
 using System.Collections.Concurrent;
+using LibraryProject.WebSocketServer.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
 app.UseWebSockets();
-
+var configuration = builder.Configuration;
+var userName = configuration["name"]?.ToString()!;
+var password = configuration["password"]?.ToString()!;
+var restUrl = configuration["restUrl"]?.ToString()!;
 var clients = new ConcurrentDictionary<WebSocket, string>(); // Ýstemci baðlantýlarýný saklamak için
-
+var tool = new Tool();
 app.Map("/AuthorList/", async context =>
 {
     if (context.WebSockets.IsWebSocketRequest)
@@ -167,44 +171,55 @@ app.MapPost("/api/Author/Data", async context =>
 async Task SendAllAuthors(WebSocket webSocket)
 {
     var client = new RestClient();
-    string endpoint = "https://localhost:7275/api/Author/GetAll";
-    var request = new RestRequest(endpoint, Method.Get);
-    var response = await client.ExecuteAsync(request);
-
-    if (response.IsSuccessful)
+    var isLogin = await tool.Login(restUrl, client, userName, password);
+    if(isLogin)
     {
-        var bytes = Encoding.UTF8.GetBytes(response.Content!);
-        await webSocket.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
+        string endpoint = restUrl + "/api/Author/GetAll";
+        var request = new RestRequest(endpoint, Method.Get);
+        var response = await client.ExecuteAsync(request);
+
+        if (response.IsSuccessful)
+        {
+            var bytes = Encoding.UTF8.GetBytes(response.Content!);
+            await webSocket.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
+        }
     }
 }
 async Task SendAllBooks(WebSocket webSocket)
 {
     var client = new RestClient();
-    string endpoint = "https://localhost:7275/api/Book/GetAll";
-    var request = new RestRequest(endpoint, Method.Get);
-    var response = await client.ExecuteAsync(request);
-
-    if (response.IsSuccessful)
+    var isLogin = await tool.Login(restUrl, client, userName, password);
+    if(isLogin)
     {
-        var bytes = Encoding.UTF8.GetBytes(response.Content!);
-        await webSocket.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
+        string endpoint = restUrl + "/api/Book/GetAll";
+        var request = new RestRequest(endpoint, Method.Get);
+        var response = await client.ExecuteAsync(request);
+
+        if (response.IsSuccessful)
+        {
+            var bytes = Encoding.UTF8.GetBytes(response.Content!);
+            await webSocket.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
+        }
     }
 }
 async Task SendAllUsers(WebSocket webSocket)
 {
+    
     var client = new RestClient();
-    string endpoint = "https://localhost:7275/api/User/GetAll";
-    var request = new RestRequest(endpoint, Method.Get);
-    var response = await client.ExecuteAsync(request);
-
-    if (response.IsSuccessful)
+    var isLogin = await tool.Login(restUrl, client, userName, password);
+    if(isLogin)
     {
-        var bytes = Encoding.UTF8.GetBytes(response.Content!);
-        await webSocket.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
+        string endpoint = restUrl + "/api/User/GetAll";
+        var request = new RestRequest(endpoint, Method.Get);
+        var response = await client.ExecuteAsync(request);
+
+        if (response.IsSuccessful)
+        {
+            var bytes = Encoding.UTF8.GetBytes(response.Content!);
+            await webSocket.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
+        }
     }
 }
 
-
-var configuration = builder.Configuration;
 var url = configuration["url"];
 app.Run(url);

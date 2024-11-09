@@ -20,8 +20,7 @@ function App() {
             try {
                 const data = JSON.parse(event.data);
 
-                if (data != null || data != [] || data != "")
-                {
+                if (data != null || data != [] || data != "") {
                     // Eðer gelen veri bir dizi ise, kitap listesini güncelle
                     if (Array.isArray(data)) {
                         setBooks(data);
@@ -89,6 +88,7 @@ function App() {
         <div>
             <h1 id="tableLabel">Book List</h1>
             {contents}
+
         </div>
     );
 }

@@ -15,7 +15,7 @@ namespace LibraryProject.Server.Helpers
         {
             _configuration = configuration;
             var secretKey = _configuration["JwtSettings:SecretKey"];
-            _signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+            _signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey!));
         }
 
         public string GenerateJwtToken(IdentityUser user)

@@ -4,19 +4,12 @@ import './index.css'
 import App from './App.jsx'
 import Start from './Start.jsx'
 import User from './User.jsx'
+import { Routes, Route } from 'react-router-dom'
+import First from './First.jsx'
+import { BrowserRouter } from 'react-router-dom'
 
 createRoot(document.getElementById('root')).render(
-    <StrictMode>
-        <div className="row">
-            <div className="col-md-4">
-                <App />
-            </div>
-            <div className="col-md-4">
-                <Start />
-            </div>
-            <div className="col-md-4">
-                <User />
-            </div>
-        </div>
-  </StrictMode>
+    <BrowserRouter>
+        <First />
+  </BrowserRouter>
 )

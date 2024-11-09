@@ -1,0 +1,32 @@
+﻿#root {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+th, td {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.form-group {
+    display: flex;
+    align-items: baseline; /* Label ve input dikeyde hizalanacak */
+    margin-bottom: 1rem; /* Her grup arasında boşluk */
+}
+
+.form-label {
+    margin-right: 10px; /* Label ile input arasındaki boşluk */
+    width: 100px; /* Label'ın genişliğini sabitleyebiliriz */
+}
+
+.form-control {
+    flex: 1; /* Input alanını esnetir */
+}
+.login-body {
+    height: 100vh;
+}
+
+button {
+    margin-top: 10px; /* Butona biraz boşluk ekleyebiliriz */
+}

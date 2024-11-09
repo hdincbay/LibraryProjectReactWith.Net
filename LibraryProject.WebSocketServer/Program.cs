@@ -7,6 +7,7 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Collections.Concurrent;
 using LibraryProject.WebSocketServer.Helpers;
+using Newtonsoft.Json.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
@@ -171,11 +172,13 @@ app.MapPost("/api/Author/Data", async context =>
 async Task SendAllAuthors(WebSocket webSocket)
 {
     var client = new RestClient();
-    var isLogin = await tool.Login(restUrl, client, userName, password);
-    if(isLogin)
+    var token = await tool.Login(restUrl, client, userName, password);
+    if(token is not null)
     {
+        var tokenVal = Newtonsoft.Json.JsonConvert.DeserializeObject<string>(token);
         string endpoint = restUrl + "/api/Author/GetAll";
         var request = new RestRequest(endpoint, Method.Get);
+        request.AddHeader("Bearer", tokenVal!);
         var response = await client.ExecuteAsync(request);
 
         if (response.IsSuccessful)
@@ -188,11 +191,12 @@ async Task SendAllAuthors(WebSocket webSocket)
 async Task SendAllBooks(WebSocket webSocket)
 {
     var client = new RestClient();
-    var isLogin = await tool.Login(restUrl, client, userName, password);
-    if(isLogin)
+    var token = await tool.Login(restUrl, client, userName, password);
+    if(token is not null)
     {
         string endpoint = restUrl + "/api/Book/GetAll";
         var request = new RestRequest(endpoint, Method.Get);
+        request.AddHeader("Bearer", token);
         var response = await client.ExecuteAsync(request);
 
         if (response.IsSuccessful)
@@ -206,11 +210,14 @@ async Task SendAllUsers(WebSocket webSocket)
 {
     
     var client = new RestClient();
-    var isLogin = await tool.Login(restUrl, client, userName, password);
-    if(isLogin)
+    var token = await tool.Login(restUrl, client, userName, password);
+    if(token is not null)
     {
+        var tokenVal = Newtonsoft.Json.JsonConvert.DeserializeObject<string>(token);
         string endpoint = restUrl + "/api/User/GetAll";
         var request = new RestRequest(endpoint, Method.Get);
+        var param2 = string.Format("Bearer {0}", tokenVal!);
+        request.AddHeader("Authorization", param2);
         var response = await client.ExecuteAsync(request);
 
         if (response.IsSuccessful)

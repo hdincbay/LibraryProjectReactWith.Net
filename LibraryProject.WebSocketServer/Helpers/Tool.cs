@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 using System.Runtime.InteropServices.JavaScript;
 
@@ -6,7 +7,7 @@ namespace LibraryProject.WebSocketServer.Helpers
 {
     public class Tool
     {
-        public async Task<bool> Login(string url, RestClient client, string userName, string password)
+        public async Task<string> Login(string url, RestClient client, string userName, string password)
         {
             string endpoint = url + "/api/User/Login";
             var request = new RestRequest(endpoint, Method.Post);
@@ -17,8 +18,13 @@ namespace LibraryProject.WebSocketServer.Helpers
             request.AddBody(requestSrl);
             var response = await client.ExecuteAsync(request);
             if(response.IsSuccessStatusCode)
-                return true;
-            return false;
+            {
+                return response.Content!;
+            }
+            else
+            {
+                return null!;
+            }
         }
     }
 }

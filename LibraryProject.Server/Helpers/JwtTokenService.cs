@@ -22,9 +22,9 @@ namespace LibraryProject.Server.Helpers
         {
             var claims = new[]
             {
-            new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+            new Claim(JwtRegisteredClaimNames.Sub, user.UserName!),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim(ClaimTypes.Name, user.UserName)
+            new Claim(ClaimTypes.Name, user.UserName!)
         };
 
             var signingCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);

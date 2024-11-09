@@ -75,9 +75,9 @@ function User() {
             </thead>
             <tbody>
                 {users.map(user => (
-                    <tr key={user.userId}>
-                        <td>{user.userId}</td>
-                        <td>{user.name}</td>
+                    <tr key={user.id}>
+                        <td>{user.id}</td>
+                        <td>{user.userName}</td>
                     </tr>
                 ))}
             </tbody>

@@ -35,7 +35,6 @@ namespace LibraryProject.Server.Controllers
         }
         [Authorize]
         [HttpGet("GetAll")]
-
         public async Task<IActionResult> GetAll()
         {
             try

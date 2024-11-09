@@ -1,4 +1,5 @@
 ﻿using LibraryProject.Entities.Model;
+using LibraryProject.Server.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -15,11 +16,13 @@ namespace LibraryProject.Server.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly JwtTokenService _tokenService;
 
-        public UserController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public UserController(UserManager<User> userManager, SignInManager<User> signInManager, JwtTokenService tokenService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _tokenService = tokenService;
         }
         [HttpGet("GetCurrentUser")]
         public async Task<IActionResult> GetCurrentUser()
@@ -97,7 +100,8 @@ namespace LibraryProject.Server.Controllers
                     var isLoggedin = await _signInManager.PasswordSignInAsync(user!, password!, true, true);
                     if (isLoggedin.Succeeded)
                     {
-                        return Ok("Login successful.");
+                        var token = _tokenService.GenerateJwtToken(new() { UserName = userName });
+                        return Ok(token);
                     }
                     else
                     {

@@ -2,6 +2,7 @@ using LibraryProject.Entities.Model;
 using LibraryProject.Repositories;
 using LibraryProject.Repositories.Concrete;
 using LibraryProject.Repositories.Contract;
+using LibraryProject.Server.Helpers;
 using LibraryProject.Services.Concrete;
 using LibraryProject.Services.Contract;
 using Microsoft.AspNetCore.Identity;
@@ -21,6 +22,7 @@ builder.Services.AddCors(options =>
             corspolicybuilder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
         });
 });
+builder.Services.AddSingleton<JwtTokenService>();
 builder.Services.AddDbContext<RepositoryContext>(option =>
 {
     option.UseNpgsql(builder.Configuration.GetConnectionString("pgsqlconnection"), b => b.MigrationsAssembly("LibraryProject.Server"));

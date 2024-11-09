@@ -7,13 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryProject.Server", "Li
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "libraryproject.client", "libraryproject.client\libraryproject.client.esproj", "{99E1AB99-907D-44D6-A4FA-24F30EF44312}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryProject.Entities", "LibraryProject.Entities\LibraryProject.Entities.csproj", "{D9BE9CC8-039B-4AAA-B0CA-E3C60C558034}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryProject.Entities", "LibraryProject.Entities\LibraryProject.Entities.csproj", "{D9BE9CC8-039B-4AAA-B0CA-E3C60C558034}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryProject.Repositories", "LibraryProject.Repositories\LibraryProject.Repositories.csproj", "{09EA40D3-0047-467A-94E6-10413ABA6FDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryProject.Repositories", "LibraryProject.Repositories\LibraryProject.Repositories.csproj", "{09EA40D3-0047-467A-94E6-10413ABA6FDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryProject.Services", "LibraryProject.Services\LibraryProject.Services.csproj", "{844F302F-95B5-4709-84A1-200771BBA642}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryProject.Services", "LibraryProject.Services\LibraryProject.Services.csproj", "{844F302F-95B5-4709-84A1-200771BBA642}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryProject.WebSocketServer", "LibraryProject.WebSocketServer\LibraryProject.WebSocketServer.csproj", "{5D74CA93-F22B-4534-9EB7-44A1A19CAE41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryProject.WebSocketServer", "LibraryProject.WebSocketServer\LibraryProject.WebSocketServer.csproj", "{5D74CA93-F22B-4534-9EB7-44A1A19CAE41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

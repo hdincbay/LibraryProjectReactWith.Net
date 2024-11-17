@@ -47,30 +47,57 @@ function Login() {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-                <div className="form-group my-2">
-                    <label className="form-label">User Name</label>
-                    <input
-                        className="form-control my-2"
-                        type="text"
-                        value={userName}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
+            <div className="container">
+                <div className="row">
+                    <div style={{ height: '10rem' }} className="col-md-12"></div>
                 </div>
-                <div className="form-group">
-                    <label className="form-label">Password</label>
-                    <input
-                        className="form-control my-2"
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
+                <div className="row">
+                    <div className="col-md-6">
+                        <div className="display-6">
+                            Login Page
+                        </div>
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-group my-2">
+                                <label className="form-label">User Name</label>
+                                <input
+                                    className="form-control my-2"
+                                    type="text"
+                                    value={userName}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="form-label">Password</label>
+                                <input
+                                    className="form-control my-2"
+                                    type="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                            </div>
+                            {error && <p className="error-text">{error}</p>}
+                            <div className="row">
+                                <div className="col-md-8"></div>
+                                <div className="col-md-4">
+                                    <button type="submit" className="btn btn-primary" disabled={loading}>
+                                        {loading ? 'Loading...' : 'Submit'}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div
+                        style={{
+                            backgroundImage: 'url(/img/login_photo.jpg)',
+                            backgroundPosition: 'center',
+                            backgroundSize: 'cover'
+                        }}
+                        className="col-md-6"
+                    >
+                        {/* Ýçerik */}
+                    </div>
                 </div>
-                {error && <p className="error-text">{error}</p>}
-                <button type="submit" className="btn btn-primary" disabled={loading}>
-                    {loading ? 'Loading...' : 'Submit'}
-                </button>
-            </form>
+            </div>
         </div>
     );
 }

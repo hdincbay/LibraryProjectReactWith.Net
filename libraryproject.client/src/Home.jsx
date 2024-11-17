@@ -7,7 +7,7 @@ function Home() {
     return (
 
         <div>
-            <div className="display-1 my-3 text-danger">Info</div>
+            <div className="display-1 my-3 text-danger">Info Page</div>
             <div className="row">
                 <div className="col-md-4">
                     <App />

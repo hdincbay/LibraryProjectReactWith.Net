@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom'
 import Example from './Example.jsx'
 import Home from './Home.jsx'
 import Login from './Login.jsx'
+import SignUp from './SignUp.jsx'
 import { Link } from 'react-router-dom'
 
 function First() {
@@ -23,12 +24,16 @@ function First() {
                         <li className="nav-item">
                             <Link to="/Login" className="nav-link">Login</Link>
                         </li>
+                        <li className="nav-item">
+                            <Link to="/SignUp" className="nav-link">Sign Up</Link>
+                        </li>
                     </ul>
                 </div>
             </nav>
             <Routes>
                 <Route path="/Login" element={<Login />} />
                 <Route path="/Home" element={<Home />} />
+                <Route path="/SignUp" element={<SignUp />} />
             </Routes>
         </div>
     );

@@ -65,16 +65,19 @@ namespace LibraryProject.Server.Controllers
                 {
                     var requestContent = await reader.ReadToEndAsync();
                     var requestJObj = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(requestContent);
-
+                    var password = requestJObj!["password"]?.ToString()!;
+                    var passwordConfirm = requestJObj["passwordConfirm"]?.ToString()!;
+                    if (!password.Equals(passwordConfirm))
+                        return BadRequest("Password with Password Confirm not equals!");
                     var response = await _userManager.CreateAsync(new()
                     {
                         UserName = requestJObj!["userName"]?.ToString(),
                         Email = requestJObj["email"]?.ToString(),
-                    }, requestJObj["password"]?.ToString()!);
+                    }, password);
                     if (response.Succeeded)
                         return Ok("User Created successfully.");
                     else
-                        return BadRequest("User Created failed.");
+                        return BadRequest(response.ToString());
                 }
             }
             catch (Exception ex)

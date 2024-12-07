@@ -16,7 +16,6 @@ function Start() {
         };
 
         newSocket.onmessage = (event) => {
-            console.log('Gelen mesaj:', event.data);
             try {
                 const data = JSON.parse(event.data);
                 if (data != null || data != [] || data != "")

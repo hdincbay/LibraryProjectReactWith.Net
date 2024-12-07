@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import './Login.css';
-
+import { useNavigate } from 'react-router-dom';
 function Login() {
     const [userName, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     // Form gönderildiðinde çalýþacak fonksiyon
     const handleSubmit = async (event) => {
@@ -25,18 +26,16 @@ function Login() {
                 body: JSON.stringify(userData),
                 
             });
+            
             if (!response.ok) {
-                throw new Error('Hata olustu, lutfen tekrar deneyin');
+                const textResponse = await response.text();
+                throw new Error(textResponse);
             }
-
+            else {
+                navigate('/Home');
+            }
             const contentType = response.headers.get("Content-Type");
-
-            const textResponse = await response.text();
-            console.log('Sunucudan dönen string:', textResponse);
-
-            if (textResponse) {
-                alert(textResponse);
-            }
+            
         } catch (error) {
             console.error('API istegi basarisiz:', error);
             setError(error.message);
@@ -75,7 +74,7 @@ function Login() {
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                             </div>
-                            {error && <p className="error-text">{error}</p>}
+                            {error && <p className="error-text text-danger">{error}</p>}
                             <div className="row">
                                 <div className="col-md-8"></div>
                                 <div className="col-md-4">

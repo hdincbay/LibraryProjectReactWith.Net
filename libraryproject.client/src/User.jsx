@@ -16,7 +16,6 @@ function User() {
         };
 
         newSocket.onmessage = (event) => {
-            console.log('Gelen mesaj:', event.data);
             try {
                 const data = JSON.parse(event.data);
                 if (data) {

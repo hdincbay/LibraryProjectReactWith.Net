@@ -6,13 +6,27 @@ import Home from './Home.jsx'
 import Login from './Login.jsx'
 import SignUp from './SignUp.jsx'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 function First() {
+    const navigate = useNavigate();
+
+    // Çýkýþ yapma fonksiyonu
+    const handleLogout = () => {
+        // localStorage'dan authToken'ý kaldýr
+        localStorage.removeItem('authToken');
+
+        // Kullanýcýyý login sayfasýna yönlendir
+        navigate('/login');
+    };
+
+    // Kullanýcýnýn giriþ yapýp yapmadýðýný kontrol et
+    const isLoggedIn = localStorage.getItem('authToken') !== null;
+
     return (
-        
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light p-3">
-                <a className="navbar-brand" href="#">Navbar</a>
+                <Link className="navbar-brand" to="/Home">Navbar</Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -21,15 +35,25 @@ function First() {
                         <li className="nav-item active">
                             <Link to="/Home" className="nav-link">Home</Link>
                         </li>
-                        <li className="nav-item">
-                            <Link to="/Login" className="nav-link">Login</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/SignUp" className="nav-link">Sign Up</Link>
-                        </li>
                     </ul>
                 </div>
+
+                <div className="d-flex justify-content-end">
+                    {isLoggedIn ? (
+                        <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
+                    ) : (
+                        <>
+                            <Link to="/SignUp" className="nav-link">
+                                <div className="btn btn-success mx-2">Sign Up</div>
+                            </Link>
+                            <Link to="/Login" className="nav-link">
+                                <div className="btn btn-primary mx-2">Login</div>
+                            </Link>
+                        </>
+                    )}
+                </div>
             </nav>
+
             <Routes>
                 <Route path="/Login" element={<Login />} />
                 <Route path="/Home" element={<Home />} />
@@ -38,4 +62,5 @@ function First() {
         </div>
     );
 }
+
 export default First;

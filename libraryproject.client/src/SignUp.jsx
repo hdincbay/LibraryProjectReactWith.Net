@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './SignUp.css';
-
+import { useNavigate } from 'react-router-dom';
 function SignUp() {
     const [userName, setUsername] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -9,6 +9,7 @@ function SignUp() {
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     // Form gönderildiðinde çalýþacak fonksiyon
     const handleSubmit = async (event) => {
@@ -32,15 +33,15 @@ function SignUp() {
             if (!response.ok) {
                 throw new Error(textResponse);
             }
-
+            else {
+                navigate('/Login');
+            }
             const contentType = response.headers.get("Content-Type");
 
             
             console.log('Sunucudan dönen string:', textResponse);
 
-            if (textResponse) {
-                alert(textResponse);
-            }
+            
         } catch (error) {
             console.error('API istegi basarisiz:', error);
             setError(error.message);
@@ -53,7 +54,7 @@ function SignUp() {
         <div>
             <div className="container">
                 <div className="row">
-                    <div style={{ height: '10rem' }} className="col-md-12"></div>
+                    <div style={{ height: '5rem' }} className="col-md-12"></div>
                 </div>
                 <div className="row">
                     <div className="col-md-6">
@@ -110,8 +111,8 @@ function SignUp() {
                             <div className="row">
                                 <div className="col-md-8"></div>
                                 <div className="col-md-4">
-                                    <button type="submit" className="btn btn-primary" disabled={loading}>
-                                        {loading ? 'Loading...' : 'Submit'}
+                                    <button type="submit" className="btn btn-success" disabled={loading}>
+                                        {loading ? 'Loading...' : 'Sign Up'}
                                     </button>
                                 </div>
                             </div>

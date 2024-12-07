@@ -10,7 +10,7 @@ function User() {
         const newSocket = new WebSocket('ws://localhost:7276/UserList/');
 
         newSocket.onopen = () => {
-            console.log('WebSocket baðlantýsý açýldý.');
+            console.log('WebSocket baglantisi adildi.');
             // Kullanýcý listesini talep eden bir mesaj gönderebilirsiniz
             newSocket.send(JSON.stringify("Hello"));
         };
@@ -32,19 +32,19 @@ function User() {
                 }
 
             } catch (e) {
-                console.error('JSON parse hatasý:', e);
+                console.error('JSON parse hatasi:', e);
                 setError('Veri iþleme hatasý.');
             }
         };
 
         newSocket.onerror = (error) => {
-            console.error('WebSocket hatasý:', error);
-            setError('WebSocket baðlantý hatasý. Yeniden deniyor...');
+            console.error('WebSocket hatasi:', error);
+            setError('WebSocket baglanti hatasi. Yeniden deniyor...');
         };
 
         newSocket.onclose = () => {
-            console.log('WebSocket baðlantýsý kapandý. Yeniden deniyor...');
-            setError('WebSocket baðlantýsý kapandý. Yeniden deniyor...');
+            console.log('WebSocket baglantisi kapandi. Yeniden deniyor...');
+            setError('WebSocket baglantisi kapandi. Yeniden deniyor...');
             setTimeout(connectWebSocket, 5000);
         };
 

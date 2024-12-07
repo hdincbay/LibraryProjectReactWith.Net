@@ -10,7 +10,7 @@ function App() {
         const newSocket = new WebSocket('ws://localhost:7276/BookList/');
 
         newSocket.onopen = () => {
-            console.log('WebSocket baðlantýsý açýldý.');
+            console.log('WebSocket baglantisi acildi.');
             // Kitap listesini talep eden bir mesaj gönderebilirsiniz
             newSocket.send(JSON.stringify("Hello"));
         };
@@ -19,7 +19,7 @@ function App() {
             try {
                 const data = JSON.parse(event.data);
 
-                if (data != null || data != [] || data != "") {
+                if (data != null && data != [] && data != "") {
                     // Eðer gelen veri bir dizi ise, kitap listesini güncelle
                     if (Array.isArray(data)) {
                         setBooks(data);
@@ -32,19 +32,19 @@ function App() {
                     }
                 }
             } catch (e) {
-                console.error('JSON parse hatasý:', e);
-                setError('Veri iþleme hatasý.');
+                console.error('JSON parse hatasi:', e);
+                setError('Veri isleme hatasi.');
             }
         };
 
         newSocket.onerror = (error) => {
-            console.error('WebSocket hatasý:', error);
+            console.error('WebSocket hatasi:', error);
             setError('WebSocket baðlantý hatasý. Yeniden deniyor...');
         };
 
         newSocket.onclose = () => {
-            console.log('WebSocket baðlantýsý kapandý. Yeniden deniyor...');
-            setError('WebSocket baðlantýsý kapandý. Yeniden deniyor...');
+            console.log('WebSocket baglantisi kapandi. Yeniden deniyor...');
+            setError('WebSocket baglantisi kapandi. Yeniden deniyor...');
             setTimeout(connectWebSocket, 5000);
         };
 

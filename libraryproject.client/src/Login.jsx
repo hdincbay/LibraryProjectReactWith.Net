@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import './Login.css';
+import { Routes, Route } from 'react-router-dom'
+import SignUp from './SignUp.jsx'
+import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
+
 function Login() {
     const [userName, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -24,18 +28,23 @@ function Login() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(userData),
-                
+
             });
-            
+            const textResponse = await response.text();
             if (!response.ok) {
-                const textResponse = await response.text();
+
                 throw new Error(textResponse);
             }
             else {
+
+                const token = textResponse;
+                // Token'in localStorage'a kaydedilmesi
+                localStorage.setItem('authToken', token);
+
                 navigate('/Home');
             }
             const contentType = response.headers.get("Content-Type");
-            
+
         } catch (error) {
             console.error('API istegi basarisiz:', error);
             setError(error.message);
@@ -76,11 +85,12 @@ function Login() {
                             </div>
                             {error && <p className="error-text text-danger">{error}</p>}
                             <div className="row">
-                                <div className="col-md-8"></div>
-                                <div className="col-md-4">
-                                    <button type="submit" className="btn btn-primary" disabled={loading}>
-                                        {loading ? 'Loading...' : 'Submit'}
-                                    </button>
+                                <div className="col-md-12">
+                                    <div>
+                                        <button type="submit" className="btn btn-outline-primary w-100" disabled={loading}>
+                                            {loading ? 'Loading...' : 'Login'}
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -97,6 +107,9 @@ function Login() {
                     </div>
                 </div>
             </div>
+            <Routes>
+                <Route path="/SignUp" element={<SignUp />} />
+            </Routes>
         </div>
     );
 }

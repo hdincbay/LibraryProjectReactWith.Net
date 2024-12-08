@@ -5,14 +5,19 @@ function Start() {
     const [authors, setAuthors] = useState([]);
     const [error, setError] = useState(null);
     const [socket, setSocket] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [authToken, setAuthToken] = useState(null);
 
+    const authTokenVal = localStorage.getItem('authToken');
     const connectWebSocket = () => {
         const newSocket = new WebSocket('ws://localhost:7276/AuthorList/');
 
         newSocket.onopen = () => {
             console.log('WebSocket baglantisi acildi.');
-            const clientName = 'author';
-            newSocket.send(JSON.stringify({ clientName: clientName }));
+            setAuthToken(authTokenVal);
+            if (authTokenVal) {
+                newSocket.send(JSON.stringify({ authToken: authTokenVal + '_author' }));
+            }
         };
 
         newSocket.onmessage = (event) => {
@@ -51,7 +56,30 @@ function Start() {
 
         setSocket(newSocket);
     };
+    const deleteUser = async (event, authorid) => {
+        setLoading(true); // Yükleniyor durumunu baþlatýyoruz
+        try {
+            setAuthToken(authToken);
+            // API'ye POST isteði gönderme
+            const response = await fetch(`https://localhost:7275/api/Author/Delete/${authorid}`, {
+                method: 'DELETE',
+                body: JSON.stringify({
+                    authToken: authTokenVal + '_author'
+                }),
+            });
+            const textResponse = await response.text();
+            console.log(textResponse);
 
+            if (!response.ok) {
+                throw new Error(textResponse);
+            }
+        } catch (error) {
+            console.error('API isteði baþarýsýz:', error);
+            setError(error.message);
+        } finally {
+            setLoading(false); // Yükleniyor durumunu bitiriyoruz
+        }
+    };
     useEffect(() => {
         connectWebSocket();
         return () => {
@@ -71,6 +99,7 @@ function Start() {
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
+                    <th>#</th>
                 </tr>
             </thead>
             <tbody>
@@ -78,6 +107,11 @@ function Start() {
                     <tr key={author.authorId}>
                         <td>{author.authorId}</td>
                         <td>{author.name}</td>
+                        <td>
+                            <button className="btn btn-success" onClick={(event) => deleteUser(event, author.authorId)} disabled={loading}>
+                                {loading ? 'Siliniyor...' : 'Sil'}
+                            </button>
+                        </td>
                     </tr>
                 ))}
             </tbody>

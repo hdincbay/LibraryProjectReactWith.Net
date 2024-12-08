@@ -40,8 +40,8 @@ app.Map("/AuthorList/", async context =>
                 var receivedMessage = Encoding.UTF8.GetString(buffer, 0, result.Count);
                 Console.WriteLine("Gelen mesaj: " + receivedMessage);
                 var jsonMessage = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(receivedMessage);
-                var clientName = jsonMessage?["hashCodeId"]?.ToString();
-                clients.TryAdd(webSocket, clientName);
+                var authToken = jsonMessage?["authToken"]?.ToString();
+                clients.TryAdd(webSocket, authToken);
                 await SendAllAuthors(webSocket);
             } while (!result.CloseStatus.HasValue);
             Console.WriteLine("try içinde.");
@@ -71,10 +71,8 @@ app.Map("/BookList/", async context =>
     if (context.WebSockets.IsWebSocketRequest)
     {
         using var webSocket = await context.WebSockets.AcceptWebSocketAsync();
-        clients.TryAdd(webSocket, null);
         Console.WriteLine("Yeni bir istemci baðlandý.");
-        await SendAllBooks(webSocket);
-
+        
         var buffer = new byte[1024 * 4];
         WebSocketReceiveResult result = null;
 
@@ -85,6 +83,10 @@ app.Map("/BookList/", async context =>
                 result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), System.Threading.CancellationToken.None);
                 var receivedMessage = Encoding.UTF8.GetString(buffer, 0, result.Count);
                 Console.WriteLine("Gelen mesaj: " + receivedMessage);
+                var jsonMessage = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(receivedMessage);
+                var authToken = jsonMessage?["authToken"]?.ToString();
+                clients.TryAdd(webSocket, authToken);
+                await SendAllBooks(webSocket);
             } while (!result.CloseStatus.HasValue);
             Console.WriteLine("try içinde.");
         }
@@ -163,23 +165,40 @@ app.Map("/UserList/", async context =>
 app.MapPost("/api/Author/Data", async context =>
 {
     var restclient = new RestClient();
-    string endpoint = "https://localhost:7275/api/Author/GetAll";
-    var request = new RestRequest(endpoint, Method.Get);
-    var response = await restclient.ExecuteAsync(request);
-
-    if (response.IsSuccessful)
+    var token = await tool.Login(restUrl, restclient, userName, password);
+    if (token is not null)
     {
-        var bytes = Encoding.UTF8.GetBytes(response.Content!);
-        // Tüm istemcilere yeni veriyi gönder
-        foreach (var client in clients.Keys)
+        var tokenVal = Newtonsoft.Json.JsonConvert.DeserializeObject<string>(token);
+        string endpoint = restUrl + "/api/Author/GetAll";
+        var request = new RestRequest(endpoint, Method.Get);
+        var param2 = string.Format("Bearer {0}", tokenVal!);
+        request.AddHeader("Authorization", param2);
+        var response = await restclient.ExecuteAsync(request);
+        var hashCodeIdControl = "";
+        using (var reader = new StreamReader(context.Request.Body))
         {
-            await client.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
+            var requestContent = await reader.ReadToEndAsync();
+            hashCodeIdControl = requestContent;
         }
-        context.Response.StatusCode = 200;
-    }
-    else
-    {
-        context.Response.StatusCode = 500; // Hata durumunda uygun bir hata kodu döndür
+        if (response.IsSuccessful)
+        {
+            var bytes = Encoding.UTF8.GetBytes(response.Content!);
+            // Tüm istemcilere yeni veriyi gönder
+            foreach (var client in clients)
+            {
+
+                if (client.Value == hashCodeIdControl)
+                {
+                    await client.Key.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
+                    break;
+                }
+            }
+            context.Response.StatusCode = 200;
+        }
+        else
+        {
+            context.Response.StatusCode = 500; // Hata durumunda uygun bir hata kodu döndür
+        }
     }
 });
 app.MapPost("/api/User/Data", async context =>
@@ -222,6 +241,46 @@ app.MapPost("/api/User/Data", async context =>
     }
     
 });
+app.MapPost("/api/Book/Data", async context =>
+{
+    var restclient = new RestClient();
+    var token = await tool.Login(restUrl, restclient, userName, password);
+    if (token is not null)
+    {
+        var tokenVal = Newtonsoft.Json.JsonConvert.DeserializeObject<string>(token);
+        string endpoint = restUrl + "/api/Book/GetAll";
+        var request = new RestRequest(endpoint, Method.Get);
+        var param2 = string.Format("Bearer {0}", tokenVal!);
+        request.AddHeader("Authorization", param2);
+        var response = await restclient.ExecuteAsync(request);
+        var hashCodeIdControl = "";
+        using (var reader = new StreamReader(context.Request.Body))
+        {
+            var requestContent = await reader.ReadToEndAsync();
+            hashCodeIdControl = requestContent;
+        }
+        if (response.IsSuccessful)
+        {
+            var bytes = Encoding.UTF8.GetBytes(response.Content!);
+            // Tüm istemcilere yeni veriyi gönder
+            foreach (var client in clients)
+            {
+
+                if (client.Value == hashCodeIdControl)
+                {
+                    await client.Key.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
+                    break;
+                }
+            }
+            context.Response.StatusCode = 200;
+        }
+        else
+        {
+            context.Response.StatusCode = 500; // Hata durumunda uygun bir hata kodu döndür
+        }
+    }
+
+});
 
 async Task SendAllAuthors(WebSocket webSocket)
 {
@@ -247,15 +306,17 @@ async Task SendAllBooks(WebSocket webSocket)
 {
     var client = new RestClient();
     var token = await tool.Login(restUrl, client, userName, password);
-    if(token is not null)
+    if (token is not null)
     {
+        var tokenVal = Newtonsoft.Json.JsonConvert.DeserializeObject<string>(token);
         string endpoint = restUrl + "/api/Book/GetAll";
         var request = new RestRequest(endpoint, Method.Get);
-        request.AddHeader("Bearer", token);
+        request.AddHeader("Bearer", tokenVal!);
         var response = await client.ExecuteAsync(request);
 
         if (response.IsSuccessful)
         {
+
             var bytes = Encoding.UTF8.GetBytes(response.Content!);
             await webSocket.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
         }

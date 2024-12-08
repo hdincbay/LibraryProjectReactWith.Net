@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import './First.css';
 import { Routes, Route } from 'react-router-dom'
-import Example from './Example.jsx'
 import Home from './Home.jsx'
 import Login from './Login.jsx'
 import SignUp from './SignUp.jsx'

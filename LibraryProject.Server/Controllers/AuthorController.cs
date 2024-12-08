@@ -146,12 +146,19 @@ namespace LibraryProject.Server.Controllers
                     {
                         _manager.AuthorService.DeleteOne(id);
                     });
-                    var client = new RestClient();
-                    string websocketurl = _configuration["websocketurl"]?.ToString()!;
-                    var endpoint = websocketurl + "/api/Author/Data";
-                    var request = new RestRequest(endpoint, Method.Post);
-                    var response = await client.ExecuteAsync(request);
-                    return Ok("Author Deleted succesfully.");
+                    using (var reader = new StreamReader(Request.Body))
+                    {
+                        var requestContent = await reader.ReadToEndAsync();
+                        var requestJObj = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(requestContent);
+                        var authToken = requestJObj!["authToken"]?.ToString();
+                        var client = new RestClient();
+                        string websocketurl = _configuration["websocketurl"]?.ToString()!;
+                        var endpoint = websocketurl + "/api/Author/Data";
+                        var request = new RestRequest(endpoint, Method.Post);
+                        request.AddJsonBody(authToken);
+                        var response = await client.ExecuteAsync(request);
+                        return Ok("Author Deleted succesfully.");
+                    }
                 }
                 else
                 {

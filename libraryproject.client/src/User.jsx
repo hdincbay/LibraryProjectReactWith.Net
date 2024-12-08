@@ -114,7 +114,7 @@ function User() {
                         <td>{user.id}</td>
                         <td>{user.userName}</td>
                         <td>
-                            <button onClick={(event) => deleteUser(event, user.id)} disabled={loading}>
+                            <button className="btn btn-success" onClick={(event) => deleteUser(event, user.id)} disabled={loading}>
                                 {loading ? 'Siliniyor...' : 'Sil'}
                             </button>
                         </td>

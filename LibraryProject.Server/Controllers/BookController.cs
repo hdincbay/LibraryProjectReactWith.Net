@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
+using RestSharp;
 using System.Xml.Linq;
 
 namespace LibraryProject.Server.Controllers
@@ -16,11 +17,13 @@ namespace LibraryProject.Server.Controllers
     {
         private readonly RepositoryContext _context;
         private readonly IServiceManager _manager;
+        private readonly IConfiguration _configuration;
 
-        public BookController(RepositoryContext context, IServiceManager manager)
+        public BookController(RepositoryContext context, IServiceManager manager, IConfiguration configuration)
         {
             _context = context;
             _manager = manager;
+            _configuration = configuration;
         }
         [HttpGet("GetById/{id:int}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
@@ -41,7 +44,6 @@ namespace LibraryProject.Server.Controllers
                 return BadRequest(ex.ToString());
             }
         }
-        [Authorize]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
@@ -138,7 +140,19 @@ namespace LibraryProject.Server.Controllers
                 if (book is not null)
                 {
                     _manager.BookService.DeleteOne(id);
-                    return Ok("Book Deleted successfully.");
+                    using (var reader = new StreamReader(Request.Body))
+                    {
+                        var requestContent = await reader.ReadToEndAsync();
+                        var requestJObj = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(requestContent);
+                        var authToken = requestJObj!["authToken"]?.ToString();
+                        var client = new RestClient();
+                        string websocketurl = _configuration["websocketurl"]?.ToString()!;
+                        var endpoint = websocketurl + "/api/Book/Data";
+                        var request = new RestRequest(endpoint, Method.Post);
+                        request.AddJsonBody(authToken);
+                        var response = await client.ExecuteAsync(request);
+                        return Ok("Book Deleted succesfully.");
+                    }
                 }
                 else
                 {

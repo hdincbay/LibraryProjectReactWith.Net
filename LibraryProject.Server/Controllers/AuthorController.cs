@@ -81,7 +81,7 @@ namespace LibraryProject.Server.Controllers
                     string websocketurl = _configuration["websocketurl"]?.ToString()!;
                     var endpoint = websocketurl + "/api/Author/Data";
                     var request = new RestRequest(endpoint, Method.Post);
-                    await client.ExecuteAsync(request);
+                    var rsp = await client.ExecuteAsync(request);
                     return Ok("Author Created successfully.");
                 }
             }

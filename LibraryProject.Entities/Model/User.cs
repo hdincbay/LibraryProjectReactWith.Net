@@ -10,8 +10,6 @@ namespace LibraryProject.Entities.Model
 {
     public class User : IdentityUser<int>
     {
-        [Key]
-        public int UserId { get; set; }
         public ICollection<Loan> Loans { get; set; } = new List<Loan>(); // Üyenin ödünç aldığı kitaplar
         public int BookCount { get; set; } = 0;
 

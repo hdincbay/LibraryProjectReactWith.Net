@@ -11,8 +11,9 @@ function App() {
 
         newSocket.onopen = () => {
             console.log('WebSocket baglantisi acildi.');
-            // Kitap listesini talep eden bir mesaj gönderebilirsiniz
-            newSocket.send(JSON.stringify("Hello"));
+            // Backend'e userId gönderiyoruz
+            const userId = 'user123';  // Örneðin, burada 'user123' userId'yi alýyorsunuz
+            newSocket.send(JSON.stringify({ type: 'setUserId', userId: userId }));
         };
 
         newSocket.onmessage = (event) => {

@@ -11,7 +11,12 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddDistributedMemoryCache(); // Çerez tabanlý oturum yönetimi için
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = ".MyApp.Session"; // Çerez adý
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Oturum süresi
+});
 // Add services to the container.
 
 builder.Services.AddCors(options =>
@@ -86,7 +91,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseSession();
 app.UseCors("AllowAllOrigins");
 
 app.UseHttpsRedirection();

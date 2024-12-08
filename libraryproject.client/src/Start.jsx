@@ -11,8 +11,8 @@ function Start() {
 
         newSocket.onopen = () => {
             console.log('WebSocket baglantisi acildi.');
-            // Yazar listesini talep eden bir mesaj gönderebilirsiniz
-            newSocket.send(JSON.stringify("Hello"));
+            const clientName = 'author';
+            newSocket.send(JSON.stringify({ clientName: clientName }));
         };
 
         newSocket.onmessage = (event) => {

@@ -85,6 +85,7 @@ namespace LibraryProject.Server.Controllers
                         UserName = requestJObj!["userName"]?.ToString(),
                         Email = requestJObj["email"]?.ToString(),
                     }, password);
+                    reader.Dispose();
                     if (response.Succeeded)
                         return Ok("User Created successfully.");
                     else
@@ -95,6 +96,7 @@ namespace LibraryProject.Server.Controllers
             {
                 return BadRequest(ex.ToString());
             }
+
         }
         [HttpPost("Login")]
         public async Task<IActionResult> Login()

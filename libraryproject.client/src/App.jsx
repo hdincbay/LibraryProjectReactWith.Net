@@ -24,11 +24,9 @@ function App() {
                 const data = JSON.parse(event.data);
 
                 if (data != null && data != [] && data != "") {
-                    // Eðer gelen veri bir dizi ise, kitap listesini güncelle
                     if (Array.isArray(data)) {
                         setBooks(data);
                     } else {
-                        // Tekil kitap verisi gelirse, mevcut listeyi güncelle
                         setBooks(prevBooks => {
                             const existingIds = new Set(prevBooks.map(book => book.bookId));
                             return [...prevBooks, data].filter(book => !existingIds.has(book.bookId));
@@ -75,7 +73,7 @@ function App() {
             console.error('API isteði baþarýsýz:', error);
             setError(error.message);
         } finally {
-            setLoading(false); // Yükleniyor durumunu bitiriyoruz
+            setLoading(false); 
         }
     };
     useEffect(() => {

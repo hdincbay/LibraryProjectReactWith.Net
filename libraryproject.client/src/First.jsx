@@ -43,6 +43,7 @@ function First() {
                     console.log(`Enlem: ${latitude}, Boylam: ${longitude}`);
                     const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}`);
                     const data = await response.json();
+                    debugger;
 
                     console.log("API Response:", data); // API yanýtýný kontrol et
 
@@ -64,9 +65,10 @@ function First() {
                     const weatherValue3hourWeatherList = weatherValue3hour.weather;
                     const weatherValue3hourWeatherFirst = weatherValue3hourWeatherList[0];
                     const weatherValue3hourWeatherDescription = weatherValue3hourWeatherFirst.description;
-                    weatherFields.map((item, index) => {
+                    weatherFields.forEach((item, index) => {
                         if (item.responseField == weatherValue3hourWeatherDescription) {
                             setWeatherIn3HoursDesc(item.fieldTranslate);
+                            return;  // Döngüyü burada sonlandýrýyoruz
                         }
                     });
                     // Tarih bilgisini çevirmek

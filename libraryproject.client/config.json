@@ -3,7 +3,23 @@
   "weathers": [
     {
       "responseField": "broken clouds",
+      "fieldTranslate": "Dağınık Bulutlu"
+    },
+    {
+      "responseField": "scattered clouds",
       "fieldTranslate": "Parçalı Bulutlu"
+    },
+    {
+      "responseField": "few clouds",
+      "fieldTranslate": "Az Bulutlu"
+    },
+    {
+      "responseField": "clear sky",
+      "fieldTranslate": "Açık"
+    },
+    {
+      "responseField": "overcast clouds",
+      "fieldTranslate": "Kapalı"
     }
   ]
 }

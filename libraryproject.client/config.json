@@ -1,5 +1,9 @@
 {
   "apiKey": "",
-  "lat": "",
-  "lon": ""
+  "weathers": [
+    {
+      "responseField": "broken clouds",
+      "fieldTranslate": "Parçalı Bulutlu"
+    }
+  ]
 }

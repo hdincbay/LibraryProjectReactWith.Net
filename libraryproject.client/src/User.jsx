@@ -89,6 +89,7 @@ function User() {
         connectWebSocket();
         return () => {
             if (socket) {
+                debugger;
                 socket.close();
             }
         };

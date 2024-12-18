@@ -12,9 +12,9 @@ function First() {
     const [data, setData] = useState(null);
     const [city, setCity] = useState("");
     const [isControl, setIsControl] = useState(false);
-    const [weatherIn3HoursClouds, setWeatherIn3HoursClouds] = useState(null);
-    const [weatherIn3HoursHum, setWeatherIn3HoursHum] = useState(null);
-    const [weatherIn3HoursTemp, setWeatherIn3HoursTemp] = useState(null);
+    const [weatherIn3HoursClouds, setWeatherIn3HoursClouds] = useState(0);
+    const [weatherIn3HoursHum, setWeatherIn3HoursHum] = useState(0);
+    const [weatherIn3HoursTemp, setWeatherIn3HoursTemp] = useState(0);
     const [weatherIn3HoursDesc, setWeatherIn3HoursDesc] = useState(null);
     const [weatherIn3HoursDate, setWeatherIn3HoursDate] = useState(null);
     const [locationError, setLocationError] = useState(false); // Konum hatasý için state
@@ -43,7 +43,7 @@ function First() {
                     console.log(`Enlem: ${latitude}, Boylam: ${longitude}`);
                     const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}`);
                     const data = await response.json();
-                    debugger;
+                    
 
                     console.log("API Response:", data); // API yanýtýný kontrol et
 
@@ -130,8 +130,8 @@ function First() {
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav">
                             <li className="nav-item active">
-                                <h4>{city} / {weatherIn3HoursDate || "Loading"}</h4>
-                                <h6>{weatherIn3HoursTemp} / {weatherIn3HoursDesc} / %{weatherIn3HoursClouds || "Loading"} Bulutlu / %{weatherIn3HoursHum || "Loading"} Nem</h6>
+                                <h4>{city} / Saat: {weatherIn3HoursDate}</h4>
+                                <h6>{weatherIn3HoursTemp} / {weatherIn3HoursDesc} / %{weatherIn3HoursClouds} Bulutlu / %{weatherIn3HoursHum} Nem</h6>
                             </li>
                         </ul>
                     </div>

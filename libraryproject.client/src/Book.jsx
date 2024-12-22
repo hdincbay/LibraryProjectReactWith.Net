@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import './App.css';
+import './Book.css';
 
-function App() {
+function Book() {
     const [books, setBooks] = useState([]);
     const [error, setError] = useState(null);
     const [socket, setSocket] = useState(null);
@@ -123,4 +123,4 @@ function App() {
     );
 }
 
-export default App;
+export default Book;

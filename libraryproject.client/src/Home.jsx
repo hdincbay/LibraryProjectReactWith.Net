@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import './Home.css';
 import { useNavigate } from 'react-router-dom';  // Yönlendirme için kullanýlýyor
-import App from './App.jsx';
-import Start from './Start.jsx';
+import Book from './Book.jsx';
+import Author from './Author.jsx';
 import User from './User.jsx';
 
 function Home() {
@@ -29,10 +29,10 @@ function Home() {
             <div className="display-1 my-3 text-danger">Info Page</div>
             <div className="row">
                 <div className="col-md-4">
-                    <App />
+                    <Book />
                 </div>
                 <div className="col-md-4">
-                    <Start />
+                    <Author />
                 </div>
                 <div className="col-md-4">
                     <User />

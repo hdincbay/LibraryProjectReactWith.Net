@@ -20,6 +20,18 @@
     {
       "responseField": "overcast clouds",
       "fieldTranslate": "Kapalı"
+    },
+    {
+      "responseField": "light rain",
+      "fieldTranslate": "Hafif Yağmurlu"
+    },
+    {
+      "responseField": "moderate rain",
+      "fieldTranslate": "Sağanak Yağışlı"
+    },
+    {
+      "responseField": "heavy intensity rain",
+      "fieldTranslate": "Yoğun Sağanak Yağışlı"
     }
   ]
 }

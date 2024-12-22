@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './Home.jsx';
 import Login from './Login.jsx';
 import SignUp from './SignUp.jsx';
+import Weather from './Weather.jsx';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Config from '../config.json';
@@ -114,6 +115,7 @@ function First() {
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light p-3">
                 <Link className="navbar-brand" to="/Home">Navbar</Link>
+                <Link to="/Weather" className="nav-link">Weather</Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -154,6 +156,7 @@ function First() {
                             <Link to="/Login" className="nav-link">
                                 <div className="btn btn-primary mx-2">Login</div>
                             </Link>
+                            
                         </>
                     )}
                 </div>
@@ -163,6 +166,7 @@ function First() {
                 <Route path="/Login" element={<Login />} />
                 <Route path="/Home" element={<Home />} />
                 <Route path="/SignUp" element={<SignUp />} />
+                <Route path="/Weather" element={<Weather />} />
             </Routes>
         </div>
     );

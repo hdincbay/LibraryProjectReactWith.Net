@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import './Start.css';
+import './Author.css';
 
-function Start() {
+function Author() {
     const [authors, setAuthors] = useState([]);
     const [error, setError] = useState(null);
     const [socket, setSocket] = useState(null);
@@ -126,4 +126,4 @@ function Start() {
     );
 }
 
-export default Start;
+export default Author;

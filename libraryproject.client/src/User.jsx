@@ -50,8 +50,8 @@ function User() {
         };
 
         newSocket.onclose = () => {
-            console.log('WebSocket baðlantýsý kapandý. Yeniden deniyor...');
-            setError('WebSocket baðlantýsý kapandý. Yeniden deniyor...');
+            console.log('WebSocket baglantisi kapandi. Yeniden deniyor...');
+            setError('WebSocket baglantisi kapandi. Yeniden deniyor...');
             setTimeout(connectWebSocket, 5000); // Yeniden baðlantý kurmaya çalýþ
         };
 
@@ -89,7 +89,6 @@ function User() {
         connectWebSocket();
         return () => {
             if (socket) {
-                debugger;
                 socket.close();
             }
         };

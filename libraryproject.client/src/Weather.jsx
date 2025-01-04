@@ -35,13 +35,11 @@ function Weather() {
 
                     if (Array.isArray(data.list)) {
                         data.list.forEach(function (element) {
-                            var translatedWeather = "";
                             weatherFields.forEach((item, index) => {
                                 if (item.responseField == element.weather[0].description) {
-                                    translatedWeather = item.fieldTranslate;
+                                    element.weather[0].description = item.fieldTranslate;
                                 }
                             });
-                            element.weather[0].description = translatedWeather;
                         });
                         
                         setWeatherData(data.list);

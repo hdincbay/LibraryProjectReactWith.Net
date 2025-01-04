@@ -1,14 +1,25 @@
 import { useEffect, useState } from 'react';
 import './Author.css';
 import Config from '../config.json';
+import { useNavigate } from 'react-router-dom';  // Yönlendirme için kullanýlýyor
 
 function Weather() {
     const [weatherData, setWeatherData] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const [isControl, setIsControl] = useState(false);
+    const navigate = useNavigate();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
+        // localStorage'dan token'ý alýp, giriþ durumunu kontrol ediyoruz
+        const token = localStorage.getItem('authToken');
+        if (token) {
+            setIsLoggedIn(true);
+        } else {
+            setIsLoggedIn(false);
+            navigate('/Login');
+        }
         const fetchData = async () => {
             const apiKey = Config.apiKey; // Config dosyasýndan apiKey'i al
             const weatherFields = Config.weathers;
@@ -58,7 +69,7 @@ function Weather() {
         };
 
         fetchData(); // fetchData fonksiyonunu çalýþtýr
-    }, []);
+    }, [navigate]);
 
     const contents = (
         <table className="table" aria-labelledby="tableLabel">

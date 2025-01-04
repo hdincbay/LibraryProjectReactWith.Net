@@ -25,7 +25,6 @@ function First() {
         const fetchData = async () => {
             const apiKey = Config.apiKey; // Config dosyasýndan apiKey'i al
             const weatherFields = Config.weathers;
-            console.log("API Key:", apiKey); // API anahtarýný logla
 
             try {
                 if (navigator.geolocation) {

@@ -33,5 +33,15 @@
       "responseField": "heavy intensity rain",
       "fieldTranslate": "Yoğun Sağanak Yağışlı"
     }
+  ],
+  "pods": [
+    {
+      "responseField": "n",
+      "fieldTranslate": "Gece"
+    },
+    {
+      "responseField": "d",
+      "fieldTranslate": "Gündüz"
+    }
   ]
 }

@@ -12,6 +12,7 @@ import Config from '../config.json';
 function First() {
     const [data, setData] = useState(null);
     const [city, setCity] = useState("");
+    const [icon, setIcon] = useState("");
     const [isControl, setIsControl] = useState(false);
     const [weatherIn3HoursClouds, setWeatherIn3HoursClouds] = useState(0);
     const [weatherIn3HoursHum, setWeatherIn3HoursHum] = useState(0);
@@ -52,6 +53,7 @@ function First() {
                     }
 
                     setCity(data.city.name); // Þehir adýný state'e kaydet
+                    
 
                     const weatherValueList = data.list;
                     const weatherValue3hour = weatherValueList[0];
@@ -65,6 +67,7 @@ function First() {
                     const weatherValue3hourWeatherList = weatherValue3hour.weather;
                     const weatherValue3hourWeatherFirst = weatherValue3hourWeatherList[0];
                     const weatherValue3hourWeatherDescription = weatherValue3hourWeatherFirst.description;
+                    const weatherValue3hourWeatherIcon = weatherValue3hourWeatherFirst.icon;
                     weatherFields.forEach((item, index) => {
                         if (item.responseField == weatherValue3hourWeatherDescription) {
                             setWeatherIn3HoursDesc(item.fieldTranslate);
@@ -76,8 +79,9 @@ function First() {
                     const hours = date.getHours();
                     const minutes = date.getMinutes();
                     const formattedTime = `${hours}:${minutes < 10 ? '0' + minutes : minutes}`;
-
+                    const iconsrc = "http://openweathermap.org/img/wn/" + weatherValue3hourWeatherIcon + ".png";
                     // State güncellemelerini yapmak
+                    setIcon(iconsrc); // Þehir adýný state'e kaydet
                     setWeatherIn3HoursClouds(weatherValue3hourClouds);
                     setWeatherIn3HoursHum(weatherValue3hourHum);
                     setWeatherIn3HoursTemp(temperatureWithDegree);
@@ -133,6 +137,7 @@ function First() {
                             <li className="nav-item active">
                                 <h4>{city} / Saat: {weatherIn3HoursDate}</h4>
                                 <h6>{weatherIn3HoursTemp} / {weatherIn3HoursDesc} / %{weatherIn3HoursClouds} Bulutlu / %{weatherIn3HoursHum} Nem</h6>
+                                <img src={icon} alt="Weather Icon"></img>
                             </li>
                         </ul>
                     </div>

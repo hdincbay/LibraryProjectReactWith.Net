@@ -23,6 +23,7 @@ function Weather() {
         const fetchData = async () => {
             const apiKey = Config.apiKey; // Config dosyasýndan apiKey'i al
             const weatherFields = Config.weathers;
+            const podFields = Config.pods;
 
             try {
                 if (navigator.geolocation) {
@@ -46,7 +47,13 @@ function Weather() {
 
                     if (Array.isArray(data.list)) {
                         data.list.forEach(function (element) {
-                            weatherFields.forEach((item, index) => {
+                            element.weather[0].icon = "http://openweathermap.org/img/wn/" + element.weather[0].icon + ".png";
+                            podFields.forEach((item) => {
+                                if (item.responseField == element.sys.pod) {
+                                    element.sys.pod = item.fieldTranslate;
+                                }
+                            });
+                            weatherFields.forEach((item) => {
                                 if (item.responseField == element.weather[0].description) {
                                     element.weather[0].description = item.fieldTranslate;
                                 }
@@ -72,25 +79,39 @@ function Weather() {
     }, [navigate]);
 
     const contents = (
-        <table className="table" aria-labelledby="tableLabel">
+        <table className="table table-hover" aria-labelledby="tableLabel">
             <thead>
                 <tr>
                     <th>Time</th>
+                    <th>Day/Night</th>
                     <th>Temperature (C)</th>
                     <th>Cloudiness (%)</th>
                     <th>State</th>
+                    <th>Icon</th>
                 </tr>
             </thead>
             <tbody>
                 {weatherData.map(item => (
-                    <tr key={item.dt}>
-                        <td>{new Date(item.dt * 1000).toLocaleString()}</td> {/* Zamaný insan okunabilir formata çevir */}
-                        <td>{(item.main.temp - 273.15).toFixed(2)} C</td> {/* Kelvin'den °C'ye dönüþtür */}
-                        <td>{item.clouds.all}%</td> {/* Bulutluluk oraný */}
-                        <td>{item.weather[0].description}</td> {/* Bulutluluk oraný */}
+                    <tr key={item.dt} >
+                        <td>
+                            {new Date(item.dt * 1000).toLocaleString('tr-TR', {
+                                day: '2-digit',
+                                month: '2-digit',
+                                year: 'numeric',
+                                hour: '2-digit',
+                                minute: '2-digit',
+                                hour12: false
+                            })}
+                        </td>
+                        <td>{item.sys.pod}</td>
+                        <td>{(item.main.temp - 273.15).toFixed(2)} C</td>
+                        <td>{item.clouds.all}%</td>
+                        <td>{item.weather[0].description}</td>
+                        <td><img src={item.weather[0].icon} alt="Weather Icon" /></td>
                     </tr>
                 ))}
             </tbody>
+
         </table>
     );
 

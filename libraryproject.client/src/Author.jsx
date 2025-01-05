@@ -13,7 +13,6 @@ function Author() {
         const newSocket = new WebSocket('ws://localhost:7276/AuthorList/');
 
         newSocket.onopen = () => {
-            console.log('WebSocket baglantisi acildi.');
             setAuthToken(authTokenVal);
             if (authTokenVal) {
                 newSocket.send(JSON.stringify({ authToken: authTokenVal + '_author' }));
@@ -38,18 +37,15 @@ function Author() {
                 }
                 
             } catch (e) {
-                console.error('JSON parse hatasý:', e);
                 setError('Veri isleme hatasi.');
             }
         };
 
         newSocket.onerror = (error) => {
-            console.error('WebSocket hatasi:', error);
             setError('WebSocket baglanti hatasi. Yeniden deniyor...');
         };
 
         newSocket.onclose = () => {
-            console.log('WebSocket baglantisi kapandi. Yeniden deniyor...');
             setError('WebSocket baglantisi kapandi. Yeniden deniyor...');
             setTimeout(connectWebSocket, 5000);
         };
@@ -68,13 +64,11 @@ function Author() {
                 }),
             });
             const textResponse = await response.text();
-            console.log(textResponse);
 
             if (!response.ok) {
                 throw new Error(textResponse);
             }
         } catch (error) {
-            console.error('API isteði baþarýsýz:', error);
             setError(error.message);
         } finally {
             setLoading(false); // Yükleniyor durumunu bitiriyoruz

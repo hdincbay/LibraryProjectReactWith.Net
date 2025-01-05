@@ -46,7 +46,6 @@ function Login() {
             const contentType = response.headers.get("Content-Type");
 
         } catch (error) {
-            console.error('API istegi basarisiz:', error);
             setError(error.message);
         } finally {
             setLoading(false);

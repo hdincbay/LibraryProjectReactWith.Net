@@ -41,12 +41,10 @@ function First() {
                     const latitude = position.coords.latitude; // Enlem
                     const longitude = position.coords.longitude; // Boylam
 
-                    console.log(`Enlem: ${latitude}, Boylam: ${longitude}`);
                     const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}`);
                     const data = await response.json();
                     
 
-                    console.log("API Response:", data); // API yanýtýný kontrol et
 
                     if (data.cod !== "200") {
                         throw new Error("API yanýtý hatalý");
@@ -91,11 +89,9 @@ function First() {
                     setLocationError(false); // Konum baþarýyla alýndý, hata durumu sýfýrlanýr
                     setIsControl(true);
                 } else {
-                    console.log("Geolocation API tarayýcýnýzda desteklenmiyor.");
                     setLocationError(true); // Konum alýnamadý hatasý
                 }
             } catch (error) {
-                console.error('API fetch error:', error); // Hata olursa konsola yaz
                 setLocationError(true); // Hata durumunda konum hatasý state'i true yapýlýr
             }
         };

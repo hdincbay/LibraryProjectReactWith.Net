@@ -37,13 +37,8 @@ function SignUp() {
                 navigate('/Login');
             }
             const contentType = response.headers.get("Content-Type");
-
-            
-            console.log('Sunucudan dönen string:', textResponse);
-
             
         } catch (error) {
-            console.error('API istegi basarisiz:', error);
             setError(error.message);
         } finally {
             setLoading(false);

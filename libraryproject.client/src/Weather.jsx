@@ -39,11 +39,9 @@ function Weather() {
                     const latitude = position.coords.latitude; // Enlem
                     const longitude = position.coords.longitude; // Boylam
 
-                    console.log(`Enlem: ${latitude}, Boylam: ${longitude}`);
                     const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}`);
                     const data = await response.json();
 
-                    console.log(data);  // API yanýtýný kontrol edin
 
                     if (Array.isArray(data.list)) {
                         data.list.forEach(function (element) {
@@ -66,11 +64,9 @@ function Weather() {
                     setError(false); // Konum baþarýyla alýndý, hata durumu sýfýrlanýr
                     setIsControl(true);
                 } else {
-                    console.log("Geolocation API tarayýcýnýzda desteklenmiyor.");
                     setError(true); // Konum alýnamadý hatasý
                 }
             } catch (error) {
-                console.error('API fetch error:', error); // Hata olursa konsola yaz
                 setError(true); // Hata durumunda konum hatasý state'i true yapýlýr
             }
         };

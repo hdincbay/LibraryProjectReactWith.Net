@@ -12,7 +12,6 @@ function Book() {
         const newSocket = new WebSocket('ws://localhost:7276/BookList/');
 
         newSocket.onopen = () => {
-            console.log('WebSocket baglantisi acildi.');
             setAuthToken(authTokenVal);
             if (authTokenVal) {
                 newSocket.send(JSON.stringify({ authToken: authTokenVal + '_book' }));
@@ -34,18 +33,15 @@ function Book() {
                     }
                 }
             } catch (e) {
-                console.error('JSON parse hatasi:', e);
                 setError('Veri isleme hatasi.');
             }
         };
 
         newSocket.onerror = (error) => {
-            console.error('WebSocket hatasi:', error);
             setError('WebSocket baðlantý hatasý. Yeniden deniyor...');
         };
 
         newSocket.onclose = () => {
-            console.log('WebSocket baglantisi kapandi. Yeniden deniyor...');
             setError('WebSocket baglantisi kapandi. Yeniden deniyor...');
             setTimeout(connectWebSocket, 5000);
         };
@@ -64,13 +60,11 @@ function Book() {
                 }),
             });
             const textResponse = await response.text();
-            console.log(textResponse);
 
             if (!response.ok) {
                 throw new Error(textResponse);
             }
         } catch (error) {
-            console.error('API isteði baþarýsýz:', error);
             setError(error.message);
         } finally {
             setLoading(false); 

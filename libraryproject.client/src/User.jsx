@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './User.css';
-
+import Config from '../config.json';
 function User() {
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
@@ -11,7 +11,8 @@ function User() {
     const authTokenVal = localStorage.getItem('authToken');
     // WebSocket baðlantýsýný kurma fonksiyonu
     const connectWebSocket = () => {
-        const newSocket = new WebSocket('ws://localhost:7276/UserList/');
+        var webSocketServerUrl = Config.webSocketUrl;
+        const newSocket = new WebSocket(`${webSocketServerUrl}/UserList/`);
 
         newSocket.onopen = async () => {
 
@@ -59,8 +60,9 @@ function User() {
         setLoading(true); // Yükleniyor durumunu baþlatýyoruz
         try {
             setAuthToken(authToken);
+            var restUrl = Config.restApiUrl;
             // API'ye POST isteði gönderme
-            const response = await fetch(`https://localhost:7275/api/User/Delete/${userid}`, {
+            const response = await fetch(`${restUrl}/api/User/Delete/${userid}`, {
                 method: 'DELETE',
                 body: JSON.stringify({
                     authToken: authTokenVal + '_user'

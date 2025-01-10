@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './Author.css';
-
+import Config from '../config.json';
 function Author() {
     const [authors, setAuthors] = useState([]);
     const [error, setError] = useState(null);
@@ -10,7 +10,8 @@ function Author() {
 
     const authTokenVal = localStorage.getItem('authToken');
     const connectWebSocket = () => {
-        const newSocket = new WebSocket('ws://localhost:7276/AuthorList/');
+        var webSocketServerUrl = Config.webSocketUrl;
+        const newSocket = new WebSocket(`${webSocketServerUrl}/AuthorList/`);
 
         newSocket.onopen = () => {
             setAuthToken(authTokenVal);
@@ -57,7 +58,8 @@ function Author() {
         try {
             setAuthToken(authToken);
             // API'ye POST isteði gönderme
-            const response = await fetch(`https://localhost:7275/api/Author/Delete/${authorid}`, {
+            var restUrl = Config.restApiUrl;
+            const response = await fetch(`${restUrl}/api/Author/Delete/${authorid}`, {
                 method: 'DELETE',
                 body: JSON.stringify({
                     authToken: authTokenVal + '_author'

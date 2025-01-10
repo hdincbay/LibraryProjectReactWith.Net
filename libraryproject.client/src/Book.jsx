@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './Book.css';
-
+import Config from '../config.json';
 function Book() {
     const [books, setBooks] = useState([]);
     const [error, setError] = useState(null);
@@ -9,7 +9,8 @@ function Book() {
     const [authToken, setAuthToken] = useState(null);
     const authTokenVal = localStorage.getItem('authToken');
     const connectWebSocket = () => {
-        const newSocket = new WebSocket('ws://localhost:7276/BookList/');
+        var webSocketServerUrl = Config.webSocketUrl;
+        const newSocket = new WebSocket(`${webSocketServerUrl}/BookList/`);
 
         newSocket.onopen = () => {
             setAuthToken(authTokenVal);
@@ -52,8 +53,9 @@ function Book() {
         setLoading(true); // Yükleniyor durumunu baþlatýyoruz
         try {
             setAuthToken(authToken);
+            var restUrl = Config.restApiUrl;
             // API'ye POST isteði gönderme
-            const response = await fetch(`https://localhost:7275/api/Book/Delete/${bookid}`, {
+            const response = await fetch(`${restUrl}/api/Book/Delete/${bookid}`, {
                 method: 'DELETE',
                 body: JSON.stringify({
                     authToken: authTokenVal + '_book'

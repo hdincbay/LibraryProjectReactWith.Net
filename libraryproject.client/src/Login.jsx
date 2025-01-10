@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom'
 import SignUp from './SignUp.jsx'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
-
+import Config from '../config.json';
 function Login() {
     const [userName, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -21,8 +21,9 @@ function Login() {
         const userData = { userName, password };
 
         try {
+            var restUrl = Config.restApiUrl;
             // API'ye POST isteði gönderme
-            const response = await fetch('https://localhost:7275/api/User/Login', {
+            const response = await fetch(`${restUrl}/api/User/Login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

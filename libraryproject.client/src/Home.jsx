@@ -25,16 +25,15 @@ function Home() {
     }
 
     return (
-        <div>
-            <div className="display-1 my-3 text-danger">Info Page</div>
+        <div style={{ width: '100%' }}>
             <div className="row">
-                <div className="col-md-4">
+                <div className="col-md-6">
                     <Book />
                 </div>
-                <div className="col-md-4">
+                <div className="col-md-3">
                     <Author />
                 </div>
-                <div className="col-md-4">
+                <div className="col-md-3">
                     <User />
                 </div>
             </div>

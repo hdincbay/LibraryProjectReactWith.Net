@@ -3,13 +3,43 @@ import './Book.css';
 import Config from '../config.json';
 import { Link } from 'react-router-dom';
 import BookCreate from './BookCreate.jsx';
+
 function Book() {
     const [books, setBooks] = useState([]);
     const [error, setError] = useState(null);
     const [socket, setSocket] = useState(null);
     const [loading, setLoading] = useState(false);
     const [authToken, setAuthToken] = useState(null);
+    const [authorName, setAuthorName] = useState('');
     const authTokenVal = localStorage.getItem('authToken');
+
+    // Date formatlama fonksiyonu
+    function formatDate(dateStr) {
+        let date = new Date(dateStr);
+        let day = String(date.getDate()).padStart(2, '0');
+        let month = String(date.getMonth() + 1).padStart(2, '0');
+        let year = date.getFullYear();
+        let hours = String(date.getHours()).padStart(2, '0');
+        let minutes = String(date.getMinutes()).padStart(2, '0');
+        return `${day}/${month}/${year} ${hours}:${minutes}`;
+    };
+
+    // Yazar adýný almak için asenkron fonksiyon
+    const getAuthorName = async (authorIdVal) => {
+        var restUrl = Config.restApiUrl;
+        const response = await fetch(`${restUrl}/api/Author/GetById/${authorIdVal}`, {
+            method: 'GET'
+        });
+        const textResponse = await response.text();
+        try {
+            const jsonResponse = JSON.parse(textResponse);
+            return jsonResponse.name + ' ' + jsonResponse.surname; // Yazar adý burada dönülüyor
+        } catch (error) {
+            console.error('JSON parse hatasý:', error);
+        }
+    }
+
+    // WebSocket baðlantýsý
     const connectWebSocket = () => {
         var webSocketServerUrl = Config.webSocketUrl;
         const newSocket = new WebSocket(`${webSocketServerUrl}/BookList/`);
@@ -21,12 +51,17 @@ function Book() {
             }
         };
 
-        newSocket.onmessage = (event) => {
+        newSocket.onmessage = async (event) => {
             try {
                 const data = JSON.parse(event.data);
 
                 if (data != null && data != [] && data != "") {
                     if (Array.isArray(data)) {
+                        // Asenkron olarak yazar adlarýný alýp kitaplara ekle
+                        for (let item of data) {
+                            item.authorId = await getAuthorName(item.authorId); // Yazar adýný al
+                            item.createdDate = formatDate(item.createdDate);
+                        }
                         setBooks(data);
                     } else {
                         setBooks(prevBooks => {
@@ -36,7 +71,7 @@ function Book() {
                     }
                 }
             } catch (e) {
-                setError('Veri isleme hatasi.');
+                setError('Veri iþleme hatasý.');
             }
         };
 
@@ -45,18 +80,19 @@ function Book() {
         };
 
         newSocket.onclose = () => {
-            setError('WebSocket baglantisi kapandi. Yeniden deniyor...');
+            setError('WebSocket baðlantýsý kapandý. Yeniden deniyor...');
             setTimeout(connectWebSocket, 5000);
         };
 
         setSocket(newSocket);
     };
+
+    // Kitap silme iþlemi
     const deleteBook = async (event, bookid) => {
-        setLoading(true); // Yükleniyor durumunu baþlatýyoruz
+        setLoading(true);
         try {
             setAuthToken(authToken);
             var restUrl = Config.restApiUrl;
-            // API'ye POST isteði gönderme
             const response = await fetch(`${restUrl}/api/Book/Delete/${bookid}`, {
                 method: 'DELETE',
                 body: JSON.stringify({
@@ -71,9 +107,10 @@ function Book() {
         } catch (error) {
             setError(error.message);
         } finally {
-            setLoading(false); 
+            setLoading(false);
         }
     };
+
     useEffect(() => {
         connectWebSocket();
         return () => {
@@ -91,16 +128,22 @@ function Book() {
         <table className="table" aria-labelledby="tableLabel">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>Created Date</th>
+                    <th>Serial Number</th>
                     <th>Name</th>
+                    <th>Available</th>
+                    <th>Author Name</th>
                     <th>#</th>
                 </tr>
             </thead>
             <tbody>
                 {books.map(book => (
                     <tr key={book.bookId}>
-                        <td>{book.bookId}</td>
+                        <td>{book.createdDate}</td>
+                        <td>{book.serialNumber}</td>
                         <td>{book.name}</td>
+                        <td>{book.available.toString()}</td>
+                        <td>{book.authorId}</td>
                         <td>
                             <button className="btn btn-success" onClick={(event) => deleteBook(event, book.bookId)} disabled={loading}>
                                 {loading ? 'Siliniyor...' : 'Sil'}
@@ -119,7 +162,6 @@ function Book() {
             </Link>
             <h1 id="tableLabel">Book List</h1>
             {contents}
-
         </div>
     );
 }

@@ -72,9 +72,13 @@ namespace LibraryProject.Server.Controllers
                 {
                     bodyContent = await reader.ReadToEndAsync();
                     var requestJObj = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(bodyContent)!;
+                    var bookList = await Task.Run(() =>
+                    {
+                        return _manager.BookService.GetAll(false);
+                    });
                     var book = new Book()
                     {
-                        SerialNumber = tool.GetSerialNumber(),
+                        SerialNumber = tool.GetSerialNumber(bookList!),
                         Name = requestJObj["name"]?.ToString(),
                         AuthorId = Convert.ToInt32(requestJObj["authorId"]?.ToString())
                     };

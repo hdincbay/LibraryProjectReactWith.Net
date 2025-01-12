@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import './Book.css';
 import Config from '../config.json';
+import { Link } from 'react-router-dom';
+import BookCreate from './BookCreate.jsx';
 function Book() {
     const [books, setBooks] = useState([]);
     const [error, setError] = useState(null);
@@ -112,6 +114,9 @@ function Book() {
 
     return (
         <div>
+            <Link to="/BookCreate" className="nav-link">
+                <div className="btn btn-outline-success mx-2">Book Create</div>
+            </Link>
             <h1 id="tableLabel">Book List</h1>
             {contents}
 

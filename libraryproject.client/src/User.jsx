@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import './User.css';
 import Config from '../config.json';
+import UserCreate from './UserCreate.jsx';
+import { Link } from 'react-router-dom';
 function User() {
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
@@ -9,14 +11,12 @@ function User() {
     const [authToken, setAuthToken] = useState(null);
 
     const authTokenVal = localStorage.getItem('authToken');
-    // WebSocket baðlantýsýný kurma fonksiyonu
     const connectWebSocket = () => {
         var webSocketServerUrl = Config.webSocketUrl;
         const newSocket = new WebSocket(`${webSocketServerUrl}/UserList/`);
 
         newSocket.onopen = async () => {
 
-            // Session ID'yi almak için fetchUserHashCode fonksiyonunu çaðýrýyoruz
             setAuthToken(authTokenVal);
             if (authTokenVal) {
                 newSocket.send(JSON.stringify({ authToken: authTokenVal + '_user' }));
@@ -27,11 +27,9 @@ function User() {
             try {
                 const data = JSON.parse(event.data);
                 if (data) {
-                    // Eðer gelen veri bir dizi ise, kullanýcý listesini güncelle
                     if (Array.isArray(data)) {
                         setUsers(data);
                     } else {
-                        // Tekil kullanýcý verisi gelirse, mevcut listeyi güncelle
                         setUsers((prevUsers) => {
                             const existingIds = new Set(prevUsers.map(user => user.userId));
                             return [...prevUsers, data].filter(user => !existingIds.has(user.userId));
@@ -49,7 +47,7 @@ function User() {
 
         newSocket.onclose = () => {
             setError('WebSocket baglantisi kapandi. Yeniden deniyor...');
-            setTimeout(connectWebSocket, 5000); // Yeniden baðlantý kurmaya çalýþ
+            setTimeout(connectWebSocket, 5000);
         };
 
         setSocket(newSocket);
@@ -95,7 +93,8 @@ function User() {
         <p><em>{error}</em></p>
     ) : users.length === 0 ? (
         <p><em>User Undefined...</em></p>
-    ) : (
+        ) : (
+
         <table className="table" aria-labelledby="tableLabel">
             <thead>
                 <tr>
@@ -113,6 +112,7 @@ function User() {
                             <button className="btn btn-success" onClick={(event) => deleteUser(event, user.id)} disabled={loading}>
                                 {loading ? 'Siliniyor...' : 'Sil'}
                             </button>
+                            
                         </td>
                     </tr>
                 ))}
@@ -122,6 +122,9 @@ function User() {
 
     return (
         <div>
+            <Link to="/UserCreate" className="nav-link">
+                <div className="btn btn-outline-success mx-2">User Create</div>
+            </Link>
             <h1 id="tableLabel">User List</h1>
             {contents}
         </div>

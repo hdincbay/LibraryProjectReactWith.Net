@@ -5,6 +5,9 @@ import Home from './Home.jsx';
 import Login from './Login.jsx';
 import SignUp from './SignUp.jsx';
 import Weather from './Weather.jsx';
+import UserCreate from './UserCreate.jsx';
+import AuthorCreate from './AuthorCreate.jsx';
+import BookCreate from './BookCreate.jsx';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Config from '../config.json';
@@ -167,6 +170,9 @@ function First() {
                 <Route path="/Home" element={<Home />} />
                 <Route path="/SignUp" element={<SignUp />} />
                 <Route path="/Weather" element={<Weather />} />
+                <Route path="/UserCreate" element={<UserCreate />} />
+                <Route path="/AuthorCreate" element={<AuthorCreate />} />
+                <Route path="/BookCreate" element={<BookCreate />} />
             </Routes>
         </div>
     );

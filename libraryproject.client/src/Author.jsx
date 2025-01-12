@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import './Author.css';
 import Config from '../config.json';
+import { Link } from 'react-router-dom';
+import AuthorCreate from './AuthorCreate.jsx';
 function Author() {
     const [authors, setAuthors] = useState([]);
     const [error, setError] = useState(null);
@@ -102,7 +104,7 @@ function Author() {
                 {authors.map(author => (
                     <tr key={author.authorId}>
                         <td>{author.authorId}</td>
-                        <td>{author.name}</td>
+                        <td>{author.name + ' ' + author.surname}</td>
                         <td>
                             <button className="btn btn-success" onClick={(event) => deleteUser(event, author.authorId)} disabled={loading}>
                                 {loading ? 'Siliniyor...' : 'Sil'}
@@ -116,6 +118,9 @@ function Author() {
 
     return (
         <div>
+            <Link to="/AuthorCreate" className="nav-link">
+                <div className="btn btn-outline-success mx-2">Author Create</div>
+            </Link>
             <h1 id="tableLabel">Author List</h1>
             {contents}
         </div>

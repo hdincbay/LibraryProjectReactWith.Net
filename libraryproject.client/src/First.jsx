@@ -135,8 +135,7 @@ function First() {
                         <ul className="navbar-nav">
                             <li className="nav-item active">
                                 <h4>{city} / Saat: {weatherIn3HoursDate}</h4>
-                                <h6>{weatherIn3HoursTemp} / {weatherIn3HoursDesc} / %{weatherIn3HoursClouds} Bulutlu / %{weatherIn3HoursHum} Nem</h6>
-                                <img src={icon} alt="Weather Icon"></img>
+                                <h6>{weatherIn3HoursTemp} / {weatherIn3HoursDesc} / %{weatherIn3HoursClouds} Bulutlu /<img src={icon} alt="Weather Icon"></img>/  %{weatherIn3HoursHum} Nem</h6>
                             </li>
                         </ul>
                     </div>

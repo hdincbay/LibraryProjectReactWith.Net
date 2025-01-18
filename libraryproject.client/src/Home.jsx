@@ -25,7 +25,7 @@ function Home() {
     }
 
     return (
-        <div style={{ width: '100%' }}>
+        <div style={{ width: '100%', paddingTop: '4rem', paddingLeft: 0, paddingRight: 0 }}>
             <div className="row">
                 <div className="col-md-6">
                     <Book />

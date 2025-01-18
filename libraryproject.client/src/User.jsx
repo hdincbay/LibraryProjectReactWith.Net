@@ -100,6 +100,7 @@ function User() {
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
+                    <th>Email</th>
                     <th>#</th>
                 </tr>
             </thead>
@@ -108,6 +109,7 @@ function User() {
                     <tr key={user.id}>
                         <td>{user.id}</td>
                         <td>{user.userName}</td>
+                        <td>{user.email}</td>
                         <td>
                             <button className="btn btn-success" onClick={(event) => deleteUser(event, user.id)} disabled={loading}>
                                 {loading ? 'Siliniyor...' : 'Sil'}

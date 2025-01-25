@@ -27,11 +27,9 @@ function Author() {
                 const data = JSON.parse(event.data);
                 if (data != null || data != [] || data != "")
                 {
-                    // Eðer gelen veri bir dizi ise, yazar listesini güncelle
                     if (Array.isArray(data)) {
                         setAuthors(data);
                     } else {
-                        // Tekil yazar verisi gelirse, mevcut listeyi güncelle
                         setAuthors(prevAuthors => {
                             const existingIds = new Set(prevAuthors.map(author => author.authorId));
                             return [...prevAuthors, data].filter(author => !existingIds.has(author.authorId));
@@ -56,10 +54,9 @@ function Author() {
         setSocket(newSocket);
     };
     const deleteUser = async (event, authorid) => {
-        setLoading(true); // Yükleniyor durumunu baþlatýyoruz
+        setLoading(true);
         try {
             setAuthToken(authToken);
-            // API'ye POST isteði gönderme
             var restUrl = Config.restApiUrl;
             const response = await fetch(`${restUrl}/api/Author/Delete/${authorid}`, {
                 method: 'DELETE',
@@ -75,7 +72,7 @@ function Author() {
         } catch (error) {
             setError(error.message);
         } finally {
-            setLoading(false); // Yükleniyor durumunu bitiriyoruz
+            setLoading(false);
         }
     };
     useEffect(() => {
@@ -95,7 +92,7 @@ function Author() {
         <table className="table" aria-labelledby="tableLabel">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>Author ID</th>
                     <th>Name</th>
                     <th>#</th>
                 </tr>
@@ -117,10 +114,12 @@ function Author() {
     );
 
     return (
-        <div>
-            <Link to="/AuthorCreate" className="nav-link">
-                <div className="btn btn-outline-success mx-2">Author Create</div>
-            </Link>
+        <div style={{ width: '100%', paddingTop: '4rem', paddingLeft: 0, paddingRight: 0 }}>
+            <div class="d-flex justify-content-end">
+                <Link to="/AuthorCreate" className="nav-link">
+                    <div className="btn btn-outline-success mx-2">Author Create</div>
+                </Link>
+            </div>
             <h1 id="tableLabel">Author List</h1>
             {contents}
         </div>

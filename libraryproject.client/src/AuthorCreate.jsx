@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import './User.css';
 import Config from '../config.json';
-import { useNavigate } from 'react-router-dom';  // Yönlendirme için kullanýlýyor
+import { useNavigate } from 'react-router-dom';
 function AuthorCreate() {
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [authorName, setAuthorName] = useState('');
     const [authorSurName, setAuthorSurName] = useState('');
 
-    // Kullanýcý oturum durumunu kontrol et
     useEffect(() => {
         const token = localStorage.getItem('authToken');
         if (token) {
@@ -19,10 +18,9 @@ function AuthorCreate() {
         }
     }, [navigate]);
 
-    // Form gönderim iþlemi
     const handleSubmit = async (event) => {
-        event.preventDefault(); // Sayfanýn yenilenmesini engeller
-        const token = localStorage.getItem('authToken'); // Token al
+        event.preventDefault();
+        const token = localStorage.getItem('authToken');
 
         if (!authorName.trim()) {
             alert('Yazar adi boþ olamaz!');
@@ -40,7 +38,7 @@ function AuthorCreate() {
 
             if (response.ok) {
                 alert('Author created succesfully.');
-                navigate('/Author'); // Liste sayfasýna yönlendirme
+                navigate('/Author');
             } else {
                 const errorData = await response.json();
                 alert(`Hata: ${errorData.message || 'Kitap oluþturulamadý'}`);
@@ -56,7 +54,7 @@ function AuthorCreate() {
     }
 
     return (
-        <div style={{ width: '100%' }}>
+        <div style={{ width: '100%', paddingTop: '4rem', paddingLeft: 0, paddingRight: 0 }}>
             <form onSubmit={handleSubmit}>
                 <table style={{ width: '100%' }}>
                     <tbody>

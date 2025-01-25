@@ -12,6 +12,9 @@ namespace LibraryProject.Entities.Model
     {
         public ICollection<Loan> Loans { get; set; } = new List<Loan>(); // Üyenin ödünç aldığı kitaplar
         public int BookCount { get; set; } = 0;
+        public string? t_chatId { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
 
     }
 }

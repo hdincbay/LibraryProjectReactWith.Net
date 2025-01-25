@@ -44,7 +44,6 @@ namespace LibraryProject.Server.Controllers
             }); // Giriş yapmış kullanıcının adını alır.
             return Ok(new { UserName = userName });
         }
-        [Authorize]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
@@ -82,8 +81,11 @@ namespace LibraryProject.Server.Controllers
                         return BadRequest("Password with Password Confirm not equals!");
                     var response = await _userManager.CreateAsync(new()
                     {
+                        FirstName = requestJObj["firstName"]?.ToString(),
+                        LastName = requestJObj["lastName"]?.ToString(),
                         UserName = requestJObj!["userName"]?.ToString(),
                         Email = requestJObj["email"]?.ToString(),
+                        t_chatId = requestJObj["t_chatId"]?.ToString()
                     }, password);
                     reader.Dispose();
                     if (response.Succeeded)
@@ -156,7 +158,7 @@ namespace LibraryProject.Server.Controllers
                             var endpoint = websocketurl + "/api/User/Data";
 
                             var requestToWebSocket = new RestRequest(endpoint, Method.Post);
-                            requestToWebSocket.AddJsonBody(authToken);
+                            requestToWebSocket.AddJsonBody(authToken!);
                             var response = await client.ExecuteAsync(requestToWebSocket);
                             return Ok("User deleted successfully.");
                         }

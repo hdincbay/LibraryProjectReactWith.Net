@@ -72,6 +72,7 @@ namespace LibraryProject.Server.Controllers
                 {
                     bodyContent = await reader.ReadToEndAsync();
                     var requestJObj = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(bodyContent)!;
+                    var bookName = requestJObj["name"]?.ToString();
                     var bookList = await Task.Run(() =>
                     {
                         return _manager.BookService.GetAll(false);
@@ -79,14 +80,15 @@ namespace LibraryProject.Server.Controllers
                     var book = new Book()
                     {
                         SerialNumber = tool.GetSerialNumber(bookList!),
-                        Name = requestJObj["name"]?.ToString(),
+                        Name = bookName,
                         AuthorId = Convert.ToInt32(requestJObj["authorId"]?.ToString())
                     };
-
                     await Task.Run(() =>
                     {
                         _manager.BookService.CreateOne(book);
                     });
+
+
                     return Ok("Book Created successfully.");
                 }
             }

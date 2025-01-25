@@ -53,13 +53,11 @@ function User() {
         setSocket(newSocket);
     };
 
-    // Kullanýcý silme iþlemi
     const deleteUser = async (event, userid) => {
-        setLoading(true); // Yükleniyor durumunu baþlatýyoruz
+        setLoading(true);
         try {
             setAuthToken(authToken);
             var restUrl = Config.restApiUrl;
-            // API'ye POST isteði gönderme
             const response = await fetch(`${restUrl}/api/User/Delete/${userid}`, {
                 method: 'DELETE',
                 body: JSON.stringify({
@@ -74,11 +72,10 @@ function User() {
         } catch (error) {
             setError(error.message);
         } finally {
-            setLoading(false); // Yükleniyor durumunu bitiriyoruz
+            setLoading(false);
         }
     };
 
-    // Component mount olduðunda WebSocket baðlantýsýný baþlatýyoruz
     useEffect(() => {
         connectWebSocket();
         return () => {
@@ -88,7 +85,6 @@ function User() {
         };
     }, []);
 
-    // Hata veya kullanýcý listesi durumuna göre içerik gösterme
     const contents = error ? (
         <p><em>{error}</em></p>
     ) : users.length === 0 ? (
@@ -98,8 +94,8 @@ function User() {
         <table className="table" aria-labelledby="tableLabel">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Name</th>
+                    <th>User Name</th>
                     <th>Email</th>
                     <th>#</th>
                 </tr>
@@ -107,7 +103,7 @@ function User() {
             <tbody>
                 {users.map(user => (
                     <tr key={user.id}>
-                        <td>{user.id}</td>
+                        <td>{user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : ''}</td>
                         <td>{user.userName}</td>
                         <td>{user.email}</td>
                         <td>
@@ -123,10 +119,12 @@ function User() {
     );
 
     return (
-        <div>
-            <Link to="/UserCreate" className="nav-link">
-                <div className="btn btn-outline-success mx-2">User Create</div>
-            </Link>
+        <div style={{ width: '100%', paddingTop: '4rem', paddingLeft: 0, paddingRight: 0 }}>
+            <div class="d-flex justify-content-end">
+                <Link to="/UserCreate" className="nav-link">
+                    <div className="btn btn-outline-success mx-2">User Create</div>
+                </Link>
+            </div>
             <h1 id="tableLabel">User List</h1>
             {contents}
         </div>

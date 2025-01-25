@@ -1,7 +1,9 @@
 {
   "apiKey": "",
-  "restApiUrl": "https://localhost:7275",
-  "webSocketUrl": "ws://localhost:7276",
+  "sendMessageApiEndpoint": "",
+  "getMessagesApiEndpoint": "",
+  "restApiUrl": "",
+  "webSocketUrl": "",
   "weathers": [
     {
       "responseField": "broken clouds",

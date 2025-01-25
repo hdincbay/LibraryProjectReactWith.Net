@@ -13,7 +13,6 @@ function Book() {
     const [authorName, setAuthorName] = useState('');
     const authTokenVal = localStorage.getItem('authToken');
 
-    // Date formatlama fonksiyonu
     function formatDate(dateStr) {
         let date = new Date(dateStr);
         let day = String(date.getDate()).padStart(2, '0');
@@ -24,7 +23,6 @@ function Book() {
         return `${day}/${month}/${year} ${hours}:${minutes}`;
     };
 
-    // Yazar adýný almak için asenkron fonksiyon
     const getAuthorName = async (authorIdVal) => {
         var restUrl = Config.restApiUrl;
         const response = await fetch(`${restUrl}/api/Author/GetById/${authorIdVal}`, {
@@ -33,13 +31,11 @@ function Book() {
         const textResponse = await response.text();
         try {
             const jsonResponse = JSON.parse(textResponse);
-            return jsonResponse.name + ' ' + jsonResponse.surname; // Yazar adý burada dönülüyor
+            return jsonResponse.name + ' ' + jsonResponse.surname;
         } catch (error) {
             console.error('JSON parse hatasý:', error);
         }
     }
-
-    // WebSocket baðlantýsý
     const connectWebSocket = () => {
         var webSocketServerUrl = Config.webSocketUrl;
         const newSocket = new WebSocket(`${webSocketServerUrl}/BookList/`);
@@ -57,9 +53,8 @@ function Book() {
 
                 if (data != null && data != [] && data != "") {
                     if (Array.isArray(data)) {
-                        // Asenkron olarak yazar adlarýný alýp kitaplara ekle
                         for (let item of data) {
-                            item.authorId = await getAuthorName(item.authorId); // Yazar adýný al
+                            item.authorId = await getAuthorName(item.authorId);
                             item.createdDate = formatDate(item.createdDate);
                         }
                         setBooks(data);
@@ -87,7 +82,6 @@ function Book() {
         setSocket(newSocket);
     };
 
-    // Kitap silme iþlemi
     const deleteBook = async (event, bookid) => {
         setLoading(true);
         try {
@@ -128,10 +122,11 @@ function Book() {
         <table className="table" aria-labelledby="tableLabel">
             <thead>
                 <tr>
+                    <th>Book ID</th>
                     <th>Created Date</th>
                     <th>Serial Number</th>
-                    <th>Name</th>
                     <th>Available</th>
+                    <th>Name</th>
                     <th>Author Name</th>
                     <th>#</th>
                 </tr>
@@ -139,10 +134,11 @@ function Book() {
             <tbody>
                 {books.map(book => (
                     <tr key={book.bookId}>
+                        <td>{book.bookId}</td>
                         <td>{book.createdDate}</td>
                         <td>{book.serialNumber}</td>
-                        <td>{book.name}</td>
                         <td>{book.available.toString()}</td>
+                        <td>{book.name}</td>
                         <td>{book.authorId}</td>
                         <td>
                             <button className="btn btn-success" onClick={(event) => deleteBook(event, book.bookId)} disabled={loading}>
@@ -156,10 +152,12 @@ function Book() {
     );
 
     return (
-        <div>
-            <Link to="/BookCreate" className="nav-link">
-                <div className="btn btn-outline-success mx-2">Book Create</div>
-            </Link>
+        <div style={{ width: '100%', paddingTop: '4rem', paddingLeft: 0, paddingRight: 0 }}>
+            <div className="d-flex justify-content-end">
+                <Link to="/BookCreate" className="nav-link">
+                    <div className="btn btn-outline-success mx-2">Book Create</div>
+                </Link>
+            </div>
             <h1 id="tableLabel">Book List</h1>
             {contents}
         </div>

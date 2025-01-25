@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './User.css';
-import Config from '../config.json'; // API base URL burada olabilir
+import Config from '../config.json';
 import { useNavigate } from 'react-router-dom';
 
 function BookCreate() {
@@ -21,14 +21,13 @@ function BookCreate() {
             const jsonResponse = JSON.parse(textResponse);
 
             if (Array.isArray(jsonResponse)) {
-                setAuthorList(jsonResponse); // Yazar listesini ayarla
+                setAuthorList(jsonResponse);
             }
         } catch (error) {
             console.error('JSON parse hatasý:', error);
         }
     };
 
-    // Kullanýcý oturum durumunu kontrol et
     useEffect(() => {
         const token = localStorage.getItem('authToken');
         if (token) {
@@ -40,10 +39,9 @@ function BookCreate() {
         }
     }, [navigate]);
 
-    // Form gönderim iþlemi
     const handleSubmit = async (event) => {
-        event.preventDefault(); // Sayfanýn yenilenmesini engeller
-        const token = localStorage.getItem('authToken'); // Token al
+        event.preventDefault();
+        const token = localStorage.getItem('authToken');
 
         if (!bookName.trim()) {
             alert('Kitap adý boþ olamaz!');
@@ -60,17 +58,17 @@ function BookCreate() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`, // Eðer gerekliyse token eklenebilir
+                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify({
                     name: bookName,
-                    authorId: parseInt(authorId, 10) // ID'yi sayýya çevir
+                    authorId: parseInt(authorId, 10)
                 }),
             });
 
             if (response.ok) {
                 alert('Book created successfully.');
-                navigate('/Books'); // Liste sayfasýna yönlendirme
+                navigate('/Books');
             } else {
                 const errorData = await response.json();
                 alert(`Hata: ${errorData.message || 'Kitap oluþturulamadý'}`);
@@ -87,7 +85,7 @@ function BookCreate() {
     }
 
     return (
-        <div style={{ width: '100%' }}>
+        <div style={{ width: '100%', paddingTop: '4rem', paddingLeft: 0, paddingRight: 0 }}>
             <form onSubmit={handleSubmit}>
                 <table style={{ width: '100%' }}>
                     <tbody>

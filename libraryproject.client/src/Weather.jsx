@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './Author.css';
 import Config from '../config.json';
-import { useNavigate } from 'react-router-dom';  // Yönlendirme için kullanýlýyor
+import { useNavigate } from 'react-router-dom';
 
 function Weather() {
     const [weatherData, setWeatherData] = useState([]);
@@ -12,7 +12,6 @@ function Weather() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        // localStorage'dan token'ý alýp, giriþ durumunu kontrol ediyoruz
         const token = localStorage.getItem('authToken');
         if (token) {
             setIsLoggedIn(true);
@@ -21,7 +20,7 @@ function Weather() {
             navigate('/Login');
         }
         const fetchData = async () => {
-            const apiKey = Config.apiKey; // Config dosyasýndan apiKey'i al
+            const apiKey = Config.apiKey;
             const weatherFields = Config.weathers;
             const podFields = Config.pods;
 
@@ -29,15 +28,14 @@ function Weather() {
                 if (navigator.geolocation) {
 
                     const kelvinToCelsius = (kelvin) => {
-                        return kelvin - 273.15; // Kelvin'den Celsius'a dönüþtürme
+                        return kelvin - 273.15;
                     };
-                    // Konum alma (Geolocation API)
                     const position = await new Promise((resolve, reject) => {
                         navigator.geolocation.getCurrentPosition(resolve, reject);
                     });
 
-                    const latitude = position.coords.latitude; // Enlem
-                    const longitude = position.coords.longitude; // Boylam
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
 
                     const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}`);
                     const data = await response.json();
@@ -61,17 +59,17 @@ function Weather() {
                         setWeatherData(data.list);
                     }
 
-                    setError(false); // Konum baþarýyla alýndý, hata durumu sýfýrlanýr
+                    setError(false);
                     setIsControl(true);
                 } else {
-                    setError(true); // Konum alýnamadý hatasý
+                    setError(true);
                 }
             } catch (error) {
-                setError(true); // Hata durumunda konum hatasý state'i true yapýlýr
+                setError(true);
             }
         };
 
-        fetchData(); // fetchData fonksiyonunu çalýþtýr
+        fetchData();
     }, [navigate]);
 
     const contents = (
@@ -116,7 +114,7 @@ function Weather() {
     }
 
     return (
-        <div>
+        <div style={{ width: '100%', paddingTop: '4rem', paddingLeft: 0, paddingRight: 0 }}>
             <h1 id="tableLabel">Weather Forecast</h1>
             {error ? (
                 <div>Error: Unable to fetch weather data.</div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import './User.css';
-import Config from '../config.json';
+import './AuthorCreate.css';
+import Config from '../../config.json';
 import { useNavigate } from 'react-router-dom';
 function AuthorCreate() {
     const navigate = useNavigate();

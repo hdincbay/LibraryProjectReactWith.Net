@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './User.css';
-import Config from '../config.json';
+import Config from '../../config.json';
 import { useNavigate } from 'react-router-dom';  // Yönlendirme için kullanýlýyor
 function UserCreate() {
     const [users, setUsers] = useState([]);

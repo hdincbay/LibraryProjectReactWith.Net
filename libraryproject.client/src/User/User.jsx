@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './User.css';
-import Config from '../config.json';
-import UserCreate from './UserCreate.jsx';
+import Config from '../../config.json';
 import { Link } from 'react-router-dom';
 function User() {
+    const navigate = useNavigate();
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
     const [socket, setSocket] = useState(null);
     const [loading, setLoading] = useState(false);
     const [authToken, setAuthToken] = useState(null);
-
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    
+    
     const authTokenVal = localStorage.getItem('authToken');
     const connectWebSocket = () => {
         var webSocketServerUrl = Config.webSocketUrl;
@@ -77,13 +80,23 @@ function User() {
     };
 
     useEffect(() => {
+        const token = localStorage.getItem('authToken');
+        if (token) {
+            setIsLoggedIn(true);
+        } else {
+            setIsLoggedIn(false);
+            navigate('/Login');
+        }
         connectWebSocket();
         return () => {
             if (socket) {
                 socket.close();
             }
         };
-    }, []);
+    }, [navigate]);
+    if (!isLoggedIn) {
+        return null;
+    }
 
     const contents = error ? (
         <p><em>{error}</em></p>
@@ -94,6 +107,7 @@ function User() {
         <table className="table" aria-labelledby="tableLabel">
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Name</th>
                     <th>User Name</th>
                     <th>Email</th>
@@ -103,12 +117,13 @@ function User() {
             <tbody>
                 {users.map(user => (
                     <tr key={user.id}>
+                        <td>{user.id}</td>
                         <td>{user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : ''}</td>
                         <td>{user.userName}</td>
                         <td>{user.email}</td>
                         <td>
-                            <button className="btn btn-success" onClick={(event) => deleteUser(event, user.id)} disabled={loading}>
-                                {loading ? 'Siliniyor...' : 'Sil'}
+                            <button className="btn btn-outline-danger" onClick={(event) => deleteUser(event, user.id)} disabled={loading}>
+                                <i className="fa fa-trash"></i> {loading ? 'Removed...' : 'Remove'}
                             </button>
                             
                         </td>
@@ -122,7 +137,7 @@ function User() {
         <div style={{ width: '100%', paddingTop: '4rem', paddingLeft: 0, paddingRight: 0 }}>
             <div class="d-flex justify-content-end">
                 <Link to="/UserCreate" className="nav-link">
-                    <div className="btn btn-outline-success mx-2">User Create</div>
+                    <div className="btn btn-outline-success mx-2"><i class="fa-solid fa-plus"></i> User Create</div>
                 </Link>
             </div>
             <h1 id="tableLabel">User List</h1>

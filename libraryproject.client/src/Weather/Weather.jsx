@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import './Author.css';
-import Config from '../config.json';
+import './Weather.css';
+import Config from '../../config.json';
 import { useNavigate } from 'react-router-dom';
 
 function Weather() {

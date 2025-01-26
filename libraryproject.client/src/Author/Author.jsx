@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Author.css';
-import Config from '../config.json';
+import Config from '../../config.json';
 import { Link } from 'react-router-dom';
-import AuthorCreate from './AuthorCreate.jsx';
 function Author() {
+    const navigate = useNavigate();
     const [authors, setAuthors] = useState([]);
     const [error, setError] = useState(null);
     const [socket, setSocket] = useState(null);
     const [loading, setLoading] = useState(false);
     const [authToken, setAuthToken] = useState(null);
-
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    
     const authTokenVal = localStorage.getItem('authToken');
     const connectWebSocket = () => {
         var webSocketServerUrl = Config.webSocketUrl;
@@ -76,13 +78,23 @@ function Author() {
         }
     };
     useEffect(() => {
+        const token = localStorage.getItem('authToken');
+        if (token) {
+            setIsLoggedIn(true);
+        } else {
+            setIsLoggedIn(false);
+            navigate('/Login');
+        }
         connectWebSocket();
         return () => {
             if (socket) {
                 socket.close();
             }
         };
-    }, []);
+    }, [navigate]);
+    if (!isLoggedIn) {
+        return null;
+    }
 
     const contents = error ? (
         <p><em>{error}</em></p>
@@ -92,7 +104,7 @@ function Author() {
         <table className="table" aria-labelledby="tableLabel">
             <thead>
                 <tr>
-                    <th>Author ID</th>
+                    <th>ID</th>
                     <th>Name</th>
                     <th>#</th>
                 </tr>
@@ -103,8 +115,8 @@ function Author() {
                         <td>{author.authorId}</td>
                         <td>{author.name + ' ' + author.surname}</td>
                         <td>
-                            <button className="btn btn-success" onClick={(event) => deleteUser(event, author.authorId)} disabled={loading}>
-                                {loading ? 'Siliniyor...' : 'Sil'}
+                            <button className="btn btn-outline-danger" onClick={(event) => deleteUser(event, author.authorId)} disabled={loading}>
+                                <i className="fa fa-trash"></i> {loading ? 'Removed...' : 'Remove'}
                             </button>
                         </td>
                     </tr>
@@ -117,7 +129,7 @@ function Author() {
         <div style={{ width: '100%', paddingTop: '4rem', paddingLeft: 0, paddingRight: 0 }}>
             <div class="d-flex justify-content-end">
                 <Link to="/AuthorCreate" className="nav-link">
-                    <div className="btn btn-outline-success mx-2">Author Create</div>
+                    <div className="btn btn-outline-success mx-2"><i class="fa-solid fa-plus"></i> Author Create</div>
                 </Link>
             </div>
             <h1 id="tableLabel">Author List</h1>

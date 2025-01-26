@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import './User.css';
-import Config from '../config.json';
+import './BookCreate.css';
+import Config from '../../config.json';
 import { useNavigate } from 'react-router-dom';
 
 function BookCreate() {

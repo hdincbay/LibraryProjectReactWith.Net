@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import './SignUp.css';
+import './Login.css';
+import { Routes, Route } from 'react-router-dom'
+import SignUp from './SignUp.jsx'
+import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
-import Config from '../config.json';
-function SignUp() {
+import Config from '../../config.json';
+function Login() {
     const [userName, setUsername] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [passwordConfirm, setPasswordConfirm] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
@@ -18,28 +18,34 @@ function SignUp() {
 
         setLoading(true);  // API çaðrýsý sýrasýnda bir yükleniyor durumu
 
-        const userData = { userName, phoneNumber, email, password, passwordConfirm };
+        const userData = { userName, password };
 
         try {
             var restUrl = Config.restApiUrl;
             // API'ye POST isteði gönderme
-            const response = await fetch(`${restUrl}/api/User/SignUp`, {
+            const response = await fetch(`${restUrl}/api/User/Login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(userData),
-                
+
             });
             const textResponse = await response.text();
             if (!response.ok) {
+
                 throw new Error(textResponse);
             }
             else {
-                navigate('/Login');
+
+                const token = textResponse;
+                // Token'in localStorage'a kaydedilmesi
+                localStorage.setItem('authToken', token);
+
+                navigate('/Home');
             }
             const contentType = response.headers.get("Content-Type");
-            
+
         } catch (error) {
             setError(error.message);
         } finally {
@@ -51,12 +57,12 @@ function SignUp() {
         <div>
             <div className="container">
                 <div className="row">
-                    <div style={{ height: '5rem' }} className="col-md-12"></div>
+                    <div style={{ height: '10rem' }} className="col-md-12"></div>
                 </div>
                 <div className="row">
                     <div className="col-md-6">
                         <div className="display-6">
-                            Sign Up Page
+                            Login Page
                         </div>
                         <form onSubmit={handleSubmit}>
                             <div className="form-group my-2">
@@ -68,24 +74,6 @@ function SignUp() {
                                     onChange={(e) => setUsername(e.target.value)}
                                 />
                             </div>
-                            <div className="form-group my-2">
-                                <label className="form-label">Phone Number</label>
-                                <input
-                                    className="form-control my-2"
-                                    type="tel"
-                                    value={phoneNumber}
-                                    onChange={(e) => setPhoneNumber(e.target.value)}
-                                />
-                            </div>
-                            <div className="form-group my-2">
-                                <label className="form-label">Email Address</label>
-                                <input
-                                    className="form-control my-2"
-                                    type="tel"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
-                            </div>
                             <div className="form-group">
                                 <label className="form-label">Password</label>
                                 <input
@@ -95,29 +83,21 @@ function SignUp() {
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                             </div>
-                            <div className="form-group">
-                                <label className="form-label">Password Confirm</label>
-                                <input
-                                    className="form-control my-2"
-                                    type="password"
-                                    value={passwordConfirm}
-                                    onChange={(e) => setPasswordConfirm(e.target.value)}
-                                />
-                            </div>
                             {error && <p className="error-text text-danger">{error}</p>}
                             <div className="row">
-                                <div className="col-md-8"></div>
-                                <div className="col-md-4">
-                                    <button type="submit" className="btn btn-success" disabled={loading}>
-                                        {loading ? 'Loading...' : 'Sign Up'}
-                                    </button>
+                                <div className="col-md-12">
+                                    <div>
+                                        <button type="submit" className="btn btn-outline-primary w-100" disabled={loading}>
+                                            {loading ? 'Loading...' : 'Login'}
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div
                         style={{
-                            backgroundImage: 'url(/img/signup_photo.jpg)',
+                            backgroundImage: 'url(/img/login_photo.jpg)',
                             backgroundPosition: 'center',
                             backgroundSize: 'cover'
                         }}
@@ -127,8 +107,11 @@ function SignUp() {
                     </div>
                 </div>
             </div>
+            <Routes>
+                <Route path="/SignUp" element={<SignUp />} />
+            </Routes>
         </div>
     );
 }
 
-export default SignUp;
+export default Login;

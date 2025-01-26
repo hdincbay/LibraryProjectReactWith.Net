@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import './Book.css';
-import Config from '../config.json';
+import Config from '../../config.json';
 import { Link } from 'react-router-dom';
-import BookCreate from './BookCreate.jsx';
+import { useNavigate } from 'react-router-dom';
 
 function Book() {
+    const navigate = useNavigate();
     const [books, setBooks] = useState([]);
     const [error, setError] = useState(null);
     const [socket, setSocket] = useState(null);
@@ -12,7 +13,8 @@ function Book() {
     const [authToken, setAuthToken] = useState(null);
     const [authorName, setAuthorName] = useState('');
     const authTokenVal = localStorage.getItem('authToken');
-
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    
     function formatDate(dateStr) {
         let date = new Date(dateStr);
         let day = String(date.getDate()).padStart(2, '0');
@@ -106,13 +108,23 @@ function Book() {
     };
 
     useEffect(() => {
+        const token = localStorage.getItem('authToken');
+        if (token) {
+            setIsLoggedIn(true);
+        } else {
+            setIsLoggedIn(false);
+            navigate('/Login');
+        }
         connectWebSocket();
         return () => {
             if (socket) {
                 socket.close();
             }
         };
-    }, []);
+    }, [navigate]);
+    if (!isLoggedIn) {
+        return null;
+    }
 
     const contents = error ? (
         <p><em>{error}</em></p>
@@ -122,7 +134,7 @@ function Book() {
         <table className="table" aria-labelledby="tableLabel">
             <thead>
                 <tr>
-                    <th>Book ID</th>
+                    <th>ID</th>
                     <th>Created Date</th>
                     <th>Serial Number</th>
                     <th>Available</th>
@@ -141,8 +153,8 @@ function Book() {
                         <td>{book.name}</td>
                         <td>{book.authorId}</td>
                         <td>
-                            <button className="btn btn-success" onClick={(event) => deleteBook(event, book.bookId)} disabled={loading}>
-                                {loading ? 'Siliniyor...' : 'Sil'}
+                            <button className="btn btn-outline-danger" onClick={(event) => deleteBook(event, book.bookId)} disabled={loading}>
+                                <i className="fa fa-trash"></i> {loading ? 'Removed...' : 'Remove'}
                             </button>
                         </td>
                     </tr>
@@ -155,7 +167,7 @@ function Book() {
         <div style={{ width: '100%', paddingTop: '4rem', paddingLeft: 0, paddingRight: 0 }}>
             <div className="d-flex justify-content-end">
                 <Link to="/BookCreate" className="nav-link">
-                    <div className="btn btn-outline-success mx-2">Book Create</div>
+                    <div className="btn btn-outline-success mx-2"><i class="fa-solid fa-plus"></i> Book Create</div>
                 </Link>
             </div>
             <h1 id="tableLabel">Book List</h1>

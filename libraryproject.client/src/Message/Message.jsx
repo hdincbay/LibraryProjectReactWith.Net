@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Config from '../config.json';
+import Config from '../../config.json';
 
 export function Message() {
     const navigate = useNavigate();

@@ -115,29 +115,21 @@ function First() {
 
     return (
         <div>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light p-3">
+            <nav className="w-100 navbar navbar-expand-lg navbar-light bg-light p-3">
                 <Link className="navbar-brand" to="/Home"><i className="fa-solid fa-book"></i> Library Application</Link>
-                <Link to="/Weather" className="nav-link">Weather</Link>
-                <Link style={{ marginLeft: '.3rem' }} to="/Message" className="nav-link">Message</Link>
-                <Link style={{ marginLeft: '.3rem' }} to="/User" className="btn btn-outline-primary">User</Link>
-                <Link style={{ marginLeft: '.3rem' }} to="/Author" className="btn btn-outline-secondary">Author</Link>
-                <Link style={{ marginLeft: '.3rem' }} to="/Book" className="btn btn-outline-success">Book</Link>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav">
-                        <li className="nav-item active">
-                            <Link to="/Home" className="nav-link">Home</Link>
-                        </li>
-                    </ul>
+                <div className="btn-group">
+                    <Link to="/Weather" className="btn btn-outline-dark">Weather</Link>
+                    <Link to="/Message" className="btn btn-outline-dark">Message</Link>
+                    <Link to="/User" className="btn btn-outline-dark">User</Link>
+                    <Link to="/Author" className="btn btn-outline-dark">Author</Link>
+                    <Link to="/Book" className="btn btn-outline-dark">Book</Link>
                 </div>
                 
                 
 
                 {/* Konum verisi alýnana kadar hiçbir þey gösterilmesin */}
                 {isControl && (
-                    <div className="collapse navbar-collapse" id="navbarNav">
+                    <div className="d-flex justify-content-center collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav">
                             <li className="nav-item active">
                                 <h4>{city} / Saat: {weatherIn3HoursDate}</h4>
@@ -147,23 +139,20 @@ function First() {
                     </div>
                 )}
 
-                {!isControl && !locationError && <h6>Konum Verisi Bekleniyor...</h6>}
 
-                {locationError && <h3>Konum Alýnamadý</h3>}
-
-                <div className="d-flex justify-content-end">
+                <div style={{ position: 'absolute', right: '1rem' }}>
                     {isLoggedIn ? (
-                        <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
+                        <button className="d-flex justify-content-end btn btn-outline-danger" onClick={handleLogout}><div><i className="fa-solid fa-right-from-bracket"></i> Logout</div></button>
                     ) : (
-                        <>
+                        <div className="btn-group">
                             <Link to="/SignUp" className="nav-link">
-                                <div className="btn btn-success mx-2">Sign Up</div>
+                                <div className="btn btn-outline-success mx-1">Sign Up</div>
                             </Link>
                             <Link to="/Login" className="nav-link">
-                                <div className="btn btn-primary mx-2">Login</div>
+                                <div className="btn btn-outline-primary mx-1">Login</div>
                             </Link>
                             
-                        </>
+                        </div>
                     )}
                 </div>
             </nav>

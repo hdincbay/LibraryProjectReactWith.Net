@@ -159,7 +159,7 @@ export function Message() {
                                 <th>#</th>
                                 <th>Date</th>
                                 <th>Name</th>
-                                <th>SurName</th>
+                                <th>Surname</th>
                                 <th>Message</th>
                             </tr>
                         </thead>

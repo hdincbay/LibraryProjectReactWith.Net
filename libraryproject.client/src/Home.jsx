@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const Home = () => {
     const [tempData, setTempData] = useState([]);
     const [timeData, setTimeData] = useState([]);
+    const [humData, setHumData] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const [isControl, setIsControl] = useState(false);
@@ -43,6 +44,7 @@ const Home = () => {
                     if (Array.isArray(data.list)) {
                         data.list.forEach(function (element) {
                             setTempData(prevTempData => [...prevTempData, kelvinToCelsius(element.main.temp)]);
+                            setHumData(prevTempData => [...prevTempData, element.main.humidity]);
                             setTimeData(prevTimeData => [
                                 ...prevTimeData,
                                 (() => {
@@ -89,9 +91,16 @@ const Home = () => {
                 label: 'Sicaklik Verisi',
                 data: tempData,
                 fill: false,
-                borderColor: 'rgba(75,192,192,1)',
+                borderColor: 'rgba(15, 168, 82)',
                 tension: 0.1,
             },
+            {
+                label: 'Nem Verisi (%)',
+                data: humData,
+                fill: false,
+                borderColor: 'rgba(112, 2, 2)',
+                tension: 0.1,
+            }
         ],
     };
 
@@ -106,7 +115,7 @@ const Home = () => {
 
     return (
         <div style={{ width: '100%', paddingTop: '4rem', paddingLeft: 0, paddingRight: 0 }}>
-            <h2>Sicaklik Grafigi</h2>
+            <h2>Hava Durumu</h2>
             <Line data={data} options={options} />
         </div>
     );

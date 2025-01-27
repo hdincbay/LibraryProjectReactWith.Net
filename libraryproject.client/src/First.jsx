@@ -2,16 +2,17 @@ import { useEffect, useState } from 'react';
 import './First.css';
 import { Routes, Route } from 'react-router-dom';
 import Home from './Home.jsx';
+import User from './User/User.jsx';
+import UserCreate from './User/UserCreate.jsx';
 import Login from './Entry/Login.jsx';
 import SignUp from './Entry/SignUp.jsx';
 import Weather from './Weather/Weather.jsx';
-import UserCreate from './User/UserCreate.jsx';
+import Author from './Author/Author.jsx';
 import AuthorCreate from './Author/AuthorCreate.jsx';
+import AuthorUpdate from './Author/AuthorUpdate.jsx';
+import Book from './Book/Book.jsx';
 import BookCreate from './Book/BookCreate.jsx';
 import Message from './Message/Message.jsx';
-import Book from './Book/Book.jsx';
-import Author from './Author/Author.jsx';
-import User from './User/User.jsx';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Config from '../config.json';
@@ -118,11 +119,11 @@ function First() {
             <nav className="w-100 navbar navbar-expand-lg navbar-light bg-light p-3">
                 <Link className="navbar-brand" to="/Home"><i className="fa-solid fa-book"></i> Library Application</Link>
                 <div className="btn-group">
-                    <Link to="/Weather" className="btn btn-outline-dark">Weather</Link>
-                    <Link to="/Message" className="btn btn-outline-dark">Message</Link>
-                    <Link to="/User" className="btn btn-outline-dark">User</Link>
-                    <Link to="/Author" className="btn btn-outline-dark">Author</Link>
-                    <Link to="/Book" className="btn btn-outline-dark">Book</Link>
+                    <Link to="/Weather" className="btn btn-outline-dark"><i className="fa-regular fa-moon"></i> Weather</Link>
+                    <Link to="/Message" className="btn btn-outline-dark"><i className="fa-regular fa-message"></i> Message</Link>
+                    <Link to="/User" className="btn btn-outline-dark"><i className="fa-regular fa-user"></i> User</Link>
+                    <Link to="/Author" className="btn btn-outline-dark"><i className="fa-solid fa-book-open-reader"></i> Author</Link>
+                    <Link to="/Book" className="btn btn-outline-dark"><i className="fa-solid fa-book-open"></i> Book</Link>
                 </div>
                 
                 
@@ -164,6 +165,7 @@ function First() {
                 <Route path="/Weather" element={<Weather />} />
                 <Route path="/UserCreate" element={<UserCreate />} />
                 <Route path="/AuthorCreate" element={<AuthorCreate />} />
+                <Route path="/AuthorUpdate/:authorId" element={<AuthorUpdate />} />
                 <Route path="/BookCreate" element={<BookCreate />} />
                 <Route path="/Message" element={<Message />} />
                 <Route path="/User" element={<User />} />

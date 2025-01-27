@@ -135,9 +135,9 @@ function User() {
 
     return (
         <div style={{ width: '100%', paddingTop: '4rem', paddingLeft: 0, paddingRight: 0 }}>
-            <div class="d-flex justify-content-end">
+            <div className="d-flex justify-content-end">
                 <Link to="/UserCreate" className="nav-link">
-                    <div className="btn btn-outline-success mx-2"><i class="fa-solid fa-plus"></i> User Create</div>
+                    <div className="btn btn-outline-success mx-2"><i className="fa-solid fa-plus"></i> User Create</div>
                 </Link>
             </div>
             <h1 id="tableLabel">User List</h1>

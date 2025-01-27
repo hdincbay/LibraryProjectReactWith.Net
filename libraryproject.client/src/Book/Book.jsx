@@ -167,7 +167,7 @@ function Book() {
         <div style={{ width: '100%', paddingTop: '4rem', paddingLeft: 0, paddingRight: 0 }}>
             <div className="d-flex justify-content-end">
                 <Link to="/BookCreate" className="nav-link">
-                    <div className="btn btn-outline-success mx-2"><i class="fa-solid fa-plus"></i> Book Create</div>
+                    <div className="btn btn-outline-success mx-2"><i className="fa-solid fa-plus"></i> Book Create</div>
                 </Link>
             </div>
             <h1 id="tableLabel">Book List</h1>

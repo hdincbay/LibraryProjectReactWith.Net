@@ -115,10 +115,37 @@ function Author() {
                         <td>{author.authorId}</td>
                         <td>{author.name + ' ' + author.surname}</td>
                         <td>
-                            <button className="btn btn-outline-danger" onClick={(event) => deleteUser(event, author.authorId)} disabled={loading}>
-                                <i className="fa fa-trash"></i> {loading ? 'Removed...' : 'Remove'}
-                            </button>
+                            <div className="col-md-4 offset-md-4" style={{ display: 'flex', flexDirection: 'column' }}>
+                                <Link
+                                    className="btn btn-primary"
+                                    to={`/AuthorUpdate/${author.authorId}`}
+                                    style={{
+                                        height: '2.5rem', // Ayný yükseklik
+                                        display: 'flex',  // Flexbox
+                                        alignItems: 'center', // Ýçeriði dikeyde ortala
+                                        justifyContent: 'center', // Ýçeriði yatayda ortala
+                                        padding: '0 1rem' // Buton içeriði için sað ve sol padding
+                                    }}
+                                >
+                                    <i className="fa-solid fa-pen-nib"></i>&nbsp;Update
+                                </Link>
+                                <button
+                                    className="btn btn-outline-primary"
+                                    onClick={(event) => deleteUser(event, author.authorId)}
+                                    disabled={loading}
+                                    style={{
+                                        height: '2.5rem', // Ayný yükseklik
+                                        display: 'flex',  // Flexbox
+                                        alignItems: 'center', // Ýçeriði dikeyde ortala
+                                        justifyContent: 'center', // Ýçeriði yatayda ortala
+                                        padding: '0 1rem' // Buton içeriði için sað ve sol padding
+                                    }}
+                                >
+                                    <i className="fa fa-trash"></i>&nbsp;{loading ? 'Removed...' : 'Remove'}
+                                </button>
+                            </div>
                         </td>
+
                     </tr>
                 ))}
             </tbody>
@@ -127,9 +154,9 @@ function Author() {
 
     return (
         <div style={{ width: '100%', paddingTop: '4rem', paddingLeft: 0, paddingRight: 0 }}>
-            <div class="d-flex justify-content-end">
+            <div className="d-flex justify-content-end">
                 <Link to="/AuthorCreate" className="nav-link">
-                    <div className="btn btn-outline-success mx-2"><i class="fa-solid fa-plus"></i> Author Create</div>
+                    <div className="btn btn-outline-success mx-2"><i className="fa-solid fa-plus"></i> Author Create</div>
                 </Link>
             </div>
             <h1 id="tableLabel">Author List</h1>

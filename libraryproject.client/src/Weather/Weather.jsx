@@ -114,7 +114,7 @@ function Weather() {
     }
 
     return (
-        <div style={{ width: '100%', paddingTop: '4rem', paddingLeft: 0, paddingRight: 0 }}>
+        <div>
             <h1 id="tableLabel">Weather Forecast</h1>
             {error ? (
                 <div>Error: Unable to fetch weather data.</div>

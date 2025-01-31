@@ -153,7 +153,7 @@ function Author() {
     );
 
     return (
-        <div style={{ width: '100%', paddingTop: '4rem', paddingLeft: 0, paddingRight: 0 }}>
+        <div>
             <div className="d-flex justify-content-end">
                 <Link to="/AuthorCreate" className="nav-link">
                     <div className="btn btn-outline-success mx-2"><i className="fa-solid fa-plus"></i> Author Create</div>

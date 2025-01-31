@@ -11,44 +11,30 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Bellek tabanlý önbellek ve Session yapýlandýrmasý
 builder.Services.AddDistributedMemoryCache(); // Çerez tabanlý oturum yönetimi için
 builder.Services.AddSession(options =>
 {
     options.Cookie.Name = ".MyApp.Session"; // Çerez adý
     options.IdleTimeout = TimeSpan.FromMinutes(30); // Oturum süresi
+    options.Cookie.HttpOnly = true; // Çerez yalnýzca HTTP üzerinden eriþilebilir
+    options.Cookie.IsEssential = true; // Çerez zaruri olmalýdýr (GDPR uyumu için)
 });
-// Add services to the container.
 
+// CORS yapýlandýrmasý
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAllOrigins",
-        corspolicybuilder =>
-        {
-            corspolicybuilder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-        });
+    options.AddPolicy("AllowAllOrigins", corspolicybuilder =>
+    {
+        corspolicybuilder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
 });
 
-builder.Services.AddSingleton<JwtTokenService>();
-
-builder.Services.AddDbContext<RepositoryContext>(option =>
-{
-    option.UseNpgsql(builder.Configuration.GetConnectionString("pgsqlconnection"), b => b.MigrationsAssembly("LibraryProject.Server"));
-});
-
-builder.Services.AddIdentity<User, Role>(options =>
-{
-    options.User.RequireUniqueEmail = true;
-    options.User.AllowedUserNameCharacters = "abcdefghijklmnoprstuvyz1234567890";
-    options.Password.RequiredLength = 6;
-    options.Password.RequireLowercase = true;
-    options.Password.RequireUppercase = false;
-    options.Password.RequireDigit = false;
-}).AddEntityFrameworkStores<RepositoryContext>();
-
-// JWT Authentication
+// JWT Authentication yapýlandýrmasý
 builder.Services.AddAuthentication(options =>
 {
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;  // Burada JwtBearerDefaults kullanýlacak
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; // JWT kullanýmý
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
 .AddJwtBearer(options =>
@@ -61,10 +47,28 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true,
         ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
         ValidAudience = builder.Configuration["JwtSettings:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:SecretKey"]!))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:SecretKey"]!)),
+        ClockSkew = TimeSpan.Zero  // Token süresi ile sunucu saati arasýndaki farký tolere etmeyin (bu, güvenliði artýrabilir)
     };
 });
 
+builder.Services.AddSingleton<JwtTokenService>();
+
+// DbContext ve Identity yapýlandýrmasý
+builder.Services.AddDbContext<RepositoryContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("pgsqlconnection"), b => b.MigrationsAssembly("LibraryProject.Server")));
+
+builder.Services.AddIdentity<User, Role>(options =>
+{
+    options.User.RequireUniqueEmail = true;
+    options.User.AllowedUserNameCharacters = "abcdefghijklmnoprstuvyz1234567890";
+    options.Password.RequiredLength = 6;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireDigit = false;
+}).AddEntityFrameworkStores<RepositoryContext>();
+
+// Repository ve Service yapýlandýrmalarý
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<ILoanRepository, LoanRepository>();
@@ -75,32 +79,34 @@ builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<ILoanService, LoanService>();
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
 
+// Controller ve Swagger yapýlandýrmalarý
 builder.Services.AddControllers();
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// Statis dosyalar ve varsayýlan dosya ayarlarý
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-// Configure the HTTP request pipeline.
+// Swagger kullanýmý geliþtirme ortamýnda
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseSession();
-app.UseCors("AllowAllOrigins");
 
-app.UseHttpsRedirection();
+// Session, CORS, Authentication ve Authorization middleware sýrasý
+app.UseSession(); // Session'ý en önce tanýmlýyoruz
+app.UseCors("AllowAllOrigins"); // CORS politikasýný tanýmlýyoruz
 
+app.UseHttpsRedirection(); // HTTPS yönlendirme
 app.UseAuthentication();  // JWT doðrulama iþlemi
 app.UseAuthorization();   // Yetkilendirme iþlemi
 
-app.MapControllers();
+app.MapControllers(); // Controller'larý tanýmlýyoruz
 
-app.MapFallbackToFile("/index.html");
+app.MapFallbackToFile("/index.html"); // SPA kullanýmý için fallback
 
 app.Run();

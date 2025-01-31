@@ -26,24 +26,6 @@ namespace LibraryProject.Server.Controllers
             _tokenService = tokenService;
             _configuration = configuration;
         }
-        [HttpGet("GetCurrentUser")]
-        public async Task<IActionResult> GetCurrentUser()
-        {
-            var userName = await Task.Run(() =>
-            {
-                return User!.Identity!.Name;
-            }); // Giriş yapmış kullanıcının adını alır.
-            return Ok(new { UserName = userName });
-        }
-        [HttpGet("GetCurrentUserHashCode")]
-        public async Task<IActionResult> GetCurrentUserId()
-        {
-            var userName = await Task.Run(() =>
-            {
-                return User!.Identity!.GetHashCode();
-            }); // Giriş yapmış kullanıcının adını alır.
-            return Ok(new { UserName = userName });
-        }
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
@@ -105,7 +87,7 @@ namespace LibraryProject.Server.Controllers
         {
             try
             {
-                using(var reader = new StreamReader(Request.Body))
+                using (var reader = new StreamReader(Request.Body))
                 {
                     var requestContent = await reader.ReadToEndAsync();
                     var requestJObj = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(requestContent);
@@ -117,8 +99,24 @@ namespace LibraryProject.Server.Controllers
                     var isLoggedin = await _signInManager.PasswordSignInAsync(user!, password!, true, true);
                     if (isLoggedin.Succeeded)
                     {
-                        var token = _tokenService.GenerateJwtToken(new() { UserName = userName });
-                        return Ok(token);
+                        // Oturum açıldıktan sonra, session'a kaydediyoruz
+                        if (userName != "systemuser")
+                        {
+                            HttpContext.Session.SetString("UserName", userName!);
+                            var userObj = await _userManager.FindByNameAsync(userName!);
+                            var userFullName = userObj!.FirstName + " " + userObj!.LastName;
+                            return Ok(userFullName);
+                        }
+                        else
+                        {
+                            var token = _tokenService.GenerateJwtToken(new() { UserName = userName });
+                            
+                            
+                            return Ok(token);
+                        }
+
+
+                        return Ok("User logged in successfully.");
                     }
                     else
                     {
@@ -126,11 +124,13 @@ namespace LibraryProject.Server.Controllers
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.ToString());
             }
         }
+
+
         [HttpPost("Logout")]
         public async Task<IActionResult> Logout()
         {

@@ -122,9 +122,35 @@ function User() {
                         <td>{user.userName}</td>
                         <td>{user.email}</td>
                         <td>
-                            <button className="btn btn-outline-danger" onClick={(event) => deleteUser(event, user.id)} disabled={loading}>
-                                <i className="fa fa-trash"></i> {loading ? 'Removed...' : 'Remove'}
-                            </button>
+                            <div className="col-md-8 offset-md-2" style={{ display: 'flex', flexDirection: 'column' }}>
+                                <Link
+                                    className="btn btn-primary"
+                                    to={`/UserUpdate/${user.userId}`}
+                                    style={{
+                                        height: '2.5rem', // Ayný yükseklik
+                                        display: 'flex',  // Flexbox
+                                        alignItems: 'center', // Ýçeriði dikeyde ortala
+                                        justifyContent: 'center', // Ýçeriði yatayda ortala
+                                        padding: '0 1rem' // Buton içeriði için sað ve sol padding
+                                    }}
+                                >
+                                    <i className="fa-solid fa-pen-nib"></i>&nbsp;Update
+                                </Link>
+                                <button
+                                    className="btn btn-outline-primary"
+                                    onClick={(event) => deleteUser(event, user.userId)}
+                                    disabled={loading}
+                                    style={{
+                                        height: '2.5rem', // Ayný yükseklik
+                                        display: 'flex',  // Flexbox
+                                        alignItems: 'center', // Ýçeriði dikeyde ortala
+                                        justifyContent: 'center', // Ýçeriði yatayda ortala
+                                        padding: '0 1rem' // Buton içeriði için sað ve sol padding
+                                    }}
+                                >
+                                    <i className="fa fa-trash"></i>&nbsp;{loading ? 'Removed...' : 'Remove'}
+                                </button>
+                            </div>
                             
                         </td>
                     </tr>
@@ -134,7 +160,7 @@ function User() {
     );
 
     return (
-        <div style={{ width: '100%', paddingTop: '4rem', paddingLeft: 0, paddingRight: 0 }}>
+        <div>
             <div className="d-flex justify-content-end">
                 <Link to="/UserCreate" className="nav-link">
                     <div className="btn btn-outline-success mx-2"><i className="fa-solid fa-plus"></i> User Create</div>

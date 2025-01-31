@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import Config from '../../config.json';
 function Login() {
     const [userName, setUsername] = useState('');
+    const [currentUserName, setCurrentUserName] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -41,6 +42,7 @@ function Login() {
                 const token = textResponse;
                 // Token'in localStorage'a kaydedilmesi
                 localStorage.setItem('authToken', token);
+                localStorage.setItem("userFullName", textResponse);
 
                 navigate('/Home');
             }

@@ -185,7 +185,7 @@ export function Message() {
                     </table>
                 </div>
             ) : (
-                <div>Loading...</div>
+                <div></div>
             )}
         </div>
     );

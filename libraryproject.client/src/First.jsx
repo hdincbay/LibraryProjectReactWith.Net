@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './First.css';
+import Config from '../config.json';
 import { Routes, Route, Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Home from './Home.jsx';
@@ -14,12 +15,14 @@ import AuthorUpdate from './Author/AuthorUpdate.jsx';
 import UserUpdate from './User/UserUpdate.jsx';
 import Book from './Book/Book.jsx';
 import BookCreate from './Book/BookCreate.jsx';
+import BookUpdate from './Book/BookUpdate.jsx';
 import Message from './Message/Message.jsx';
 
 function First() {
     const [currentUserFullName, setCurrentUserFullName] = useState('');
     const navigate = useNavigate();
 
+    // Oturum açmýþ kullanýcýyý çýkarmak için logout iþlemi
     const handleLogout = () => {
         localStorage.removeItem('authToken');
         localStorage.removeItem('userFullName');
@@ -30,10 +33,19 @@ function First() {
     const isLoggedIn = localStorage.getItem('authToken') !== null;
 
     useEffect(() => {
+        // Oturum açmýþ kullanýcýnýn adýný alýyoruz
         const getCurrentUserFullName = localStorage.getItem('userFullName');
         if (getCurrentUserFullName !== null) {
             setCurrentUserFullName(getCurrentUserFullName);
         }
+
+
+        window.addEventListener('beforeunload', handleLogout);
+
+        // Cleanup fonksiyonu
+        return () => {
+            window.removeEventListener('beforeunload', handleLogout);
+        };
     }, [isLoggedIn]);
 
     return (
@@ -43,7 +55,7 @@ function First() {
                     <i className="fa-solid fa-book"></i> Library Application
                 </Link>
 
-                {/* Menu links */}
+                {/* Menü linkleri */}
                 <div className="btn-group">
                     <Link to="/Weather" className="btn btn-outline-dark">
                         <i className="fa-regular fa-snowflake"></i> Weather
@@ -62,16 +74,16 @@ function First() {
                     </Link>
                 </div>
 
-                {/* User info and auth buttons */}
+                {/* Kullanýcý bilgisi ve oturum açma/kapama butonlarý */}
                 <div style={{ position: 'absolute', right: '1rem', top: '1rem', display: 'flex', alignItems: 'center' }}>
-                    {/* Display user name only if logged in */}
+                    {/* Kullanýcý adý, giriþ yaptýysa */}
                     {isLoggedIn && currentUserFullName && (
                         <p id="textfullname" style={{ marginRight: '1rem', fontSize: '1.2rem' }}>
                             <strong>{currentUserFullName}</strong>
                         </p>
                     )}
 
-                    {/* Logout button if logged in, SignUp/Login buttons if not */}
+                    {/* Kullanýcý oturum açtýysa çýkýþ butonu, açmadýysa giriþ/üye ol butonlarý */}
                     {isLoggedIn ? (
                         <button className="btn btn-outline-danger" onClick={handleLogout}>
                             <i className="fa-solid fa-right-from-bracket"></i> Logout
@@ -89,7 +101,7 @@ function First() {
                 </div>
             </nav>
 
-            {/* Routes */}
+            {/* Sayfa yönlendirme (routes) */}
             <Routes>
                 <Route path="/Login" element={<Login />} />
                 <Route path="/Home" element={<Home />} />
@@ -99,6 +111,7 @@ function First() {
                 <Route path="/AuthorCreate" element={<AuthorCreate />} />
                 <Route path="/AuthorUpdate/:authorId" element={<AuthorUpdate />} />
                 <Route path="/UserUpdate/:userId" element={<UserUpdate />} />
+                <Route path="/BookUpdate/:bookId" element={<BookUpdate />} />
                 <Route path="/BookCreate" element={<BookCreate />} />
                 <Route path="/Message" element={<Message />} />
                 <Route path="/User" element={<User />} />

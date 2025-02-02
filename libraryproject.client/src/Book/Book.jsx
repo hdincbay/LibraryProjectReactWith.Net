@@ -153,9 +153,35 @@ function Book() {
                         <td>{book.name}</td>
                         <td>{book.authorId}</td>
                         <td>
-                            <button className="btn btn-outline-danger" onClick={(event) => deleteBook(event, book.bookId)} disabled={loading}>
-                                <i className="fa fa-trash"></i> {loading ? 'Removed...' : 'Remove'}
-                            </button>
+                            <div className="col-md-8 offset-md-2" style={{ display: 'flex', flexDirection: 'column' }}>
+                                <Link
+                                    className="btn btn-primary"
+                                    to={`/BookUpdate/${book.bookId}`}
+                                    style={{
+                                        height: '2.5rem', // Ayný yükseklik
+                                        display: 'flex',  // Flexbox
+                                        alignItems: 'center', // Ýçeriði dikeyde ortala
+                                        justifyContent: 'center', // Ýçeriði yatayda ortala
+                                        padding: '0 1rem' // Buton içeriði için sað ve sol padding
+                                    }}
+                                >
+                                    <i className="fa-solid fa-pen-nib"></i>&nbsp;Update
+                                </Link>
+                                <button
+                                    className="btn btn-outline-primary"
+                                    onClick={(event) => deleteBook(event, book.bookId)}
+                                    disabled={loading}
+                                    style={{
+                                        height: '2.5rem', // Ayný yükseklik
+                                        display: 'flex',  // Flexbox
+                                        alignItems: 'center', // Ýçeriði dikeyde ortala
+                                        justifyContent: 'center', // Ýçeriði yatayda ortala
+                                        padding: '0 1rem' // Buton içeriði için sað ve sol padding
+                                    }}
+                                >
+                                    <i className="fa fa-trash"></i>&nbsp;{loading ? 'Removed...' : 'Remove'}
+                                </button>
+                            </div>
                         </td>
                     </tr>
                 ))}

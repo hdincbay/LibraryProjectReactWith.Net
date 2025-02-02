@@ -8,7 +8,6 @@ export function Message() {
     const [apiResponseFormat, setApiResponseFormat] = useState('');
     const [fromModelList, setFromModelList] = useState([]);
     const [userList, setUserList] = useState([]);
-
     const [formData, setFormData] = useState({
         chat_id: '',
         text: ''
@@ -22,15 +21,19 @@ export function Message() {
             setIsLoggedIn(true);
             getMessages(getMessagesApiEndpointVal);
             getUserList(restApiUrlVal);
+
+            // Set an interval to check for new messages every 5 seconds (5000ms)
+            const intervalId = setInterval(() => {
+                getMessages(getMessagesApiEndpointVal); // Check for new messages
+            }, 5000);
+
+            // Cleanup interval on component unmount
+            return () => clearInterval(intervalId);
         } else {
             setIsLoggedIn(false);
             navigate('/Login');
         }
     }, [navigate]);
-
-    if (!isLoggedIn) {
-        return null;
-    }
 
     const handleChange = (e) => {
         setApiResponseFormat(null);
@@ -57,6 +60,11 @@ export function Message() {
             });
             const jsonData = await response.json();
             if (response.ok && jsonData.result && jsonData.result.chat) {
+                // Mesaj gönderildiðinde formu sýfýrlama
+                setFormData({
+                    chat_id: '',
+                    text: ''
+                });
                 const responseFormat = jsonData.result.chat.first_name + ' ' + jsonData.result.chat.last_name + ' kullanicisina mesaj iletilmistir.';
                 setApiResponseFormat(responseFormat);
             } else {
@@ -73,9 +81,12 @@ export function Message() {
         try {
             const response = await fetch(getMessagesApiEndpointVal);
             const jsonData = await response.json();
+
             if (response.ok && jsonData.result) {
-                var filteredMessage = jsonData.result.filter(msg => msg.message);
-                setFromModelList(filteredMessage);
+                const filteredMessage = jsonData.result.filter(msg => msg.message);
+                if (JSON.stringify(filteredMessage) !== JSON.stringify(fromModelList)) {
+                    setFromModelList(filteredMessage); // Update state if messages have changed
+                }
             } else {
                 setFromModelList([]);
                 console.error("Mesajlar alýnýrken bir hata oluþtu:", jsonData);
@@ -185,7 +196,7 @@ export function Message() {
                     </table>
                 </div>
             ) : (
-                <div></div>
+                <div>No messages available.</div>
             )}
         </div>
     );

@@ -120,7 +120,7 @@ export function Message() {
     };
 
     return (
-        <div style={{ width: '100%', paddingTop: '4rem', paddingLeft: 0, paddingRight: 0 }}>
+        <div id="componentcontent" style={{ width: '100%', paddingTop: '4rem' }}>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <select
@@ -163,7 +163,7 @@ export function Message() {
             <div className="text-danger display-6">{apiResponseFormat}</div>
 
             {fromModelList.length > 0 ? (
-                <div style={{ marginTop: '3rem' }}>
+                <div>
                     <table className="table table-hover">
                         <thead>
                             <tr>

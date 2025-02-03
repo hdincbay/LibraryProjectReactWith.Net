@@ -48,11 +48,8 @@ function SignUp() {
     };
 
     return (
-        <div>
+        <div id="componentcontent">
             <div className="container">
-                <div className="row">
-                    <div style={{ height: '5rem' }} className="col-md-12"></div>
-                </div>
                 <div className="row">
                     <div className="col-md-6">
                         <div className="display-6">

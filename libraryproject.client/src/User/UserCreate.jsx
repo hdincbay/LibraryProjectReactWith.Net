@@ -69,7 +69,7 @@ function UserCreate() {
         });
     };
     return (
-        <div style={{ width: '100%', paddingTop: '4rem', paddingLeft: 0, paddingRight: 0 }}>
+        <div id="componentcontent" style={{ width: '100%', paddingTop: '4rem', paddingLeft: 0, paddingRight: 0 }}>
             <div className="display-6 text-danger text-center">
                 {apiResponse ?? error} 
             </div>

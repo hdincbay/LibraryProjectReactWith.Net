@@ -101,7 +101,7 @@ function BookUpdate() {
     }
 
     return (
-        <div style={{ width: '100%', paddingTop: '4rem', paddingLeft: 0, paddingRight: 0 }}>
+        <div id="componentcontent" style={{ width: '100%', paddingTop: '4rem', paddingLeft: 0, paddingRight: 0 }}>
             {errorMessage}
             <form onSubmit={handleSubmit}>
                 <table style={{ width: '100%' }}>

@@ -153,7 +153,7 @@ function Author() {
     );
 
     return (
-        <div>
+        <div id="componentcontent">
             <div className="d-flex justify-content-end">
                 <Link to="/AuthorCreate" className="nav-link">
                     <div className="btn btn-outline-success mx-2"><i className="fa-solid fa-plus"></i> Author Create</div>

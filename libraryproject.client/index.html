@@ -13,8 +13,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Library Application</title>
     <style>
-        body {
-            padding-top: 56px; /* Navbar yüksekliği kadar boşluk bırak */
+        #root {
+            background-image: url('public/img/homepage_photo.jpg');
+            background-size: cover;
+            height: 100vh;
         }
 
         .navbar {
@@ -27,7 +29,7 @@
     </style>
 </head>
 <body>
-    <div style="width: 100%; height: 100%; padding-top: 3rem; padding-left: 0; padding-right: 0; margin-left: 0; margin-right: 0" id="root"></div>
+    <div style="width: 100%; height: 100vh; padding-top: 6rem; margin-left: 0; margin-right: 0" id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
 </body>
 </html>

@@ -114,7 +114,7 @@ function Weather() {
     }
 
     return (
-        <div>
+        <div id="componentcontent">
             <h1 id="tableLabel">Weather Forecast</h1>
             {error ? (
                 <div>Error: Unable to fetch weather data.</div>

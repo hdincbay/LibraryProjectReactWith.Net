@@ -1,5 +1,5 @@
 ﻿#root {
-    max-width: 1280px;
+    
     margin: 0 auto;
     padding: 2rem;
     text-align: center;
@@ -29,4 +29,9 @@ th, td {
 
 button {
     margin-top: 10px; /* Butona biraz boşluk ekleyebiliriz */
+}
+#componentcontent {
+    padding: 3rem;
+    background-color: white;
+    border: 1px;
 }

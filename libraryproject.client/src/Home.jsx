@@ -114,7 +114,7 @@ const Home = () => {
     };
 
     return (
-        <div>
+        <div id="componentcontent">
             <h2>Hava Durumu</h2>
             <Line data={data} options={options} />
         </div>

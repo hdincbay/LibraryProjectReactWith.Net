@@ -99,17 +99,22 @@ namespace LibraryProject.Server.Controllers
                     var isLoggedin = await _signInManager.PasswordSignInAsync(user!, password!, true, true);
                     if (isLoggedin.Succeeded)
                     {
+                        var token = _tokenService.GenerateJwtToken(new() { UserName = userName });
                         // Oturum açıldıktan sonra, session'a kaydediyoruz
                         if (userName != "systemuser")
                         {
                             HttpContext.Session.SetString("UserName", userName!);
                             var userObj = await _userManager.FindByNameAsync(userName!);
                             var userFullName = userObj!.FirstName + " " + userObj!.LastName;
-                            return Ok(userFullName);
+                            var resultJObj = new JObject();
+                            resultJObj.Add("userName", userFullName);
+                            resultJObj.Add("token", token);
+
+                            return Ok(resultJObj.ToString());
                         }
                         else
                         {
-                            var token = _tokenService.GenerateJwtToken(new() { UserName = userName });
+                            
                             
                             
                             return Ok(token);

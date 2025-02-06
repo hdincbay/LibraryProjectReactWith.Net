@@ -32,17 +32,17 @@ function Login() {
                 body: JSON.stringify(userData),
 
             });
-            const textResponse = await response.text();
+            const textResponse = await response.json();
             if (!response.ok) {
 
                 throw new Error(textResponse);
             }
             else {
-
-                const token = textResponse;
+                const token = textResponse.token;
+                const userName = textResponse.userName;
                 // Token'in localStorage'a kaydedilmesi
                 localStorage.setItem('authToken', token);
-                localStorage.setItem("userFullName", textResponse);
+                localStorage.setItem("userFullName", userName);
 
                 navigate('/Home');
             }

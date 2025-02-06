@@ -11,8 +11,8 @@ function User() {
     const [loading, setLoading] = useState(false);
     const [authToken, setAuthToken] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    
-    
+
+
     const authTokenVal = localStorage.getItem('authToken');
     const connectWebSocket = () => {
         var webSocketServerUrl = Config.webSocketUrl;
@@ -40,12 +40,12 @@ function User() {
                     }
                 }
             } catch (e) {
-                setError('Veri iþleme hatasý.');
+                setError('Veri i?leme hatas?.');
             }
         };
 
         newSocket.onerror = (error) => {
-            setError('WebSocket baðlantý hatasý. Yeniden deniyor...');
+            setError('WebSocket ba?lant? hatas?. Yeniden deniyor...');
         };
 
         newSocket.onclose = () => {
@@ -102,7 +102,7 @@ function User() {
         <p><em>{error}</em></p>
     ) : users.length === 0 ? (
         <p><em>User Undefined...</em></p>
-        ) : (
+    ) : (
 
         <table className="table" aria-labelledby="tableLabel">
             <thead>
@@ -127,11 +127,11 @@ function User() {
                                     className="btn btn-primary"
                                     to={`/UserUpdate/${user.userId}`}
                                     style={{
-                                        height: '2.5rem', // Ayný yükseklik
+                                        height: '2.5rem', // Ayn? yükseklik
                                         display: 'flex',  // Flexbox
-                                        alignItems: 'center', // Ýçeriði dikeyde ortala
-                                        justifyContent: 'center', // Ýçeriði yatayda ortala
-                                        padding: '0 1rem' // Buton içeriði için sað ve sol padding
+                                        alignItems: 'center', // ?çeri?i dikeyde ortala
+                                        justifyContent: 'center', // ?çeri?i yatayda ortala
+                                        padding: '0 1rem' // Buton içeri?i için sa? ve sol padding
                                     }}
                                 >
                                     <i className="fa-solid fa-pen-nib"></i>&nbsp;Update
@@ -141,17 +141,17 @@ function User() {
                                     onClick={(event) => deleteUser(event, user.userId)}
                                     disabled={loading}
                                     style={{
-                                        height: '2.5rem', // Ayný yükseklik
+                                        height: '2.5rem', // Ayn? yükseklik
                                         display: 'flex',  // Flexbox
-                                        alignItems: 'center', // Ýçeriði dikeyde ortala
-                                        justifyContent: 'center', // Ýçeriði yatayda ortala
-                                        padding: '0 1rem' // Buton içeriði için sað ve sol padding
+                                        alignItems: 'center', // ?çeri?i dikeyde ortala
+                                        justifyContent: 'center', // ?çeri?i yatayda ortala
+                                        padding: '0 1rem' // Buton içeri?i için sa? ve sol padding
                                     }}
                                 >
                                     <i className="fa fa-trash"></i>&nbsp;{loading ? 'Removed...' : 'Remove'}
                                 </button>
                             </div>
-                            
+
                         </td>
                     </tr>
                 ))}

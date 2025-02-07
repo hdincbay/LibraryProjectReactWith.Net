@@ -69,7 +69,7 @@ export function Message() {
                 setApiResponseFormat(responseFormat);
             } else {
                 console.error("Beklenen veri formatý gelmedi:", jsonData);
-                setApiResponseFormat("Mesaj gönderilemedi.");
+                setApiResponseFormat("Mesaj gonderilemedi.");
             }
         } catch (error) {
             console.error('Mesaj gönderilirken bir hata oluþtu:', error);

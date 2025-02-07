@@ -12,9 +12,18 @@ function Book() {
     const [loading, setLoading] = useState(false);
     const [authToken, setAuthToken] = useState(null);
     const [authorName, setAuthorName] = useState('');
+    const [searchTermName, setSearchTermName] = useState('');  // Book name search
+    const [searchTermAuthor, setSearchTermAuthor] = useState('');  // Author name search
+    const [searchTermSerial, setSearchTermSerial] = useState('');  // Serial number search
+    const [searchTermAvailable, setSearchTermAvailable] = useState('');  // Availability search
     const authTokenVal = localStorage.getItem('authToken');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    
+
+    const [sortConfig, setSortConfig] = useState({
+        key: 'bookId',  // Default sorting by ID
+        direction: 'ascending'
+    });
+
     function formatDate(dateStr) {
         let date = new Date(dateStr);
         let day = String(date.getDate()).padStart(2, '0');
@@ -23,7 +32,7 @@ function Book() {
         let hours = String(date.getHours()).padStart(2, '0');
         let minutes = String(date.getMinutes()).padStart(2, '0');
         return `${day}/${month}/${year} ${hours}:${minutes}`;
-    };
+    }
 
     const getAuthorName = async (authorIdVal) => {
         var restUrl = Config.restApiUrl;
@@ -35,9 +44,10 @@ function Book() {
             const jsonResponse = JSON.parse(textResponse);
             return jsonResponse.name + ' ' + jsonResponse.surname;
         } catch (error) {
-            console.error('JSON parse hatasý:', error);
+            console.error('JSON parse error:', error);
         }
-    }
+    };
+
     const connectWebSocket = () => {
         var webSocketServerUrl = Config.webSocketUrl;
         const newSocket = new WebSocket(`${webSocketServerUrl}/BookList/`);
@@ -68,16 +78,16 @@ function Book() {
                     }
                 }
             } catch (e) {
-                setError('Veri iþleme hatasý.');
+                setError('Data processing error.');
             }
         };
 
         newSocket.onerror = (error) => {
-            setError('WebSocket baðlantý hatasý. Yeniden deniyor...');
+            setError('WebSocket connection error. Retrying...');
         };
 
         newSocket.onclose = () => {
-            setError('WebSocket baðlantýsý kapandý. Yeniden deniyor...');
+            setError('WebSocket connection closed. Retrying...');
             setTimeout(connectWebSocket, 5000);
         };
 
@@ -107,6 +117,14 @@ function Book() {
         }
     };
 
+    const handleSort = (key) => {
+        let direction = 'ascending';
+        if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+            direction = 'descending';
+        }
+        setSortConfig({ key, direction });
+    };
+
     useEffect(() => {
         const token = localStorage.getItem('authToken');
         if (token) {
@@ -122,29 +140,50 @@ function Book() {
             }
         };
     }, [navigate]);
+
     if (!isLoggedIn) {
         return null;
     }
 
+    // Filtered books
+    const filteredBooks = books.filter(book =>
+        (book.name.toLowerCase().includes(searchTermName.toLowerCase())) &&
+        (book.authorId.toLowerCase().includes(searchTermAuthor.toLowerCase())) &&
+        (book.serialNumber.toLowerCase().includes(searchTermSerial.toLowerCase())) &&
+        (book.available.toString().includes(searchTermAvailable.toLowerCase()))
+    );
+
+    // Sorting books based on the selected key and direction
+    const sortedBooks = filteredBooks.sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+            return sortConfig.direction === 'ascending' ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+            return sortConfig.direction === 'ascending' ? 1 : -1;
+        }
+        return 0;
+    });
+
     const contents = error ? (
         <p><em>{error}</em></p>
-    ) : books.length === 0 ? (
+    ) : sortedBooks.length === 0 ? (
         <p><em>Author Undefined...</em></p>
     ) : (
         <table className="table" aria-labelledby="tableLabel">
             <thead>
+                
                 <tr>
-                    <th>ID</th>
-                    <th>Created Date</th>
-                    <th>Serial Number</th>
-                    <th>Available</th>
-                    <th>Name</th>
-                    <th>Author Name</th>
+                    <th onClick={() => handleSort('bookId')}>ID</th>
+                    <th onClick={() => handleSort('createdDate')}>Created Date</th>
+                    <th onClick={() => handleSort('serialNumber')}>Serial Number</th>
+                    <th onClick={() => handleSort('available')}>Available</th>
+                    <th onClick={() => handleSort('name')}>Name</th>
+                    <th onClick={() => handleSort('authorId')}>Author Name</th>
                     <th>#</th>
                 </tr>
             </thead>
             <tbody>
-                {books.map(book => (
+                {sortedBooks.map(book => (
                     <tr key={book.bookId}>
                         <td>{book.bookId}</td>
                         <td>{book.createdDate}</td>
@@ -158,11 +197,11 @@ function Book() {
                                     className="btn btn-primary"
                                     to={`/BookUpdate/${book.bookId}`}
                                     style={{
-                                        height: '2.5rem', // Ayný yükseklik
-                                        display: 'flex',  // Flexbox
-                                        alignItems: 'center', // Ýçeriði dikeyde ortala
-                                        justifyContent: 'center', // Ýçeriði yatayda ortala
-                                        padding: '0 1rem' // Buton içeriði için sað ve sol padding
+                                        height: '2.5rem',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        padding: '0 1rem'
                                     }}
                                 >
                                     <i className="fa-solid fa-pen-nib"></i>&nbsp;Update
@@ -172,11 +211,11 @@ function Book() {
                                     onClick={(event) => deleteBook(event, book.bookId)}
                                     disabled={loading}
                                     style={{
-                                        height: '2.5rem', // Ayný yükseklik
-                                        display: 'flex',  // Flexbox
-                                        alignItems: 'center', // Ýçeriði dikeyde ortala
-                                        justifyContent: 'center', // Ýçeriði yatayda ortala
-                                        padding: '0 1rem' // Buton içeriði için sað ve sol padding
+                                        height: '2.5rem',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        padding: '0 1rem'
                                     }}
                                 >
                                     <i className="fa fa-trash"></i>&nbsp;{loading ? 'Removed...' : 'Remove'}
@@ -197,6 +236,67 @@ function Book() {
                 </Link>
             </div>
             <h1 id="tableLabel">Book List</h1>
+
+            <table className="table" aria-labelledby="tableLabel">
+                <thead>
+                    <tr id="tableheadsearch">
+                        <th>
+                            <input
+                                type="text"
+                                className="form-control mx-2 col-md-2"
+                                placeholder="Search by Name"
+                                value={searchTermName}
+                                onChange={(e) => setSearchTermName(e.target.value)}
+                            />
+                        </th>
+                        <th>
+                            <input
+                                type="datetime-local"
+                                className="form-control mx-2 col-md-2"
+                                placeholder="Search by Name"
+                                value={searchTermName}
+                                onChange={(e) => setSearchTermName(e.target.value)}
+                            />
+                        </th>
+                        <th>
+                            <input
+                                type="text"
+                                className="form-control mx-2 col-md-2"
+                                placeholder="Search by Name"
+                                value={searchTermName}
+                                onChange={(e) => setSearchTermName(e.target.value)}
+                            />
+                        </th>
+                        <th>
+                            <input
+                                type="text"
+                                className="form-control mx-2 col-md-2"
+                                placeholder="Search by Serial Number"
+                                value={searchTermSerial}
+                                onChange={(e) => setSearchTermSerial(e.target.value)}
+                            />
+                        </th>
+                        <th>
+                            <input
+                                type="text"
+                                className="form-control mx-2"
+                                placeholder="Search by Availability"
+                                value={searchTermAvailable}
+                                onChange={(e) => setSearchTermAvailable(e.target.value)}
+                            />
+                        </th>
+                        <th>
+                            <input
+                                type="text"
+                                className="form-control mx-2"
+                                placeholder="Search by Availability"
+                                value={searchTermAvailable}
+                                onChange={(e) => setSearchTermAvailable(e.target.value)}
+                            />
+                        </th>
+                    </tr>
+                </thead>
+            </table>
             {contents}
         </div>
     );

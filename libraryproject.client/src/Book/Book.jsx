@@ -12,7 +12,10 @@ function Book() {
     const [loading, setLoading] = useState(false);
     const [authToken, setAuthToken] = useState(null);
     const [authorName, setAuthorName] = useState('');
+    const [searchTermId, setSearchTermId] = useState('');  // Book id search
     const [searchTermName, setSearchTermName] = useState('');  // Book name search
+    const [searchTermCreatedDateStart, setSearchTermCreatedDateStart] = useState('');  // Book name search
+    const [searchTermCreatedDateFinish, setSearchTermCreatedDateFinish] = useState('');  // Book name search
     const [searchTermAuthor, setSearchTermAuthor] = useState('');  // Author name search
     const [searchTermSerial, setSearchTermSerial] = useState('');  // Serial number search
     const [searchTermAvailable, setSearchTermAvailable] = useState('');  // Availability search
@@ -129,6 +132,9 @@ function Book() {
         const token = localStorage.getItem('authToken');
         if (token) {
             setIsLoggedIn(true);
+            
+            var defaultValue = $('#datePickerStart').val('');
+            debugger;
         } else {
             setIsLoggedIn(false);
             navigate('/Login');
@@ -144,15 +150,37 @@ function Book() {
     if (!isLoggedIn) {
         return null;
     }
-
+    
     // Filtered books
-    const filteredBooks = books.filter(book =>
-        (book.name.toLowerCase().includes(searchTermName.toLowerCase())) &&
-        (book.authorId.toLowerCase().includes(searchTermAuthor.toLowerCase())) &&
-        (book.serialNumber.toLowerCase().includes(searchTermSerial.toLowerCase())) &&
-        (book.available.toString().includes(searchTermAvailable.toLowerCase()))
+    const filteredBooks = books.filter(book => {
+        
+        var searchDateStart = new Date(searchTermCreatedDateStart);
+        if (searchTermCreatedDateStart == "") {
+            searchDateStart = new Date("1970-01-01T00:00:00");
+        } else {
+            searchDateStart = new Date(searchTermCreatedDateStart);
+        }
+        var searchDateFinish = new Date(searchTermCreatedDateFinish);
+        if (searchTermCreatedDateFinish == "") {
+            searchDateFinish = new Date("1970-01-01T00:00:00");
+        } else {
+            searchDateFinish = new Date(searchTermCreatedDateFinish); 
+        }
+        const currentCreatedDate = new Date(book.createdDate);
+        const newDay = 12;
+        const newMonth = 0;
+        currentCreatedDate.setDate(newDay);
+        currentCreatedDate.setMonth(newMonth);
+        console.log("currentCreatedDate: " + currentCreatedDate);
+        return (book.bookId.toString().includes(searchTermId.toString())) &&
+            (book.name.toLowerCase().includes(searchTermName.toLowerCase())) &&
+            (searchTermCreatedDateStart ? currentCreatedDate >= searchDateStart : true) &&
+            (searchTermCreatedDateFinish ? currentCreatedDate <= searchDateFinish : true) &&
+            (book.serialNumber.toLowerCase().includes(searchTermSerial.toLowerCase())) &&
+            (book.available.toString().includes(searchTermAvailable.toLowerCase()))
+    }
     );
-
+    
     // Sorting books based on the selected key and direction
     const sortedBooks = filteredBooks.sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
@@ -173,13 +201,13 @@ function Book() {
             <thead>
                 
                 <tr>
-                    <th onClick={() => handleSort('bookId')}>ID</th>
-                    <th onClick={() => handleSort('createdDate')}>Created Date</th>
-                    <th onClick={() => handleSort('serialNumber')}>Serial Number</th>
-                    <th onClick={() => handleSort('available')}>Available</th>
-                    <th onClick={() => handleSort('name')}>Name</th>
-                    <th onClick={() => handleSort('authorId')}>Author Name</th>
-                    <th>#</th>
+                    <th style={{ width: '10%' }} onClick={() => handleSort('bookId')}>ID</th>
+                    <th style={{ width: '20%' }} onClick={() => handleSort('createdDate')}>Created Date</th>
+                    <th style={{ width: '10%' }} onClick={() => handleSort('serialNumber')}>Serial Number</th>
+                    <th style={{ width: '10%' }} onClick={() => handleSort('available')}>Available</th>
+                    <th style={{ width: '20%' }} onClick={() => handleSort('name')}>Name</th>
+                    <th style={{ width: '20%' }} onClick={() => handleSort('authorId')}>Author Name</th>
+                    <th style={{ width: '10%' }}>#</th>
                 </tr>
             </thead>
             <tbody>
@@ -240,34 +268,34 @@ function Book() {
             <table className="table" aria-labelledby="tableLabel">
                 <thead>
                     <tr id="tableheadsearch">
-                        <th>
+                        <th style={{ width: '10%' }}>
                             <input
                                 type="text"
                                 className="form-control mx-2 col-md-2"
-                                placeholder="Search by Name"
-                                value={searchTermName}
-                                onChange={(e) => setSearchTermName(e.target.value)}
+                                placeholder="Search by ID"
+                                value={searchTermId}
+                                onChange={(e) => setSearchTermId(e.target.value)}
                             />
                         </th>
-                        <th>
+                        <th style={{ width: '20%' }}>
                             <input
+                                id="datePickerStart"
                                 type="datetime-local"
                                 className="form-control mx-2 col-md-2"
                                 placeholder="Search by Name"
-                                value={searchTermName}
-                                onChange={(e) => setSearchTermName(e.target.value)}
+                                value={searchTermCreatedDateStart}
+                                onChange={(e) => setSearchTermCreatedDateStart(e.target.value)}
                             />
-                        </th>
-                        <th>
                             <input
-                                type="text"
+                                id="datePickerFinish"
+                                type="datetime-local"
                                 className="form-control mx-2 col-md-2"
                                 placeholder="Search by Name"
-                                value={searchTermName}
-                                onChange={(e) => setSearchTermName(e.target.value)}
+                                value={searchTermCreatedDateFinish}
+                                onChange={(e) => setSearchTermCreatedDateFinish(e.target.value)}
                             />
                         </th>
-                        <th>
+                        <th style={{ width: '10%' }}>
                             <input
                                 type="text"
                                 className="form-control mx-2 col-md-2"
@@ -276,7 +304,16 @@ function Book() {
                                 onChange={(e) => setSearchTermSerial(e.target.value)}
                             />
                         </th>
-                        <th>
+                        <th style={{ width: '10%' }}>
+                            <input
+                                type="text"
+                                className="form-control mx-2 col-md-2"
+                                value={searchTermName} 
+                                onChange={(e) => setSearchTermName(e.target.value)} 
+                            />
+                        </th>
+                        
+                        <th style={{ width: '20%' }}>
                             <input
                                 type="text"
                                 className="form-control mx-2"
@@ -285,7 +322,7 @@ function Book() {
                                 onChange={(e) => setSearchTermAvailable(e.target.value)}
                             />
                         </th>
-                        <th>
+                        <th style={{ width: '20%' }}>
                             <input
                                 type="text"
                                 className="form-control mx-2"
@@ -293,6 +330,9 @@ function Book() {
                                 value={searchTermAvailable}
                                 onChange={(e) => setSearchTermAvailable(e.target.value)}
                             />
+                        </th>
+                        <th style={{ width: '10%' }}>
+
                         </th>
                     </tr>
                 </thead>

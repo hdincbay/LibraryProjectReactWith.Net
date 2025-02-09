@@ -117,6 +117,7 @@ namespace LibraryProject.Server.Controllers
                     {
                         book.Name = requestJObj["name"]?.ToString();
                         book.AuthorId = Convert.ToInt32(requestJObj["authorId"]?.ToString());
+                        book.Available = Convert.ToBoolean(requestJObj["available"]?.ToString());
                         await Task.Run(() =>
                         {
                             _manager.BookService.UpdateOne(book!);

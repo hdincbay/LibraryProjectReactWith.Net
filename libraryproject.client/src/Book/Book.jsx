@@ -127,14 +127,20 @@ function Book() {
         }
         setSortConfig({ key, direction });
     };
-
+    const clearFilters = () => {
+        setSearchTermId('');
+        setSearchTermName('');
+        setSearchTermCreatedDateStart('');
+        setSearchTermCreatedDateFinish('');
+        setSearchTermAuthor('');
+        setSearchTermSerial('');
+        setSearchTermAvailable('');
+    };
     useEffect(() => {
         const token = localStorage.getItem('authToken');
         if (token) {
             setIsLoggedIn(true);
             
-            var defaultValue = $('#datePickerStart').val('');
-            debugger;
         } else {
             setIsLoggedIn(false);
             navigate('/Login');
@@ -166,18 +172,21 @@ function Book() {
         } else {
             searchDateFinish = new Date(searchTermCreatedDateFinish); 
         }
+        const dateNowUnixVal = Date.now();
+        const dateNow = new Date(dateNowUnixVal);
+
         const currentCreatedDate = new Date(book.createdDate);
         const newDay = 12;
         const newMonth = 0;
         currentCreatedDate.setDate(newDay);
         currentCreatedDate.setMonth(newMonth);
-        console.log("currentCreatedDate: " + currentCreatedDate);
         return (book.bookId.toString().includes(searchTermId.toString())) &&
             (book.name.toLowerCase().includes(searchTermName.toLowerCase())) &&
             (searchTermCreatedDateStart ? currentCreatedDate >= searchDateStart : true) &&
             (searchTermCreatedDateFinish ? currentCreatedDate <= searchDateFinish : true) &&
             (book.serialNumber.toLowerCase().includes(searchTermSerial.toLowerCase())) &&
-            (book.available.toString().includes(searchTermAvailable.toLowerCase()))
+            (book.authorId.toLowerCase().includes(searchTermAuthor.toLowerCase())) &&
+            (searchTermAvailable.toString() ? book.available == searchTermAvailable : true)
     }
     );
     
@@ -216,7 +225,13 @@ function Book() {
                         <td>{book.bookId}</td>
                         <td>{book.createdDate}</td>
                         <td>{book.serialNumber}</td>
-                        <td>{book.available.toString()}</td>
+                        <td>
+                            <input
+                                type="checkbox"
+                                className="form-check-input"
+                                defaultChecked={book.available}
+                            />
+                        </td>
                         <td>{book.name}</td>
                         <td>{book.authorId}</td>
                         <td>
@@ -259,9 +274,11 @@ function Book() {
     return (
         <div id="componentcontent" style={{ width: '100%', paddingLeft: 0, paddingRight: 0 }}>
             <div className="d-flex justify-content-end">
-                <Link to="/BookCreate" className="nav-link">
+                <a className="btn btn-outline-danger" onClick={clearFilters}><i className="fa-solid fa-filter-circle-xmark"></i> Clear Filters</a>
+                <Link to="/BookCreate" className="nav-link ">
                     <div className="btn btn-outline-success mx-2"><i className="fa-solid fa-plus"></i> Book Create</div>
                 </Link>
+                
             </div>
             <h1 id="tableLabel">Book List</h1>
 
@@ -306,29 +323,29 @@ function Book() {
                         </th>
                         <th style={{ width: '10%' }}>
                             <input
+                                id="available"
+                                type="checkbox"
+                                className="form-check-input mx-2"
+                                checked={searchTermAvailable}  // checked ile durumu kontrol et
+                                onChange={(e) => setSearchTermAvailable(e.target.checked)} // onChange ile checkbox'ýn deðerini kontrol et
+                            />
+                        </th>
+                        <th style={{ width: '20%' }}>
+                            <input
                                 type="text"
-                                className="form-control mx-2 col-md-2"
-                                value={searchTermName} 
+                                className="form-control mx-2"
+                                value={searchTermName}
+                                placeholder="Search by Name"
                                 onChange={(e) => setSearchTermName(e.target.value)} 
                             />
                         </th>
-                        
                         <th style={{ width: '20%' }}>
                             <input
                                 type="text"
                                 className="form-control mx-2"
-                                placeholder="Search by Availability"
-                                value={searchTermAvailable}
-                                onChange={(e) => setSearchTermAvailable(e.target.value)}
-                            />
-                        </th>
-                        <th style={{ width: '20%' }}>
-                            <input
-                                type="text"
-                                className="form-control mx-2"
-                                placeholder="Search by Availability"
-                                value={searchTermAvailable}
-                                onChange={(e) => setSearchTermAvailable(e.target.value)}
+                                value={searchTermAuthor}
+                                placeholder="Search by Author"
+                                onChange={(e) => setSearchTermAuthor(e.target.value)}
                             />
                         </th>
                         <th style={{ width: '10%' }}>

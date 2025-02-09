@@ -8,6 +8,7 @@ function BookUpdate() {
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [bookName, setBookName] = useState('');
+    const [available, setAvailable] = useState('');
     const [authorList, setAuthorList] = useState([]);
     const [authorId, setAuthorId] = useState(0);
     const [errorMessage, setErrorMessage] = useState('');
@@ -21,7 +22,6 @@ function BookUpdate() {
         const textResponse = await response.text();
         try {
             const jsonResponse = JSON.parse(textResponse);
-
             if (Array.isArray(jsonResponse)) {
                 setAuthorList(jsonResponse);
             }
@@ -45,6 +45,7 @@ function BookUpdate() {
                         if (response.ok) {
                             setBookName(data.name);
                             setAuthorId(data.authorId);  // Kitabýn yazarýný set et
+                            setAvailable(data.available);
                         } else {
                             alert('Kitap bilgileri alinamadi');
                         }
@@ -81,7 +82,8 @@ function BookUpdate() {
                 body: JSON.stringify({
                     bookId: paramBookId,  // Parametre olarak kitap ID'si de gönderiliyor
                     name: bookName,
-                    authorId: authorId
+                    authorId: authorId,
+                    available: available
                 }),
             });
             if (response.ok) {
@@ -138,6 +140,22 @@ function BookUpdate() {
                                         </option>
                                     ))}
                                 </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style={{ width: '20%' }}>
+                                <label htmlFor="available"><strong>Available</strong></label>
+                            </td>
+                            <td>
+                                <div className="d-flex justify-content-start">
+                                    <input
+                                        id="available"
+                                        type="checkbox"
+                                        className="form-check-input mx-2"
+                                        checked={available}  // checked ile durumu kontrol et
+                                        onChange={(e) => setAvailable(e.target.checked)} // onChange ile checkbox'ýn deðerini kontrol et
+                                    />
+                                </div>
                             </td>
                         </tr>
                         <tr>

@@ -68,7 +68,7 @@ function BookCreate() {
 
             if (response.ok) {
                 alert('Book created successfully.');
-                navigate('/Books');
+                navigate('/Book');
             } else {
                 const errorData = await response.json();
                 alert(`Hata: ${errorData.message || 'Kitap oluþturulamadý'}`);

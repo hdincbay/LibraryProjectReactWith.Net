@@ -103,7 +103,7 @@ function First() {
 
             {/* Sayfa yönlendirme (routes) */}
             <Routes>
-                <Route path="/Login" element={<Login />} />
+                <Route path="/Login/*" element={<Login />} />
                 <Route path="/Home" element={<Home />} />
                 <Route path="/SignUp" element={<SignUp />} />
                 <Route path="/Weather" element={<Weather />} />

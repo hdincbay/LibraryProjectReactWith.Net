@@ -11,8 +11,17 @@ function User() {
     const [loading, setLoading] = useState(false);
     const [authToken, setAuthToken] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [searchTermId, setSearchTermId] = useState('');
+    const [searchTermTchatId, setSearchTermTchatId] = useState('');
+    const [searchTermFirstname, setSearchTermFirstname] = useState('');
+    const [searchTermLastName, setSearchTermLastName] = useState('');
+    const [searchTermUsername, setSearchTermUsername] = useState('');
+    const [searchTermEmail, setSearchTermEmail] = useState('');
 
-
+    const [sortConfig, setSortConfig] = useState({
+        key: 'id',
+        direction: 'ascending'
+    });
     const authTokenVal = localStorage.getItem('authToken');
     const connectWebSocket = () => {
         var webSocketServerUrl = Config.webSocketUrl;
@@ -34,8 +43,9 @@ function User() {
                         setUsers(data);
                     } else {
                         setUsers((prevUsers) => {
-                            const existingIds = new Set(prevUsers.map(user => user.userId));
-                            return [...prevUsers, data].filter(user => !existingIds.has(user.userId));
+                            
+                            const existingIds = new Set(prevUsers.map(user => user.id));
+                            return [...prevUsers, data].filter(user => !existingIds.has(user.id));
                         });
                     }
                 }
@@ -45,7 +55,7 @@ function User() {
         };
 
         newSocket.onerror = (error) => {
-            setError('WebSocket ba?lant? hatas?. Yeniden deniyor...');
+            setError('WebSocket baglanti hatasi. Yeniden deniyor...');
         };
 
         newSocket.onclose = () => {
@@ -78,7 +88,21 @@ function User() {
             setLoading(false);
         }
     };
-
+    const handleSort = (key) => {
+        let direction = 'ascending';
+        if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+            direction = 'descending';
+        }
+        setSortConfig({ key, direction });
+    };
+    const clearFilters = () => {
+        setSearchTermId('');
+        setSearchTermFirstname('');
+        setSearchTermLastName('');
+        setSearchTermUsername('');
+        setSearchTermTchatId('');
+        setSearchTermEmail('');
+    };
     useEffect(() => {
         const token = localStorage.getItem('authToken');
         if (token) {
@@ -97,35 +121,58 @@ function User() {
     if (!isLoggedIn) {
         return null;
     }
+    const filteredUsers = users.filter(user => {
+        return (user.id.toString().includes(searchTermId.toString())) &&
+            (user.t_chatId ? user.t_chatId.toLowerCase().includes(searchTermTchatId.toString().toLowerCase()) : true) &&
+            (user.firstName ? user.firstName.toLowerCase().includes(searchTermFirstname.toLowerCase()) : true) &&
+            (user.lastName ? user.lastName.toLowerCase().includes(searchTermLastName.toLowerCase()) : true) &&
+            (user.userName ? user.userName.toLowerCase().includes(searchTermUsername.toLowerCase()) : true) &&
+            (user.email ? user.email.toLowerCase().includes(searchTermEmail.toLowerCase()) : true)
+        }
+    );
 
+    // Sorting books based on the selected key and direction
+    const sortedUsers = filteredUsers.sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+            return sortConfig.direction === 'ascending' ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+            return sortConfig.direction === 'ascending' ? 1 : -1;
+        }
+        return 0;
+    });
     const contents = error ? (
         <p><em>{error}</em></p>
-    ) : users.length === 0 ? (
+    ) : sortedUsers.length === 0 ? (
         <p><em>User Undefined...</em></p>
     ) : (
 
         <table className="table" aria-labelledby="tableLabel">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>User Name</th>
-                    <th>Email</th>
-                    <th>#</th>
+                    <th style={{ width: '10%' }}>ID</th>
+                    <th style={{ width: '10%' }}>TChatID</th>
+                    <th style={{ width: '15%' }}>User Name</th>
+                    <th style={{ width: '20%' }}>Name</th>
+                    <th style={{ width: '20%' }}>Last Name</th>
+                    <th style={{ width: '10%' }}>Email</th>
+                    <th style={{ width: '15%' }}>#</th>
                 </tr>
             </thead>
             <tbody>
-                {users.map(user => (
+                {sortedUsers.map(user => (
                     <tr key={user.id}>
                         <td>{user.id}</td>
-                        <td>{user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : ''}</td>
+                        <td>{user.t_chatId}</td>
                         <td>{user.userName}</td>
+                        <td>{user.firstName}</td>
+                        <td>{user.lastName}</td>
                         <td>{user.email}</td>
                         <td>
                             <div className="col-md-8 offset-md-2" style={{ display: 'flex', flexDirection: 'column' }}>
                                 <Link
                                     className="btn btn-primary"
-                                    to={`/UserUpdate/${user.userId}`}
+                                    to={`/UserUpdate/${user.id}`}
                                     style={{
                                         height: '2.5rem', // Ayn? yükseklik
                                         display: 'flex',  // Flexbox
@@ -162,11 +209,75 @@ function User() {
     return (
         <div id="componentcontent">
             <div className="d-flex justify-content-end">
+                <a className="btn btn-outline-danger" onClick={clearFilters}><i className="fa-solid fa-filter-circle-xmark"></i> Clear Filters</a>
                 <Link to="/UserCreate" className="nav-link">
                     <div className="btn btn-outline-success mx-2"><i className="fa-solid fa-plus"></i> User Create</div>
                 </Link>
             </div>
             <h1 id="tableLabel">User List</h1>
+            <table className="table" aria-labelledby="tableLabel">
+                <thead>
+                    <tr id="tableheadsearch">
+                        <th style={{ width: '10%' }}>
+                            <input
+                                type="text"
+                                className="form-control mx-2 col-md-2"
+                                placeholder="Search by ID"
+                                value={searchTermId}
+                                onChange={(e) => setSearchTermId(e.target.value)}
+                            />
+                        </th>
+                        <th style={{ width: '10%' }}>
+                            <input
+                                type="text"
+                                className="form-control mx-2 col-md-2"
+                                placeholder="Search by TChatID"
+                                value={searchTermTchatId}
+                                onChange={(e) => setSearchTermTchatId(e.target.value)}
+                            />
+                        </th>
+                        <th style={{ width: '15%' }}>
+                            <input
+                                type="text"
+                                className="form-control mx-2 col-md-2"
+                                placeholder="Search by UserName"
+                                value={searchTermUsername}
+                                onChange={(e) => setSearchTermUsername(e.target.value)}
+                            />
+                        </th>
+                        <th style={{ width: '15%' }}>
+                            <input
+                                type="text"
+                                className="form-control mx-2"
+                                value={searchTermFirstname}
+                                placeholder="Search by Name"
+                                onChange={(e) => setSearchTermFirstname(e.target.value)}
+                            />
+                        </th>
+                        <th style={{ width: '15%' }}>
+                            <input
+                                type="text"
+                                className="form-control mx-2"
+                                value={searchTermLastName}
+                                placeholder="Search by LastName"
+                                onChange={(e) => setSearchTermLastName(e.target.value)}
+                            />
+                        </th>
+                        <th style={{ width: '10%' }}>
+                            <input
+                                type="text"
+                                className="form-control mx-2"
+                                value={searchTermEmail}
+                                placeholder="Search by Email"
+                                onChange={(e) => setSearchTermEmail(e.target.value)}
+                            />
+                        </th>
+                        <th style={{ width: '25%' }}>
+
+                        </th>
+                    </tr>
+                </thead>
+            </table>
             {contents}
         </div>
     );

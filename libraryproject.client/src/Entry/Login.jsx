@@ -32,12 +32,13 @@ function Login() {
                 body: JSON.stringify(userData),
 
             });
-            const textResponse = await response.json();
+            
             if (!response.ok) {
-
+                const textResponse = await response.text();
                 throw new Error(textResponse);
             }
             else {
+                const textResponse = await response.json();
                 const token = textResponse.token;
                 const userName = textResponse.userName;
                 // Token'in localStorage'a kaydedilmesi

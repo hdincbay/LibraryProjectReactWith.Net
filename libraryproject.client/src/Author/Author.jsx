@@ -11,7 +11,13 @@ function Author() {
     const [loading, setLoading] = useState(false);
     const [authToken, setAuthToken] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    
+    const [searchTermId, setSearchTermId] = useState('');
+    const [searchTermName, setSearchTermName] = useState('');
+    const [searchTermSurname, setSearchTermSurname] = useState('');
+    const [sortConfig, setSortConfig] = useState({
+        key: 'authorId',
+        direction: 'ascending'
+    });
     const authTokenVal = localStorage.getItem('authToken');
     const connectWebSocket = () => {
         var webSocketServerUrl = Config.webSocketUrl;
@@ -55,7 +61,7 @@ function Author() {
 
         setSocket(newSocket);
     };
-    const deleteUser = async (event, authorid) => {
+    const deleteAuthor = async (event, authorid) => {
         setLoading(true);
         try {
             setAuthToken(authToken);
@@ -77,6 +83,18 @@ function Author() {
             setLoading(false);
         }
     };
+    const handleSort = (key) => {
+        let direction = 'ascending';
+        if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+            direction = 'descending';
+        }
+        setSortConfig({ key, direction });
+    };
+    const clearFilters = () => {
+        setSearchTermId('');
+        setSearchTermName('');
+        setSearchTermSurname('');
+    };
     useEffect(() => {
         const token = localStorage.getItem('authToken');
         if (token) {
@@ -95,25 +113,43 @@ function Author() {
     if (!isLoggedIn) {
         return null;
     }
+    const filteredAuthors = authors.filter(author => {
+        return (author.authorId.toString().includes(searchTermId.toString())) &&
+            (author.name.toLowerCase().includes(searchTermName.toLowerCase())) &&
+            (author.surname.toLowerCase().includes(searchTermSurname.toLowerCase()))
+        }
+    );
 
+    // Sorting books based on the selected key and direction
+    const sortedAuthors = filteredAuthors.sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+            return sortConfig.direction === 'ascending' ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+            return sortConfig.direction === 'ascending' ? 1 : -1;
+        }
+        return 0;
+    });
     const contents = error ? (
         <p><em>{error}</em></p>
-    ) : authors.length === 0 ? (
+    ) : sortedAuthors.length === 0 ? (
         <p><em>Book Undefined...</em></p>
     ) : (
         <table className="table" aria-labelledby="tableLabel">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>#</th>
+                    <th style={{ width: '10%' }} onClick={() => handleSort('authorId')}>ID</th>
+                    <th style={{ width: '30%' }} onClick={() => handleSort('name')}>Name</th>
+                    <th style={{ width: '30%' }} onClick={() => handleSort('surname')}>Surname</th>
+                    <th style={{ width: '30%' }}>#</th>
                 </tr>
             </thead>
             <tbody>
-                {authors.map(author => (
+                {sortedAuthors.map(author => (
                     <tr key={author.authorId}>
                         <td>{author.authorId}</td>
-                        <td>{author.name + ' ' + author.surname}</td>
+                        <td>{author.name}</td>
+                        <td>{author.surname}</td>
                         <td>
                             <div className="col-md-4 offset-md-4" style={{ display: 'flex', flexDirection: 'column' }}>
                                 <Link
@@ -131,7 +167,7 @@ function Author() {
                                 </Link>
                                 <button
                                     className="btn btn-outline-primary"
-                                    onClick={(event) => deleteUser(event, author.authorId)}
+                                    onClick={(event) => deleteAuthor(event, author.authorId)}
                                     disabled={loading}
                                     style={{
                                         height: '2.5rem', // Ayný yükseklik
@@ -155,11 +191,48 @@ function Author() {
     return (
         <div id="componentcontent">
             <div className="d-flex justify-content-end">
+                <a className="btn btn-outline-danger" onClick={clearFilters}><i className="fa-solid fa-filter-circle-xmark"></i> Clear Filters</a>
                 <Link to="/AuthorCreate" className="nav-link">
                     <div className="btn btn-outline-success mx-2"><i className="fa-solid fa-plus"></i> Author Create</div>
                 </Link>
             </div>
             <h1 id="tableLabel">Author List</h1>
+            <table className="table" aria-labelledby="tableLabel">
+                <thead>
+                    <tr id="tableheadsearch">
+                        <th style={{ width: '10%' }}>
+                            <input
+                                type="text"
+                                className="form-control mx-2 col-md-2"
+                                placeholder="Search by ID"
+                                value={searchTermId}
+                                onChange={(e) => setSearchTermId(e.target.value)}
+                            />
+                        </th>
+                        <th style={{ width: '30%' }}>
+                            <input
+                                type="text"
+                                className="form-control mx-2"
+                                value={searchTermName}
+                                placeholder="Search by Name"
+                                onChange={(e) => setSearchTermName(e.target.value)}
+                            />
+                        </th>
+                        <th style={{ width: '30%' }}>
+                            <input
+                                type="text"
+                                className="form-control mx-2"
+                                value={searchTermSurname}
+                                placeholder="Search by Surname"
+                                onChange={(e) => setSearchTermSurname(e.target.value)}
+                            />
+                        </th>
+                        <th style={{ width: '30%' }}>
+                            
+                        </th>
+                    </tr>
+                </thead>
+            </table>
             {contents}
         </div>
     );

@@ -11,7 +11,6 @@ function Book() {
     const [socket, setSocket] = useState(null);
     const [loading, setLoading] = useState(false);
     const [authToken, setAuthToken] = useState(null);
-    const [authorName, setAuthorName] = useState('');
     const [searchTermId, setSearchTermId] = useState('');  // Book id search
     const [searchTermName, setSearchTermName] = useState('');  // Book name search
     const [searchTermCreatedDateStart, setSearchTermCreatedDateStart] = useState('');  // Book name search

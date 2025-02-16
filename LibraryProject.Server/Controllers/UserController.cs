@@ -48,6 +48,63 @@ namespace LibraryProject.Server.Controllers
                 return BadRequest(ex.ToString());
             }
         }
+        [HttpGet("GetOne/{id:int}")]
+        public async Task<IActionResult> GetOne([FromRoute]int id)
+        {
+            try
+            {
+                var user = await _userManager.Users.Where(u => u.Id.Equals(id)).SingleOrDefaultAsync();
+                if (user is not null)
+                {
+                    var userSrl = Newtonsoft.Json.JsonConvert.SerializeObject(user);
+                    return Ok(userSrl);
+                }
+                else
+                {
+                    return BadRequest("User Undefined");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
+        [HttpPut("Update/{id:int}")]
+        public async Task<IActionResult> Update([FromRoute]int id)
+        {
+            try
+            {
+                var user = await _userManager.Users.Where(u => u.Id.Equals(id)).SingleOrDefaultAsync();
+                if (user is not null)
+                {
+                    using (var reader = new StreamReader(Request.Body))
+                    {
+                        var requestContent = await reader.ReadToEndAsync();
+                        var requestJObj = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(requestContent);
+                        user.FirstName = requestJObj!["firstName"]?.ToString();
+                        user.LastName = requestJObj!["lastName"]?.ToString();
+                        user.UserName = requestJObj!["userName"]?.ToString();
+                        user.Email = requestJObj["email"]?.ToString();
+                        user.t_chatId = requestJObj["t_chatId"]?.ToString();
+                        var response = await _userManager.UpdateAsync(user);
+                        reader.Dispose();
+                        if (response.Succeeded)
+                            return Ok("User Created successfully.");
+                        else
+                            return BadRequest(response.ToString());
+                    }
+                }
+                else
+                {
+                    return BadRequest("User undefined!");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+
+        }
         [HttpPost("SignUp")]
         public async Task<IActionResult> SingUp()
         {
@@ -114,14 +171,8 @@ namespace LibraryProject.Server.Controllers
                         }
                         else
                         {
-                            
-                            
-                            
                             return Ok(token);
                         }
-
-
-                        return Ok("User logged in successfully.");
                     }
                     else
                     {

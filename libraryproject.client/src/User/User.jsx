@@ -245,7 +245,7 @@ function User() {
                                 onChange={(e) => setSearchTermUsername(e.target.value)}
                             />
                         </th>
-                        <th style={{ width: '15%' }}>
+                        <th style={{ width: '20%' }}>
                             <input
                                 type="text"
                                 className="form-control mx-2"
@@ -254,7 +254,7 @@ function User() {
                                 onChange={(e) => setSearchTermFirstname(e.target.value)}
                             />
                         </th>
-                        <th style={{ width: '15%' }}>
+                        <th style={{ width: '20%' }}>
                             <input
                                 type="text"
                                 className="form-control mx-2"
@@ -272,7 +272,7 @@ function User() {
                                 onChange={(e) => setSearchTermEmail(e.target.value)}
                             />
                         </th>
-                        <th style={{ width: '25%' }}>
+                        <th style={{ width: '15%' }}>
 
                         </th>
                     </tr>

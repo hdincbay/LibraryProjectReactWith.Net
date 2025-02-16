@@ -3,7 +3,7 @@ import './User.css';
 import Config from '../../config.json';
 import { useParams, useNavigate } from 'react-router-dom';
 function UserUpdate() {
-    const { userId: paramAuthorId } = useParams(); // URL'den authorId'yi alýyoruz
+    const { userId: paramAuthorId } = useParams(); // URL'den userId'yi alýyoruz
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
     const [apiResponse, setApiResponse] = useState(null);
@@ -11,7 +11,11 @@ function UserUpdate() {
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [formData, setFormData] = useState('');
-
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [emailAddress, setEmailAddress] = useState('');
+    const [userName, setUserName] = useState('');
+    const [tchatId, setTChatId] = useState('');
     // Component mount olduðunda WebSocket baðlantýsýný baþlatýyoruz
     useEffect(() => {
         const token = localStorage.getItem('authToken');
@@ -21,10 +25,18 @@ function UserUpdate() {
                 // Yazar bilgilerini API'den al
                 const fetchAuthorData = async () => {
                     try {
-                        const responseCurrentUser= await fetch(`${Config.restApiUrl}/api/User/GetCurrentUser`);
-                        const dataCurrentUser = await responseCurrentUser.text();
+                        const responseCurrentUser = await fetch(`${Config.restApiUrl}/api/User/GetOne/${paramAuthorId}`);
                         
-                        if (response.ok) {
+                        const userData = await responseCurrentUser.json();
+                        if (userData) {
+                            setFirstName(userData.FirstName);
+                            setLastName(userData.LastName);
+                            setEmailAddress(userData.Email);
+                            setTChatId(userData.t_chatId);
+                            setUserName(userData.UserName);
+                        }
+                        
+                        if (responseCurrentUser.ok) {
                             
                         } else {
                             alert('Kullanici bilgileri alýnamadý.');
@@ -46,48 +58,39 @@ function UserUpdate() {
     if (!isLoggedIn) {
         return null;
     }
-    async function userCreate(firstName, lastName, userName, email, chatId, password, passwordConfirm) {
-        const data = {
-            firstName: firstName,
-            lastName: lastName,
-            userName: userName,
-            t_chatId: chatId,
-            email: email,
-            password: password,
-            passwordConfirm: passwordConfirm
-        };
-        const restApiUrlVal = Config.restApiUrl;
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        if (!userName.trim()) {
+            alert('Username cannot be empty!');
+            return;
+        }
+
         try {
-            const response = await fetch(`${restApiUrlVal}/api/User/Update`, {
-                method: 'POST',
+            const response = await fetch(`${Config.restApiUrl}/api/User/Update/${paramAuthorId}`, {
+                method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data),
+                body: JSON.stringify({
+                    firstName: firstName,
+                    lastName: lastName,
+                    userName: userName,
+                    email: emailAddress,
+                    t_chatId: tchatId,
+                })
             });
-            const jsonData = await response.text();
-            setApiResponse(jsonData);
-            console.log(jsonData);
-            
+
+            if (response.ok) {
+                navigate('/User');
+            } else {
+                const errorData = await response.json();
+                alert(`Hata: ${errorData.message || 'User update failed!'}`);
+            }
         } catch (error) {
-            console.error('Mesaj gönderilirken bir hata oluþtu:', error);
+            console.error('An error occurred while updating the author: ', error);
+            alert('An error occurred, please try again.');
         }
-    }
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (formData.password != formData.passwordconfirm) {
-            setError('Passwords do not match');
-        }
-        else {
-            await userCreate(formData.firstName, formData.lastName, formData.userName, formData.email, formData.t_chatId, formData.password, formData.passwordconfirm);
-        }
-    };
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
     };
     return (
         <div id="componentcontent" style={{ width: '100%', paddingTop: '4rem', paddingLeft: 0, paddingRight: 0 }}>
@@ -106,8 +109,8 @@ function UserUpdate() {
                                 <input className="form-control"
                                     id="firstName"
                                     name="firstName"
-                                    value={formData.firstName}
-                                    onChange={handleChange} />
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)} />
                             </td>
                         </tr>
                         <tr>
@@ -118,72 +121,48 @@ function UserUpdate() {
                                 <input className="form-control"
                                     id="lastName"
                                     name="lastName"
-                                    value={formData.lastName}
-                                    onChange={handleChange} />
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)} />
                             </td>
                         </tr>
                         <tr>
-                            <td style={{ width: '20%' }}>
+                            <td style={{ width: '30%' }}>
                                 <strong>User Name</strong>
                             </td>
                             <td>
                                 <input className="form-control"
                                     id="userName"
                                     name="userName"
-                                    value={formData.userName}
-                                    onChange={handleChange} />
+                                    value={userName}
+                                    onChange={(e) => setUserName(e.target.value)} />
                             </td>
                         </tr>
                         <tr>
-                            <td style={{ width: '20%' }}>
+                            <td style={{ width: '30%' }}>
                                 <strong>Email</strong>
                             </td>
                             <td>
                                 <input className="form-control"
                                     id="email"
                                     name="email"
-                                    value={formData.email}
-                                    onChange={handleChange} />
+                                    value={emailAddress}
+                                    onChange={(e) => setEmailAddress(e.target.value)} />
                             </td>
                         </tr>
                         <tr>
-                            <td style={{ width: '20%' }}>
+                            <td style={{ width: '30%' }}>
                                 <strong>Chat ID</strong>
                             </td>
                             <td>
                                 <input className="form-control"
-                                    id="t_chatId"
-                                    name="t_chatId"
-                                    value={formData.t_chatId}
-                                    onChange={handleChange} />
+                                    id="tchatId"
+                                    name="tchatId"
+                                    value={tchatId}
+                                    onChange={(e) => setTChatId(e.target.value)} />
                             </td>
                         </tr>
                         <tr>
-                            <td style={{ width: '20%' }}>
-                                <strong>Password</strong>
-                            </td>
-                            <td>
-                                <input className="form-control" type="password"
-                                    id="password"
-                                    name="password"
-                                    value={formData.password}
-                                    onChange={handleChange} />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style={{ width: '20%' }}>
-                                <strong>Password Confirm</strong>
-                            </td>
-                            <td>
-                                <input className="form-control" type="password"
-                                    id="passwordconfirm"
-                                    name="passwordconfirm"
-                                    value={formData.passwordconfirm}
-                                    onChange={handleChange} />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style={{ width: '20%' }}>
+                            <td style={{ width: '30%' }}>
                             </td>
                             <td>
                                 <button className="btn btn-success">Submit</button>

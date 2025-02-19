@@ -27,17 +27,15 @@ function UserUpdate() {
                     try {
                         const responseCurrentUser = await fetch(`${Config.restApiUrl}/api/User/GetOne/${paramAuthorId}`);
                         
-                        const userData = await responseCurrentUser.json();
-                        if (userData) {
-                            setFirstName(userData.FirstName);
-                            setLastName(userData.LastName);
-                            setEmailAddress(userData.Email);
-                            setTChatId(userData.t_chatId);
-                            setUserName(userData.UserName);
-                        }
-                        
                         if (responseCurrentUser.ok) {
-                            
+                            const userData = await responseCurrentUser.json();
+                            if (userData) {
+                                setFirstName(userData.FirstName);
+                                setLastName(userData.LastName);
+                                setEmailAddress(userData.Email);
+                                setTChatId(userData.t_chatId);
+                                setUserName(userData.UserName);
+                            }
                         } else {
                             alert('Kullanici bilgileri alýnamadý.');
                         }

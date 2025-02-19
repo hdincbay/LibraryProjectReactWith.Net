@@ -11,10 +11,9 @@ namespace LibraryProject.Entities.Model
     {
         public Loan()
         {
-            Book!.LoanDate = DateTime.UtcNow;
-            Book!.Available = false;
+            CreatedDate = DateTime.UtcNow;
         }
-
+        public DateTime CreatedDate { get; set; }
         public int LoanId { get; set; }
         public int? BookId { get; set; }
         public Book? Book { get; set; }

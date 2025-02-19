@@ -1,5 +1,7 @@
 ﻿using LibraryProject.Entities.Model;
+using LibraryProject.Repositories;
 using LibraryProject.Server.Helpers;
+using LibraryProject.Services.Contract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -19,12 +21,16 @@ namespace LibraryProject.Server.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly JwtTokenService _tokenService;
         private readonly IConfiguration _configuration;
-        public UserController(UserManager<User> userManager, SignInManager<User> signInManager, JwtTokenService tokenService, IConfiguration configuration)
+        private readonly IServiceManager _manager;
+        private readonly RepositoryContext _context;
+        public UserController(UserManager<User> userManager, SignInManager<User> signInManager, JwtTokenService tokenService, IConfiguration configuration, IServiceManager manager, RepositoryContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _tokenService = tokenService;
             _configuration = configuration;
+            _manager = manager;
+            _context = context;
         }
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
@@ -247,6 +253,50 @@ namespace LibraryProject.Server.Controllers
 
             var sessionId = HttpContext.Session.GetString("session_id");
             return Ok(sessionId);
+        }
+        [HttpPost("AddBookLoan")]
+        public async Task<IActionResult> AddBookLoan()
+        {
+
+            try
+            {
+                using (var reader = new StreamReader(Request.Body))
+                {
+                    var requestContent = await reader.ReadToEndAsync();
+                    var requestJObj = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(requestContent);
+                    var userId = Convert.ToInt32(requestJObj!["userId"]?.ToString());
+                    var bookId = Convert.ToInt32(requestJObj!["bookId"]?.ToString());
+                    var loan = _context.Loan!.Where(u => u.UserId.Equals(userId) && u.BookId.Equals(bookId)).SingleOrDefault();
+                    if(loan is null)
+                    {
+                        var book = _manager.BookService.GetOne(bookId, true);
+                        if (book is not null)
+                        {
+
+                            var newLoan = new Loan() { BookId = bookId, UserId = userId, Book = book };
+                            _manager.LoanService.CreateOne(newLoan);
+                            book.LoanDate = DateTime.UtcNow;
+                            book.Available = false;
+                            _manager.BookService.UpdateOne(book);
+                            return Ok("Loan added successfully.");
+                        }
+                        else
+                        {
+                            return BadRequest("Book is null!");
+                        }                    }
+                    else
+                    {
+                        return BadRequest("Loan already exists!");
+                    }
+                    
+                    
+                }
+                
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
         }
     }
 }

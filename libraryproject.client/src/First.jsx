@@ -55,8 +55,7 @@ function First() {
                     <i className="fa-solid fa-book"></i> Library Application
                 </Link>
 
-                {/* Menü linkleri */}
-                <div className="btn-group" id="#navbar" id="navbar">
+                <div className="btn-group" id="navbar">
                     <Link to="/Weather" className="btn btn-outline-dark">
                         <i className="fa-regular fa-snowflake"></i> Weather
                     </Link>

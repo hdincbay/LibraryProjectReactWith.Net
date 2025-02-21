@@ -236,7 +236,7 @@ function Book() {
                         <td>
                             <div className="col-md-8 offset-md-2" style={{ display: 'flex', flexDirection: 'column' }}>
                                 <Link
-                                    className="btn btn-primary"
+                                    className="btn btn-outline-secondary"
                                     to={`/BookUpdate/${book.bookId}`}
                                     style={{
                                         height: '2.5rem',
@@ -262,6 +262,31 @@ function Book() {
                                 >
                                     <i className="fa fa-trash"></i>&nbsp;{loading ? 'Removed...' : 'Remove'}
                                 </button>
+                                {book.available ? <button
+                                    className="btn btn-outline-success"
+                                    disabled={loading}
+                                    style={{
+                                        height: '2.5rem',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        padding: '0 1rem'
+                                    }}
+                                >
+                                    <i class="fa-solid fa-right-long"></i>&nbsp;&nbsp;{loading ? 'Lend...' : 'Lend'}
+                                </button> : <button
+                                    className="btn btn-outline-danger"
+                                    disabled={loading}
+                                    style={{
+                                        height: '2.5rem',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        padding: '0 1rem'
+                                    }}
+                                >
+                                    <i class="fa-solid fa-left-long"></i>&nbsp;{loading ? 'Retrieve...' : 'Retrieve'}
+                                </button>}
                             </div>
                         </td>
                     </tr>

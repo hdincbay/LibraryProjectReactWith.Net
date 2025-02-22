@@ -10,6 +10,5 @@ namespace LibraryProject.Services.Contract
     {
         public IAuthorService AuthorService { get; }
         public IBookService BookService { get; }
-        public ILoanService LoanService { get; }
     }
 }

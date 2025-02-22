@@ -171,5 +171,45 @@ namespace LibraryProject.Server.Controllers
                 return BadRequest(ex.ToString());
             }
         }
+        [HttpPost("LoanBook")]
+        public async Task<IActionResult> LoanBook()
+        {
+            try
+            {
+                Tool tool = new Tool(_context);
+                var bodyContent = "";
+                using (var reader = new StreamReader(Request.Body))
+                {
+                    bodyContent = await reader.ReadToEndAsync();
+                    var requestJObj = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(bodyContent)!;
+                    var userId = requestJObj["UserId"]?.ToString();
+                    var bookId = requestJObj["BookId"]?.ToString();
+                    var user = _context.Users.Where(u => u.Id.Equals(userId)).FirstOrDefault();
+                    if(user is not null)
+                    {
+                        var book = _manager.BookService.GetOne(Convert.ToInt32(bookId), true);
+                        if (book is not null)
+                        { 
+                            book.LoanDate = DateTime.Now;
+                            book.Available = false;
+                            book.UserId = Convert.ToInt32(userId);
+                        }
+                        await Task.Run(() =>
+                        {
+                            _manager.BookService.UpdateOne(book!);
+                        });
+                        return Ok("The book has been successfully loaned.");
+                    }
+                    else
+                    {
+                        return Ok("User not found!");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
     }
 }

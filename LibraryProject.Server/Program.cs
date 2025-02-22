@@ -71,12 +71,10 @@ builder.Services.AddIdentity<User, Role>(options =>
 // Repository ve Service yapýlandýrmalarý
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
-builder.Services.AddScoped<ILoanRepository, LoanRepository>();
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 
 builder.Services.AddScoped<IAuthorService, AuthorService>();
 builder.Services.AddScoped<IBookService, BookService>();
-builder.Services.AddScoped<ILoanService, LoanService>();
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
 
 // Controller ve Swagger yapýlandýrmalarý

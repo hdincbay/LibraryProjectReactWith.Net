@@ -11,22 +11,18 @@ namespace LibraryProject.Repositories.Concrete
     {
         private readonly IAuthorRepository _authorRepository;
         private readonly IBookRepository _bookRepository;
-        private readonly ILoanRepository _loanRepository;
         private readonly RepositoryContext _context;
 
-        public RepositoryManager(IAuthorRepository authorRepository, IBookRepository bookRepository, ILoanRepository loanRepository, RepositoryContext context)
+        public RepositoryManager(IAuthorRepository authorRepository, IBookRepository bookRepository, RepositoryContext context)
         {
             _authorRepository = authorRepository;
             _bookRepository = bookRepository;
-            _loanRepository = loanRepository;
             _context = context;
         }
 
         public IAuthorRepository Author => _authorRepository;
 
         public IBookRepository Book => _bookRepository;
-
-        public ILoanRepository Loan => _loanRepository;
 
         public void Save()
         {

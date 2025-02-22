@@ -254,49 +254,6 @@ namespace LibraryProject.Server.Controllers
             var sessionId = HttpContext.Session.GetString("session_id");
             return Ok(sessionId);
         }
-        [HttpPost("AddBookLoan")]
-        public async Task<IActionResult> AddBookLoan()
-        {
-
-            try
-            {
-                using (var reader = new StreamReader(Request.Body))
-                {
-                    var requestContent = await reader.ReadToEndAsync();
-                    var requestJObj = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(requestContent);
-                    var userId = Convert.ToInt32(requestJObj!["userId"]?.ToString());
-                    var bookId = Convert.ToInt32(requestJObj!["bookId"]?.ToString());
-                    var loan = _context.Loan!.Where(u => u.UserId.Equals(userId) && u.BookId.Equals(bookId)).SingleOrDefault();
-                    if(loan is null)
-                    {
-                        var book = _manager.BookService.GetOne(bookId, true);
-                        if (book is not null)
-                        {
-
-                            var newLoan = new Loan() { BookId = bookId, UserId = userId, Book = book };
-                            _manager.LoanService.CreateOne(newLoan);
-                            book.LoanDate = DateTime.UtcNow;
-                            book.Available = false;
-                            _manager.BookService.UpdateOne(book);
-                            return Ok("Loan added successfully.");
-                        }
-                        else
-                        {
-                            return BadRequest("Book is null!");
-                        }                    }
-                    else
-                    {
-                        return BadRequest("Loan already exists!");
-                    }
-                    
-                    
-                }
-                
-            }
-            catch(Exception ex)
-            {
-                return BadRequest(ex.ToString());
-            }
-        }
+        
     }
 }

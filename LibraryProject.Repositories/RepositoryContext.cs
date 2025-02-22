@@ -17,13 +17,21 @@ namespace LibraryProject.Repositories
         }
         public DbSet<Book>? Book { get; set; }
         public DbSet<Author>? Author { get; set; }
-        public DbSet<Loan>? Loan { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<Book>().HasOne(b => b.Author).WithMany(b => b.Books).HasForeignKey(b => b.AuthorId);
-            builder.Entity<Loan>().HasOne(l => l.Book).WithMany().HasForeignKey(l => l.BookId);
-            builder.Entity<Loan>().HasOne(l => l.User).WithMany(m => m.Loans).HasForeignKey(l => l.UserId);
+            builder.Entity<Book>()
+                .HasOne(b => b.Author)
+                .WithMany(a => a.Books)
+                .HasForeignKey(b => b.AuthorId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Book>()
+                .HasOne(b => b.User)
+                .WithMany(u => u.Books)
+                .HasForeignKey(b => b.UserId);
+
+            builder.Entity<User>().Property(u => u.Id).ValueGeneratedOnAdd();
         }
     }
 }

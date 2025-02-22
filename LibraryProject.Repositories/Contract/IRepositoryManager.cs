@@ -10,7 +10,6 @@ namespace LibraryProject.Repositories.Contract
     {
         public IAuthorRepository Author { get; }
         public IBookRepository Book { get; }
-        public ILoanRepository Loan { get; }
         public void Save();
     }
 }

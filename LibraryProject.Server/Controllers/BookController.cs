@@ -118,10 +118,14 @@ namespace LibraryProject.Server.Controllers
                         book.Name = requestJObj["name"]?.ToString();
                         book.AuthorId = Convert.ToInt32(requestJObj["authorId"]?.ToString());
                         book.Available = Convert.ToBoolean(requestJObj["available"]?.ToString());
-                        var bookUserId = book.UserId;
-                        if (!Convert.ToBoolean(requestJObj["available"]?.ToString()) && bookUserId == null)
+                        var currentBookUserId = book.UserId;
+                        if (!Convert.ToBoolean(requestJObj["available"]?.ToString()))
                         {
+                            var bookUserId = book.UserId;
                             book.LoanDate = DateTime.UtcNow;
+                            var loanDuration = Convert.ToInt32(requestJObj["loanDuration"]?.ToString());
+                            book.LoanEndDate = DateTime.UtcNow.AddDays(loanDuration);
+                            book.LoanDuration = loanDuration;
                             bookUserId = Convert.ToInt32(requestJObj["userId"]?.ToString());
                             book.UserId = bookUserId;
                             var user = _context.Users.Where(u => u.Id.Equals(bookUserId)).FirstOrDefault();
@@ -131,10 +135,20 @@ namespace LibraryProject.Server.Controllers
                                 _context.Users.Update(user);
                                 _context.SaveChanges();
                             }
+                            if(currentBookUserId != null)
+                            {
+                                var currentUser = _context.Users.Where(u => u.Id.Equals(currentBookUserId)).FirstOrDefault();
+                                if(currentUser is not null)
+                                {
+                                    currentUser.BookCount -= 1;
+                                    _context.Users.Update(currentUser);
+                                    _context.SaveChanges();
+                                }
+                            }
                         }
                         else
                         {
-                            var user = _context.Users.Where(u => u.Id.Equals(bookUserId)).FirstOrDefault();
+                            var user = _context.Users.Where(u => u.Id.Equals(currentBookUserId)).FirstOrDefault();
                             if (user is not null)
                             {
                                 user.BookCount -= 1;
@@ -142,6 +156,8 @@ namespace LibraryProject.Server.Controllers
                                 _context.SaveChanges();
                             }
                             book.LoanDate = null;
+                            book.LoanDuration = 0;
+                            book.LoanEndDate = null;
                             book.UserId = null;
                         }
                         

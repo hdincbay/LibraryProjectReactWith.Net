@@ -37,7 +37,6 @@ function AuthorCreate() {
             });
 
             if (response.ok) {
-                alert('Author created succesfully.');
                 navigate('/Author');
             } else {
                 const errorData = await response.json();

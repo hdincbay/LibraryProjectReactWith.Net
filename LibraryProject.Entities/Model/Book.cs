@@ -20,9 +20,11 @@ namespace LibraryProject.Entities.Model
         public Author? Author { get; set; }
         public bool Available { get; set; } = true;
         public DateTime? LoanDate { get; set; }
+        public DateTime? LoanEndDate { get; set; }
         public DateTime? CreatedDate { get; set; }
         public int? UserId { get; set; }
         [ForeignKey("UserId")]
         public User? User { get; set; }
+        public int LoanDuration { get; set; }
     }
 }

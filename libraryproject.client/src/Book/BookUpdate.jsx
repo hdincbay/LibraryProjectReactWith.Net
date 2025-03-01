@@ -12,9 +12,24 @@ function BookUpdate() {
     const [authorList, setAuthorList] = useState([]);
     const [userList, setUserList] = useState([]);
     const [authorId, setAuthorId] = useState(0);
+    const [loanDuration, setLoanDuration] = useState(0);
+    const [loanDate, setLoanDate] = useState('');
+    const [loanEndDate, setLoanEndDate] = useState('');
     const [userId, setUserId] = useState(0);
     const [errorMessage, setErrorMessage] = useState('');
-
+    function formatDate(dateStr) {
+        let date = new Date(dateStr);
+        let day = String(date.getDate()).padStart(2, '0');
+        let month = String(date.getMonth() + 1).padStart(2, '0');
+        let year = date.getFullYear();
+        let hours = String(date.getHours()).padStart(2, '0');
+        let minutes = String(date.getMinutes()).padStart(2, '0');
+        var result = `${day}/${month}/${year} ${hours}:${minutes}`;
+        if (result == "01/01/1970 02:00") {
+            result = '';
+        }
+        return result;
+    }
     const getAuthorListThenSetAuthor = async () => {
         const restUrl = Config.restApiUrl;
         const response = await fetch(`${restUrl}/api/Author/GetAll`, { method: 'GET' });
@@ -50,6 +65,9 @@ function BookUpdate() {
         setAvailable(available);
         if (available) {
             setUserId(0);
+            setLoanDuration(0);
+            setLoanDate('');
+            setLoanEndDate('');
         }
     };
 
@@ -79,6 +97,9 @@ function BookUpdate() {
                             setAuthorId(data.authorId);
                             setAvailable(data.available);
                             setUserId(data.userId);
+                            setLoanDuration(data.loanDuration);
+                            setLoanDate(formatDate(data.loanDate));
+                            setLoanEndDate(formatDate(data.loanEndDate));
                         } else {
                             alert('Failed to retrieve book data');
                         }
@@ -97,8 +118,11 @@ function BookUpdate() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (!available && userId === 0) {
+        if (!available && userId == 0) {
             setErrorMessage("Borrower cannot be empty!");
+        }
+        else if (userId != 0 && loanDuration == 0) {
+            setErrorMessage("Loan Duration is required");
         } else {
             if (!bookName.trim()) {
                 setErrorMessage('Name cannot be empty!');
@@ -118,7 +142,8 @@ function BookUpdate() {
                         name: bookName,
                         authorId: authorId,
                         available: available,
-                        userId: userId
+                        userId: userId,
+                        loanDuration: loanDuration
                     }),
                 });
                 if (response.ok) {
@@ -214,6 +239,49 @@ function BookUpdate() {
                                         </option>
                                     ))}
                                 </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style={{ width: '20%' }}>
+                                <label htmlFor="loanDuration"><strong>Loan Duration (Day)</strong></label>
+                            </td>
+                            <td>
+                                <input
+                                    id="loanDuration"
+                                    className="form-control"
+                                    value={loanDuration}
+                                    type="number"
+                                    onChange={(e) => setLoanDuration(e.target.value)}
+                                    placeholder="Enter the Loan Duration"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style={{ width: '20%' }}>
+                                <label htmlFor="loanDate"><strong>Loan Date</strong></label>
+                            </td>
+                            <td>
+                                <input
+                                    id="loanData"
+                                    disabled={true}
+                                    className="form-control"
+                                    value={loanDate || ''}
+                                    type="text"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style={{ width: '20%' }}>
+                                <label htmlFor="loanEndDate"><strong>Loan End Date</strong></label>
+                            </td>
+                            <td>
+                                <input
+                                    id="loanEndDate"
+                                    disabled={true}
+                                    className="form-control"
+                                    value={loanEndDate || ''}
+                                    type="text"
+                                />
                             </td>
                         </tr>
                         <tr>

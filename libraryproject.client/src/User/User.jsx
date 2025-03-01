@@ -13,6 +13,7 @@ function User() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [searchTermId, setSearchTermId] = useState('');
     const [searchTermTchatId, setSearchTermTchatId] = useState('');
+    const [searchTermBookCount, setSearchBookCount] = useState('');
     const [searchTermFirstname, setSearchTermFirstname] = useState('');
     const [searchTermLastName, setSearchTermLastName] = useState('');
     const [searchTermUsername, setSearchTermUsername] = useState('');
@@ -128,6 +129,7 @@ function User() {
             (user.firstName ? user.firstName.toLowerCase().includes(searchTermFirstname.toLowerCase()) : true) &&
             (user.lastName ? user.lastName.toLowerCase().includes(searchTermLastName.toLowerCase()) : true) &&
             (user.userName ? user.userName.toLowerCase().includes(searchTermUsername.toLowerCase()) : true) &&
+            (user.bookCount.toString().includes(searchTermBookCount)) &&
             (user.email ? user.email.toLowerCase().includes(searchTermEmail.toLowerCase()) : true)
         }
     );
@@ -153,7 +155,8 @@ function User() {
                 <tr>
                     <th style={{ width: '10%' }}>ID</th>
                     <th style={{ width: '10%' }}>TChatID</th>
-                    <th style={{ width: '15%' }}>User Name</th>
+                    <th style={{ width: '5%' }}>Book Count</th>
+                    <th style={{ width: '10%' }}>User Name</th>
                     <th style={{ width: '20%' }}>Name</th>
                     <th style={{ width: '20%' }}>Last Name</th>
                     <th style={{ width: '10%' }}>Email</th>
@@ -165,6 +168,7 @@ function User() {
                     <tr key={user.id}>
                         <td>{user.id}</td>
                         <td>{user.t_chatId}</td>
+                        <td>{user.bookCount}</td>
                         <td>{user.userName}</td>
                         <td>{user.firstName}</td>
                         <td>{user.lastName}</td>
@@ -235,6 +239,15 @@ function User() {
                                 placeholder="Search by TChatID"
                                 value={searchTermTchatId}
                                 onChange={(e) => setSearchTermTchatId(e.target.value)}
+                            />
+                        </th>
+                        <th style={{ width: '5%' }}>
+                            <input
+                                type="text"
+                                className="form-control mx-2 col-md-2"
+                                placeholder="Search by Book Count"
+                                value={searchTermBookCount}
+                                onChange={(e) => setSearchBookCount(e.target.value)}
                             />
                         </th>
                         <th style={{ width: '15%' }}>

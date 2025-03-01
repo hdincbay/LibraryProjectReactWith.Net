@@ -118,6 +118,33 @@ namespace LibraryProject.Server.Controllers
                         book.Name = requestJObj["name"]?.ToString();
                         book.AuthorId = Convert.ToInt32(requestJObj["authorId"]?.ToString());
                         book.Available = Convert.ToBoolean(requestJObj["available"]?.ToString());
+                        var bookUserId = book.UserId;
+                        if (!Convert.ToBoolean(requestJObj["available"]?.ToString()) && bookUserId == null)
+                        {
+                            book.LoanDate = DateTime.UtcNow;
+                            bookUserId = Convert.ToInt32(requestJObj["userId"]?.ToString());
+                            book.UserId = bookUserId;
+                            var user = _context.Users.Where(u => u.Id.Equals(bookUserId)).FirstOrDefault();
+                            if(user is not null)
+                            {
+                                user.BookCount += 1;
+                                _context.Users.Update(user);
+                                _context.SaveChanges();
+                            }
+                        }
+                        else
+                        {
+                            var user = _context.Users.Where(u => u.Id.Equals(bookUserId)).FirstOrDefault();
+                            if (user is not null)
+                            {
+                                user.BookCount -= 1;
+                                _context.Users.Update(user);
+                                _context.SaveChanges();
+                            }
+                            book.LoanDate = null;
+                            book.UserId = null;
+                        }
+                        
                         await Task.Run(() =>
                         {
                             _manager.BookService.UpdateOne(book!);
@@ -167,46 +194,6 @@ namespace LibraryProject.Server.Controllers
                 }
             }
             catch(Exception ex)
-            {
-                return BadRequest(ex.ToString());
-            }
-        }
-        [HttpPost("LoanBook")]
-        public async Task<IActionResult> LoanBook()
-        {
-            try
-            {
-                Tool tool = new Tool(_context);
-                var bodyContent = "";
-                using (var reader = new StreamReader(Request.Body))
-                {
-                    bodyContent = await reader.ReadToEndAsync();
-                    var requestJObj = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(bodyContent)!;
-                    var userId = requestJObj["UserId"]?.ToString();
-                    var bookId = requestJObj["BookId"]?.ToString();
-                    var user = _context.Users.Where(u => u.Id.Equals(userId)).FirstOrDefault();
-                    if(user is not null)
-                    {
-                        var book = _manager.BookService.GetOne(Convert.ToInt32(bookId), true);
-                        if (book is not null)
-                        { 
-                            book.LoanDate = DateTime.Now;
-                            book.Available = false;
-                            book.UserId = Convert.ToInt32(userId);
-                        }
-                        await Task.Run(() =>
-                        {
-                            _manager.BookService.UpdateOne(book!);
-                        });
-                        return Ok("The book has been successfully loaned.");
-                    }
-                    else
-                    {
-                        return Ok("User not found!");
-                    }
-                }
-            }
-            catch (Exception ex)
             {
                 return BadRequest(ex.ToString());
             }

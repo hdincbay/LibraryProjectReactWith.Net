@@ -40,7 +40,8 @@ function User() {
                 const data = JSON.parse(event.data);
                 if (data) {
                     if (Array.isArray(data)) {
-                        setUsers(data);
+                        const filteredUsers = data.filter(user => user.normalizedUserName !== 'SYSTEMUSER');
+                        setUsers(filteredUsers);
                     } else {
                         setUsers((prevUsers) => {
                             

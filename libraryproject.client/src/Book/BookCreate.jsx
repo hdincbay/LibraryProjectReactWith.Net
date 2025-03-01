@@ -67,7 +67,6 @@ function BookCreate() {
             });
 
             if (response.ok) {
-                alert('Book created successfully.');
                 navigate('/Book');
             } else {
                 const errorData = await response.json();
@@ -111,7 +110,7 @@ function BookCreate() {
                                 <select
                                     id="authorList"
                                     className="form-control"
-                                    value={authorId}
+                                    value={authorId || 0}
                                     onChange={(e) => setAuthorId(e.target.value)}
                                 >
                                     <option value="0">Select an author</option>

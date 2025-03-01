@@ -49,7 +49,56 @@ function Book() {
             console.error('JSON parse error:', error);
         }
     };
+    const removeLoan = async (event, userId, bookId) => {
+        setLoading(true);
+        try {
+            var restUrl = Config.restApiUrl;
+            setAuthToken(authTokenVal);
+            const response = await fetch(`${restUrl}/api/Book/LoanBook`, {
+                method: 'PUT',
+                body: JSON.stringify({
+                    authToken: authTokenVal + '_book',
+                    Type: 'Remove',
+                    UserId: userId,
+                    BookId: bookId
+                }),
+            });
+            const textResponse = await response.text();
 
+            if (!response.ok) {
+                throw new Error(textResponse);
+            }
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+    const bookLoan = async (event, userId, bookId) => {
+        setLoading(true);
+        try {
+            var restUrl = Config.restApiUrl;
+            setAuthToken(authTokenVal);
+            const response = await fetch(`${restUrl}/api/Book/LoanBook`, {
+                method: 'PUT',
+                body: JSON.stringify({
+                    authToken: authTokenVal + '_book',
+                    Type: 'Add',
+                    UserId: userId,
+                    BookId: bookId
+                }),
+            });
+            const textResponse = await response.text();
+
+            if (!response.ok) {
+                throw new Error(textResponse);
+            }
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
     const connectWebSocket = () => {
         var webSocketServerUrl = Config.webSocketUrl;
         const newSocket = new WebSocket(`${webSocketServerUrl}/BookList/`);
@@ -188,8 +237,6 @@ function Book() {
             (searchTermAvailable.toString() ? book.available == searchTermAvailable : true)
     }
     );
-    
-    // Sorting books based on the selected key and direction
     const sortedBooks = filteredBooks.sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
             return sortConfig.direction === 'ascending' ? -1 : 1;
@@ -203,7 +250,7 @@ function Book() {
     const contents = error ? (
         <p><em>{error}</em></p>
     ) : sortedBooks.length === 0 ? (
-        <p><em>Author Undefined...</em></p>
+        <p><em>Book Undefined...</em></p>
     ) : (
         <table className="table" aria-labelledby="tableLabel">
             <thead>
@@ -262,31 +309,6 @@ function Book() {
                                 >
                                     <i className="fa fa-trash"></i>&nbsp;{loading ? 'Removed...' : 'Remove'}
                                 </button>
-                                {book.available ? <button
-                                    className="btn btn-outline-success"
-                                    disabled={loading}
-                                    style={{
-                                        height: '2.5rem',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        padding: '0 1rem'
-                                    }}
-                                >
-                                    <i class="fa-solid fa-right-long"></i>&nbsp;&nbsp;{loading ? 'Lend...' : 'Lend'}
-                                </button> : <button
-                                    className="btn btn-outline-danger"
-                                    disabled={loading}
-                                    style={{
-                                        height: '2.5rem',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        padding: '0 1rem'
-                                    }}
-                                >
-                                    <i class="fa-solid fa-left-long"></i>&nbsp;{loading ? 'Retrieve...' : 'Retrieve'}
-                                </button>}
                             </div>
                         </td>
                     </tr>
@@ -350,8 +372,8 @@ function Book() {
                                 id="available"
                                 type="checkbox"
                                 className="form-check-input mx-2"
-                                checked={searchTermAvailable}  // checked ile durumu kontrol et
-                                onChange={(e) => setSearchTermAvailable(e.target.checked)} // onChange ile checkbox'ýn deðerini kontrol et
+                                checked={searchTermAvailable}
+                                onChange={(e) => setSearchTermAvailable(e.target.checked)}
                             />
                         </th>
                         <th style={{ width: '20%' }}>

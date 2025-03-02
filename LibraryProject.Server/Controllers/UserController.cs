@@ -254,6 +254,33 @@ namespace LibraryProject.Server.Controllers
             var sessionId = HttpContext.Session.GetString("session_id");
             return Ok(sessionId);
         }
-        
+        [HttpGet("GetBookListByUserId/{id:int}")]
+        public async Task<IActionResult> GetBookListByUserId([FromRoute] int id)
+        {
+            try
+            {
+                var user = _context.Users.Where(u => u.Id.Equals(id)).FirstOrDefault();
+                if(user is not null)
+                {
+                    var bookList = await _context.Book!.Where(b => b.UserId.Equals(id)).Include(b => b.User).Include(b => b.Author).ToListAsync();
+                    var responseJArray = new JArray();
+                    foreach (var book in bookList)
+                    {
+                        responseJArray.Add(book.Name);
+                    }
+                    var responseSrl = Newtonsoft.Json.JsonConvert.SerializeObject(responseJArray);
+                    return Ok(responseSrl);
+                }
+                else
+                {
+                    return BadRequest("User not found!");
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
     }
 }

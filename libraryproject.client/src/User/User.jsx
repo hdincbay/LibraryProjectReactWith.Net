@@ -67,6 +67,7 @@ function User() {
 
         setSocket(newSocket);
     };
+    
 
     const deleteUser = async (event, userid) => {
         setLoading(true);

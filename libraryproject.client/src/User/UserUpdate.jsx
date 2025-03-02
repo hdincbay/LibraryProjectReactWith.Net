@@ -3,7 +3,7 @@ import './User.css';
 import Config from '../../config.json';
 import { useParams, useNavigate } from 'react-router-dom';
 function UserUpdate() {
-    const { userId: paramAuthorId } = useParams(); // URL'den userId'yi alýyoruz
+    const { userId: userId } = useParams(); // URL'den userId'yi alýyoruz
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
     const [apiResponse, setApiResponse] = useState(null);
@@ -16,42 +16,51 @@ function UserUpdate() {
     const [emailAddress, setEmailAddress] = useState('');
     const [userName, setUserName] = useState('');
     const [tchatId, setTChatId] = useState('');
-    // Component mount olduðunda WebSocket baðlantýsýný baþlatýyoruz
+    const fetchUserData = async () => {
+        try {
+            const responseCurrentUser = await fetch(`${Config.restApiUrl}/api/User/GetOne/${userId}`);
+
+            if (responseCurrentUser.ok) {
+                const userData = await responseCurrentUser.json();
+                if (userData) {
+                    setFirstName(userData.FirstName);
+                    setLastName(userData.LastName);
+                    setEmailAddress(userData.Email);
+                    setTChatId(userData.t_chatId);
+                    setUserName(userData.UserName);
+                }
+            } else {
+                alert('Kullanici bilgileri alýnamadý.');
+            }
+        } catch (error) {
+            console.error('Kullanici bilgileri yüklenirken bir hata oluþtu: ', error);
+            alert('Kullanici bilgileri yüklenemedi.');
+        }
+    };
+    const getbookListByUser = async () => {
+        var restUrl = Config.restApiUrl;
+        const response = await fetch(`${restUrl}/api/User/GetBookListByUserId/${userId}`, {
+            method: 'GET'
+        });
+        const textResponse = await response.text();
+        if (!response.ok) {
+            throw new Error(textResponse);
+        }
+    };
     useEffect(() => {
         const token = localStorage.getItem('authToken');
         if (token) {
             setIsLoggedIn(true);
-            if (paramAuthorId) {
-                // Yazar bilgilerini API'den al
-                const fetchAuthorData = async () => {
-                    try {
-                        const responseCurrentUser = await fetch(`${Config.restApiUrl}/api/User/GetOne/${paramAuthorId}`);
-                        
-                        if (responseCurrentUser.ok) {
-                            const userData = await responseCurrentUser.json();
-                            if (userData) {
-                                setFirstName(userData.FirstName);
-                                setLastName(userData.LastName);
-                                setEmailAddress(userData.Email);
-                                setTChatId(userData.t_chatId);
-                                setUserName(userData.UserName);
-                            }
-                        } else {
-                            alert('Kullanici bilgileri alýnamadý.');
-                        }
-                    } catch (error) {
-                        console.error('Kullanici bilgileri yüklenirken bir hata oluþtu: ', error);
-                        alert('Kullanici bilgileri yüklenemedi.');
-                    }
-                };
-                fetchAuthorData();
+            if (userId) {
+                getbookListByUser();
+                fetchUserData();
             }
         } else {
             setIsLoggedIn(false);
             navigate('/Login');
         }
 
-    }, [paramAuthorId, navigate]);
+    }, [userId, navigate]);
 
     if (!isLoggedIn) {
         return null;
@@ -63,7 +72,6 @@ function UserUpdate() {
             alert('Username cannot be empty!');
             return;
         }
-
         try {
             const response = await fetch(`${Config.restApiUrl}/api/User/Update/${paramAuthorId}`, {
                 method: 'PUT',

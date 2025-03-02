@@ -251,7 +251,7 @@ function User() {
                                 onChange={(e) => setSearchBookCount(e.target.value)}
                             />
                         </th>
-                        <th style={{ width: '15%' }}>
+                        <th style={{ width: '10%' }}>
                             <input
                                 type="text"
                                 className="form-control mx-2 col-md-2"

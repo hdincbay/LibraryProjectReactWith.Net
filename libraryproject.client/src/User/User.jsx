@@ -191,7 +191,7 @@ function User() {
                                 </Link>
                                 <button
                                     className="btn btn-outline-primary"
-                                    onClick={(event) => deleteUser(event, user.userId)}
+                                    onClick={(event) => deleteUser(event, user.id)}
                                     disabled={loading}
                                     style={{
                                         height: '2.5rem', // Ayn? yükseklik

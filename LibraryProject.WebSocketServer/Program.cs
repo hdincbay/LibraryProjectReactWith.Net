@@ -41,7 +41,7 @@ app.Map("/AuthorList/", async context =>
                 Console.WriteLine("Gelen mesaj: " + receivedMessage);
                 var jsonMessage = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(receivedMessage);
                 var authToken = jsonMessage?["authToken"]?.ToString();
-                clients.TryAdd(webSocket, authToken);
+                clients.TryAdd(webSocket, authToken!);
                 await SendAllAuthors(webSocket);
             } while (!result.CloseStatus.HasValue);
             Console.WriteLine("try içinde.");
@@ -85,7 +85,7 @@ app.Map("/BookList/", async context =>
                 Console.WriteLine("Gelen mesaj: " + receivedMessage);
                 var jsonMessage = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(receivedMessage);
                 var authToken = jsonMessage?["authToken"]?.ToString();
-                clients.TryAdd(webSocket, authToken);
+                clients.TryAdd(webSocket, authToken!);
                 await SendAllBooks(webSocket);
             } while (!result.CloseStatus.HasValue);
             Console.WriteLine("try içinde.");

@@ -20,6 +20,8 @@ namespace LibraryProject.Repositories.Concrete
 
         public IQueryable<Book?> GetAllBooks(bool trackChanges) => FindAll(trackChanges);
 
+        public IQueryable<Book?> GetNotAvailableAllBook(bool trackChanges) => FindAll(trackChanges).Where(b => b!.Available.Equals(false));
+
         public Book? GetOneBook(int id, bool trakChanges) => FindByCondition(b => b.BookId.Equals(id), trakChanges);
 
         public void UpdateOneBook(Book book) => Update(book);

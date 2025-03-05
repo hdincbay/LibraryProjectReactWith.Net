@@ -1,70 +1,74 @@
 import { useEffect, useState } from 'react';
-import './User.css';
-import Config from '../../config.json';
 import { useParams, useNavigate } from 'react-router-dom';
+import Config from '../../config.json';
+import './User.css';
+
 function UserUpdate() {
-    const { userId: userId } = useParams(); // URL'den userId'yi alýyoruz
-    const [users, setUsers] = useState([]);
-    const [error, setError] = useState(null);
-    const [apiResponse, setApiResponse] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const { userId } = useParams();
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [formData, setFormData] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [emailAddress, setEmailAddress] = useState('');
     const [userName, setUserName] = useState('');
     const [tchatId, setTChatId] = useState('');
-    const fetchUserData = async () => {
-        try {
-            const responseCurrentUser = await fetch(`${Config.restApiUrl}/api/User/GetOne/${userId}`);
+    const [bookList, setBookList] = useState([]);
 
-            if (responseCurrentUser.ok) {
-                const userData = await responseCurrentUser.json();
-                if (userData) {
-                    setFirstName(userData.FirstName);
-                    setLastName(userData.LastName);
-                    setEmailAddress(userData.Email);
-                    setTChatId(userData.t_chatId);
-                    setUserName(userData.UserName);
-                }
-            } else {
-                alert('Kullanici bilgileri alýnamadý.');
-            }
-        } catch (error) {
-            console.error('Kullanici bilgileri yüklenirken bir hata oluþtu: ', error);
-            alert('Kullanici bilgileri yüklenemedi.');
-        }
-    };
-    const getbookListByUser = async () => {
-        var restUrl = Config.restApiUrl;
-        const response = await fetch(`${restUrl}/api/User/GetBookListByUserId/${userId}`, {
-            method: 'GET'
-        });
-        const textResponse = await response.text();
-        if (!response.ok) {
-            throw new Error(textResponse);
-        }
-    };
+    function formatDate(dateStr) {
+        let date = new Date(dateStr);
+        let day = String(date.getDate()).padStart(2, '0');
+        let month = String(date.getMonth() + 1).padStart(2, '0');
+        let year = date.getFullYear();
+        let hours = String(date.getHours()).padStart(2, '0');
+        let minutes = String(date.getMinutes()).padStart(2, '0');
+        let result = `${day}/${month}/${year} ${hours}:${minutes}`;
+        return result === "01/01/1970 02:00" ? '' : result;
+    }
+
     useEffect(() => {
         const token = localStorage.getItem('authToken');
-        if (token) {
-            setIsLoggedIn(true);
-            if (userId) {
-                getbookListByUser();
-                fetchUserData();
-            }
-        } else {
-            setIsLoggedIn(false);
+        if (!token) {
             navigate('/Login');
+            return;
         }
+        setIsLoggedIn(true);
 
+        const fetchUserData = async () => {
+            try {
+                const response = await fetch(`${Config.restApiUrl}/api/User/GetOne/${userId}`);
+                if (!response.ok) throw new Error('Failed to retrieve user information.');
+
+                const userData = await response.json();
+                setFirstName(userData.FirstName);
+                setLastName(userData.LastName);
+                setEmailAddress(userData.Email);
+                setUserName(userData.UserName);
+                setTChatId(userData.t_chatId);
+            } catch (error) {
+                alert(error.message);
+            }
+        };
+
+        const getBookListByUser = async () => {
+            try {
+                const response = await fetch(`${Config.restApiUrl}/api/User/GetBookListByUserId/${userId}`);
+                if (!response.ok) throw new Error('Failed to retrieve book list.');
+
+                const jsonResponse = await response.json();
+                setBookList(jsonResponse.map(item => ({
+                    ...item,
+                    loanDate: formatDate(item.loanDate),
+                    loanEndDate: formatDate(item.loanEndDate),
+                })));
+            } catch (error) {
+                alert(error.message);
+            }
+        };
+
+        fetchUserData();
+        getBookListByUser();
     }, [userId, navigate]);
 
-    if (!isLoggedIn) {
-        return null;
-    }
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -73,7 +77,7 @@ function UserUpdate() {
             return;
         }
         try {
-            const response = await fetch(`${Config.restApiUrl}/api/User/Update/${paramAuthorId}`, {
+            const response = await fetch(`${Config.restApiUrl}/api/User/Update/${userId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -91,96 +95,70 @@ function UserUpdate() {
                 navigate('/User');
             } else {
                 const errorData = await response.json();
-                alert(`Hata: ${errorData.message || 'User update failed!'}`);
+                alert(`Error: ${errorData.message || 'User update failed!'}`);
             }
         } catch (error) {
-            console.error('An error occurred while updating the author: ', error);
+            console.error('An error occurred while updating the user:', error);
             alert('An error occurred, please try again.');
         }
     };
-    return (
-        <div id="componentcontent" style={{ width: '100%', paddingTop: '4rem', paddingLeft: 0, paddingRight: 0 }}>
-            <div className="display-6 text-danger text-center">
-                {apiResponse ?? error} 
-            </div>
-            
+
+    return isLoggedIn ? (
+        <div id="componentcontent" style={{ width: '100%', paddingTop: '4rem' }}>
             <form onSubmit={handleSubmit}>
                 <table style={{ width: '100%' }}>
                     <tbody>
                         <tr>
-                            <td style={{ width: '20%' }}>
-                                <strong>First Name</strong>
-                            </td>
-                            <td>
-                                <input className="form-control"
-                                    id="firstName"
-                                    name="firstName"
-                                    value={firstName}
-                                    onChange={(e) => setFirstName(e.target.value)} />
-                            </td>
+                            <td><strong>First Name</strong></td>
+                            <td><input className="form-control" value={firstName} onChange={(e) => setFirstName(e.target.value)} /></td>
                         </tr>
                         <tr>
-                            <td style={{ width: '20%' }}>
-                                <strong>Last Name</strong>
-                            </td>
-                            <td>
-                                <input className="form-control"
-                                    id="lastName"
-                                    name="lastName"
-                                    value={lastName}
-                                    onChange={(e) => setLastName(e.target.value)} />
-                            </td>
+                            <td><strong>Last Name</strong></td>
+                            <td><input className="form-control" value={lastName} onChange={(e) => setLastName(e.target.value)} /></td>
                         </tr>
                         <tr>
-                            <td style={{ width: '30%' }}>
-                                <strong>User Name</strong>
-                            </td>
-                            <td>
-                                <input className="form-control"
-                                    id="userName"
-                                    name="userName"
-                                    value={userName}
-                                    onChange={(e) => setUserName(e.target.value)} />
-                            </td>
+                            <td><strong>User Name</strong></td>
+                            <td><input className="form-control" value={userName} onChange={(e) => setUserName(e.target.value)} /></td>
                         </tr>
                         <tr>
-                            <td style={{ width: '30%' }}>
-                                <strong>Email</strong>
-                            </td>
-                            <td>
-                                <input className="form-control"
-                                    id="email"
-                                    name="email"
-                                    value={emailAddress}
-                                    onChange={(e) => setEmailAddress(e.target.value)} />
-                            </td>
+                            <td><strong>Email</strong></td>
+                            <td><input className="form-control" value={emailAddress} onChange={(e) => setEmailAddress(e.target.value)} /></td>
                         </tr>
                         <tr>
-                            <td style={{ width: '30%' }}>
-                                <strong>Chat ID</strong>
-                            </td>
-                            <td>
-                                <input className="form-control"
-                                    id="tchatId"
-                                    name="tchatId"
-                                    value={tchatId}
-                                    onChange={(e) => setTChatId(e.target.value)} />
-                            </td>
+                            <td><strong>Chat ID</strong></td>
+                            <td><input className="form-control" value={tchatId} onChange={(e) => setTChatId(e.target.value)} /></td>
                         </tr>
                         <tr>
-                            <td style={{ width: '30%' }}>
-                            </td>
-                            <td>
-                                <button className="btn btn-success">Submit</button>
-                            </td>
+                            <td></td>
+                            <td><button className="btn btn-success">Submit</button></td>
                         </tr>
                     </tbody>
                 </table>
-
             </form>
-            
+            {bookList.length > 0 && (
+                <table className="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Book Name</th>
+                            <th>Loan Date</th>
+                            <th>Loan End Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {bookList.map(book => (
+                            <tr key={book.bookId}>
+                                <td>{book.bookId}</td>
+                                <td>{book.name}</td>
+                                <td>{book.loanDate}</td>
+                                <td>{book.loanEndDate}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            )}
         </div>
-    );
+    ) : <div className="text-center">Redirecting to Login...</div>;
 }
 
 export default UserUpdate;

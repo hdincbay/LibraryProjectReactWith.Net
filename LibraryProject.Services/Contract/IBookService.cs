@@ -9,7 +9,8 @@ namespace LibraryProject.Services.Contract
 {
     public interface IBookService
     {
-        public IEnumerable<Book?> GetAll(bool trakChanges);
+        public IEnumerable<Book?> GetAll(bool trackChanges);
+        public IEnumerable<Book?> GetNotAvailableAllBook(bool trackChanges);
         public Book? GetOne(int id, bool trackChanges);
         public void CreateOne(Book book);
         public void UpdateOne(Book book);

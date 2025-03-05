@@ -207,6 +207,17 @@ namespace LibraryProject.Server.Controllers
                 var user = await _userManager.FindByIdAsync(id.ToString());
                 if(user is not null)
                 {
+                    var bookList = _context.Book!.Where(b => b.UserId.Equals(id)).ToList();
+                    foreach(var item in bookList)
+                    {
+                        item.LoanDate = null;
+                        item.LoanEndDate = null;
+                        item.LoanDuration = 0;
+                        item.UserId = null;
+                        item.Available = true;
+                        _context.Book!.Update(item);
+                        _context.SaveChanges();
+                    }
                     var deleteResponse = await _userManager.DeleteAsync(user!);
                     if (deleteResponse.Succeeded)
                     {
@@ -262,14 +273,18 @@ namespace LibraryProject.Server.Controllers
                 var user = _context.Users.Where(u => u.Id.Equals(id)).FirstOrDefault();
                 if(user is not null)
                 {
-                    var bookList = await _context.Book!.Where(b => b.UserId.Equals(id)).Include(b => b.User).Include(b => b.Author).ToListAsync();
+                    var bookList = await _context.Book!.Where(b => b.UserId.Equals(id)).ToListAsync();
                     var responseJArray = new JArray();
                     foreach (var book in bookList)
                     {
-                        responseJArray.Add(book.Name);
+                        var modelJObject = new JObject();
+                        modelJObject.Add("bookId", book.BookId);
+                        modelJObject.Add("name", book.Name);
+                        modelJObject.Add("loanDate", book.LoanDate);
+                        modelJObject.Add("loanEndDate", book.LoanEndDate);
+                        responseJArray.Add(modelJObject);
                     }
-                    var responseSrl = Newtonsoft.Json.JsonConvert.SerializeObject(responseJArray);
-                    return Ok(responseSrl);
+                    return Ok(responseJArray.ToString());
                 }
                 else
                 {

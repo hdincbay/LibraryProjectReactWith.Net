@@ -34,7 +34,9 @@ namespace LibraryProject.Services.Concrete
             }
         }
 
-        public IEnumerable<Book?> GetAll(bool trakChanges) => _manager.Book.GetAllBooks(trakChanges);
+        public IEnumerable<Book?> GetAll(bool trackChanges) => _manager.Book.GetAllBooks(trackChanges);
+
+        public IEnumerable<Book?> GetNotAvailableAllBook(bool trackChanges) => _manager.Book.GetNotAvailableAllBook(trackChanges);
 
         public Book? GetOne(int id, bool trackChanges) => _manager.Book.GetOneBook(id, trackChanges);
 

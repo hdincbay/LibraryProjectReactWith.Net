@@ -26,5 +26,7 @@ namespace LibraryProject.Entities.Model
         [ForeignKey("UserId")]
         public User? User { get; set; }
         public int LoanDuration { get; set; }
+        public long SLAExpiryUnixTime { get; set; }
+        public bool IsSlaExceeded { get; set; }
     }
 }

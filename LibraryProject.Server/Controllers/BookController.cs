@@ -44,6 +44,23 @@ namespace LibraryProject.Server.Controllers
                 return BadRequest(ex.ToString());
             }
         }
+        [HttpGet("GetNotAvailableAllBook")]
+        public async Task<IActionResult> GetNotAvailableAllBook()
+        {
+            try
+            {
+                var notAvailableBookList = await Task.Run(() =>
+                {
+                    return _manager.BookService.GetNotAvailableAllBook(false);
+                });
+                return Ok(notAvailableBookList);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {

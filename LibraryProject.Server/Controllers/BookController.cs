@@ -176,6 +176,8 @@ namespace LibraryProject.Server.Controllers
                             book.LoanDuration = 0;
                             book.LoanEndDate = null;
                             book.UserId = null;
+                            book.SLAExpiryUnixTime = 0;
+                            book.IsSlaExceeded = false;
                         }
                         
                         await Task.Run(() =>

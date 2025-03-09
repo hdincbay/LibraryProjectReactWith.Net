@@ -66,7 +66,7 @@ namespace LibraryProject.SLAService
                 {
                     _logger.LogError("exception: {exception.ToString()}", exception.ToString());
                 }
-                await Task.Delay(1000, stoppingToken);
+                await Task.Delay(50000, stoppingToken);
             }
         }
     }

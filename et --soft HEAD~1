@@ -1,0 +1,258 @@
+[33mcommit 5cf16db02e7b03f9d28435ce0aba14f321527197[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Mar 9 13:34:12 2025 +0300
+
+    Project updated.
+
+[33mcommit e25a75e37bd873faf588b40491c654a2adfffdf9[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Mar 9 13:31:21 2025 +0300
+
+    Project updated.
+
+[33mcommit 7bb28e0382243375f63d505d858a121499cfd469[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Mar 9 13:29:07 2025 +0300
+
+    Clear git cache and apply .gitignore rules
+
+[33mcommit 490c1583412987409125ccf10839a0ab2895dc60[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Mar 9 13:27:24 2025 +0300
+
+    config.json updated.
+
+[33mcommit a402c15820aabfb1d96a9c43d632f8e88099cbbe[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Mar 9 13:25:11 2025 +0300
+
+    Remove config.json from tracking
+
+[33mcommit 6d15a97d668189ea89932d1464df1fd764aa2fc1[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Mar 9 13:22:04 2025 +0300
+
+    .gitignore updated.
+
+[33mcommit 1995e19021b3689465d2cd4f1b77f0e3cf2c6db1[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Mar 9 13:21:14 2025 +0300
+
+    .gitignore updated.
+
+[33mcommit 877c4c9feb94d992989618579c67e031d7b6cb00[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Mar 9 13:18:46 2025 +0300
+
+    config.json updated.
+
+[33mcommit 3a8e94e353f75298559d6c22512da3c4971e0bda[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Mar 9 13:15:58 2025 +0300
+
+    Project updated.
+
+[33mcommit c1b61809f79ab2e1a8d66351b9f173559e83fd9e[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Mar 9 13:14:16 2025 +0300
+
+    Updated SLAService and Server projects with recent changes and improvements.
+
+[33mcommit 6d02c3616c7ce71a22daeb523b9b28863158ede8[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Wed Mar 5 23:25:30 2025 +0300
+
+    The BookController content has been updated, and the SLA Service has been added to the solution.
+
+[33mcommit 68f3825fcf46aa17b0faabc5188dcd8c83794699[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Mar 2 11:42:33 2025 +0300
+
+    index.html has been updated.
+
+[33mcommit d3f3b1f3f42da9c7675d5ce06a49ff40acb73b06[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Mar 2 11:29:21 2025 +0300
+
+    UserController and User.jsx have been updated.
+
+[33mcommit f41560f7ed19ae1789a63ab3b2156d5b31334f5d[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Mar 2 00:05:36 2025 +0300
+
+    Updated loan transactions.
+
+[33mcommit 3607c5ed8f0e26e9eea067037248182b38b28f23[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sat Mar 1 21:28:49 2025 +0300
+
+    Updated book borrowing functionality.
+
+[33mcommit 8a3d94ecbe9dfb4256301622178aa16e60167b5a[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Feb 23 01:42:18 2025 +0300
+
+    The Loan entity has been removed. The User and Book entities, as well as the UserController and BookController, have been updated.
+
+[33mcommit 2d408218fffe87f482b3a89e7180ea08da1130f0[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sat Feb 22 02:08:31 2025 +0300
+
+    Book.jsx updated.
+
+[33mcommit 16e0079f4c898330c8362d5004e3fa04c20c20c6[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Wed Feb 19 22:43:39 2025 +0300
+
+    The content of the UserController has been revised to incorporate the AddBookLoan method.
+
+[33mcommit cb59da6cf9da4246a6060932ba3fb56baa3c4762[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Feb 16 15:21:22 2025 +0300
+
+    UserController and UserUpdate Component updated.
+
+[33mcommit 9bdf7fc9d803f8756b8da6b430667b4b26cf0b00[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Mon Feb 10 21:10:04 2025 +0300
+
+    Search filter has been added to the User.jsx and Author.jsx components.
+
+[33mcommit faccade9ec69aa7c0a1667ba4ea52024114c2323[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Feb 9 16:02:31 2025 +0300
+
+    -Sortable columns and search filters have been updated in the book list.
+    -Update method in the Book Controller has been updated.
+
+[33mcommit 51ec333eebc7c1c7e408ce78fe89395a6485e672[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Feb 9 00:06:18 2025 +0300
+
+    Sortable columns and search filters have been updated in the book list.
+
+[33mcommit d808f8b90828fcf3fd90016fb3062141892edc1c[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sat Feb 8 02:21:38 2025 +0300
+
+    Sortable columns and search filters have been added to the book list.
+
+[33mcommit 080059a19f4909e2912b903baaa0bc558bcf6588[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Thu Feb 6 21:40:14 2025 +0300
+
+    Project has been organized.
+
+[33mcommit dc13e2e6d2929ef3b9cbcbd549f926a44668d5f4[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Mon Feb 3 20:08:34 2025 +0300
+
+    Frontend updates implemented.
+
+[33mcommit e5b0a4040e2f489b01b6f01ddd598d0f51374f6a[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Feb 2 21:14:02 2025 +0300
+
+    Projet updated.
+
+[33mcommit f16b0cc46190cbce6f46b673615e88c28c4b9c59[m[33m ([m[1;32mExample[m[33m)[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sat Feb 1 00:25:21 2025 +0300
+
+    Project updated.
+
+[33mcommit 3884f1e79fb62cfb8ef2a7bcd0ca616b1e1f96c3[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Mon Jan 27 22:41:27 2025 +0300
+
+    AuthorUpdate component added.
+
+[33mcommit 6ffd4f5fb9e3c9bc7e503297d3ee6ad1da502eee[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Mon Jan 27 18:36:01 2025 +0300
+
+    Project Updated.
+
+[33mcommit 4ca501ff3003da8e5d4e0f86b2009b4c9328afbb[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Jan 26 13:10:35 2025 +0300
+
+    Project Updated.
+
+[33mcommit 4e4e3f60dddfd75cac9636dc4e151f2542bfa995[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Jan 26 01:31:16 2025 +0300
+
+    Project Updated.
+
+[33mcommit e349915930947a23203b7024649c565d237b5105[m[33m ([m[1;32mMessageComponent[m[33m)[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sat Jan 18 20:21:19 2025 +0300
+
+    Project updated.
+
+[33mcommit 14c14710c8869c30c9aec701005da3069ad4b9e3[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Jan 12 23:07:22 2025 +0300
+
+    Project updated.
+
+[33mcommit 193b66c4e9636589b7c295d045fe449d7e277bf4[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Jan 12 21:03:47 2025 +0300
+
+    Project updated.
+
+[33mcommit 63fbc2a43c740b2c05f8d08bfa38ba4c220238ec[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Fri Jan 10 21:01:30 2025 +0300
+
+    restapi and websocket url updated.
+
+[33mcommit e8e0650cf48662ad36e5a1a16fb324fd943c9d49[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Jan 5 16:06:22 2025 +0300
+
+    Project Updated.
+
+[33mcommit fc9feaa2ace412db87ed13ca874656ce8567a056[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Jan 5 15:53:34 2025 +0300
+
+    Weather Component Updated.
+
+[33mcommit 962d8c643ba54cae8ac9b9d7ad70176007068e0c[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Jan 5 01:12:52 2025 +0300
+
+    Weather.jsx Updated.
+
+[33mcommit f6a8823c0d0aa7a6c40cffd15c463bb53cd1ef8d[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Jan 5 01:08:34 2025 +0300
+
+    Weather.jsx Updated.
+
+[33mcommit 4e21f380c64a18a66154141e027d1fbe203f44c6[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Jan 5 01:06:29 2025 +0300
+
+    Weather.jsx Updated.
+
+[33mcommit 9466d66d19294c707944f623712998345ed7ca9b[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Jan 5 00:45:02 2025 +0300
+
+    Project updated.
+
+[33mcommit cc752770cf48082eaaab3f09a1998d41533a4ae4[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Dec 22 17:44:34 2024 +0300
+
+    CHANGELOG has been updated.
+
+[33mcommit 54b2bb0c5b45418260fcb7a70519c41a9e1031ad[m
+Author: Hüseyin Dinçbay <hdincbay3@gmail.com>
+Date:   Sun Dec 22 17:42:29 2024 +0300
+
+    Component names and contents have been 

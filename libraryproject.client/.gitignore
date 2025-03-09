@@ -6,7 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-C:\Users\hdinc\Source\Repos\LibraryProjectReactWith.Net\libraryproject.client\config.json
+libraryproject.client/config.json
 node_modules
 dist
 dist-ssr

@@ -155,7 +155,7 @@ namespace LibraryProject.Server.Controllers
                         string websocketurl = _configuration["websocketurl"]?.ToString()!;
                         var endpoint = websocketurl + "/api/Author/Data";
                         var request = new RestRequest(endpoint, Method.Post);
-                        request.AddJsonBody(authToken);
+                        request.AddJsonBody(authToken!);
                         var response = await client.ExecuteAsync(request);
                         return Ok("Author Deleted succesfully.");
                     }

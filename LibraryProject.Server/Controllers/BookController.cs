@@ -231,5 +231,36 @@ namespace LibraryProject.Server.Controllers
                 return BadRequest(ex.ToString());
             }
         }
+        [HttpPut("SLAUpdate/{id:int}")]
+        public async Task<IActionResult> SLAUpdate([FromRoute] int id)
+        {
+            try
+            {
+                var book = _manager.BookService.GetOne(id, true);
+                if (book is not null)
+                {
+                    var bodyContent = "";
+                    using (var reader = new StreamReader(Request.Body))
+                    {
+                        bodyContent = await reader.ReadToEndAsync();
+                        var requestJObj = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(bodyContent);
+                        var isSlaExceeded = Convert.ToBoolean(requestJObj!["isSlaExceeded"]?.ToString());
+                        var slaExpiryUnixTime = Convert.ToInt64(requestJObj!["slaExpiryUnixTime"]?.ToString());
+                        book.IsSlaExceeded = isSlaExceeded;
+                        book.SLAExpiryUnixTime = slaExpiryUnixTime;
+                        _manager.BookService.UpdateOne(book);
+                        return Ok("Book updated successfully.");
+                    }
+                }
+                else
+                {
+                    return BadRequest("Book is null!");
+                }
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
     }
 }

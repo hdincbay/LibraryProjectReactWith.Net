@@ -208,8 +208,7 @@ namespace LibraryProject.Server.Controllers
                 if(user is not null)
                 {
                     var bookList = _context.Book!.Where(b => b.UserId.Equals(id)).ToList();
-                    foreach(var item in bookList)
-                    {
+                    Parallel.ForEach(bookList, item => {
                         item.LoanDate = null;
                         item.LoanEndDate = null;
                         item.LoanDuration = 0;
@@ -217,7 +216,8 @@ namespace LibraryProject.Server.Controllers
                         item.Available = true;
                         _context.Book!.Update(item);
                         _context.SaveChanges();
-                    }
+                    });
+                    
                     var deleteResponse = await _userManager.DeleteAsync(user!);
                     if (deleteResponse.Succeeded)
                     {
@@ -275,7 +275,7 @@ namespace LibraryProject.Server.Controllers
                 {
                     var bookList = await _context.Book!.Where(b => b.UserId.Equals(id)).ToListAsync();
                     var responseJArray = new JArray();
-                    foreach (var book in bookList)
+                    Parallel.ForEach(bookList, book =>
                     {
                         var modelJObject = new JObject();
                         modelJObject.Add("bookId", book.BookId);
@@ -283,7 +283,7 @@ namespace LibraryProject.Server.Controllers
                         modelJObject.Add("loanDate", book.LoanDate);
                         modelJObject.Add("loanEndDate", book.LoanEndDate);
                         responseJArray.Add(modelJObject);
-                    }
+                    });
                     return Ok(responseJArray.ToString());
                 }
                 else

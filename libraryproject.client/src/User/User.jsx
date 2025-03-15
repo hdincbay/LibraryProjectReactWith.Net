@@ -180,11 +180,11 @@ function User() {
                                     className="btn btn-primary"
                                     to={`/UserUpdate/${user.id}`}
                                     style={{
-                                        height: '2.5rem', // Ayn? yükseklik
-                                        display: 'flex',  // Flexbox
-                                        alignItems: 'center', // ?çeri?i dikeyde ortala
-                                        justifyContent: 'center', // ?çeri?i yatayda ortala
-                                        padding: '0 1rem' // Buton içeri?i için sa? ve sol padding
+                                        height: '2.5rem',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        padding: '0 1rem'
                                     }}
                                 >
                                     <i className="fa-solid fa-pen-nib"></i>&nbsp;Update
@@ -194,11 +194,11 @@ function User() {
                                     onClick={(event) => deleteUser(event, user.id)}
                                     disabled={loading}
                                     style={{
-                                        height: '2.5rem', // Ayn? yükseklik
-                                        display: 'flex',  // Flexbox
-                                        alignItems: 'center', // ?çeri?i dikeyde ortala
-                                        justifyContent: 'center', // ?çeri?i yatayda ortala
-                                        padding: '0 1rem' // Buton içeri?i için sa? ve sol padding
+                                        height: '2.5rem',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        padding: '0 1rem'
                                     }}
                                 >
                                     <i className="fa fa-trash"></i>&nbsp;{loading ? 'Removed...' : 'Remove'}

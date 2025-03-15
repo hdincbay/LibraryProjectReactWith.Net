@@ -275,15 +275,17 @@ namespace LibraryProject.Server.Controllers
                 {
                     var bookList = await _context.Book!.Where(b => b.UserId.Equals(id)).ToListAsync();
                     var responseJArray = new JArray();
-                    Parallel.ForEach(bookList, book =>
+                    foreach(var book in bookList)
                     {
                         var modelJObject = new JObject();
                         modelJObject.Add("bookId", book.BookId);
                         modelJObject.Add("name", book.Name);
                         modelJObject.Add("loanDate", book.LoanDate);
                         modelJObject.Add("loanEndDate", book.LoanEndDate);
+                        modelJObject.Add("sla", book.IsSlaExceeded);
+                        modelJObject.Add("slaDuration", book.SLAExpiryUnixTime);
                         responseJArray.Add(modelJObject);
-                    });
+                    }
                     return Ok(responseJArray.ToString());
                 }
                 else

@@ -14,6 +14,17 @@ function UserUpdate() {
     const [tchatId, setTChatId] = useState('');
     const [bookList, setBookList] = useState([]);
 
+    function formatDuration(duration) {
+        let hours = Math.floor(duration / 3600);
+        duration %= 3600;
+        let minutes = Math.floor(duration / 60);
+        let seconds = duration % 60;
+        hours = String(hours).padStart(2, '0');
+        minutes = String(minutes).padStart(2, '0');
+        seconds = String(seconds).padStart(2, '0');
+        let formattedTime = `${hours}:${minutes}:${seconds}`;
+        return formattedTime;
+    }
     function formatDate(dateStr) {
         let date = new Date(dateStr);
         let day = String(date.getDate()).padStart(2, '0');
@@ -57,6 +68,7 @@ function UserUpdate() {
                 const jsonResponse = await response.json();
                 setBookList(jsonResponse.map(item => ({
                     ...item,
+                    slaDuration: formatDuration(item.slaDuration),
                     loanDate: formatDate(item.loanDate),
                     loanEndDate: formatDate(item.loanEndDate),
                 })));
@@ -143,6 +155,8 @@ function UserUpdate() {
                             <th>Book Name</th>
                             <th>Loan Date</th>
                             <th>Loan End Date</th>
+                            <th>SLA Expire</th>
+                            <th>Remaining Time</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -152,6 +166,14 @@ function UserUpdate() {
                                 <td>{book.name}</td>
                                 <td>{book.loanDate}</td>
                                 <td>{book.loanEndDate}</td>
+                                <td>
+                                    <input
+                                        type="checkbox"
+                                        className="form-check-input"
+                                        defaultChecked={book.sla}
+                                    />
+                                </td>
+                                <td>{book.slaDuration}</td>
                             </tr>
                         ))}
                     </tbody>

@@ -43,7 +43,9 @@ namespace LibraryProject.SLAService
                                 _logger.LogInformation("loanEndDate > currentDate içinde.");
                                 var loanDateUnix = ((DateTimeOffset)loanDate.ToUniversalTime()).ToUnixTimeSeconds();
                                 _logger.LogInformation("loanDateUnix: {loanDateUnix}", loanDateUnix);
-                                var resultDurationUnix = currentDateUnix - loanDateUnix;
+                                var loanEndDateUnix = ((DateTimeOffset)loanEndDate.ToUniversalTime()).ToUnixTimeSeconds();
+                                _logger.LogInformation("loanEndDateUnix: {loanEndDateUnix}", loanEndDateUnix);
+                                var resultDurationUnix = loanEndDateUnix - currentDateUnix;
                                 _logger.LogInformation("resultDurationUnix: {resultDurationUnix}", resultDurationUnix);
                                 putRequestBodyJObj.Add("slaExpiryUnixTime", resultDurationUnix);
                                 if (loanEndDate < currentDate)
@@ -66,7 +68,7 @@ namespace LibraryProject.SLAService
                 {
                     _logger.LogError("exception: {exception.ToString()}", exception.ToString());
                 }
-                await Task.Delay(50000, stoppingToken);
+                await Task.Delay(5000, stoppingToken);
             }
         }
     }

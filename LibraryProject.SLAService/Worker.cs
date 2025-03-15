@@ -32,30 +32,30 @@ namespace LibraryProject.SLAService
                             if (!Convert.ToBoolean(item["available"]?.ToString()))
                             {
                                 var putRequestBodyJObj = new JObject();
-                                _logger.LogInformation("bookId: {bookId}", item["bookId"]?.ToString());
+                                var bookId = item["bookId"]?.ToString();
+                                _logger.LogInformation("bookId: {bookId}", bookId);
                                 var getOneRequest = new RestRequest(restApiUrl + "/api/Book/GetById/" + item["bookId"]?.ToString(), Method.Get);
                                 var responseOne = await client.ExecuteAsync(getOneRequest);
-                                var loanDate = Convert.ToDateTime(item["loanDate"]?.ToString());
                                 var loanEndDate = Convert.ToDateTime(item["loanEndDate"]?.ToString());
+                                loanEndDate = loanEndDate.AddHours(3);
                                 var currentDate = DateTime.Now;
                                 var currentDateUnix = ((DateTimeOffset)DateTime.Now).ToUnixTimeSeconds();
                                 var putOneRequest = new RestRequest(restApiUrl + "/api/Book/SLAUpdate/" + item["bookId"]?.ToString(), Method.Put);
-                                _logger.LogInformation("loanEndDate > currentDate içinde.");
-                                var loanDateUnix = ((DateTimeOffset)loanDate.ToUniversalTime()).ToUnixTimeSeconds();
-                                _logger.LogInformation("loanDateUnix: {loanDateUnix}", loanDateUnix);
                                 var loanEndDateUnix = ((DateTimeOffset)loanEndDate.ToUniversalTime()).ToUnixTimeSeconds();
-                                _logger.LogInformation("loanEndDateUnix: {loanEndDateUnix}", loanEndDateUnix);
+                                _logger.LogInformation("Book ID: {bookId} loanEndDateUnix: {loanEndDateUnix}", bookId, loanEndDateUnix);
                                 var resultDurationUnix = loanEndDateUnix - currentDateUnix;
-                                _logger.LogInformation("resultDurationUnix: {resultDurationUnix}", resultDurationUnix);
-                                putRequestBodyJObj.Add("slaExpiryUnixTime", resultDurationUnix);
+                                _logger.LogInformation("Book ID: {bookId} resultDurationUnix: {resultDurationUnix}", bookId, resultDurationUnix);
+                                
                                 if (loanEndDate < currentDate)
                                 {
-                                    _logger.LogInformation("loanEndDate < currentDate içinde.");
+                                    _logger.LogInformation("SLA Expired! Book ID: {bookId}", bookId);
                                     putRequestBodyJObj.Add("isSlaExceeded", true);
+                                    resultDurationUnix = 0;
                                 }
+                                putRequestBodyJObj.Add("slaExpiryUnixTime", resultDurationUnix);
                                 putOneRequest.AddBody(Newtonsoft.Json.JsonConvert.SerializeObject(putRequestBodyJObj));
                                 var putResponse = await client.ExecuteAsync(putOneRequest);
-                                _logger.LogInformation("putResponse.Content: {putResponse.Content}, {DateTimeOffset.Now}", putResponse.Content, DateTimeOffset.Now);
+                                _logger.LogInformation("Book ID: {bookId} putResponse.Content: {putResponse.Content}, {DateTimeOffset.Now}", bookId, putResponse.Content, DateTimeOffset.Now);
                             }
                         }
                         catch (Exception ex)

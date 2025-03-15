@@ -275,6 +275,7 @@ function Book() {
                             <input
                                 type="checkbox"
                                 className="form-check-input"
+                                disabled={true}
                                 defaultChecked={book.available}
                             />
                         </td>

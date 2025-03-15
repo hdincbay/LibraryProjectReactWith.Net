@@ -15,16 +15,36 @@ function UserUpdate() {
     const [bookList, setBookList] = useState([]);
 
     function formatDuration(duration) {
+        let days = Math.floor(duration / 86400);
+        duration %= 86400;
         let hours = Math.floor(duration / 3600);
         duration %= 3600;
         let minutes = Math.floor(duration / 60);
         let seconds = duration % 60;
+
+        days = String(days).padStart(2, '0');
         hours = String(hours).padStart(2, '0');
         minutes = String(minutes).padStart(2, '0');
         seconds = String(seconds).padStart(2, '0');
-        let formattedTime = `${hours}:${minutes}:${seconds}`;
+        let formattedTime = "";
+        if (days == 0 && hours != 0 && minutes != 0 && seconds != 0) {
+            formattedTime = `${hours} Hours ${minutes} Minutes ${seconds} Seconds`;
+        }
+        else if (days == 0 && hours == 0 && minutes != 0 && seconds != 0) {
+            formattedTime = `${minutes} Minutes ${seconds} Seconds`;
+        }
+        else if (days == 0 && hours == 0 && minutes == 0 && seconds != 0) {
+            formattedTime = `${seconds} Seconds`;
+        }
+        else if (days == 0 && hours == 0 && minutes == 0 && seconds == 0) {
+            formattedTime = "SLA Time Expired";
+        }
+        else {
+            formattedTime = `${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`;
+        }
         return formattedTime;
     }
+
     function formatDate(dateStr) {
         let date = new Date(dateStr);
         let day = String(date.getDate()).padStart(2, '0');
@@ -170,6 +190,7 @@ function UserUpdate() {
                                     <input
                                         type="checkbox"
                                         className="form-check-input"
+                                        disabled={true}
                                         defaultChecked={book.sla}
                                     />
                                 </td>

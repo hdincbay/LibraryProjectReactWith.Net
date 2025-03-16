@@ -16,7 +16,9 @@ function BookUpdate() {
     const [loanDate, setLoanDate] = useState('');
     const [loanEndDate, setLoanEndDate] = useState('');
     const [userId, setUserId] = useState(0);
+    const [lenderId, setLenderId] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    
     function formatDate(dateStr) {
         let date = new Date(dateStr);
         let day = String(date.getDate()).padStart(2, '0');
@@ -81,6 +83,7 @@ function BookUpdate() {
     };
 
     useEffect(() => {
+        const currentUserId = localStorage.getItem('currentUserId');
         const token = localStorage.getItem('authToken');
         if (token) {
             getAuthorListThenSetAuthor();
@@ -97,6 +100,7 @@ function BookUpdate() {
                             setAuthorId(data.authorId);
                             setAvailable(data.available);
                             setUserId(data.userId);
+                            setLenderId(currentUserId);
                             setLoanDuration(data.loanDuration);
                             setLoanDate(formatDate(data.loanDate));
                             setLoanEndDate(formatDate(data.loanEndDate));
@@ -135,6 +139,7 @@ function BookUpdate() {
             }
 
             try {
+                
                 const response = await fetch(`${Config.restApiUrl}/api/Book/Update`, {
                     method: 'PUT',
                     body: JSON.stringify({
@@ -143,7 +148,8 @@ function BookUpdate() {
                         authorId: authorId,
                         available: available,
                         userId: userId,
-                        loanDuration: loanDuration
+                        loanDuration: loanDuration,
+                        lenderId: lenderId
                     }),
                 });
                 if (response.ok) {

@@ -30,6 +30,10 @@ namespace LibraryProject.Repositories
                 .HasOne(b => b.User)
                 .WithMany(u => u.Books)
                 .HasForeignKey(b => b.UserId);
+            builder.Entity<Book>()
+                .HasOne(b => b.User)
+                .WithMany(u => u.Books)
+                .HasForeignKey(b => b.LenderId);
 
             builder.Entity<User>().Property(u => u.Id).ValueGeneratedOnAdd();
         }

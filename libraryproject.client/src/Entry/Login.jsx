@@ -40,10 +40,13 @@ function Login() {
             else {
                 const textResponse = await response.json();
                 const token = textResponse.token;
+                const userFullName = textResponse.userFullName;
                 const userName = textResponse.userName;
-                // Token'in localStorage'a kaydedilmesi
+                const userId = textResponse.userId;
                 localStorage.setItem('authToken', token);
-                localStorage.setItem("userFullName", userName);
+                localStorage.setItem("userFullName", userFullName);
+                localStorage.setItem("userName", userName);
+                localStorage.setItem("currentUserId", userId);
 
                 navigate('/Home');
             }

@@ -163,15 +163,15 @@ namespace LibraryProject.Server.Controllers
                     if (isLoggedin.Succeeded)
                     {
                         var token = _tokenService.GenerateJwtToken(new() { UserName = userName });
-                        // Oturum açıldıktan sonra, session'a kaydediyoruz
                         if (userName != "systemuser")
                         {
-                            HttpContext.Session.SetString("UserName", userName!);
                             var userObj = await _userManager.FindByNameAsync(userName!);
                             var userFullName = userObj!.FirstName + " " + userObj!.LastName;
                             var resultJObj = new JObject();
-                            resultJObj.Add("userName", userFullName);
+                            resultJObj.Add("userFullName", userFullName);
+                            resultJObj.Add("userName", userName);
                             resultJObj.Add("token", token);
+                            resultJObj.Add("userId", userObj.Id);
 
                             return Ok(resultJObj.ToString());
                         }

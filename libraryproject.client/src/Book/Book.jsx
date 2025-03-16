@@ -49,56 +49,6 @@ function Book() {
             console.error('JSON parse error:', error);
         }
     };
-    const removeLoan = async (event, userId, bookId) => {
-        setLoading(true);
-        try {
-            var restUrl = Config.restApiUrl;
-            setAuthToken(authTokenVal);
-            const response = await fetch(`${restUrl}/api/Book/LoanBook`, {
-                method: 'PUT',
-                body: JSON.stringify({
-                    authToken: authTokenVal + '_book',
-                    Type: 'Remove',
-                    UserId: userId,
-                    BookId: bookId
-                }),
-            });
-            const textResponse = await response.text();
-
-            if (!response.ok) {
-                throw new Error(textResponse);
-            }
-        } catch (error) {
-            setError(error.message);
-        } finally {
-            setLoading(false);
-        }
-    };
-    const bookLoan = async (event, userId, bookId) => {
-        setLoading(true);
-        try {
-            var restUrl = Config.restApiUrl;
-            setAuthToken(authTokenVal);
-            const response = await fetch(`${restUrl}/api/Book/LoanBook`, {
-                method: 'PUT',
-                body: JSON.stringify({
-                    authToken: authTokenVal + '_book',
-                    Type: 'Add',
-                    UserId: userId,
-                    BookId: bookId
-                }),
-            });
-            const textResponse = await response.text();
-
-            if (!response.ok) {
-                throw new Error(textResponse);
-            }
-        } catch (error) {
-            setError(error.message);
-        } finally {
-            setLoading(false);
-        }
-    };
     const connectWebSocket = () => {
         var webSocketServerUrl = Config.webSocketUrl;
         const newSocket = new WebSocket(`${webSocketServerUrl}/BookList/`);
@@ -114,7 +64,7 @@ function Book() {
             try {
                 const data = JSON.parse(event.data);
 
-                if (data != null && data != [] && data != "") {
+                if (data) {
                     if (Array.isArray(data)) {
                         for (let item of data) {
                             item.authorId = await getAuthorName(item.authorId);

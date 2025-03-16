@@ -52,7 +52,7 @@ function User() {
                     }
                 }
             } catch (e) {
-                setError('Veri i?leme hatas?.');
+                setError('Veri isleme hatas?.');
             }
         };
 

@@ -138,13 +138,14 @@ namespace LibraryProject.Server.Controllers
                         var currentBookUserId = book.UserId;
                         if (!Convert.ToBoolean(requestJObj["available"]?.ToString()))
                         {
-                            var bookUserId = book.UserId;
                             book.LoanDate = DateTime.UtcNow;
                             var loanDuration = Convert.ToInt32(requestJObj["loanDuration"]?.ToString());
                             book.LoanEndDate = DateTime.UtcNow.AddDays(loanDuration);
                             book.LoanDuration = loanDuration;
-                            bookUserId = Convert.ToInt32(requestJObj["userId"]?.ToString());
+                            var bookUserId = Convert.ToInt32(requestJObj["userId"]?.ToString());
+                            var lenderId = Convert.ToInt32(requestJObj["lenderId"]?.ToString());
                             book.UserId = bookUserId;
+                            book.LenderId = lenderId;
                             var user = _context.Users.Where(u => u.Id.Equals(bookUserId)).FirstOrDefault();
                             if(user is not null)
                             {
@@ -176,6 +177,7 @@ namespace LibraryProject.Server.Controllers
                             book.LoanDuration = 0;
                             book.LoanEndDate = null;
                             book.UserId = null;
+                            book.LenderId = null;
                             book.SLAExpiryUnixTime = 0;
                             book.IsSlaExceeded = false;
                         }
@@ -220,6 +222,20 @@ namespace LibraryProject.Server.Controllers
                         var request = new RestRequest(endpoint, Method.Post);
                         request.AddJsonBody(authToken!);
                         var response = await client.ExecuteAsync(request);
+                        if(!book.Available)
+                        {
+                            var currentBookUserId = book.UserId;
+                            if (currentBookUserId is not null)
+                            {
+                                var currentUser = _context.Users.Where(u => u.Id.Equals(currentBookUserId)).FirstOrDefault();
+                                if (currentUser is not null)
+                                {
+                                    currentUser.BookCount -= 1;
+                                    _context.Users.Update(currentUser);
+                                    _context.SaveChanges();
+                                }
+                            }
+                        }
                         return Ok("Book Deleted succesfully.");
                     }
                 }

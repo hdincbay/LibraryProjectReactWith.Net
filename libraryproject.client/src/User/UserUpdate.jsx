@@ -13,6 +13,7 @@ function UserUpdate() {
     const [userName, setUserName] = useState('');
     const [tchatId, setTChatId] = useState('');
     const [bookList, setBookList] = useState([]);
+    const [bookCount, setBookCount] = useState(0);
 
     function formatDuration(duration) {
         let days = Math.floor(duration / 86400);
@@ -86,6 +87,7 @@ function UserUpdate() {
                 if (!response.ok) throw new Error('Failed to retrieve book list.');
 
                 const jsonResponse = await response.json();
+                setBookCount(jsonResponse.length);
                 setBookList(jsonResponse.map(item => ({
                     ...item,
                     slaDuration: formatDuration(item.slaDuration),
@@ -167,38 +169,42 @@ function UserUpdate() {
                     </tbody>
                 </table>
             </form>
-            {bookList.length > 0 && (
-                <table className="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Book Name</th>
-                            <th>Loan Date</th>
-                            <th>Loan End Date</th>
-                            <th>SLA Expire</th>
-                            <th>Remaining Time</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {bookList.map(book => (
-                            <tr key={book.bookId}>
-                                <td>{book.bookId}</td>
-                                <td>{book.name}</td>
-                                <td>{book.loanDate}</td>
-                                <td>{book.loanEndDate}</td>
-                                <td>
-                                    <input
-                                        type="checkbox"
-                                        className="form-check-input"
-                                        disabled={true}
-                                        defaultChecked={book.sla}
-                                    />
-                                </td>
-                                <td>{book.slaDuration}</td>
+            {bookList.length > 0 &&  (
+                <div>
+                    <div className="text-primary display-6">{bookCount} records are available.</div>
+                    <hr></hr>
+                    <table className="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Book Name</th>
+                                <th>Loan Date</th>
+                                <th>Loan End Date</th>
+                                <th>SLA Expire</th>
+                                <th>Remaining Time</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {bookList.map(book => (
+                                <tr key={book.bookId}>
+                                    <td>{book.bookId}</td>
+                                    <td>{book.name}</td>
+                                    <td>{book.loanDate}</td>
+                                    <td>{book.loanEndDate}</td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            className="form-check-input"
+                                            disabled={true}
+                                            defaultChecked={book.sla}
+                                        />
+                                    </td>
+                                    <td>{book.slaDuration}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             )}
         </div>
     ) : <div className="text-center">Redirecting to Login...</div>;

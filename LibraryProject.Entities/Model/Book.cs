@@ -24,6 +24,8 @@ namespace LibraryProject.Entities.Model
         public DateTime? CreatedDate { get; set; }
         public int? UserId { get; set; }
         [ForeignKey("UserId")]
+        public int? LenderId { get; set; }
+        [ForeignKey("UserId")]
         public User? User { get; set; }
         public int LoanDuration { get; set; }
         public long SLAExpiryUnixTime { get; set; }

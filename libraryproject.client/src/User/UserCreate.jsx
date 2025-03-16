@@ -38,7 +38,7 @@ function UserCreate() {
         const restApiUrlVal = Config.restApiUrl;
         try {
             const response = await fetch(`${restApiUrlVal}/api/User/SignUp`, {
-                method: 'POST',
+                mestrongod: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -79,7 +79,7 @@ function UserCreate() {
                     <tbody>
                         <tr>
                             <td style={{ width: '20%' }}>
-                                <th>First Name</th>
+                                <strong>First Name</strong>
                             </td>
                             <td>
                                 <input className="form-control"
@@ -91,7 +91,7 @@ function UserCreate() {
                         </tr>
                         <tr>
                             <td style={{ width: '20%' }}>
-                                <th>Last Name</th>
+                                <strong>Last Name</strong>
                             </td>
                             <td>
                                 <input className="form-control"
@@ -103,7 +103,7 @@ function UserCreate() {
                         </tr>
                         <tr>
                             <td style={{ width: '20%' }}>
-                                <th>User Name</th>
+                                <strong>User Name</strong>
                             </td>
                             <td>
                                 <input className="form-control"
@@ -115,7 +115,7 @@ function UserCreate() {
                         </tr>
                         <tr>
                             <td style={{ width: '20%' }}>
-                                <th>Email</th>
+                                <strong>Email</strong>
                             </td>
                             <td>
                                 <input className="form-control"
@@ -127,7 +127,7 @@ function UserCreate() {
                         </tr>
                         <tr>
                             <td style={{ width: '20%' }}>
-                                <th>Chat ID</th>
+                                <strong>Chat ID</strong>
                             </td>
                             <td>
                                 <input className="form-control"
@@ -139,7 +139,7 @@ function UserCreate() {
                         </tr>
                         <tr>
                             <td style={{ width: '20%' }}>
-                                <th>Password</th>
+                                <strong>Password</strong>
                             </td>
                             <td>
                                 <input className="form-control" type="password"
@@ -151,7 +151,7 @@ function UserCreate() {
                         </tr>
                         <tr>
                             <td style={{ width: '20%' }}>
-                                <th>Password Confirm</th>
+                                <strong>Password Confirm</strong>
                             </td>
                             <td>
                                 <input className="form-control"

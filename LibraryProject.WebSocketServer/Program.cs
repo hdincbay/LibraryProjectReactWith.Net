@@ -174,11 +174,11 @@ app.MapPost("/api/Author/Data", async context =>
         var param2 = string.Format("Bearer {0}", tokenVal!);
         request.AddHeader("Authorization", param2);
         var response = await restclient.ExecuteAsync(request);
-        var sessionIdAndObjectName = "";
+        var jwtAndObjectName = "";
         using (var reader = new StreamReader(context.Request.Body))
         {
             var requestContent = await reader.ReadToEndAsync();
-            sessionIdAndObjectName = requestContent;
+            jwtAndObjectName = requestContent;
         }
         if (response.IsSuccessful)
         {
@@ -187,7 +187,7 @@ app.MapPost("/api/Author/Data", async context =>
             foreach (var client in clients)
             {
 
-                if (client.Value == sessionIdAndObjectName)
+                if (client.Value == jwtAndObjectName)
                 {
                     await client.Key.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
                     break;
@@ -213,11 +213,11 @@ app.MapPost("/api/User/Data", async context =>
         var param2 = string.Format("Bearer {0}", tokenVal!);
         request.AddHeader("Authorization", param2);
         var response = await restclient.ExecuteAsync(request);
-        var sessionIdAndObjectName = "";
+        var jwtAndObjectName = "";
         using (var reader = new StreamReader(context.Request.Body))
         {
             var requestContent = await reader.ReadToEndAsync();
-            sessionIdAndObjectName = requestContent;
+            jwtAndObjectName = requestContent;
         }
         if (response.IsSuccessful)
         {
@@ -226,7 +226,7 @@ app.MapPost("/api/User/Data", async context =>
             foreach (var client in clients)
             {
              
-                if(client.Value == sessionIdAndObjectName)
+                if(client.Value == jwtAndObjectName)
                 {
                     await client.Key.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
                     break;
@@ -253,11 +253,11 @@ app.MapPost("/api/Book/Data", async context =>
         var param2 = string.Format("Bearer {0}", tokenVal!);
         request.AddHeader("Authorization", param2);
         var response = await restclient.ExecuteAsync(request);
-        var sessionIdAndObjectName = "";
+        var jwtAndObjectName = "";
         using (var reader = new StreamReader(context.Request.Body))
         {
             var requestContent = await reader.ReadToEndAsync();
-            sessionIdAndObjectName = requestContent;
+            jwtAndObjectName = requestContent;
         }
         if (response.IsSuccessful)
         {
@@ -266,7 +266,7 @@ app.MapPost("/api/Book/Data", async context =>
             foreach (var client in clients)
             {
 
-                if (client.Value == sessionIdAndObjectName)
+                if (client.Value == jwtAndObjectName)
                 {
                     await client.Key.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
                     break;

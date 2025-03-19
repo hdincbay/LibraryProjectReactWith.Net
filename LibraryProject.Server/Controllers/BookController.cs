@@ -213,15 +213,6 @@ namespace LibraryProject.Server.Controllers
                     _manager.BookService.DeleteOne(id);
                     using (var reader = new StreamReader(Request.Body))
                     {
-                        var requestContent = await reader.ReadToEndAsync();
-                        var requestJObj = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(requestContent);
-                        var authToken = requestJObj!["authToken"]?.ToString();
-                        var client = new RestClient();
-                        string websocketurl = _configuration["websocketurl"]?.ToString()!;
-                        var endpoint = websocketurl + "/api/Book/Data";
-                        var request = new RestRequest(endpoint, Method.Post);
-                        request.AddJsonBody(authToken!);
-                        var response = await client.ExecuteAsync(request);
                         if(!book.Available)
                         {
                             var currentBookUserId = book.UserId;
@@ -236,6 +227,15 @@ namespace LibraryProject.Server.Controllers
                                 }
                             }
                         }
+                        var requestContent = await reader.ReadToEndAsync();
+                        var requestJObj = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(requestContent);
+                        var authToken = requestJObj!["authToken"]?.ToString();
+                        var client = new RestClient();
+                        string websocketurl = _configuration["websocketurl"]?.ToString()!;
+                        var endpoint = websocketurl + "/api/Book/Data";
+                        var request = new RestRequest(endpoint, Method.Post);
+                        request.AddJsonBody(authToken!);
+                        var response = await client.ExecuteAsync(request);
                         return Ok("Book Deleted succesfully.");
                     }
                 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Author.css';
 import Config from '../../config.json';
@@ -7,7 +7,6 @@ function Author() {
     const navigate = useNavigate();
     const [authors, setAuthors] = useState([]);
     const [error, setError] = useState(null);
-    const [socket, setSocket] = useState(null);
     const [loading, setLoading] = useState(false);
     const [authToken, setAuthToken] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -18,8 +17,12 @@ function Author() {
         key: 'authorId',
         direction: 'ascending'
     });
+    const socketRef = useRef(null);
     const authTokenVal = localStorage.getItem('authToken');
     const connectWebSocket = () => {
+        if (socketRef.current) {
+            return;
+        }
         var webSocketServerUrl = Config.webSocketUrl;
         const newSocket = new WebSocket(`${webSocketServerUrl}/AuthorList/`);
 
@@ -59,7 +62,7 @@ function Author() {
             setTimeout(connectWebSocket, 5000);
         };
 
-        setSocket(newSocket);
+        socketRef.current = newSocket;
     };
     const deleteAuthor = async (event, authorid) => {
         setLoading(true);
@@ -103,10 +106,12 @@ function Author() {
             setIsLoggedIn(false);
             navigate('/Login');
         }
-        connectWebSocket();
+        if (!socketRef.current) {
+            connectWebSocket();
+        }
         return () => {
-            if (socket) {
-                socket.close();
+            if (socketRef.current) {
+                socketRef.current.close();
             }
         };
     }, [navigate]);

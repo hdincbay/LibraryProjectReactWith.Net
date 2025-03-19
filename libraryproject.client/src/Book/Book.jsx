@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import './Book.css';
 import Config from '../../config.json';
 import { Link } from 'react-router-dom';
@@ -8,7 +8,6 @@ function Book() {
     const navigate = useNavigate();
     const [books, setBooks] = useState([]);
     const [error, setError] = useState(null);
-    const [socket, setSocket] = useState(null);
     const [loading, setLoading] = useState(false);
     const [authToken, setAuthToken] = useState(null);
     const [searchTermId, setSearchTermId] = useState('');  // Book id search
@@ -26,6 +25,7 @@ function Book() {
         direction: 'ascending'
     });
 
+    const socketRef = useRef(null);
     function formatDate(dateStr) {
         let date = new Date(dateStr);
         let day = String(date.getDate()).padStart(2, '0');
@@ -50,6 +50,9 @@ function Book() {
         }
     };
     const connectWebSocket = () => {
+        if (socketRef.current) {
+            return;
+        }
         var webSocketServerUrl = Config.webSocketUrl;
         const newSocket = new WebSocket(`${webSocketServerUrl}/BookList/`);
 
@@ -92,7 +95,7 @@ function Book() {
             setTimeout(connectWebSocket, 5000);
         };
 
-        setSocket(newSocket);
+        socketRef.current = newSocket;
     };
 
     const deleteBook = async (event, bookid) => {
@@ -143,10 +146,12 @@ function Book() {
             setIsLoggedIn(false);
             navigate('/Login');
         }
-        connectWebSocket();
+        if (!socketRef.current) {
+            connectWebSocket();
+        }
         return () => {
-            if (socket) {
-                socket.close();
+            if (socketRef.current) {
+                socketRef.current.close();
             }
         };
     }, [navigate]);

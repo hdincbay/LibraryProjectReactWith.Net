@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import './User.css';
 import Config from '../../config.json';
-import { useNavigate } from 'react-router-dom';  // Yönlendirme için kullanýlýyor
+import { useNavigate } from 'react-router-dom';
+
 function UserCreate() {
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
@@ -9,9 +10,17 @@ function UserCreate() {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [formData, setFormData] = useState('');
 
-    // Component mount olduðunda WebSocket baðlantýsýný baþlatýyoruz
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        userName: '',
+        email: '',
+        t_chatId: '',
+        password: '',
+        passwordconfirm: ''
+    });
+
     useEffect(() => {
         const token = localStorage.getItem('authToken');
         if (token) {
@@ -25,6 +34,7 @@ function UserCreate() {
     if (!isLoggedIn) {
         return null;
     }
+
     async function userCreate(firstName, lastName, userName, email, chatId, password, passwordConfirm) {
         const data = {
             firstName: firstName,
@@ -36,31 +46,49 @@ function UserCreate() {
             passwordConfirm: passwordConfirm
         };
         const restApiUrlVal = Config.restApiUrl;
+
         try {
             const response = await fetch(`${restApiUrlVal}/api/User/SignUp`, {
-                mestrongod: 'POST',
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data),
             });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                setApiResponse(errorText);
+                return;
+            }
+            setFormData({
+                firstName: '',
+                lastName: '',
+                userName: '',
+                email: '',
+                t_chatId: '',
+                password: '',
+                passwordconfirm: ''
+            });
             const jsonData = await response.text();
             setApiResponse(jsonData);
             console.log(jsonData);
-            
         } catch (error) {
-            console.error('Mesaj gönderilirken bir hata oluþtu:', error);
+            console.error('Error occurred while sending message:', error);
         }
     }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (formData.password != formData.passwordconfirm) {
+
+        if (formData.password !== formData.passwordconfirm) {
             setError('Passwords do not match');
-        }
-        else {
+        } else {
+            setError(null);
             await userCreate(formData.firstName, formData.lastName, formData.userName, formData.email, formData.t_chatId, formData.password, formData.passwordconfirm);
         }
     };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -68,104 +96,105 @@ function UserCreate() {
             [name]: value
         });
     };
+
     return (
         <div id="componentcontent" style={{ width: '100%', paddingTop: '4rem', paddingLeft: 0, paddingRight: 0 }}>
             <div className="display-6 text-danger text-center">
-                {apiResponse ?? error} 
+                {apiResponse ?? error}
             </div>
-            
+
             <form onSubmit={handleSubmit}>
                 <table style={{ width: '100%' }}>
                     <tbody>
                         <tr>
-                            <td style={{ width: '20%' }}>
-                                <strong>First Name</strong>
-                            </td>
+                            <td style={{ width: '20%' }}><strong>First Name</strong></td>
                             <td>
-                                <input className="form-control"
+                                <input
+                                    className="form-control"
                                     id="firstName"
                                     name="firstName"
                                     value={formData.firstName}
-                                    onChange={handleChange}></input>
+                                    onChange={handleChange}
+                                />
                             </td>
                         </tr>
                         <tr>
-                            <td style={{ width: '20%' }}>
-                                <strong>Last Name</strong>
-                            </td>
+                            <td style={{ width: '20%' }}><strong>Last Name</strong></td>
                             <td>
-                                <input className="form-control"
+                                <input
+                                    className="form-control"
                                     id="lastName"
                                     name="lastName"
                                     value={formData.lastName}
-                                    onChange={handleChange}></input>
+                                    onChange={handleChange}
+                                />
                             </td>
                         </tr>
                         <tr>
-                            <td style={{ width: '20%' }}>
-                                <strong>User Name</strong>
-                            </td>
+                            <td style={{ width: '20%' }}><strong>User Name</strong></td>
                             <td>
-                                <input className="form-control"
+                                <input
+                                    className="form-control"
                                     id="userName"
                                     name="userName"
                                     value={formData.userName}
-                                    onChange={handleChange}></input>
+                                    onChange={handleChange}
+                                />
                             </td>
                         </tr>
                         <tr>
-                            <td style={{ width: '20%' }}>
-                                <strong>Email</strong>
-                            </td>
+                            <td style={{ width: '20%' }}><strong>Email</strong></td>
                             <td>
-                                <input className="form-control"
+                                <input
+                                    className="form-control"
                                     id="email"
                                     name="email"
                                     value={formData.email}
-                                    onChange={handleChange}></input>
+                                    onChange={handleChange}
+                                />
                             </td>
                         </tr>
                         <tr>
-                            <td style={{ width: '20%' }}>
-                                <strong>Chat ID</strong>
-                            </td>
+                            <td style={{ width: '20%' }}><strong>Chat ID</strong></td>
                             <td>
-                                <input className="form-control"
+                                <input
+                                    className="form-control"
                                     id="t_chatId"
                                     name="t_chatId"
                                     value={formData.t_chatId}
-                                    onChange={handleChange}></input>
+                                    onChange={handleChange}
+                                />
                             </td>
                         </tr>
                         <tr>
-                            <td style={{ width: '20%' }}>
-                                <strong>Password</strong>
-                            </td>
+                            <td style={{ width: '20%' }}><strong>Password</strong></td>
                             <td>
-                                <input className="form-control" type="password"
+                                <input
+                                    className="form-control"
+                                    type="password"
                                     id="password"
                                     name="password"
                                     value={formData.password}
-                                    onChange={handleChange}></input>
+                                    onChange={handleChange}
+                                />
                             </td>
                         </tr>
                         <tr>
-                            <td style={{ width: '20%' }}>
-                                <strong>Password Confirm</strong>
-                            </td>
+                            <td style={{ width: '20%' }}><strong>Password Confirm</strong></td>
                             <td>
-                                <input className="form-control"
+                                <input
+                                    className="form-control"
                                     type="password"
                                     id="passwordconfirm"
                                     name="passwordconfirm"
                                     value={formData.passwordconfirm}
-                                    onChange={handleChange}></input>
+                                    onChange={handleChange}
+                                />
                             </td>
                         </tr>
-                        
+
                         <tr>
-                            <td style={{ width: '20%' }}>
-                            </td>
+                            <td style={{ width: '20%' }}></td>
                             <td>
                                 <button className="btn btn-success">Submit</button>
                             </td>
@@ -173,7 +202,6 @@ function UserCreate() {
                     </tbody>
                 </table>
             </form>
-            
         </div>
     );
 }

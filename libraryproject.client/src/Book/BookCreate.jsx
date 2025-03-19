@@ -67,7 +67,8 @@ function BookCreate() {
             });
 
             if (response.ok) {
-                navigate('/Book');
+                setAuthorId('');
+                setBookName('');
             } else {
                 const errorData = await response.json();
                 alert(`Hata: ${errorData.message || 'Kitap oluþturulamadý'}`);

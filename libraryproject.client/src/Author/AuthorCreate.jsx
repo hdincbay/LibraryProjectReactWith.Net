@@ -37,7 +37,8 @@ function AuthorCreate() {
             });
 
             if (response.ok) {
-                navigate('/Author');
+                setAuthorName('');
+                setAuthorSurName('');
             } else {
                 const errorData = await response.json();
                 alert(`Hata: ${errorData.message || 'Kitap oluþturulamadý'}`);

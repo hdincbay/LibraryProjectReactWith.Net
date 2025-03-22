@@ -1,0 +1,1247 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{844F302F-95B5-4709-84A1-200771BBA642}|LibraryProject.Services\\LibraryProject.Services.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.services\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844F302F-95B5-4709-84A1-200771BBA642}|LibraryProject.Services\\LibraryProject.Services.csproj|solutionrelative:libraryproject.services\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B428DC5-08E8-4737-9A16-5E5758FD59FB}|LibraryProject.Server\\LibraryProject.Server.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.server\\libraryproject.server.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{5B428DC5-08E8-4737-9A16-5E5758FD59FB}|LibraryProject.Server\\LibraryProject.Server.csproj|solutionrelative:libraryproject.server\\libraryproject.server.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B428DC5-08E8-4737-9A16-5E5758FD59FB}|LibraryProject.Server\\LibraryProject.Server.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5B428DC5-08E8-4737-9A16-5E5758FD59FB}|LibraryProject.Server\\LibraryProject.Server.csproj|solutionrelative:libraryproject.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B428DC5-08E8-4737-9A16-5E5758FD59FB}|LibraryProject.Server\\LibraryProject.Server.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.server\\libraryproject.server.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{5B428DC5-08E8-4737-9A16-5E5758FD59FB}|LibraryProject.Server\\LibraryProject.Server.csproj|solutionrelative:libraryproject.server\\libraryproject.server.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5D74CA93-F22B-4534-9EB7-44A1A19CAE41}|LibraryProject.WebSocketServer\\LibraryProject.WebSocketServer.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.websocketserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5D74CA93-F22B-4534-9EB7-44A1A19CAE41}|LibraryProject.WebSocketServer\\LibraryProject.WebSocketServer.csproj|solutionrelative:libraryproject.websocketserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B428DC5-08E8-4737-9A16-5E5758FD59FB}|LibraryProject.Server\\LibraryProject.Server.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.server\\helpers\\jwttokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5B428DC5-08E8-4737-9A16-5E5758FD59FB}|LibraryProject.Server\\LibraryProject.Server.csproj|solutionrelative:libraryproject.server\\helpers\\jwttokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B428DC5-08E8-4737-9A16-5E5758FD59FB}|LibraryProject.Server\\LibraryProject.Server.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5B428DC5-08E8-4737-9A16-5E5758FD59FB}|LibraryProject.Server\\LibraryProject.Server.csproj|solutionrelative:libraryproject.server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5D74CA93-F22B-4534-9EB7-44A1A19CAE41}|LibraryProject.WebSocketServer\\LibraryProject.WebSocketServer.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.websocketserver\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5D74CA93-F22B-4534-9EB7-44A1A19CAE41}|LibraryProject.WebSocketServer\\LibraryProject.WebSocketServer.csproj|solutionrelative:libraryproject.websocketserver\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\author\\author.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\author\\author.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\author\\author.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\author\\author.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{09EA40D3-0047-467A-94E6-10413ABA6FDC}|LibraryProject.Repositories\\LibraryProject.Repositories.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.repositories\\concrete\\repositorybase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{09EA40D3-0047-467A-94E6-10413ABA6FDC}|LibraryProject.Repositories\\LibraryProject.Repositories.csproj|solutionrelative:libraryproject.repositories\\concrete\\repositorybase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{09EA40D3-0047-467A-94E6-10413ABA6FDC}|LibraryProject.Repositories\\LibraryProject.Repositories.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.repositories\\concrete\\bookrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{09EA40D3-0047-467A-94E6-10413ABA6FDC}|LibraryProject.Repositories\\LibraryProject.Repositories.csproj|solutionrelative:libraryproject.repositories\\concrete\\bookrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{09EA40D3-0047-467A-94E6-10413ABA6FDC}|LibraryProject.Repositories\\LibraryProject.Repositories.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.repositories\\contract\\irepositorybase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{09EA40D3-0047-467A-94E6-10413ABA6FDC}|LibraryProject.Repositories\\LibraryProject.Repositories.csproj|solutionrelative:libraryproject.repositories\\contract\\irepositorybase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{09EA40D3-0047-467A-94E6-10413ABA6FDC}|LibraryProject.Repositories\\LibraryProject.Repositories.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.repositories\\repositorycontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{09EA40D3-0047-467A-94E6-10413ABA6FDC}|LibraryProject.Repositories\\LibraryProject.Repositories.csproj|solutionrelative:libraryproject.repositories\\repositorycontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B428DC5-08E8-4737-9A16-5E5758FD59FB}|LibraryProject.Server\\LibraryProject.Server.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.server\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5B428DC5-08E8-4737-9A16-5E5758FD59FB}|LibraryProject.Server\\LibraryProject.Server.csproj|solutionrelative:libraryproject.server\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B428DC5-08E8-4737-9A16-5E5758FD59FB}|LibraryProject.Server\\LibraryProject.Server.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.server\\helpers\\tool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5B428DC5-08E8-4737-9A16-5E5758FD59FB}|LibraryProject.Server\\LibraryProject.Server.csproj|solutionrelative:libraryproject.server\\helpers\\tool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5D74CA93-F22B-4534-9EB7-44A1A19CAE41}|LibraryProject.WebSocketServer\\LibraryProject.WebSocketServer.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.websocketserver\\libraryproject.websocketserver.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{5D74CA93-F22B-4534-9EB7-44A1A19CAE41}|LibraryProject.WebSocketServer\\LibraryProject.WebSocketServer.csproj|solutionrelative:libraryproject.websocketserver\\libraryproject.websocketserver.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\config.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\config.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B428DC5-08E8-4737-9A16-5E5758FD59FB}|LibraryProject.Server\\LibraryProject.Server.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.server\\controllers\\authorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5B428DC5-08E8-4737-9A16-5E5758FD59FB}|LibraryProject.Server\\LibraryProject.Server.csproj|solutionrelative:libraryproject.server\\controllers\\authorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B428DC5-08E8-4737-9A16-5E5758FD59FB}|LibraryProject.Server\\LibraryProject.Server.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.server\\controllers\\bookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5B428DC5-08E8-4737-9A16-5E5758FD59FB}|LibraryProject.Server\\LibraryProject.Server.csproj|solutionrelative:libraryproject.server\\controllers\\bookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\user\\user.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\user\\user.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\book\\book.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\book\\book.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\author\\authorcreate.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\author\\authorcreate.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\author\\authorupdate.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\author\\authorupdate.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\author\\authorupdate.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\author\\authorupdate.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5D74CA93-F22B-4534-9EB7-44A1A19CAE41}|LibraryProject.WebSocketServer\\LibraryProject.WebSocketServer.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.websocketserver\\helpers\\tool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5D74CA93-F22B-4534-9EB7-44A1A19CAE41}|LibraryProject.WebSocketServer\\LibraryProject.WebSocketServer.csproj|solutionrelative:libraryproject.websocketserver\\helpers\\tool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|c:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\node_modules\\react-dom\\cjs\\react-dom.development.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}|",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:libraryproject.client\\node_modules\\react-dom\\cjs\\react-dom.development.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844F302F-95B5-4709-84A1-200771BBA642}|LibraryProject.Services\\LibraryProject.Services.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.services\\contract\\ibookservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844F302F-95B5-4709-84A1-200771BBA642}|LibraryProject.Services\\LibraryProject.Services.csproj|solutionrelative:libraryproject.services\\contract\\ibookservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844F302F-95B5-4709-84A1-200771BBA642}|LibraryProject.Services\\LibraryProject.Services.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.services\\contract\\iservicemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844F302F-95B5-4709-84A1-200771BBA642}|LibraryProject.Services\\LibraryProject.Services.csproj|solutionrelative:libraryproject.services\\contract\\iservicemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\book\\bookcreate.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\book\\bookcreate.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\user\\usercreate.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\user\\usercreate.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\book\\bookcreate.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\book\\bookcreate.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\book\\bookupdate.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\book\\bookupdate.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{09EA40D3-0047-467A-94E6-10413ABA6FDC}|LibraryProject.Repositories\\LibraryProject.Repositories.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.repositories\\concrete\\repositorymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{09EA40D3-0047-467A-94E6-10413ABA6FDC}|LibraryProject.Repositories\\LibraryProject.Repositories.csproj|solutionrelative:libraryproject.repositories\\concrete\\repositorymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844F302F-95B5-4709-84A1-200771BBA642}|LibraryProject.Services\\LibraryProject.Services.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.services\\concrete\\authorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844F302F-95B5-4709-84A1-200771BBA642}|LibraryProject.Services\\LibraryProject.Services.csproj|solutionrelative:libraryproject.services\\concrete\\authorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\entry\\login.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\entry\\login.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\user\\userupdate.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\user\\userupdate.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\book\\bookupdate.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\book\\bookupdate.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\weather\\weather.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\weather\\weather.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D9BE9CC8-039B-4AAA-B0CA-E3C60C558034}|LibraryProject.Entities\\LibraryProject.Entities.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.entities\\model\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D9BE9CC8-039B-4AAA-B0CA-E3C60C558034}|LibraryProject.Entities\\LibraryProject.Entities.csproj|solutionrelative:libraryproject.entities\\model\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D9BE9CC8-039B-4AAA-B0CA-E3C60C558034}|LibraryProject.Entities\\LibraryProject.Entities.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.entities\\model\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D9BE9CC8-039B-4AAA-B0CA-E3C60C558034}|LibraryProject.Entities\\LibraryProject.Entities.csproj|solutionrelative:libraryproject.entities\\model\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34DC857F-9B93-4F92-9DC5-875B36015376}|LibraryProject.SLAService\\LibraryProject.SLAService.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.slaservice\\worker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34DC857F-9B93-4F92-9DC5-875B36015376}|LibraryProject.SLAService\\LibraryProject.SLAService.csproj|solutionrelative:libraryproject.slaservice\\worker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34DC857F-9B93-4F92-9DC5-875B36015376}|LibraryProject.SLAService\\LibraryProject.SLAService.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.slaservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34DC857F-9B93-4F92-9DC5-875B36015376}|LibraryProject.SLAService\\LibraryProject.SLAService.csproj|solutionrelative:libraryproject.slaservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\user\\userupdate.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\user\\userupdate.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844F302F-95B5-4709-84A1-200771BBA642}|LibraryProject.Services\\LibraryProject.Services.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.services\\concrete\\bookservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844F302F-95B5-4709-84A1-200771BBA642}|LibraryProject.Services\\LibraryProject.Services.csproj|solutionrelative:libraryproject.services\\concrete\\bookservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34DC857F-9B93-4F92-9DC5-875B36015376}|LibraryProject.SLAService\\LibraryProject.SLAService.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.slaservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{34DC857F-9B93-4F92-9DC5-875B36015376}|LibraryProject.SLAService\\LibraryProject.SLAService.csproj|solutionrelative:libraryproject.slaservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{09EA40D3-0047-467A-94E6-10413ABA6FDC}|LibraryProject.Repositories\\LibraryProject.Repositories.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.repositories\\contract\\ibookrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{09EA40D3-0047-467A-94E6-10413ABA6FDC}|LibraryProject.Repositories\\LibraryProject.Repositories.csproj|solutionrelative:libraryproject.repositories\\contract\\ibookrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\index.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\index.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\main.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\main.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\first.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\first.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B428DC5-08E8-4737-9A16-5E5758FD59FB}|LibraryProject.Server\\LibraryProject.Server.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.server\\migrations\\repositorycontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5B428DC5-08E8-4737-9A16-5E5758FD59FB}|LibraryProject.Server\\LibraryProject.Server.csproj|solutionrelative:libraryproject.server\\migrations\\repositorycontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5D74CA93-F22B-4534-9EB7-44A1A19CAE41}|LibraryProject.WebSocketServer\\LibraryProject.WebSocketServer.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.websocketserver\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5D74CA93-F22B-4534-9EB7-44A1A19CAE41}|LibraryProject.WebSocketServer\\LibraryProject.WebSocketServer.csproj|solutionrelative:libraryproject.websocketserver\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\book\\book.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\book\\book.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D9BE9CC8-039B-4AAA-B0CA-E3C60C558034}|LibraryProject.Entities\\LibraryProject.Entities.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.entities\\model\\author.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D9BE9CC8-039B-4AAA-B0CA-E3C60C558034}|LibraryProject.Entities\\LibraryProject.Entities.csproj|solutionrelative:libraryproject.entities\\model\\author.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D9BE9CC8-039B-4AAA-B0CA-E3C60C558034}|LibraryProject.Entities\\LibraryProject.Entities.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.entities\\model\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D9BE9CC8-039B-4AAA-B0CA-E3C60C558034}|LibraryProject.Entities\\LibraryProject.Entities.csproj|solutionrelative:libraryproject.entities\\model\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B428DC5-08E8-4737-9A16-5E5758FD59FB}|LibraryProject.Server\\LibraryProject.Server.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.server\\migrations\\20250222220150_mig_10.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5B428DC5-08E8-4737-9A16-5E5758FD59FB}|LibraryProject.Server\\LibraryProject.Server.csproj|solutionrelative:libraryproject.server\\migrations\\20250222220150_mig_10.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844F302F-95B5-4709-84A1-200771BBA642}|LibraryProject.Services\\LibraryProject.Services.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.services\\concrete\\servicemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844F302F-95B5-4709-84A1-200771BBA642}|LibraryProject.Services\\LibraryProject.Services.csproj|solutionrelative:libraryproject.services\\concrete\\servicemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{09EA40D3-0047-467A-94E6-10413ABA6FDC}|LibraryProject.Repositories\\LibraryProject.Repositories.csproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.repositories\\contract\\irepositorymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{09EA40D3-0047-467A-94E6-10413ABA6FDC}|LibraryProject.Repositories\\LibraryProject.Repositories.csproj|solutionrelative:libraryproject.repositories\\contract\\irepositorymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\home.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\home.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\entry\\signup.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\entry\\signup.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\message\\message.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\message\\message.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\user\\user.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\user\\user.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\home.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\home.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\weather\\weather.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\weather\\weather.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\first.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\first.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\user\\usercreate.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\user\\usercreate.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\message\\message.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\message\\message.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\entry\\login.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\entry\\login.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\author\\authorcreate.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\author\\authorcreate.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\entry\\signup.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\entry\\signup.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\assets\\react.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\assets\\react.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\login.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\login.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\scripts\\chart.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\scripts\\chart.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\public\\vite.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\public\\vite.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LibraryProject.Server.csproj",
+              "DocumentMoniker": "C:\\Users\\hdinc\\Source\\Repos\\LibraryProjectReactWith.Net\\LibraryProject.Server\\LibraryProject.Server.csproj",
+              "RelativeDocumentMoniker": "LibraryProject.Server\\LibraryProject.Server.csproj",
+              "ToolTip": "C:\\Users\\hdinc\\Source\\Repos\\LibraryProjectReactWith.Net\\LibraryProject.Server\\LibraryProject.Server.csproj",
+              "RelativeToolTip": "LibraryProject.Server\\LibraryProject.Server.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-03-22T19:10:59.124Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Services\\Program.cs",
+              "RelativeDocumentMoniker": "LibraryProject.Services\\Program.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Services\\Program.cs",
+              "RelativeToolTip": "LibraryProject.Services\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-22T19:10:33.314Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "RepositoryContext.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Repositories\\RepositoryContext.cs",
+              "RelativeDocumentMoniker": "LibraryProject.Repositories\\RepositoryContext.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Repositories\\RepositoryContext.cs",
+              "RelativeToolTip": "LibraryProject.Repositories\\RepositoryContext.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAADwvxAAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-22T21:59:33.059Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "BookRepository.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Repositories\\Concrete\\BookRepository.cs",
+              "RelativeDocumentMoniker": "LibraryProject.Repositories\\Concrete\\BookRepository.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Repositories\\Concrete\\BookRepository.cs",
+              "RelativeToolTip": "LibraryProject.Repositories\\Concrete\\BookRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T19:50:31.03Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "IRepositoryBase.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Repositories\\Contract\\IRepositoryBase.cs",
+              "RelativeDocumentMoniker": "LibraryProject.Repositories\\Contract\\IRepositoryBase.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Repositories\\Contract\\IRepositoryBase.cs",
+              "RelativeToolTip": "LibraryProject.Repositories\\Contract\\IRepositoryBase.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-22T21:58:41.303Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "RepositoryBase.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Repositories\\Concrete\\RepositoryBase.cs",
+              "RelativeDocumentMoniker": "LibraryProject.Repositories\\Concrete\\RepositoryBase.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Repositories\\Concrete\\RepositoryBase.cs",
+              "RelativeToolTip": "LibraryProject.Repositories\\Concrete\\RepositoryBase.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAABeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-22T21:58:20.337Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Author.css",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Author\\Author.css",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\Author\\Author.css",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Author\\Author.css",
+              "RelativeToolTip": "libraryproject.client\\src\\Author\\Author.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-01-26T09:27:12.765Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Server\\appsettings.json",
+              "RelativeDocumentMoniker": "LibraryProject.Server\\appsettings.json",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Server\\appsettings.json",
+              "RelativeToolTip": "LibraryProject.Server\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-01-31T20:17:58.348Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "JwtTokenService.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Server\\Helpers\\JwtTokenService.cs",
+              "RelativeDocumentMoniker": "LibraryProject.Server\\Helpers\\JwtTokenService.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Server\\Helpers\\JwtTokenService.cs",
+              "RelativeToolTip": "LibraryProject.Server\\Helpers\\JwtTokenService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-31T20:17:59.301Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Server\\Program.cs",
+              "RelativeDocumentMoniker": "LibraryProject.Server\\Program.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Server\\Program.cs",
+              "RelativeToolTip": "LibraryProject.Server\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-31T20:00:08.102Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.WebSocketServer\\Program.cs",
+              "RelativeDocumentMoniker": "LibraryProject.WebSocketServer\\Program.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.WebSocketServer\\Program.cs",
+              "RelativeToolTip": "LibraryProject.WebSocketServer\\Program.cs",
+              "ViewState": "AgIAAPMAAAAAAAAAAAAAAJEAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T18:18:56.038Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LibraryProject.Server.http",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Server\\LibraryProject.Server.http",
+              "RelativeDocumentMoniker": "LibraryProject.Server\\LibraryProject.Server.http",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Server\\LibraryProject.Server.http",
+              "RelativeToolTip": "LibraryProject.Server\\LibraryProject.Server.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-03-22T19:07:17.312Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Author.jsx",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Author\\Author.jsx",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\Author\\Author.jsx",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Author\\Author.jsx",
+              "RelativeToolTip": "libraryproject.client\\src\\Author\\Author.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-01-26T09:22:30.513Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Tool.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Server\\Helpers\\Tool.cs",
+              "RelativeDocumentMoniker": "LibraryProject.Server\\Helpers\\Tool.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Server\\Helpers\\Tool.cs",
+              "RelativeToolTip": "LibraryProject.Server\\Helpers\\Tool.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-22T22:05:06.449Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Server\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "LibraryProject.Server\\Controllers\\UserController.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Server\\Controllers\\UserController.cs",
+              "RelativeToolTip": "LibraryProject.Server\\Controllers\\UserController.cs",
+              "ViewState": "AgIAAAUBAAAAAAAAAAAYwAQBAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-27T19:43:56.304Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.WebSocketServer\\appsettings.json",
+              "RelativeDocumentMoniker": "LibraryProject.WebSocketServer\\appsettings.json",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.WebSocketServer\\appsettings.json",
+              "RelativeToolTip": "LibraryProject.WebSocketServer\\appsettings.json",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAAAgAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-02-23T15:29:15.415Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "User.jsx",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\User\\User.jsx",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\User\\User.jsx",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\User\\User.jsx",
+              "RelativeToolTip": "libraryproject.client\\src\\User\\User.jsx",
+              "ViewState": "AgIAAHwAAAAAAAAAAADgv1wAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-02-10T17:50:18.421Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Book.jsx",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Book\\Book.jsx",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\Book\\Book.jsx",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Book\\Book.jsx",
+              "RelativeToolTip": "libraryproject.client\\src\\Book\\Book.jsx",
+              "ViewState": "AgIAAL4AAAAAAAAAAADgv9EAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-01-26T09:22:22.182Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "AuthorController.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Server\\Controllers\\AuthorController.cs",
+              "RelativeDocumentMoniker": "LibraryProject.Server\\Controllers\\AuthorController.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Server\\Controllers\\AuthorController.cs",
+              "RelativeToolTip": "LibraryProject.Server\\Controllers\\AuthorController.cs",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAuwJEAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-27T18:40:04.975Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "BookController.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Server\\Controllers\\BookController.cs",
+              "RelativeDocumentMoniker": "LibraryProject.Server\\Controllers\\BookController.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Server\\Controllers\\BookController.cs",
+              "RelativeToolTip": "LibraryProject.Server\\Controllers\\BookController.cs",
+              "ViewState": "AgIAAM4AAAAAAAAAAAAAwOoAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-02T15:16:37.109Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "LibraryProject.WebSocketServer.csproj",
+              "DocumentMoniker": "C:\\Users\\hdinc\\Source\\Repos\\LibraryProjectReactWith.Net\\LibraryProject.WebSocketServer\\LibraryProject.WebSocketServer.csproj",
+              "RelativeDocumentMoniker": "LibraryProject.WebSocketServer\\LibraryProject.WebSocketServer.csproj",
+              "ToolTip": "C:\\Users\\hdinc\\Source\\Repos\\LibraryProjectReactWith.Net\\LibraryProject.WebSocketServer\\LibraryProject.WebSocketServer.csproj",
+              "RelativeToolTip": "LibraryProject.WebSocketServer\\LibraryProject.WebSocketServer.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-03-22T18:00:51.063Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "config.json",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\config.json",
+              "RelativeDocumentMoniker": "libraryproject.client\\config.json",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\config.json",
+              "RelativeToolTip": "libraryproject.client\\config.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAB1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-01-24T19:45:06.559Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Tool.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.WebSocketServer\\Helpers\\Tool.cs",
+              "RelativeDocumentMoniker": "LibraryProject.WebSocketServer\\Helpers\\Tool.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.WebSocketServer\\Helpers\\Tool.cs",
+              "RelativeToolTip": "LibraryProject.WebSocketServer\\Helpers\\Tool.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-16T12:32:29.694Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "AuthorCreate.jsx",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Author\\AuthorCreate.jsx",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\Author\\AuthorCreate.jsx",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Author\\AuthorCreate.jsx",
+              "RelativeToolTip": "libraryproject.client\\src\\Author\\AuthorCreate.jsx",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAQwCgAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-01-26T09:27:24.775Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "AuthorUpdate.css",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Author\\AuthorUpdate.css",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\Author\\AuthorUpdate.css",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Author\\AuthorUpdate.css",
+              "RelativeToolTip": "libraryproject.client\\src\\Author\\AuthorUpdate.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-02-03T16:28:00.52Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "AuthorUpdate.jsx",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Author\\AuthorUpdate.jsx",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\Author\\AuthorUpdate.jsx",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Author\\AuthorUpdate.jsx",
+              "RelativeToolTip": "libraryproject.client\\src\\Author\\AuthorUpdate.jsx",
+              "ViewState": "AgIAAFwAAAAAAAAAAAAQwHAAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-01-27T18:38:34.231Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "react-dom.development.js",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\node_modules\\react-dom\\cjs\\react-dom.development.js",
+              "RelativeDocumentMoniker": "libraryproject.client\\node_modules\\react-dom\\cjs\\react-dom.development.js",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\node_modules\\react-dom\\cjs\\react-dom.development.js",
+              "RelativeToolTip": "libraryproject.client\\node_modules\\react-dom\\cjs\\react-dom.development.js",
+              "ViewState": "AgIAAEhZAAAAAAAAAAAEwF1ZAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-01-26T09:47:30.02Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "IBookService.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Services\\Contract\\IBookService.cs",
+              "RelativeDocumentMoniker": "LibraryProject.Services\\Contract\\IBookService.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Services\\Contract\\IBookService.cs",
+              "RelativeToolTip": "LibraryProject.Services\\Contract\\IBookService.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAgwBAAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T19:56:06.228Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "IServiceManager.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Services\\Contract\\IServiceManager.cs",
+              "RelativeDocumentMoniker": "LibraryProject.Services\\Contract\\IServiceManager.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Services\\Contract\\IServiceManager.cs",
+              "RelativeToolTip": "LibraryProject.Services\\Contract\\IServiceManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAsAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-22T21:59:04.64Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "BookCreate.jsx",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Book\\BookCreate.jsx",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\Book\\BookCreate.jsx",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Book\\BookCreate.jsx",
+              "RelativeToolTip": "libraryproject.client\\src\\Book\\BookCreate.jsx",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAQwEYAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-01-26T09:38:44.798Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "BookCreate.css",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Book\\BookCreate.css",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\Book\\BookCreate.css",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Book\\BookCreate.css",
+              "RelativeToolTip": "libraryproject.client\\src\\Book\\BookCreate.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-01-26T09:38:44.275Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "UserCreate.jsx",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\User\\UserCreate.jsx",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\User\\UserCreate.jsx",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\User\\UserCreate.jsx",
+              "RelativeToolTip": "libraryproject.client\\src\\User\\UserCreate.jsx",
+              "ViewState": "AgIAACMAAAAAAAAAAAAQwEcAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-01-26T09:42:25.511Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "BookUpdate.jsx",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Book\\BookUpdate.jsx",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\Book\\BookUpdate.jsx",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Book\\BookUpdate.jsx",
+              "RelativeToolTip": "libraryproject.client\\src\\Book\\BookUpdate.jsx",
+              "ViewState": "AgIAAHwAAAAAAAAAAAAgwIsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-02-02T15:09:56.225Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "RepositoryManager.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Repositories\\Concrete\\RepositoryManager.cs",
+              "RelativeDocumentMoniker": "LibraryProject.Repositories\\Concrete\\RepositoryManager.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Repositories\\Concrete\\RepositoryManager.cs",
+              "RelativeToolTip": "LibraryProject.Repositories\\Concrete\\RepositoryManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-22T21:58:24.493Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "Login.jsx",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Entry\\Login.jsx",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\Entry\\Login.jsx",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Entry\\Login.jsx",
+              "RelativeToolTip": "libraryproject.client\\src\\Entry\\Login.jsx",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAQwCgAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-01-26T10:05:46.88Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "AuthorService.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Services\\Concrete\\AuthorService.cs",
+              "RelativeDocumentMoniker": "LibraryProject.Services\\Concrete\\AuthorService.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Services\\Concrete\\AuthorService.cs",
+              "RelativeToolTip": "LibraryProject.Services\\Concrete\\AuthorService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T19:56:31.078Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "UserUpdate.jsx",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\User\\UserUpdate.jsx",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\User\\UserUpdate.jsx",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\User\\UserUpdate.jsx",
+              "RelativeToolTip": "libraryproject.client\\src\\User\\UserUpdate.jsx",
+              "ViewState": "AgIAAEEAAAAAAAAAAADwv2cAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-01-31T19:32:21.415Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "BookUpdate.css",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Book\\BookUpdate.css",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\Book\\BookUpdate.css",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Book\\BookUpdate.css",
+              "RelativeToolTip": "libraryproject.client\\src\\Book\\BookUpdate.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-02-02T15:09:51.608Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "Weather.jsx",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Weather\\Weather.jsx",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\Weather\\Weather.jsx",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Weather\\Weather.jsx",
+              "RelativeToolTip": "libraryproject.client\\src\\Weather\\Weather.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-01-26T09:30:35.69Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "Book.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Entities\\Model\\Book.cs",
+              "RelativeDocumentMoniker": "LibraryProject.Entities\\Model\\Book.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Entities\\Model\\Book.cs",
+              "RelativeToolTip": "LibraryProject.Entities\\Model\\Book.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABoAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-19T19:33:50.816Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Entities\\Model\\User.cs",
+              "RelativeDocumentMoniker": "LibraryProject.Entities\\Model\\User.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Entities\\Model\\User.cs",
+              "RelativeToolTip": "LibraryProject.Entities\\Model\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-31T19:46:55.476Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "Worker.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.SLAService\\Worker.cs",
+              "RelativeDocumentMoniker": "LibraryProject.SLAService\\Worker.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.SLAService\\Worker.cs",
+              "RelativeToolTip": "LibraryProject.SLAService\\Worker.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAowDkAAACNAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T19:30:43.166Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.SLAService\\Program.cs",
+              "RelativeDocumentMoniker": "LibraryProject.SLAService\\Program.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.SLAService\\Program.cs",
+              "RelativeToolTip": "LibraryProject.SLAService\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T19:30:45.784Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "UserUpdate.css",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\User\\UserUpdate.css",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\User\\UserUpdate.css",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\User\\UserUpdate.css",
+              "RelativeToolTip": "libraryproject.client\\src\\User\\UserUpdate.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-02-03T16:36:42.049Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "IBookRepository.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Repositories\\Contract\\IBookRepository.cs",
+              "RelativeDocumentMoniker": "LibraryProject.Repositories\\Contract\\IBookRepository.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Repositories\\Contract\\IBookRepository.cs",
+              "RelativeToolTip": "LibraryProject.Repositories\\Contract\\IBookRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T19:50:32.932Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\.gitignore",
+              "RelativeDocumentMoniker": "libraryproject.client\\.gitignore",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\.gitignore",
+              "RelativeToolTip": "libraryproject.client\\.gitignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAF8SURBVDhPjVNLTgJBEG1lwpoFB3GNK9fieA48hD8iwT/ihwgSDAIHgAGXXsEV18CNzL/LquqZdsYM6kteXqcy3fWqpmpNRBgOhyABBEgpAFVKPIMUcYzUyOU\u002BXM/b2qtU3vkSfRjjZTCAMAw1A2LwzdFoBPP5HNqdzuL27n4juibWI\u002BUshBA1DIkhEx9iEorFotgslQqGYbxxAGFEqt1MxmPWJLbLZdZ\u002Bv89q5PMFPiTR6z2zdaxR0fXA0XTBcVywkb4fwHXjRteecIDNQ7UmExVYAdPcxYaqclN46na5WenMKjtlVnTYwcXlVYaDqImW9beD5N/TeGy32QHXm6hZ03ZgiSQHp2fnWQ4oBmJqWSqwAqZpZjt4aLXAD4J0VqyZsmoubfB8H2r1eoaD6NXZ9HcHO\u002BSA3f4AjifXl8rItOETM8ckB9WTWpYD9RdeZ1PWVWAHWXPQaDb59f/w8LiqHeh1pvGkCaP6qB8yXusoxmuNZ7XmII4O9vGuEF86osuDYRkpYQAAAABJRU5ErkJggg==",
+              "WhenOpened": "2025-01-26T09:19:46.549Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "BookService.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Services\\Concrete\\BookService.cs",
+              "RelativeDocumentMoniker": "LibraryProject.Services\\Concrete\\BookService.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Services\\Concrete\\BookService.cs",
+              "RelativeToolTip": "LibraryProject.Services\\Concrete\\BookService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAACCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T19:56:20.725Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.SLAService\\appsettings.json",
+              "RelativeDocumentMoniker": "LibraryProject.SLAService\\appsettings.json",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.SLAService\\appsettings.json",
+              "RelativeToolTip": "LibraryProject.SLAService\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-03-05T19:31:02.171Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "index.html",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\index.html",
+              "RelativeDocumentMoniker": "libraryproject.client\\index.html",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\index.html",
+              "RelativeToolTip": "libraryproject.client\\index.html",
+              "ViewState": "AgIAAAYAAAAAAAAAAABBwCAAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-02-02T17:49:31.042Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "index.css",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\index.css",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\index.css",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\index.css",
+              "RelativeToolTip": "libraryproject.client\\src\\index.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-02-03T16:10:05.167Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "main.jsx",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\main.jsx",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\main.jsx",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\main.jsx",
+              "RelativeToolTip": "libraryproject.client\\src\\main.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-01-26T09:28:19.914Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "First.jsx",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\First.jsx",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\First.jsx",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\First.jsx",
+              "RelativeToolTip": "libraryproject.client\\src\\First.jsx",
+              "ViewState": "AgIAACYAAAAAAAAAAADgvzgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-01-26T09:28:23.651Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "RepositoryContextModelSnapshot.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Server\\Migrations\\RepositoryContextModelSnapshot.cs",
+              "RelativeDocumentMoniker": "LibraryProject.Server\\Migrations\\RepositoryContextModelSnapshot.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Server\\Migrations\\RepositoryContextModelSnapshot.cs",
+              "RelativeToolTip": "LibraryProject.Server\\Migrations\\RepositoryContextModelSnapshot.cs",
+              "ViewState": "AgIAAFgBAAAAAAAAAABhwH0BAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-01T21:16:05.489Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.WebSocketServer\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "LibraryProject.WebSocketServer\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.WebSocketServer\\Properties\\launchSettings.json",
+              "RelativeToolTip": "LibraryProject.WebSocketServer\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-03-01T19:55:42.522Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "Author.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Entities\\Model\\Author.cs",
+              "RelativeDocumentMoniker": "LibraryProject.Entities\\Model\\Author.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Entities\\Model\\Author.cs",
+              "RelativeToolTip": "LibraryProject.Entities\\Model\\Author.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-22T22:04:31.506Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "Book.css",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Book\\Book.css",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\Book\\Book.css",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Book\\Book.css",
+              "RelativeToolTip": "libraryproject.client\\src\\Book\\Book.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-02-03T16:29:52.082Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "20250222220150_mig_10.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Server\\Migrations\\20250222220150_mig_10.cs",
+              "RelativeDocumentMoniker": "LibraryProject.Server\\Migrations\\20250222220150_mig_10.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Server\\Migrations\\20250222220150_mig_10.cs",
+              "RelativeToolTip": "LibraryProject.Server\\Migrations\\20250222220150_mig_10.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-22T22:02:06.301Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "Role.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Entities\\Model\\Role.cs",
+              "RelativeDocumentMoniker": "LibraryProject.Entities\\Model\\Role.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Entities\\Model\\Role.cs",
+              "RelativeToolTip": "LibraryProject.Entities\\Model\\Role.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-22T21:59:46.548Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "ServiceManager.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Services\\Concrete\\ServiceManager.cs",
+              "RelativeDocumentMoniker": "LibraryProject.Services\\Concrete\\ServiceManager.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Services\\Concrete\\ServiceManager.cs",
+              "RelativeToolTip": "LibraryProject.Services\\Concrete\\ServiceManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-22T21:57:30.98Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "IRepositoryManager.cs",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Repositories\\Contract\\IRepositoryManager.cs",
+              "RelativeDocumentMoniker": "LibraryProject.Repositories\\Contract\\IRepositoryManager.cs",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\LibraryProject.Repositories\\Contract\\IRepositoryManager.cs",
+              "RelativeToolTip": "LibraryProject.Repositories\\Contract\\IRepositoryManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-22T21:58:42.699Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 61,
+              "Title": "SignUp.css",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Entry\\SignUp.css",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\Entry\\SignUp.css",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Entry\\SignUp.css",
+              "RelativeToolTip": "libraryproject.client\\src\\Entry\\SignUp.css",
+              "ViewState": "AgIAAAkAAAAAAAAAAIBJwCMAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-02-03T16:30:45.661Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "Home.jsx",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Home.jsx",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\Home.jsx",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Home.jsx",
+              "RelativeToolTip": "libraryproject.client\\src\\Home.jsx",
+              "ViewState": "AgIAABAAAAAAAAAAAAAUwCkAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-01-26T09:28:13.158Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 66,
+              "Title": "First.css",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\First.css",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\First.css",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\First.css",
+              "RelativeToolTip": "libraryproject.client\\src\\First.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-02-03T15:59:45.98Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 68,
+              "Title": "Message.css",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Message\\Message.css",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\Message\\Message.css",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Message\\Message.css",
+              "RelativeToolTip": "libraryproject.client\\src\\Message\\Message.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-01-26T09:44:21.305Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 62,
+              "Title": "Message.jsx",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Message\\Message.jsx",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\Message\\Message.jsx",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Message\\Message.jsx",
+              "RelativeToolTip": "libraryproject.client\\src\\Message\\Message.jsx",
+              "ViewState": "AgIAADAAAAAAAAAAAIBJwEcAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-01-26T09:44:24.421Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 64,
+              "Title": "Home.css",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Home.css",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\Home.css",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Home.css",
+              "RelativeToolTip": "libraryproject.client\\src\\Home.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-01-26T09:43:44.351Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 65,
+              "Title": "Weather.css",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Weather\\Weather.css",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\Weather\\Weather.css",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Weather\\Weather.css",
+              "RelativeToolTip": "libraryproject.client\\src\\Weather\\Weather.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-01-26T10:08:22.627Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 67,
+              "Title": "UserCreate.css",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\User\\UserCreate.css",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\User\\UserCreate.css",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\User\\UserCreate.css",
+              "RelativeToolTip": "libraryproject.client\\src\\User\\UserCreate.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-02-03T16:35:52.941Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 63,
+              "Title": "User.css",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\User\\User.css",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\User\\User.css",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\User\\User.css",
+              "RelativeToolTip": "libraryproject.client\\src\\User\\User.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-02-03T16:36:03.663Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 69,
+              "Title": "Login.css",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Entry\\Login.css",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\Entry\\Login.css",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Entry\\Login.css",
+              "RelativeToolTip": "libraryproject.client\\src\\Entry\\Login.css",
+              "ViewState": "AgIAAAwAAAAAAAAAAIBJwCMAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-02-03T16:30:41.909Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 70,
+              "Title": "AuthorCreate.css",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Author\\AuthorCreate.css",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\Author\\AuthorCreate.css",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Author\\AuthorCreate.css",
+              "RelativeToolTip": "libraryproject.client\\src\\Author\\AuthorCreate.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-01-26T09:27:47.049Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 71,
+              "Title": "SignUp.jsx",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Entry\\SignUp.jsx",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\Entry\\SignUp.jsx",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Entry\\SignUp.jsx",
+              "RelativeToolTip": "libraryproject.client\\src\\Entry\\SignUp.jsx",
+              "ViewState": "AgIAACgAAAAAAAAAAAAQwDkAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-01-26T10:05:41.104Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 72,
+              "Title": "react.svg",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\assets\\react.svg",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\assets\\react.svg",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\assets\\react.svg",
+              "RelativeToolTip": "libraryproject.client\\src\\assets\\react.svg",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAB3AAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKTSURBVDhPjVNLSFRRGP7unTsz9w75uOaMZlMNpo1aFFJRodRGN7UwatMiKgga3JgVRBSNSA8RooUFLRycCCpc9ITIFi0EW\u002BhCW/gONYUcxplsQL13nKv3dM6ZGV\u002BE9N37c\u002B455/\u002B\u002B/7s/5whYA7/fP5L63BSCIDxvbGxsAiEktZQEE6Brm6K1tXWS5TU0NNQyjsiZKQgCBgBChQ2Q\u002BfswpytgDLmg9zihD9XBNJfhcrlstPoeqlVPRS6uCBDy1broLnN29PkxPeaFFmpC79gOdEu9sB8KQRt\u002Bz/NUVbUGAoGpJIfc5j2gZIuv3fam/sCNGrdjGLGwE23hR\u002BiMeBCKAbXlOTgfr0VW9QfqD4iEZ5BIJNAWDI5yB75X0tXqwrc1JZk90MKVUEq/4UplFc4W5UKwiHjaO4tx90NWiYfT5cQuj4dRITLrZfn9104XtOD3\u002BE4z7/BrqIoKZ4YM37E8XNifA4vdiuCIApPzWY9Wmy9h6UfOpd13t89FstEceyF2PJlAfNHkm6y6xSbxcTASpyuMyFT4NoeI6PV6mzEvvIy0oO\u002BXPVGULaMs186jVLVil0zzF\u002BI4ki\u002BnqjP\u002BGgemrp0Z\u002BHn8T0d0nyrOTky\u002B8x0tNoxE0iZrcSqXz5lAcroCcXkeBcGpyzcnowRTDk9xoDuEmbkE5vRlfB6cRcWzIXibv\u002BNTf5ST0y7SEBa6MGIaOFje2VUnZSgPTFECMZM9YCeLde6cdwvuVLlXrVMFWXGAHqRRaUlDezyEic6tlbFBbW/oS8nHbf0RDZIooDDLipPeTJwozIJJH4EIoG/y1/6Fe/5bj6lFousa0WjoWjoWiLYhGNidWHcXDNhOsVGWFSg0ZCUdDigbIo11Zv73Oq8C\u002BAsr5V2IWWNA0gAAAABJRU5ErkJggg==",
+              "WhenOpened": "2025-01-27T19:15:43.871Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 73,
+              "Title": "login.html",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\login.html",
+              "RelativeDocumentMoniker": "libraryproject.client\\login.html",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\login.html",
+              "RelativeToolTip": "libraryproject.client\\login.html",
+              "ViewState": "AgIAADEAAAAAAAAAAABBwEMAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-02-01T13:22:44.291Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 74,
+              "Title": "chart.js",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\Scripts\\chart.js",
+              "RelativeDocumentMoniker": "libraryproject.client\\Scripts\\chart.js",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\Scripts\\chart.js",
+              "RelativeToolTip": "libraryproject.client\\Scripts\\chart.js",
+              "ViewState": "AgIAAB4zAAAAAAAAAIBJwCYzAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-02-01T13:22:41.668Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 75,
+              "Title": "vite.svg",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\public\\vite.svg",
+              "RelativeDocumentMoniker": "libraryproject.client\\public\\vite.svg",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\public\\vite.svg",
+              "RelativeToolTip": "libraryproject.client\\public\\vite.svg",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAB3AAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKTSURBVDhPjVNLSFRRGP7unTsz9w75uOaMZlMNpo1aFFJRodRGN7UwatMiKgga3JgVRBSNSA8RooUFLRycCCpc9ITIFi0EW\u002BhCW/gONYUcxplsQL13nKv3dM6ZGV\u002BE9N37c\u002B455/\u002B\u002B/7s/5whYA7/fP5L63BSCIDxvbGxsAiEktZQEE6Brm6K1tXWS5TU0NNQyjsiZKQgCBgBChQ2Q\u002BfswpytgDLmg9zihD9XBNJfhcrlstPoeqlVPRS6uCBDy1broLnN29PkxPeaFFmpC79gOdEu9sB8KQRt\u002Bz/NUVbUGAoGpJIfc5j2gZIuv3fam/sCNGrdjGLGwE23hR\u002BiMeBCKAbXlOTgfr0VW9QfqD4iEZ5BIJNAWDI5yB75X0tXqwrc1JZk90MKVUEq/4UplFc4W5UKwiHjaO4tx90NWiYfT5cQuj4dRITLrZfn9104XtOD3\u002BE4z7/BrqIoKZ4YM37E8XNifA4vdiuCIApPzWY9Wmy9h6UfOpd13t89FstEceyF2PJlAfNHkm6y6xSbxcTASpyuMyFT4NoeI6PV6mzEvvIy0oO\u002BXPVGULaMs186jVLVil0zzF\u002BI4ki\u002BnqjP\u002BGgemrp0Z\u002BHn8T0d0nyrOTky\u002B8x0tNoxE0iZrcSqXz5lAcroCcXkeBcGpyzcnowRTDk9xoDuEmbkE5vRlfB6cRcWzIXibv\u002BNTf5ST0y7SEBa6MGIaOFje2VUnZSgPTFECMZM9YCeLde6cdwvuVLlXrVMFWXGAHqRRaUlDezyEic6tlbFBbW/oS8nHbf0RDZIooDDLipPeTJwozIJJH4EIoG/y1/6Fe/5bj6lFousa0WjoWjoWiLYhGNidWHcXDNhOsVGWFSg0ZCUdDigbIo11Zv73Oq8C\u002BAsr5V2IWWNA0gAAAABJRU5ErkJggg==",
+              "WhenOpened": "2025-01-27T19:15:45.311Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -18,12 +18,14 @@ namespace LibraryProject.Server.Controllers
         private readonly RepositoryContext _context;
         private readonly IServiceManager _manager;
         private readonly IConfiguration _configuration;
+        private readonly Tool _tool;
 
-        public BookController(RepositoryContext context, IServiceManager manager, IConfiguration configuration)
+        public BookController(RepositoryContext context, IServiceManager manager, IConfiguration configuration, Tool tool)
         {
             _context = context;
             _manager = manager;
             _configuration = configuration;
+            _tool = tool;
         }
         [HttpGet("GetById/{id:int}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
@@ -230,12 +232,7 @@ namespace LibraryProject.Server.Controllers
                         var requestContent = await reader.ReadToEndAsync();
                         var requestJObj = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(requestContent);
                         var authToken = requestJObj!["authToken"]?.ToString();
-                        var client = new RestClient();
-                        string websocketurl = _configuration["websocketurl"]?.ToString()!;
-                        var endpoint = websocketurl + "/api/Book/Data";
-                        var request = new RestRequest(endpoint, Method.Post);
-                        request.AddJsonBody(authToken!);
-                        var response = await client.ExecuteAsync(request);
+                        await _tool.WebSocketRequest(authToken!, _configuration, ControllerContext.ActionDescriptor.ControllerName);
                         return Ok("Book Deleted succesfully.");
                     }
                 }

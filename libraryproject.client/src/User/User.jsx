@@ -7,7 +7,6 @@ function User() {
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
     const [authToken, setAuthToken] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [searchTermId, setSearchTermId] = useState('');
@@ -73,7 +72,6 @@ function User() {
     
 
     const deleteUser = async (event, userid) => {
-        setLoading(true);
         try {
             setAuthToken(authToken);
             var restUrl = Config.restApiUrl;
@@ -90,8 +88,6 @@ function User() {
             }
         } catch (error) {
             setError(error.message);
-        } finally {
-            setLoading(false);
         }
     };
     const handleSort = (key) => {
@@ -197,7 +193,6 @@ function User() {
                                 <button
                                     className="btn btn-outline-primary"
                                     onClick={(event) => deleteUser(event, user.id)}
-                                    disabled={loading}
                                     style={{
                                         height: '2.5rem',
                                         display: 'flex',
@@ -206,7 +201,7 @@ function User() {
                                         padding: '0 1rem'
                                     }}
                                 >
-                                    <i className="fa fa-trash"></i>&nbsp;{loading ? 'Removed...' : 'Remove'}
+                                    <i className="fa fa-trash"></i>&nbsp;Remove
                                 </button>
                             </div>
 

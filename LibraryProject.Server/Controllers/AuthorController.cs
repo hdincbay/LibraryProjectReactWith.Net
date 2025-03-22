@@ -16,10 +16,12 @@ namespace LibraryProject.Server.Controllers
     {
         private readonly IServiceManager _manager;
         private readonly IConfiguration _configuration;
-        public AuthorController(IServiceManager manager, IConfiguration configuration)
+        private readonly Tool _tool;
+        public AuthorController(IServiceManager manager, IConfiguration configuration, Tool tool)
         {
             _manager = manager;
             _configuration = configuration;
+            _tool = tool;
         }
         [HttpGet("GetById/{id:int}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
@@ -77,11 +79,6 @@ namespace LibraryProject.Server.Controllers
                     {
                         _manager.AuthorService.CreateOne(author);
                     });
-                    var client = new RestClient();
-                    string websocketurl = _configuration["websocketurl"]?.ToString()!;
-                    var endpoint = websocketurl + "/api/Author/Data";
-                    var request = new RestRequest(endpoint, Method.Post);
-                    var rsp = await client.ExecuteAsync(request);
                     return Ok("Author Created successfully.");
                 }
             }
@@ -113,11 +110,6 @@ namespace LibraryProject.Server.Controllers
                         {
                             _manager.AuthorService.UpdateOne(author);
                         });
-                        var client = new RestClient();
-                        string websocketurl = _configuration["websocketurl"]?.ToString()!;
-                        var endpoint = websocketurl + "/api/Author/Data";
-                        var request = new RestRequest(endpoint, Method.Post);
-                        await client.ExecuteAsync(request);
                         return Ok("Author Updated successfully.");
                     }
                     else
@@ -151,12 +143,7 @@ namespace LibraryProject.Server.Controllers
                         var requestContent = await reader.ReadToEndAsync();
                         var requestJObj = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(requestContent);
                         var authToken = requestJObj!["authToken"]?.ToString();
-                        var client = new RestClient();
-                        string websocketurl = _configuration["websocketurl"]?.ToString()!;
-                        var endpoint = websocketurl + "/api/Author/Data";
-                        var request = new RestRequest(endpoint, Method.Post);
-                        request.AddJsonBody(authToken!);
-                        var response = await client.ExecuteAsync(request);
+                        await _tool.WebSocketRequest(authToken!, _configuration, ControllerContext.ActionDescriptor.ControllerName);
                         return Ok("Author Deleted succesfully.");
                     }
                 }

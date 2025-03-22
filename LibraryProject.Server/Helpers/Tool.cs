@@ -1,6 +1,7 @@
 ﻿using LibraryProject.Entities.Model;
 using LibraryProject.Repositories;
 using Microsoft.EntityFrameworkCore;
+using RestSharp;
 using System;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
@@ -44,13 +45,21 @@ namespace LibraryProject.Server.Helpers
             do
             {
                 serialNumber = "B" + newNumber;
-
-                // Serial numarasını veritabanında kontrol et
             }
             while (_context.Book!.Any(b => b.SerialNumber!.Equals(serialNumber)));
 
             return serialNumber;
 
+        }
+        public async Task WebSocketRequest(string token, IConfiguration _configuration, string objectName)
+        {
+            var client = new RestClient();
+            string websocketurl = _configuration["websocketurl"]?.ToString()!;
+            var endpoint = websocketurl + "/api/" + objectName + "/Data";
+
+            var requestToWebSocket = new RestRequest(endpoint, Method.Post);
+            requestToWebSocket.AddJsonBody(token!);
+            var response = await client.ExecuteAsync(requestToWebSocket);
         }
     }
 }

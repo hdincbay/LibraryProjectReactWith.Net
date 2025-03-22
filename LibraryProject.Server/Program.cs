@@ -77,6 +77,8 @@ builder.Services.AddScoped<IAuthorService, AuthorService>();
 builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
 
+builder.Services.AddScoped<Tool>();
+
 // Controller ve Swagger yapýlandýrmalarý
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

@@ -7,7 +7,6 @@ function Author() {
     const navigate = useNavigate();
     const [authors, setAuthors] = useState([]);
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
     const [authToken, setAuthToken] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [searchTermId, setSearchTermId] = useState('');
@@ -65,7 +64,6 @@ function Author() {
         socketRef.current = newSocket;
     };
     const deleteAuthor = async (event, authorid) => {
-        setLoading(true);
         try {
             setAuthToken(authToken);
             var restUrl = Config.restApiUrl;
@@ -82,8 +80,6 @@ function Author() {
             }
         } catch (error) {
             setError(error.message);
-        } finally {
-            setLoading(false);
         }
     };
     const handleSort = (key) => {
@@ -173,7 +169,6 @@ function Author() {
                                 <button
                                     className="btn btn-outline-primary"
                                     onClick={(event) => deleteAuthor(event, author.authorId)}
-                                    disabled={loading}
                                     style={{
                                         height: '2.5rem', // Ayný yükseklik
                                         display: 'flex',  // Flexbox
@@ -182,7 +177,7 @@ function Author() {
                                         padding: '0 1rem' // Buton içeriði için sað ve sol padding
                                     }}
                                 >
-                                    <i className="fa fa-trash"></i>&nbsp;{loading ? 'Removed...' : 'Remove'}
+                                    <i className="fa fa-trash"></i>&nbsp;Remove
                                 </button>
                             </div>
                         </td>

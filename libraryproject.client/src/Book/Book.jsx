@@ -8,7 +8,6 @@ function Book() {
     const navigate = useNavigate();
     const [books, setBooks] = useState([]);
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
     const [authToken, setAuthToken] = useState(null);
     const [searchTermId, setSearchTermId] = useState('');  // Book id search
     const [searchTermName, setSearchTermName] = useState('');  // Book name search
@@ -99,7 +98,6 @@ function Book() {
     };
 
     const deleteBook = async (event, bookid) => {
-        setLoading(true);
         try {
             setAuthToken(authToken);
             var restUrl = Config.restApiUrl;
@@ -116,8 +114,6 @@ function Book() {
             }
         } catch (error) {
             setError(error.message);
-        } finally {
-            setLoading(false);
         }
     };
 
@@ -254,7 +250,6 @@ function Book() {
                                 <button
                                     className="btn btn-outline-primary"
                                     onClick={(event) => deleteBook(event, book.bookId)}
-                                    disabled={loading}
                                     style={{
                                         height: '2.5rem',
                                         display: 'flex',
@@ -263,7 +258,7 @@ function Book() {
                                         padding: '0 1rem'
                                     }}
                                 >
-                                    <i className="fa fa-trash"></i>&nbsp;{loading ? 'Removed...' : 'Remove'}
+                                    <i className="fa fa-trash"></i>&nbsp;Remove
                                 </button>
                             </div>
                         </td>

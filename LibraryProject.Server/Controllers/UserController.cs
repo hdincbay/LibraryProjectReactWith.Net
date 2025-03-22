@@ -23,7 +23,8 @@ namespace LibraryProject.Server.Controllers
         private readonly IConfiguration _configuration;
         private readonly IServiceManager _manager;
         private readonly RepositoryContext _context;
-        public UserController(UserManager<User> userManager, SignInManager<User> signInManager, JwtTokenService tokenService, IConfiguration configuration, IServiceManager manager, RepositoryContext context)
+        private readonly Tool _tool;
+        public UserController(UserManager<User> userManager, SignInManager<User> signInManager, JwtTokenService tokenService, IConfiguration configuration, IServiceManager manager, RepositoryContext context, Tool tool)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -31,6 +32,7 @@ namespace LibraryProject.Server.Controllers
             _configuration = configuration;
             _manager = manager;
             _context = context;
+            _tool = tool;
         }
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
@@ -226,13 +228,7 @@ namespace LibraryProject.Server.Controllers
                             var requestContent = await reader.ReadToEndAsync();
                             var requestJObj = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(requestContent);
                             var authToken = requestJObj!["authToken"]?.ToString();
-                            var client = new RestClient();
-                            string websocketurl = _configuration["websocketurl"]?.ToString()!;
-                            var endpoint = websocketurl + "/api/User/Data";
-
-                            var requestToWebSocket = new RestRequest(endpoint, Method.Post);
-                            requestToWebSocket.AddJsonBody(authToken!);
-                            var response = await client.ExecuteAsync(requestToWebSocket);
+                            await _tool.WebSocketRequest(authToken!, _configuration, ControllerContext.ActionDescriptor.ControllerName);
                             return Ok("User deleted successfully.");
                         }
                     }

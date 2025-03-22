@@ -41,7 +41,10 @@ app.Map("/AuthorList/", async context =>
                 Console.WriteLine("Gelen mesaj: " + receivedMessage);
                 var jsonMessage = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(receivedMessage);
                 var authToken = jsonMessage?["authToken"]?.ToString();
-                clients.TryAdd(webSocket, authToken!);
+                if (!string.IsNullOrEmpty(authToken))
+                {
+                    clients.TryAdd(webSocket, authToken!);
+                }
                 await SendAllAuthors(webSocket);
             } while (!result.CloseStatus.HasValue);
             Console.WriteLine("try içinde.");
@@ -85,7 +88,10 @@ app.Map("/BookList/", async context =>
                 Console.WriteLine("Gelen mesaj: " + receivedMessage);
                 var jsonMessage = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(receivedMessage);
                 var authToken = jsonMessage?["authToken"]?.ToString();
-                clients.TryAdd(webSocket, authToken!);
+                if (!string.IsNullOrEmpty(authToken))
+                {
+                    clients.TryAdd(webSocket, authToken!);
+                }
                 await SendAllBooks(webSocket);
             } while (!result.CloseStatus.HasValue);
             Console.WriteLine("try içinde.");
@@ -133,10 +139,6 @@ app.Map("/UserList/", async context =>
                 {
                     clients.TryAdd(webSocket, authToken);
                 }
-                else
-                {
-                    Console.WriteLine("Session ID is null or empty.");
-                }
                 await SendAllUsers(webSocket);
             } while (!result.CloseStatus.HasValue);
             Console.WriteLine("try içinde.");
@@ -183,16 +185,10 @@ app.MapPost("/api/Author/Data", async context =>
         if (response.IsSuccessful)
         {
             var bytes = Encoding.UTF8.GetBytes(response.Content!);
-            // Tüm istemcilere yeni veriyi gönder
-            foreach (var client in clients)
+            clients.Where(c => c.Value.Split('_').Last() == "author").ToList().ForEach(async client =>
             {
-
-                if (client.Value == jwtAndObjectName)
-                {
-                    await client.Key.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
-                    break;
-                }
-            }
+                await client.Key.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
+            });
             context.Response.StatusCode = 200;
         }
         else
@@ -222,16 +218,10 @@ app.MapPost("/api/User/Data", async context =>
         if (response.IsSuccessful)
         {
             var bytes = Encoding.UTF8.GetBytes(response.Content!);
-            // Tüm istemcilere yeni veriyi gönder
-            foreach (var client in clients)
+            clients.Where(c => c.Value.Split('_').Last() == "user").ToList().ForEach(async client =>
             {
-             
-                if(client.Value == jwtAndObjectName)
-                {
-                    await client.Key.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
-                    break;
-                }
-            }
+                await client.Key.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
+            });
             context.Response.StatusCode = 200;
         }
         else
@@ -262,16 +252,10 @@ app.MapPost("/api/Book/Data", async context =>
         if (response.IsSuccessful)
         {
             var bytes = Encoding.UTF8.GetBytes(response.Content!);
-            // Tüm istemcilere yeni veriyi gönder
-            foreach (var client in clients)
+            clients.Where(c => c.Value.Split('_').Last() == "book").ToList().ForEach(async client =>
             {
-
-                if (client.Value == jwtAndObjectName)
-                {
-                    await client.Key.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
-                    break;
-                }
-            }
+                await client.Key.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
+            });
             context.Response.StatusCode = 200;
         }
         else

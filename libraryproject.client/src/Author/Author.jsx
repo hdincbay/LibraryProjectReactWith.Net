@@ -121,7 +121,6 @@ function Author() {
         }
     );
 
-    // Sorting books based on the selected key and direction
     const sortedAuthors = filteredAuthors.sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
             return sortConfig.direction === 'ascending' ? -1 : 1;
@@ -134,7 +133,7 @@ function Author() {
     const contents = error ? (
         <p><em>{error}</em></p>
     ) : sortedAuthors.length === 0 ? (
-        <p><em>Book Undefined...</em></p>
+        <p><em>Author Undefined...</em></p>
     ) : (
         <table className="table" aria-labelledby="tableLabel">
             <thead>

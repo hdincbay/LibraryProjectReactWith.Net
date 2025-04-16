@@ -4,7 +4,7 @@ import './AuthorUpdate.css';
 import Config from '../../config.json';
 
 function AuthorUpdate() {
-    const { authorId: paramAuthorId } = useParams(); // URL'den authorId'yi alýyoruz
+    const { authorId: paramAuthorId } = useParams();
     const navigate = useNavigate();
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -17,7 +17,6 @@ function AuthorUpdate() {
             setIsLoggedIn(true);
             if (paramAuthorId) {
                 setAuthorId(paramAuthorId);
-                // Yazar bilgilerini API'den al
                 const fetchAuthorData = async () => {
                     try {
                         const response = await fetch(`${Config.restApiUrl}/api/Author/GetById/${paramAuthorId}`);
@@ -76,7 +75,7 @@ function AuthorUpdate() {
     };
 
     if (!isLoggedIn) {
-        return null; // Eðer kullanýcý giriþ yapmamýþsa hiçbir þey render etme
+        return null;
     }
 
     return (

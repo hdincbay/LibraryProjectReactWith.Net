@@ -156,11 +156,11 @@ function Author() {
                                     className="btn btn-primary"
                                     to={`/AuthorUpdate/${author.authorId}`}
                                     style={{
-                                        height: '2.5rem', // Ayný yükseklik
-                                        display: 'flex',  // Flexbox
-                                        alignItems: 'center', // Ýçeriði dikeyde ortala
-                                        justifyContent: 'center', // Ýçeriði yatayda ortala
-                                        padding: '0 1rem' // Buton içeriði için sað ve sol padding
+                                        height: '2.5rem',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        padding: '0 1rem'
                                     }}
                                 >
                                     <i className="fa-solid fa-pen-nib"></i>&nbsp;Update
@@ -169,11 +169,11 @@ function Author() {
                                     className="btn btn-outline-primary"
                                     onClick={(event) => deleteAuthor(event, author.authorId)}
                                     style={{
-                                        height: '2.5rem', // Ayný yükseklik
-                                        display: 'flex',  // Flexbox
-                                        alignItems: 'center', // Ýçeriði dikeyde ortala
-                                        justifyContent: 'center', // Ýçeriði yatayda ortala
-                                        padding: '0 1rem' // Buton içeriði için sað ve sol padding
+                                        height: '2.5rem',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        padding: '0 1rem'
                                     }}
                                 >
                                     <i className="fa fa-trash"></i>&nbsp;Remove

@@ -251,7 +251,6 @@ namespace LibraryProject.Server.Controllers
         {
             await Task.Run(() =>
             {
-                // Eğer session_id set edilmediyse, bir değer atayalım
                 if (string.IsNullOrEmpty(HttpContext.Session.GetString("session_id")))
                 {
                     HttpContext.Session.SetString("session_id", Guid.NewGuid().ToString());

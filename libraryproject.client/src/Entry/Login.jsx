@@ -13,17 +13,15 @@ function Login() {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    // Form gönderildiðinde çalýþacak fonksiyon
     const handleSubmit = async (event) => {
-        event.preventDefault();  // Sayfanýn yeniden yüklenmesini engeller
+        event.preventDefault();
 
-        setLoading(true);  // API çaðrýsý sýrasýnda bir yükleniyor durumu
+        setLoading(true);
 
         const userData = { userName, password };
 
         try {
             var restUrl = Config.restApiUrl;
-            // API'ye POST isteði gönderme
             const response = await fetch(`${restUrl}/api/User/Login`, {
                 method: 'POST',
                 headers: {

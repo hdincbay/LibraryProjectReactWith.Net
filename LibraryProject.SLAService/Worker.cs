@@ -37,6 +37,7 @@ namespace LibraryProject.SLAService
                                 var getOneRequest = new RestRequest(restApiUrl + "/api/Book/GetById/" + item["bookId"]?.ToString(), Method.Get);
                                 var responseOne = await client.ExecuteAsync(getOneRequest);
                                 var loanEndDate = Convert.ToDateTime(item["loanEndDate"]?.ToString());
+                                var isSlaExceeded = Convert.ToBoolean(item["isSlaExceeded"]?.ToString());
                                 loanEndDate = loanEndDate.AddHours(3);
                                 var currentDate = DateTime.Now;
                                 var currentDateUnix = ((DateTimeOffset)DateTime.Now).ToUnixTimeSeconds();
@@ -46,13 +47,18 @@ namespace LibraryProject.SLAService
                                 var resultDurationUnix = loanEndDateUnix - currentDateUnix;
                                 _logger.LogInformation("Book ID: {bookId} resultDurationUnix: {resultDurationUnix}", bookId, resultDurationUnix);
                                 
-                                if (loanEndDate < currentDate)
+                                if (loanEndDate < currentDate && !isSlaExceeded)
                                 {
                                     _logger.LogInformation("SLA Expired! Book ID: {bookId}", bookId);
                                     putRequestBodyJObj.Add("isSlaExceeded", true);
                                     resultDurationUnix = 0;
                                 }
-                                putRequestBodyJObj.Add("slaExpiryUnixTime", resultDurationUnix);
+                                else if(isSlaExceeded)
+                                {
+                                    _logger.LogInformation("SLA Already Expired! Book ID: {bookId}", bookId);
+                                    return;
+                                }
+                                    putRequestBodyJObj.Add("slaExpiryUnixTime", resultDurationUnix);
                                 putOneRequest.AddBody(Newtonsoft.Json.JsonConvert.SerializeObject(putRequestBodyJObj));
                                 var putResponse = await client.ExecuteAsync(putOneRequest);
                                 _logger.LogInformation("Book ID: {bookId} putResponse.Content: {putResponse.Content}, {DateTimeOffset.Now}", bookId, putResponse.Content, DateTimeOffset.Now);

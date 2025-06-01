@@ -1,1 +1,1 @@
-This project is a library system built using WebSocket Server, SLA Service, .NET Web API, and React technologies.
+This project is a library management system developed using .NET Web API, React, WebSocket Server, RabbitMQ, and an SLA (Service Level Agreement) service. It supports real-time communication, asynchronous message processing via RabbitMQ, and ensures service reliability through integrated SLA monitoring.

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-LibraryProject.RabbitMQConsumer-2db524ad-fee4-4a7f-a578-e7b204f5fbea</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.4.0" />
+    <PackageReference Include="RestSharp" Version="112.1.0" />
+  </ItemGroup>
+</Project>

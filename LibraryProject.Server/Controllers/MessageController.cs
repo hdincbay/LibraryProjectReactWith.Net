@@ -30,7 +30,6 @@ namespace LibraryProject.Server.Controllers
                     var body = requestBodyJObj!["requestBody"]?.ToString();
                     var url = requestBodyJObj!["endpoint"]?.ToString();
                     var methodType = Request.Method;
-                    requestJObj.Add("Method", methodType);
                     requestJObj.Add("Endpoint", url);
                     var requestHeaderJObj = new JObject();
                     var requestHeader = Request.Headers;

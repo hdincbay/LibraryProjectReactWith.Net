@@ -58,8 +58,7 @@ export function Message() {
                 },
                 body: JSON.stringify(data),
             });
-            const jsonData = await response.json();
-            if (response.ok && jsonData.result && jsonData.result.chat) {
+            if (response.ok) {
                 setFormData({
                     chat_id: '',
                     text: ''
@@ -80,7 +79,7 @@ export function Message() {
             if (response.ok && jsonData.result) {
                 const filteredMessage = jsonData.result.filter(msg => msg.message);
                 if (JSON.stringify(filteredMessage) !== JSON.stringify(fromModelList)) {
-                    setFromModelList(filteredMessage); // Update state if messages have changed
+                    setFromModelList(filteredMessage);
                 }
             } else {
                 setFromModelList([]);

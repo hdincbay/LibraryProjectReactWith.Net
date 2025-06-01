@@ -5,7 +5,6 @@ import Config from '../../config.json';
 export function Message() {
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [apiResponseFormat, setApiResponseFormat] = useState('');
     const [fromModelList, setFromModelList] = useState([]);
     const [userList, setUserList] = useState([]);
     const [formData, setFormData] = useState({
@@ -22,12 +21,10 @@ export function Message() {
             getMessages(getMessagesApiEndpointVal);
             getUserList(restApiUrlVal);
 
-            // Set an interval to check for new messages every 5 seconds (5000ms)
             const intervalId = setInterval(() => {
-                getMessages(getMessagesApiEndpointVal); // Check for new messages
+                getMessages(getMessagesApiEndpointVal);
             }, 5000);
 
-            // Cleanup interval on component unmount
             return () => clearInterval(intervalId);
         } else {
             setIsLoggedIn(false);
@@ -36,7 +33,6 @@ export function Message() {
     }, [navigate]);
 
     const handleChange = (e) => {
-        setApiResponseFormat(null);
         const { name, value } = e.target;
         setFormData({
             ...formData,
@@ -45,13 +41,17 @@ export function Message() {
     };
 
     async function sendMessage(sendMessageApiEndpointVal, chatId, text) {
+        const restApiUrlVal = Config.restApiUrl;
         const data = {
-            chat_id: chatId,
-            text: text
+            endpoint: sendMessageApiEndpointVal,
+            requestBody: {
+                chat_id: chatId,
+                text: text
+            }
         };
 
         try {
-            const response = await fetch(sendMessageApiEndpointVal, {
+            const response = await fetch(`${restApiUrlVal}/api/Message/PublishMessage`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -60,20 +60,15 @@ export function Message() {
             });
             const jsonData = await response.json();
             if (response.ok && jsonData.result && jsonData.result.chat) {
-                // Mesaj gönderildiðinde formu sýfýrlama
                 setFormData({
                     chat_id: '',
                     text: ''
                 });
-                const responseFormat = jsonData.result.chat.first_name + ' ' + jsonData.result.chat.last_name + ' kullanicisina mesaj iletilmistir.';
-                setApiResponseFormat(responseFormat);
             } else {
                 console.error("Beklenen veri formatý gelmedi:", jsonData);
-                setApiResponseFormat("Mesaj gonderilemedi.");
             }
         } catch (error) {
             console.error('Mesaj gönderilirken bir hata oluþtu:', error);
-            setApiResponseFormat("Mesaj gönderilirken bir hata oluþtu.");
         }
     }
 
@@ -159,8 +154,6 @@ export function Message() {
                     <i className="fa-brands fa-telegram fa-l"></i>&nbsp;&nbsp;Send
                 </button>
             </form>
-
-            <div className="text-danger display-6">{apiResponseFormat}</div>
 
             {fromModelList.length > 0 ? (
                 <div>

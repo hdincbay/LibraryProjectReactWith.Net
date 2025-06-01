@@ -33,7 +33,7 @@ namespace LibraryProject.SLAService
                             {
                                 var putRequestBodyJObj = new JObject();
                                 var bookId = item["bookId"]?.ToString();
-                                _logger.LogInformation("bookId: {bookId}", bookId);
+                                _logger.LogInformation("Book Id: {bookId}", bookId);
                                 var getOneRequest = new RestRequest(restApiUrl + "/api/Book/GetById/" + item["bookId"]?.ToString(), Method.Get);
                                 var responseOne = await client.ExecuteAsync(getOneRequest);
                                 var loanEndDate = Convert.ToDateTime(item["loanEndDate"]?.ToString());
@@ -58,10 +58,10 @@ namespace LibraryProject.SLAService
                                     _logger.LogInformation("SLA Already Expired! Book ID: {bookId}", bookId);
                                     return;
                                 }
-                                    putRequestBodyJObj.Add("slaExpiryUnixTime", resultDurationUnix);
+                                putRequestBodyJObj.Add("slaExpiryUnixTime", resultDurationUnix);
                                 putOneRequest.AddBody(Newtonsoft.Json.JsonConvert.SerializeObject(putRequestBodyJObj));
                                 var putResponse = await client.ExecuteAsync(putOneRequest);
-                                _logger.LogInformation("Book ID: {bookId} putResponse.Content: {putResponse.Content}, {DateTimeOffset.Now}", bookId, putResponse.Content, DateTimeOffset.Now);
+                                _logger.LogInformation("Book ID: {bookId} Result: {putResponse.Content}, {DateTimeOffset.Now}", bookId, putResponse.Content, DateTimeOffset.Now);
                             }
                         }
                         catch (Exception ex)

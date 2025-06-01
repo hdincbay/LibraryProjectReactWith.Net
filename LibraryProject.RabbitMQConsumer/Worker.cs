@@ -97,7 +97,7 @@ namespace LibraryProject.RabbitMQConsumer
         
             channel.BasicConsume(queue: queue, autoAck: false, consumer: consumer);
 
-            await Task.Delay(-1, stoppingToken);
+            await Task.Delay(applicationRunTime, stoppingToken);
 
         }
     }

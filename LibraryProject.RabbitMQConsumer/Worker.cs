@@ -11,9 +11,10 @@ namespace LibraryProject.RabbitMQConsumer
     {
         private readonly ILogger<Worker> _logger;
         private readonly IConfiguration _configuration;
+        private IConnection _connection;
+        private IModel _channel;
 
         private static readonly object _consoleLock = new();
-        private static readonly object _channelLock = new();
 
         public Worker(ILogger<Worker> logger, IConfiguration configuration)
         {
@@ -37,12 +38,12 @@ namespace LibraryProject.RabbitMQConsumer
                 DispatchConsumersAsync = true
             };
 
-            using var connection = factory.CreateConnection();
-            using var channel = connection.CreateModel();
+            _connection = factory.CreateConnection();
+            _channel = _connection.CreateModel();
 
-            channel.QueueDeclare(queue: queue, durable: true, exclusive: false, autoDelete: false, arguments: null);
+            _channel.QueueDeclare(queue: queue, durable: true, exclusive: false, autoDelete: false, arguments: null);
 
-            var consumer = new AsyncEventingBasicConsumer(channel);
+            var consumer = new AsyncEventingBasicConsumer(_channel);
             consumer.Received += async (model, ea) =>
             {
                 await Task.Run(async () =>
@@ -76,12 +77,12 @@ namespace LibraryProject.RabbitMQConsumer
                                 if (response.IsSuccessStatusCode)
                                 {
                                     _logger.LogInformation("Message send is succesfull.");
-                                    channel.BasicAck(ea.DeliveryTag, multiple: false);
+                                    _channel.BasicAck(ea.DeliveryTag, multiple: false);
                                 }
                                 else
                                 {
                                     _logger.LogError("Message send is error: " + response.Content);
-                                    channel.BasicNack(ea.DeliveryTag, multiple: false, requeue: true);
+                                    _channel.BasicNack(ea.DeliveryTag, multiple: false, requeue: true);
                                 }
 
                             }
@@ -90,12 +91,12 @@ namespace LibraryProject.RabbitMQConsumer
                     catch (Exception ex)
                     {
                         _logger.LogError(ex.ToString());
-                        channel.BasicNack(ea.DeliveryTag, multiple: false, requeue: true);
+                        _channel.BasicNack(ea.DeliveryTag, multiple: false, requeue: true);
                     }
                 });
             };
-        
-            channel.BasicConsume(queue: queue, autoAck: false, consumer: consumer);
+
+            _channel.BasicConsume(queue: queue, autoAck: false, consumer: consumer);
 
             await Task.Delay(applicationRunTime, stoppingToken);
 

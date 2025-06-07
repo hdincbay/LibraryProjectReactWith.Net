@@ -15,73 +15,86 @@ const Home = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        const token = localStorage.getItem('authToken');
-        if (token) {
-            setIsLoggedIn(true);
-        } else {
-            setIsLoggedIn(false);
-            navigate('/Login');
-        }
-
-        const fetchData = async () => {
-            const apiKey = Config.apiKey;
-            const weatherFields = Config.weathers;
-            const podFields = Config.pods;
-
-            try {
-                if (navigator.geolocation) {
-                    const kelvinToCelsius = (kelvin) => kelvin - 273.15;
-                    const position = await new Promise((resolve, reject) => {
-                        navigator.geolocation.getCurrentPosition(resolve, reject);
-                    });
-
-                    const latitude = position.coords.latitude;
-                    const longitude = position.coords.longitude;
-
-                    const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}`);
-                    const data = await response.json();
-
-                    if (Array.isArray(data.list)) {
-                        data.list.forEach(function (element) {
-                            setTempData(prevTempData => [...prevTempData, kelvinToCelsius(element.main.temp)]);
-                            setHumData(prevTempData => [...prevTempData, element.main.humidity]);
-                            setTimeData(prevTimeData => [
-                                ...prevTimeData,
-                                (() => {
-                                    const date = new Date(element.dt * 1000);
-                                    const today = new Date();
-                                    const tomorrow = new Date(today);
-                                    tomorrow.setDate(today.getDate() + 1);
-
-                                    const isToday = date.toDateString() === today.toDateString();
-                                    const isTomorrow = date.toDateString() === tomorrow.toDateString();
-
-                                    const dateString = date.toLocaleDateString('tr-TR', { weekday: 'long', day: '2-digit', month: '2-digit' });
-                                    const timeString = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-                                    if (isToday) {
-                                        return `Bugun ${timeString}`;
-                                    } else if (isTomorrow) {
-                                        return `Yarin ${timeString}`;
-                                    } else {
-                                        return `${dateString} ${timeString}`;
-                                    }
-                                })()
-                            ]);
-                        });
+        const checkSession = async () => {
+            const token = localStorage.getItem('authToken');
+            if (token) {
+                var restUrl = Config.restApiUrl;
+                const response = await fetch(`${restUrl}/api/User/SessionControl`, {
+                    method: 'POST',
+                    headers: {
+                        'token': token
                     }
+                });
+                if (response.ok) {
+                    const fetchData = async () => {
+                        const apiKey = Config.apiKey;
+                        try {
+                            if (navigator.geolocation) {
+                                const kelvinToCelsius = (kelvin) => kelvin - 273.15;
+                                const position = await new Promise((resolve, reject) => {
+                                    navigator.geolocation.getCurrentPosition(resolve, reject);
+                                });
 
-                    setError(false);
-                    setIsControl(true);
-                } else {
-                    setError(true);
+                                const latitude = position.coords.latitude;
+                                const longitude = position.coords.longitude;
+
+                                const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}`);
+                                const data = await response.json();
+
+                                if (Array.isArray(data.list)) {
+                                    data.list.forEach(function (element) {
+                                        setTempData(prevTempData => [...prevTempData, kelvinToCelsius(element.main.temp)]);
+                                        setHumData(prevTempData => [...prevTempData, element.main.humidity]);
+                                        setTimeData(prevTimeData => [
+                                            ...prevTimeData,
+                                            (() => {
+                                                const date = new Date(element.dt * 1000);
+                                                const today = new Date();
+                                                const tomorrow = new Date(today);
+                                                tomorrow.setDate(today.getDate() + 1);
+
+                                                const isToday = date.toDateString() === today.toDateString();
+                                                const isTomorrow = date.toDateString() === tomorrow.toDateString();
+
+                                                const dateString = date.toLocaleDateString('tr-TR', { weekday: 'long', day: '2-digit', month: '2-digit' });
+                                                const timeString = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                                                if (isToday) {
+                                                    return `Bugun ${timeString}`;
+                                                } else if (isTomorrow) {
+                                                    return `Yarin ${timeString}`;
+                                                } else {
+                                                    return `${dateString} ${timeString}`;
+                                                }
+                                            })()
+                                        ]);
+                                    });
+                                }
+
+                                setError(false);
+                                setIsControl(true);
+                            } else {
+                                setError(true);
+                            }
+                        } catch (error) {
+                            setError(true);
+                        }
+                    };
+
+                    fetchData();
+                    setIsLoggedIn(true);
                 }
-            } catch (error) {
-                setError(true);
-            }
-        };
+                else {
+                    setIsLoggedIn(false);
+                    navigate('/Login');
+                }
 
-        fetchData();
+            } else {
+                setIsLoggedIn(false);
+                navigate('/Login');
+            }
+        }
+        checkSession();
     }, [navigate]);
 
     const data = {

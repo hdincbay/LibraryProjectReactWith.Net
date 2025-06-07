@@ -13,23 +13,40 @@ export function Message() {
     });
 
     useEffect(() => {
-        const getMessagesApiEndpointVal = Config.getMessagesApiEndpoint;
-        const restApiUrlVal = Config.restApiUrl;
-        const token = localStorage.getItem('authToken');
-        if (token) {
-            setIsLoggedIn(true);
-            getMessages(getMessagesApiEndpointVal);
-            getUserList(restApiUrlVal);
+        const checkSession = async () => {
+            const token = localStorage.getItem('authToken');
+            if (token) {
+                var restUrl = Config.restApiUrl;
+                const response = await fetch(`${restUrl}/api/User/SessionControl`, {
+                    method: 'POST',
+                    headers: {
+                        'token': token
+                    }
+                });
 
-            const intervalId = setInterval(() => {
-                getMessages(getMessagesApiEndpointVal);
-            }, 5000);
+                if (response.ok) {
+                    const getMessagesApiEndpointVal = Config.getMessagesApiEndpoint;
+                    setIsLoggedIn(true);
+                    getUserList(restUrl);
+                    const intervalId = setInterval(() => {
+                        getMessages(getMessagesApiEndpointVal);
+                    }, 5000);
 
-            return () => clearInterval(intervalId);
-        } else {
-            setIsLoggedIn(false);
-            navigate('/Login');
+                    return () => clearInterval(intervalId);
+                    setIsLoggedIn(true);
+
+                }
+                else {
+                    setIsLoggedIn(false);
+                    navigate('/Login');
+                }
+
+            } else {
+                setIsLoggedIn(false);
+                navigate('/Login');
+            }
         }
+        checkSession();
     }, [navigate]);
 
     const handleChange = (e) => {

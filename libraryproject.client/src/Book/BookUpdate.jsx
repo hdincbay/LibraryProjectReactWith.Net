@@ -83,41 +83,59 @@ function BookUpdate() {
     };
 
     useEffect(() => {
-        const currentUserId = localStorage.getItem('currentUserId');
-        const token = localStorage.getItem('authToken');
-        if (token) {
-            getAuthorListThenSetAuthor();
-            getUserListThenSetUser();
-            setIsLoggedIn(true);
-
-            if (paramBookId) {
-                const fetchBookData = async () => {
-                    try {
-                        const response = await fetch(`${Config.restApiUrl}/api/Book/GetById/${paramBookId}`);
-                        const data = await response.json();
-                        if (response.ok) {
-                            setBookName(data.name);
-                            setAuthorId(data.authorId);
-                            setAvailable(data.available);
-                            setUserId(data.userId);
-                            setLenderId(currentUserId);
-                            setLoanDuration(data.loanDuration);
-                            setLoanDate(formatDate(data.loanDate));
-                            setLoanEndDate(formatDate(data.loanEndDate));
-                        } else {
-                            alert('Failed to retrieve book data');
-                        }
-                    } catch (error) {
-                        console.error('Error occurred while loading book data: ', error);
-                        alert('Failed to load book data.');
+        const checkSession = async () => {
+            const currentUserId = localStorage.getItem('currentUserId');
+            const token = localStorage.getItem('authToken');
+            if (token) {
+                var restUrl = Config.restApiUrl;
+                const response = await fetch(`${restUrl}/api/User/SessionControl`, {
+                    method: 'POST',
+                    headers: {
+                        'token': token
                     }
-                };
-                fetchBookData();
+                });
+
+                if (response.ok) {
+                    getAuthorListThenSetAuthor();
+                    getUserListThenSetUser();
+                    setIsLoggedIn(true);
+
+                    if (paramBookId) {
+                        const fetchBookData = async () => {
+                            try {
+                                const response = await fetch(`${restUrl}/api/Book/GetById/${paramBookId}`);
+                                const data = await response.json();
+                                if (response.ok) {
+                                    setBookName(data.name);
+                                    setAuthorId(data.authorId);
+                                    setAvailable(data.available);
+                                    setUserId(data.userId);
+                                    setLenderId(currentUserId);
+                                    setLoanDuration(data.loanDuration);
+                                    setLoanDate(formatDate(data.loanDate));
+                                    setLoanEndDate(formatDate(data.loanEndDate));
+                                } else {
+                                    alert('Failed to retrieve book data');
+                                }
+                            } catch (error) {
+                                console.error('Error occurred while loading book data: ', error);
+                                alert('Failed to load book data.');
+                            }
+                        };
+                        fetchBookData();
+                    }
+                }
+                else {
+                    setIsLoggedIn(false);
+                    navigate('/Login');
+                }
             }
-        } else {
-            setIsLoggedIn(false);
-            navigate('/Login');
+            else {
+                setIsLoggedIn(false);
+                navigate('/Login');
+            }
         }
+        checkSession();
     }, [paramBookId, navigate]);
 
     const handleSubmit = async (event) => {

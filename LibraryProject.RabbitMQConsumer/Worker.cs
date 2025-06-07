@@ -10,7 +10,7 @@ namespace LibraryProject.RabbitMQConsumer
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
-        private readonly IConfiguration _configuration;
+        private readonly IConfiguration? _configuration;
         private IConnection _connection;
         private IModel _channel;
 

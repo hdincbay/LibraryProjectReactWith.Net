@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using RestSharp;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace LibraryProject.Server.Controllers
 {
@@ -239,26 +240,34 @@ namespace LibraryProject.Server.Controllers
                 {
                     return BadRequest("User not found!");
                 }
-                    
             }
             catch(Exception ex)
             {
                 return BadRequest(ex.ToString());
             }
         }
-        [HttpGet("GetSessionId")]
-        public async Task<IActionResult> GetSessionId()
+        [HttpPost("SessionControl")]
+        public IActionResult SessionControl([FromHeader] string token)
         {
-            await Task.Run(() =>
+            if(token is not null)
             {
-                if (string.IsNullOrEmpty(HttpContext.Session.GetString("session_id")))
+                var handler = new JwtSecurityTokenHandler();
+                var tokenObject = handler.ReadJwtToken(token);
+                var tokenExpDate = tokenObject.Payload.Expiration;
+                var currentDate = DateTimeOffset.Now.ToUnixTimeSeconds();
+                if(currentDate > tokenExpDate)
                 {
-                    HttpContext.Session.SetString("session_id", Guid.NewGuid().ToString());
+                    return Unauthorized("Token is expired!");
                 }
-            });
-
-            var sessionId = HttpContext.Session.GetString("session_id");
-            return Ok(sessionId);
+                else
+                {
+                    return Ok();
+                }
+            }
+            else
+            {
+                return Unauthorized("Token is null!");
+            }
         }
         [HttpGet("GetBookListByUserId/{id:int}")]
         public async Task<IActionResult> GetBookListByUserId([FromRoute] int id)

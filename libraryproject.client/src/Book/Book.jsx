@@ -133,15 +133,33 @@ function Book() {
         setSearchTermSerial('');
         setSearchTermAvailable('');
     };
+    
     useEffect(() => {
-        const token = localStorage.getItem('authToken');
-        if (token) {
-            setIsLoggedIn(true);
+        const checkSession = async () => {
+            const token = localStorage.getItem('authToken');
+            if (token) {
+                var restUrl = Config.restApiUrl;
+                const response = await fetch(`${restUrl}/api/User/SessionControl`, {
+                    method: 'POST',
+                    headers: {
+                        'token': token
+                    }
+                });
             
-        } else {
-            setIsLoggedIn(false);
-            navigate('/Login');
+                if (response.ok) {
+                    setIsLoggedIn(true);
+                }
+                else {
+                    setIsLoggedIn(false);
+                    navigate('/Login');
+                }
+
+            } else {
+                setIsLoggedIn(false);
+                navigate('/Login');
+            }
         }
+        checkSession();
         if (!socketRef.current) {
             connectWebSocket();
         }

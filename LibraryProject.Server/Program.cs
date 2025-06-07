@@ -17,7 +17,7 @@ builder.Services.AddDistributedMemoryCache(); // Çerez tabanlý oturum yönetimi i
 builder.Services.AddSession(options =>
 {
     options.Cookie.Name = ".MyApp.Session"; // Çerez adý
-    options.IdleTimeout = TimeSpan.FromMinutes(30); // Oturum süresi
+    options.IdleTimeout = TimeSpan.FromMinutes(3); // Oturum süresi
     options.Cookie.HttpOnly = true; // Çerez yalnýzca HTTP üzerinden eriþilebilir
     options.Cookie.IsEssential = true; // Çerez zaruri olmalýdýr (GDPR uyumu için)
 });
@@ -48,6 +48,7 @@ builder.Services.AddAuthentication(options =>
         ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
         ValidAudience = builder.Configuration["JwtSettings:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:SecretKey"]!)),
+        RequireExpirationTime = true,
         ClockSkew = TimeSpan.Zero  // Token süresi ile sunucu saati arasýndaki farký tolere etmeyin (bu, güvenliði artýrabilir)
     };
 });

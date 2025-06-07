@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import './First.css';
 import Config from '../config.json';
-import { Routes, Route, Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Routes, Route, NavLink, useNavigate } from 'react-router-dom';
 import Home from './Home.jsx';
 import User from './User/User.jsx';
 import UserCreate from './User/UserCreate.jsx';
@@ -19,103 +18,120 @@ import BookUpdate from './Book/BookUpdate.jsx';
 import Message from './Message/Message.jsx';
 
 function First() {
-    const [currentUserFullName, setCurrentUserFullName] = useState('');
     const navigate = useNavigate();
+    const [currentUserFullName, setCurrentUserFullName] = useState(localStorage.getItem('userFullName') || '');
+    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('authToken'));
 
-    // Oturum açmýþ kullanýcýyý çýkarmak için logout iþlemi
-    const handleLogout = () => {
+    const handleLogout = useCallback(() => {
         localStorage.removeItem('authToken');
         localStorage.removeItem('userFullName');
         setCurrentUserFullName('');
+        setIsLoggedIn(false);
         navigate('/login');
-    };
-
-    const isLoggedIn = localStorage.getItem('authToken') !== null;
+    }, [navigate]);
 
     useEffect(() => {
-        // Oturum açmýþ kullanýcýnýn adýný alýyoruz
-        const getCurrentUserFullName = localStorage.getItem('userFullName');
-        if (getCurrentUserFullName !== null) {
-            setCurrentUserFullName(getCurrentUserFullName);
-        }
+        const checkSession = async () => {
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                setIsLoggedIn(false);
+                navigate('/login');
+                return;
+            }
 
+            try {
+                const restUrl = Config.restApiUrl;
+                const response = await fetch(`${restUrl}/api/User/SessionControl`, {
+                    method: 'POST',
+                    headers: {
+                        'token': token,
+                    },
+                });
 
-        window.addEventListener('beforeunload', handleLogout);
-
-        // Cleanup fonksiyonu
-        return () => {
-            window.removeEventListener('beforeunload', handleLogout);
+                if (response.ok) {
+                    const fullName = localStorage.getItem('userFullName') || '';
+                    setCurrentUserFullName(fullName);
+                    setIsLoggedIn(true);
+                } else {
+                    handleLogout();
+                }
+            } catch (error) {
+                console.error('Session kontrol hatasý:', error);
+                handleLogout();
+            }
         };
-    }, [isLoggedIn]);
+
+        checkSession();
+
+        // Eðer sayfa kapanýrken logout yapmak istersen burayý açabilirsin:
+        // window.addEventListener('beforeunload', handleLogout);
+        // return () => window.removeEventListener('beforeunload', handleLogout);
+    }, [handleLogout]);
 
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light p-3" style={{ minHeight: '70px' }}>
-                <Link className="navbar-brand" to="/Home">
+                <NavLink className="navbar-brand" to="/home">
                     <i className="fa-solid fa-book"></i> Library Application
-                </Link>
+                </NavLink>
 
                 <div className="btn-group" id="navbar">
-                    <Link to="/Weather" className="btn btn-outline-dark">
+                    <NavLink to="/weather" className="btn btn-outline-dark" activeclassname="active">
                         <i className="fa-regular fa-snowflake"></i> Weather
-                    </Link>
-                    <Link to="/Message" className="btn btn-outline-dark">
+                    </NavLink>
+                    <NavLink to="/message" className="btn btn-outline-dark" activeclassname="active">
                         <i className="fa-regular fa-message"></i> Message
-                    </Link>
-                    <Link to="/User" className="btn btn-outline-dark">
+                    </NavLink>
+                    <NavLink to="/user" className="btn btn-outline-dark" activeclassname="active">
                         <i className="fa-regular fa-user"></i> User
-                    </Link>
-                    <Link to="/Author" className="btn btn-outline-dark">
+                    </NavLink>
+                    <NavLink to="/author" className="btn btn-outline-dark" activeclassname="active">
                         <i className="fa-solid fa-book-open-reader"></i> Author
-                    </Link>
-                    <Link to="/Book" className="btn btn-outline-dark">
+                    </NavLink>
+                    <NavLink to="/book" className="btn btn-outline-dark" activeclassname="active">
                         <i className="fa-solid fa-book-open"></i> Book
-                    </Link>
+                    </NavLink>
                 </div>
 
-                {/* Kullanýcý bilgisi ve oturum açma/kapama butonlarý */}
                 <div style={{ position: 'absolute', right: '1rem', top: '1rem', display: 'flex', alignItems: 'center' }}>
-                    {/* Kullanýcý adý, giriþ yaptýysa */}
                     {isLoggedIn && currentUserFullName && (
                         <p id="textfullname" style={{ marginRight: '1rem', fontSize: '1.2rem' }}>
                             <strong>{currentUserFullName}</strong>
                         </p>
                     )}
 
-                    {/* Kullanýcý oturum açtýysa çýkýþ butonu, açmadýysa giriþ/üye ol butonlarý */}
                     {isLoggedIn ? (
                         <button className="btn btn-outline-danger" onClick={handleLogout}>
                             <i className="fa-solid fa-right-from-bracket"></i> Logout
                         </button>
                     ) : (
                         <div className="btn-group">
-                            <Link to="/SignUp" className="nav-link">
+                            <NavLink to="/signup" className="nav-link">
                                 <div className="btn btn-outline-success mx-1">Sign Up</div>
-                            </Link>
-                            <Link to="/Login" className="nav-link">
+                            </NavLink>
+                            <NavLink to="/login" className="nav-link">
                                 <div className="btn btn-outline-primary mx-1">Login</div>
-                            </Link>
+                            </NavLink>
                         </div>
                     )}
                 </div>
             </nav>
 
-            {/* Sayfa yönlendirme (routes) */}
             <Routes>
-                <Route path="/Login/*" element={<Login />} />
-                <Route path="/Home" element={<Home />} />
-                <Route path="/SignUp" element={<SignUp />} />
-                <Route path="/Weather" element={<Weather />} />
-                <Route path="/UserCreate" element={<UserCreate />} />
-                <Route path="/AuthorCreate" element={<AuthorCreate />} />
-                <Route path="/AuthorUpdate/:authorId" element={<AuthorUpdate />} />
-                <Route path="/UserUpdate/:userId" element={<UserUpdate />} />
-                <Route path="/BookUpdate/:bookId" element={<BookUpdate />} />
-                <Route path="/BookCreate" element={<BookCreate />} />
-                <Route path="/Message" element={<Message />} />
-                <Route path="/User" element={<User />} />
-                <Route path="/Author" element={<Author />} />
-                <Route path="/Book" element={<Book />} />
+                <Route path="/login/*" element={<Login />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/weather" element={<Weather />} />
+                <Route path="/usercreate" element={<UserCreate />} />
+                <Route path="/authorcreate" element={<AuthorCreate />} />
+                <Route path="/authorupdate/:authorId" element={<AuthorUpdate />} />
+                <Route path="/userupdate/:userId" element={<UserUpdate />} />
+                <Route path="/bookupdate/:bookId" element={<BookUpdate />} />
+                <Route path="/bookcreate" element={<BookCreate />} />
+                <Route path="/message" element={<Message />} />
+                <Route path="/user" element={<User />} />
+                <Route path="/author" element={<Author />} />
+                <Route path="/book" element={<Book />} />
             </Routes>
         </div>
     );

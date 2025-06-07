@@ -58,49 +58,65 @@ function UserUpdate() {
     }
 
     useEffect(() => {
-        const token = localStorage.getItem('authToken');
-        if (!token) {
-            navigate('/Login');
-            return;
+        const checkSession = async () => {
+            const token = localStorage.getItem('authToken');
+            if (token) {
+                var restUrl = Config.restApiUrl;
+                const response = await fetch(`${restUrl}/api/User/SessionControl`, {
+                    method: 'POST',
+                    headers: {
+                        'token': token
+                    }
+                });
+
+                if (response.ok) {
+                    const fetchUserData = async () => {
+                        try {
+                            const response = await fetch(`${Config.restApiUrl}/api/User/GetOne/${userId}`);
+                            if (!response.ok) throw new Error('Failed to retrieve user information.');
+
+                            const userData = await response.json();
+                            setFirstName(userData.FirstName);
+                            setLastName(userData.LastName);
+                            setEmailAddress(userData.Email);
+                            setUserName(userData.UserName);
+                            setTChatId(userData.t_chatId);
+                        } catch (error) {
+                            alert(error.message);
+                        }
+                    };
+
+                    const getBookListByUser = async () => {
+                        try {
+                            const response = await fetch(`${Config.restApiUrl}/api/User/GetBookListByUserId/${userId}`);
+                            if (!response.ok) throw new Error('Failed to retrieve book list.');
+
+                            const jsonResponse = await response.json();
+                            setBookCount(jsonResponse.length);
+                            setBookList(jsonResponse.map(item => ({
+                                ...item,
+                                slaDuration: formatDuration(item.slaDuration),
+                                loanDate: formatDate(item.loanDate),
+                                loanEndDate: formatDate(item.loanEndDate),
+                            })));
+                        } catch (error) {
+                            alert(error.message);
+                        }
+                    };
+                    fetchUserData();
+                    getBookListByUser();
+                    setIsLoggedIn(true);
+                }
+                else {
+                    setIsLoggedIn(false);
+                    navigate('/Login');
+                }
+            } else {
+                setIsLoggedIn(false);
+                navigate('/Login');
+            }
         }
-        setIsLoggedIn(true);
-
-        const fetchUserData = async () => {
-            try {
-                const response = await fetch(`${Config.restApiUrl}/api/User/GetOne/${userId}`);
-                if (!response.ok) throw new Error('Failed to retrieve user information.');
-
-                const userData = await response.json();
-                setFirstName(userData.FirstName);
-                setLastName(userData.LastName);
-                setEmailAddress(userData.Email);
-                setUserName(userData.UserName);
-                setTChatId(userData.t_chatId);
-            } catch (error) {
-                alert(error.message);
-            }
-        };
-
-        const getBookListByUser = async () => {
-            try {
-                const response = await fetch(`${Config.restApiUrl}/api/User/GetBookListByUserId/${userId}`);
-                if (!response.ok) throw new Error('Failed to retrieve book list.');
-
-                const jsonResponse = await response.json();
-                setBookCount(jsonResponse.length);
-                setBookList(jsonResponse.map(item => ({
-                    ...item,
-                    slaDuration: formatDuration(item.slaDuration),
-                    loanDate: formatDate(item.loanDate),
-                    loanEndDate: formatDate(item.loanEndDate),
-                })));
-            } catch (error) {
-                alert(error.message);
-            }
-        };
-
-        fetchUserData();
-        getBookListByUser();
+        checkSession();
     }, [userId, navigate]);
 
     const handleSubmit = async (event) => {

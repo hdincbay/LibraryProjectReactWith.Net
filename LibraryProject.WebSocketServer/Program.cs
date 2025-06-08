@@ -1,15 +1,21 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using RestSharp;
 using System.Net.WebSockets;
 using System.Text;
 using System.Collections.Concurrent;
 using LibraryProject.WebSocketServer.Helpers;
 using Newtonsoft.Json.Linq;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+Log.Logger = new LoggerConfiguration()
+    .Enrich.WithThreadId()
+    .WriteTo.Console(outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level}] [Thread ID: {ThreadId}] {Message}{NewLine}{Exception}")
+    .WriteTo.File("Logs/LogFile_.log", rollingInterval: RollingInterval.Day,
+        outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level}] [Thread ID: {ThreadId}] {Message}{NewLine}{Exception}")
+    .CreateLogger();
+
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog();
 var app = builder.Build();
 
 

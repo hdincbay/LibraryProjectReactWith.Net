@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import Config from '../../config.json';
 function SignUp() {
     const [userName, setUsername] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -17,7 +19,7 @@ function SignUp() {
 
         setLoading(true);
 
-        const userData = { userName, phoneNumber, email, password, passwordConfirm };
+        const userData = { firstName, lastName, userName, phoneNumber, email, password, passwordConfirm };
 
         try {
             var restUrl = Config.restApiUrl;
@@ -54,6 +56,24 @@ function SignUp() {
                             Sign Up Page
                         </div>
                         <form onSubmit={handleSubmit}>
+                            <div className="form-group my-2">
+                                <label className="form-label">First Name</label>
+                                <input
+                                    className="form-control my-2"
+                                    type="text"
+                                    value={firstName}
+                                    onChange={(e) => setFirstname(e.target.value)}
+                                />
+                            </div>
+                            <div className="form-group my-2">
+                                <label className="form-label">Last Name</label>
+                                <input
+                                    className="form-control my-2"
+                                    type="text"
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
+                                />
+                            </div>
                             <div className="form-group my-2">
                                 <label className="form-label">User Name</label>
                                 <input
@@ -118,7 +138,6 @@ function SignUp() {
                         }}
                         className="col-md-6"
                     >
-                        {/* Ýçerik */}
                     </div>
                 </div>
             </div>

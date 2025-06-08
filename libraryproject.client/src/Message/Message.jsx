@@ -91,7 +91,7 @@ export function Message() {
     async function getMessages(getMessagesApiEndpointVal) {
         try {
             const response = await fetch(getMessagesApiEndpointVal);
-            const jsonData = await response.json();
+            const jsonData = await response.rejson();
 
             if (response.ok && jsonData.result) {
                 const filteredMessage = jsonData.result.filter(msg => msg.message);

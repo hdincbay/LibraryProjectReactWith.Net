@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import Config from '../../config.json';
 function Login() {
     const [userName, setUsername] = useState('');
-    const [currentUserName, setCurrentUserName] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -104,7 +103,6 @@ function Login() {
                         }}
                         className="col-md-6"
                     >
-                        {/* Ýçerik */}
                     </div>
                 </div>
             </div>

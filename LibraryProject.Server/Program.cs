@@ -8,10 +8,19 @@ using LibraryProject.Services.Contract;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+Log.Logger = new LoggerConfiguration()
+    .Enrich.WithThreadId()
+    .WriteTo.Console(outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level}] [Thread ID: {ThreadId}] {Message}{NewLine}{Exception}")
+    .WriteTo.File("Logs/LogFile_.log", rollingInterval: RollingInterval.Day,
+        outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level}] [Thread ID: {ThreadId}] {Message}{NewLine}{Exception}")
+    .CreateLogger();
 
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog();
 // Bellek tabanlý önbellek ve Session yapýlandýrmasý
 builder.Services.AddDistributedMemoryCache(); // Çerez tabanlý oturum yönetimi için
 builder.Services.AddSession(options =>
@@ -19,7 +28,7 @@ builder.Services.AddSession(options =>
     options.Cookie.Name = ".MyApp.Session"; // Çerez adý
     options.IdleTimeout = TimeSpan.FromMinutes(3); // Oturum süresi
     options.Cookie.HttpOnly = true; // Çerez yalnýzca HTTP üzerinden eriþilebilir
-    options.Cookie.IsEssential = true; // Çerez zaruri olmalýdýr (GDPR uyumu için)
+    options.Cookie.IsEssential = true;
 });
 
 // CORS yapýlandýrmasý
@@ -45,17 +54,16 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
-        ValidAudience = builder.Configuration["JwtSettings:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:SecretKey"]!)),
+        ValidIssuer = builder.Configuration["jwtSettings:Issuer"],
+        ValidAudience = builder.Configuration["jwtSettings:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["jwtSettings:SecretKey"]!)),
         RequireExpirationTime = true,
-        ClockSkew = TimeSpan.Zero  // Token süresi ile sunucu saati arasýndaki farký tolere etmeyin (bu, güvenliði artýrabilir)
+        ClockSkew = TimeSpan.Zero
     };
 });
 
 builder.Services.AddSingleton<JwtTokenService>();
 
-// DbContext ve Identity yapýlandýrmasý
 builder.Services.AddDbContext<RepositoryContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("pgsqlconnection"), b => b.MigrationsAssembly("LibraryProject.Server")));
 
@@ -99,14 +107,14 @@ if (app.Environment.IsDevelopment())
 }
 
 // Session, CORS, Authentication ve Authorization middleware sýrasý
-app.UseSession(); // Session'ý en önce tanýmlýyoruz
-app.UseCors("AllowAllOrigins"); // CORS politikasýný tanýmlýyoruz
+app.UseSession();
+app.UseCors("AllowAllOrigins"); // CORS politikasýný tanýmý
 
 app.UseHttpsRedirection(); // HTTPS yönlendirme
 app.UseAuthentication();  // JWT doðrulama iþlemi
 app.UseAuthorization();   // Yetkilendirme iþlemi
 
-app.MapControllers(); // Controller'larý tanýmlýyoruz
+app.MapControllers(); // Controller tanýmý
 
 app.MapFallbackToFile("/index.html"); // SPA kullanýmý için fallback
 

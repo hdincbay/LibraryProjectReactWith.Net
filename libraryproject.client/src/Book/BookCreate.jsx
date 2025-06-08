@@ -41,6 +41,7 @@ function BookCreate() {
                 });
             
                 if (response.ok) {
+                    getAuthorListThenSetAuthor();
                     setIsLoggedIn(true);
                 }
                 else {

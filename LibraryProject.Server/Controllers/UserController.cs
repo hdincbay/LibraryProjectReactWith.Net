@@ -1,15 +1,11 @@
 ﻿using LibraryProject.Entities.Model;
 using LibraryProject.Repositories;
 using LibraryProject.Server.Helpers;
-using LibraryProject.Services.Contract;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
-using RestSharp;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace LibraryProject.Server.Controllers
@@ -22,18 +18,19 @@ namespace LibraryProject.Server.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly JwtTokenService _tokenService;
         private readonly IConfiguration _configuration;
-        private readonly IServiceManager _manager;
         private readonly RepositoryContext _context;
         private readonly Tool _tool;
-        public UserController(UserManager<User> userManager, SignInManager<User> signInManager, JwtTokenService tokenService, IConfiguration configuration, IServiceManager manager, RepositoryContext context, Tool tool)
+        private readonly ILogger<UserController> _logger;
+
+        public UserController(UserManager<User> userManager, SignInManager<User> signInManager, JwtTokenService tokenService, IConfiguration configuration, RepositoryContext context, Tool tool, ILogger<UserController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _tokenService = tokenService;
             _configuration = configuration;
-            _manager = manager;
             _context = context;
             _tool = tool;
+            _logger = logger;
         }
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
@@ -249,6 +246,8 @@ namespace LibraryProject.Server.Controllers
         [HttpPost("SessionControl")]
         public IActionResult SessionControl([FromHeader] string token)
         {
+            var tid = Thread.CurrentThread;
+            _logger.LogWarning("Thread ID: " + tid.ManagedThreadId.ToString());
             if(token is not null)
             {
                 var handler = new JwtSecurityTokenHandler();
@@ -261,6 +260,10 @@ namespace LibraryProject.Server.Controllers
                 }
                 else
                 {
+                    var remainingTimeUnix = tokenExpDate - currentDate;
+                    var remainingTimeSpan = TimeSpan.FromSeconds(Convert.ToDouble(remainingTimeUnix));
+                    var remainingTime = string.Format("{0:D2}:{1:D2}:{2:D2}", remainingTimeSpan.Hours, remainingTimeSpan.Minutes, remainingTimeSpan.Seconds);
+                    _logger.LogWarning(token + " remaining time: " + remainingTime.ToString());
                     return Ok();
                 }
             }

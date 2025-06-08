@@ -16,10 +16,11 @@ import Book from './Book/Book.jsx';
 import BookCreate from './Book/BookCreate.jsx';
 import BookUpdate from './Book/BookUpdate.jsx';
 import Message from './Message/Message.jsx';
+import { useLocation } from 'react-router-dom';
 
 function First() {
     const navigate = useNavigate();
-    const [currentUserFullName, setCurrentUserFullName] = useState(localStorage.getItem('userFullName') || '');
+    const [currentUserFullName, setCurrentUserFullName] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('authToken'));
 
     const handleLogout = useCallback(() => {
@@ -29,10 +30,16 @@ function First() {
         setIsLoggedIn(false);
         navigate('/login');
     }, [navigate]);
-
+    const location = useLocation();
     useEffect(() => {
         const checkSession = async () => {
+            if (location.pathname == '/signup') {
+                navigate('/signup');
+                return;
+            }
             const token = localStorage.getItem('authToken');
+            const userFullName = localStorage.getItem('userFullName');
+            setCurrentUserFullName(userFullName);
             if (!token) {
                 setIsLoggedIn(false);
                 navigate('/login');
@@ -49,24 +56,19 @@ function First() {
                 });
 
                 if (response.ok) {
-                    const fullName = localStorage.getItem('userFullName') || '';
-                    setCurrentUserFullName(fullName);
                     setIsLoggedIn(true);
                 } else {
                     handleLogout();
                 }
             } catch (error) {
-                console.error('Session kontrol hatasý:', error);
+                console.error('Session control error: ', error);
                 handleLogout();
             }
         };
-
         checkSession();
-
-        // Eðer sayfa kapanýrken logout yapmak istersen burayý açabilirsin:
-        // window.addEventListener('beforeunload', handleLogout);
-        // return () => window.removeEventListener('beforeunload', handleLogout);
-    }, [handleLogout]);
+        window.addEventListener('beforeunload', handleLogout);
+        return () => window.removeEventListener('beforeunload', handleLogout);
+    }, [handleLogout, navigate]);
 
     return (
         <div>

@@ -9,18 +9,18 @@ function Book() {
     const [books, setBooks] = useState([]);
     const [error, setError] = useState(null);
     const [authToken, setAuthToken] = useState(null);
-    const [searchTermId, setSearchTermId] = useState('');  // Book id search
-    const [searchTermName, setSearchTermName] = useState('');  // Book name search
-    const [searchTermCreatedDateStart, setSearchTermCreatedDateStart] = useState('');  // Book name search
-    const [searchTermCreatedDateFinish, setSearchTermCreatedDateFinish] = useState('');  // Book name search
-    const [searchTermAuthor, setSearchTermAuthor] = useState('');  // Author name search
-    const [searchTermSerial, setSearchTermSerial] = useState('');  // Serial number search
-    const [searchTermAvailable, setSearchTermAvailable] = useState('');  // Availability search
+    const [searchTermId, setSearchTermId] = useState('');
+    const [searchTermName, setSearchTermName] = useState('');
+    const [searchTermCreatedDateStart, setSearchTermCreatedDateStart] = useState('');
+    const [searchTermCreatedDateFinish, setSearchTermCreatedDateFinish] = useState('');
+    const [searchTermAuthor, setSearchTermAuthor] = useState('');
+    const [searchTermSerial, setSearchTermSerial] = useState('');
+    const [searchTermAvailable, setSearchTermAvailable] = useState('');
     const authTokenVal = localStorage.getItem('authToken');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const [sortConfig, setSortConfig] = useState({
-        key: 'bookId',  // Default sorting by ID
+        key: 'bookId',
         direction: 'ascending'
     });
 
@@ -138,37 +138,38 @@ function Book() {
         const checkSession = async () => {
             const token = localStorage.getItem('authToken');
             if (token) {
-                var restUrl = Config.restApiUrl;
-                const response = await fetch(`${restUrl}/api/User/SessionControl`, {
-                    method: 'POST',
-                    headers: {
-                        'token': token
+                const restUrl = Config.restApiUrl;
+                try {
+                    const response = await fetch(`${restUrl}/api/User/SessionControl`, {
+                        method: 'POST',
+                        headers: {
+                            'token': token,
+                        },
+                    });
+
+                    if (response.ok) {
+                        setIsLoggedIn(true);
+                        // WebSocket baðlantýsýný baþlat
+                        if (!socketRef.current) {
+                            connectWebSocket();
+                        }
+                    } else {
+                        setIsLoggedIn(false);
+                        navigate('/Login');
                     }
-                });
-            
-                if (response.ok) {
-                    setIsLoggedIn(true);
-                }
-                else {
+                } catch (error) {
                     setIsLoggedIn(false);
                     navigate('/Login');
+                    console.error('Error during session check:', error);
                 }
-
             } else {
                 setIsLoggedIn(false);
                 navigate('/Login');
             }
-        }
-        checkSession();
-        if (!socketRef.current) {
-            connectWebSocket();
-        }
-        return () => {
-            if (socketRef.current) {
-                socketRef.current.close();
-            }
         };
-    }, [navigate]);
+
+        checkSession();
+    }, []); // boþ baðýmlýlýk array'i (boþ liste) sadece ilk render'da çalýþmasýný saðlar
 
     if (!isLoggedIn) {
         return null;

@@ -14,7 +14,7 @@ namespace LibraryProject.Server.Helpers
         public JwtTokenService(IConfiguration configuration)
         {
             _configuration = configuration;
-            var secretKey = _configuration["JwtSettings:SecretKey"];
+            var secretKey = _configuration["jwtSettings:SecretKey"];
             _signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey!));
         }
 
@@ -30,10 +30,10 @@ namespace LibraryProject.Server.Helpers
             var signingCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-                issuer: _configuration["JwtSettings:Issuer"],
-                audience: _configuration["JwtSettings:Audience"],
+                issuer: _configuration["jwtSettings:Issuer"],
+                audience: _configuration["jwtSettings:Audience"],
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(Convert.ToDouble(_configuration["JwtSettings:ExpiryMinutes"])),
+                expires: DateTime.UtcNow.AddMinutes(Convert.ToDouble(_configuration["jwtSettings:ExpiryMinutes"])),
                 signingCredentials: signingCredentials
             );
 

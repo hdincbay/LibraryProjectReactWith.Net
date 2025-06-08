@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 
@@ -15,9 +16,20 @@ namespace LibraryProject.SLAService
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            var restApiUrl = _configuration["restApiUrl"];
+            var applicationWaitingTime = 0;
+            var applicationWaiting = _configuration!["applicationWaitingTime"];
+            if (!string.IsNullOrEmpty(applicationWaiting))
+            {
+                applicationWaitingTime = Convert.ToInt32(applicationWaiting);
+                _logger.LogInformation("applicationWaitingTime: " + applicationWaitingTime.ToString());
+            }
+            else
+            {
+                _logger.LogError("applicationWaitingTime is null!");
+            }
             while (!stoppingToken.IsCancellationRequested)
             {
-                var restApiUrl = _configuration["restApiUrl"];
                 var client = new RestClient();
                 var getRequest = new RestRequest(restApiUrl + "/api/Book/GetNotAvailableAllBook", Method.Get);
                 var response = await client.ExecuteAsync(getRequest);
@@ -25,6 +37,10 @@ namespace LibraryProject.SLAService
                 var responseJArray = Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>(responseContent!);
                 try
                 {
+                    if (responseJArray?.Count == 0)
+                    {
+                        _logger.LogInformation("There Are No Books That Do Not Exist!");
+                    }
                     Parallel.ForEach(responseJArray!, async item =>
                     {
                         try
@@ -74,7 +90,7 @@ namespace LibraryProject.SLAService
                 {
                     _logger.LogError("exception: {exception.ToString()}", exception.ToString());
                 }
-                await Task.Delay(5000, stoppingToken);
+                await Task.Delay(applicationWaitingTime, stoppingToken);
             }
         }
     }

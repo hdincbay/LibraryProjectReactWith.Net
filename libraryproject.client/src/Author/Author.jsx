@@ -12,6 +12,7 @@ function Author() {
     const [searchTermId, setSearchTermId] = useState('');
     const [searchTermName, setSearchTermName] = useState('');
     const [searchTermSurname, setSearchTermSurname] = useState('');
+    const [loading, setLoading] = useState(true);
     const [sortConfig, setSortConfig] = useState({
         key: 'authorId',
         direction: 'ascending'
@@ -45,20 +46,23 @@ function Author() {
                             return [...prevAuthors, data].filter(author => !existingIds.has(author.authorId));
                         });
                     }
+                    setLoading(false);
                 }
                 
             } catch (e) {
-                setError('Veri isleme hatasi.');
+                setError('Data processing error!');
             }
         };
 
         newSocket.onerror = (error) => {
-            setError('WebSocket baglanti hatasi. Yeniden deniyor...');
+            setError('WebSocket connection error. Retrying...');
+            setLoading(false);
         };
 
         newSocket.onclose = () => {
-            setError('WebSocket baglantisi kapandi. Yeniden deniyor...');
+            setError('WebSocket connection closed. Retrying...');
             setTimeout(connectWebSocket, 5000);
+            setLoading(false);
         };
 
         socketRef.current = newSocket;
@@ -132,8 +136,12 @@ function Author() {
     });
     const contents = error ? (
         <p><em>{error}</em></p>
-    ) : sortedAuthors.length === 0 ? (
-        <p><em>Author Undefined...</em></p>
+    ) : loading ? (
+            <div style={{ textAlign: "center", marginTop: "50px" }}>
+                <i className="fas fa-spinner fa-spin fa-2x"></i>
+            </div>
+    ): (sortedAuthors.length === 0 ? (
+                <p>No records found.</p>
     ) : (
         <table className="table" aria-labelledby="tableLabel">
             <thead>
@@ -185,7 +193,7 @@ function Author() {
                 ))}
             </tbody>
         </table>
-    );
+    ));
 
     return (
         <div id="componentcontent">

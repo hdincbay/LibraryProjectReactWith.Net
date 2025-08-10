@@ -16,6 +16,7 @@ function User() {
     const [searchTermLastName, setSearchTermLastName] = useState('');
     const [searchTermUsername, setSearchTermUsername] = useState('');
     const [searchTermEmail, setSearchTermEmail] = useState('');
+    const [loading, setLoading] = useState(true);
 
     const [sortConfig, setSortConfig] = useState({
         key: 'id',
@@ -52,19 +53,22 @@ function User() {
                             return [...prevUsers, data].filter(user => !existingIds.has(user.id));
                         });
                     }
+                    setLoading(false);
                 }
             } catch (e) {
-                setError('Veri isleme hatas?.');
+                setError('Data processing error!');
             }
         };
 
         newSocket.onerror = (error) => {
-            setError('WebSocket baglanti hatasi. Yeniden deniyor...');
+            setError('WebSocket connection error. Retrying...');
+            setLoading(false);
         };
 
         newSocket.onclose = () => {
-            setError('WebSocket baglantisi kapandi. Yeniden deniyor...');
+            setError('WebSocket connection closed. Retrying...');
             setTimeout(connectWebSocket, 5000);
+            setLoading(false);
         };
 
         socketRef.current = newSocket;
@@ -165,8 +169,12 @@ function User() {
     });
     const contents = error ? (
         <p><em>{error}</em></p>
-    ) : sortedUsers.length === 0 ? (
-        <p><em>User Undefined...</em></p>
+    ) : loading ? (
+            <div style={{ textAlign: "center", marginTop: "50px" }}>
+                <i className="fas fa-spinner fa-spin fa-2x"></i>
+            </div>
+    ): sortedUsers.length === 0 ? (
+                <p>No records found.</p>
     ) : (
 
         <table className="table" aria-labelledby="tableLabel">

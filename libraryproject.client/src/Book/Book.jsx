@@ -18,6 +18,7 @@ function Book() {
     const [searchTermAvailable, setSearchTermAvailable] = useState('');
     const authTokenVal = localStorage.getItem('authToken');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const [sortConfig, setSortConfig] = useState({
         key: 'bookId',
@@ -79,19 +80,22 @@ function Book() {
                             return [...prevBooks, data].filter(book => !existingIds.has(book.bookId));
                         });
                     }
+                    setLoading(false);
                 }
             } catch (e) {
-                setError('Data processing error.');
+                setError('Data processing error!');
             }
         };
 
         newSocket.onerror = (error) => {
             setError('WebSocket connection error. Retrying...');
+            setLoading(false);
         };
 
         newSocket.onclose = () => {
             setError('WebSocket connection closed. Retrying...');
             setTimeout(connectWebSocket, 5000);
+            setLoading(false);
         };
 
         socketRef.current = newSocket;
@@ -219,72 +223,79 @@ function Book() {
 
     const contents = error ? (
         <p><em>{error}</em></p>
-    ) : sortedBooks.length === 0 ? (
-        <p><em>Book Undefined...</em></p>
-    ) : (
-        <table className="table" aria-labelledby="tableLabel">
-            <thead>
-                
-                <tr>
-                    <th style={{ width: '10%' }} onClick={() => handleSort('bookId')}>ID</th>
-                    <th style={{ width: '20%' }} onClick={() => handleSort('createdDate')}>Created Date</th>
-                    <th style={{ width: '10%' }} onClick={() => handleSort('serialNumber')}>Serial Number</th>
-                    <th style={{ width: '10%' }} onClick={() => handleSort('available')}>Available</th>
-                    <th style={{ width: '20%' }} onClick={() => handleSort('name')}>Name</th>
-                    <th style={{ width: '20%' }} onClick={() => handleSort('authorId')}>Author Name</th>
-                    <th style={{ width: '10%' }}>#</th>
-                </tr>
-            </thead>
-            <tbody>
-                {sortedBooks.map(book => (
-                    <tr key={book.bookId}>
-                        <td>{book.bookId}</td>
-                        <td>{book.createdDate}</td>
-                        <td>{book.serialNumber}</td>
-                        <td>
-                            <input
-                                type="checkbox"
-                                className="form-check-input"
-                                disabled={true}
-                                defaultChecked={book.available}
-                            />
-                        </td>
-                        <td>{book.name}</td>
-                        <td>{book.authorId}</td>
-                        <td>
-                            <div className="col-md-8 offset-md-2" style={{ display: 'flex', flexDirection: 'column' }}>
-                                <Link
-                                    className="btn btn-outline-secondary"
-                                    to={`/BookUpdate/${book.bookId}`}
-                                    style={{
-                                        height: '2.5rem',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        padding: '0 1rem'
-                                    }}
-                                >
-                                    <i className="fa-solid fa-pen-nib"></i>&nbsp;Update
-                                </Link>
-                                <button
-                                    className="btn btn-outline-primary"
-                                    onClick={(event) => deleteBook(event, book.bookId)}
-                                    style={{
-                                        height: '2.5rem',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        padding: '0 1rem'
-                                    }}
-                                >
-                                    <i className="fa fa-trash"></i>&nbsp;Remove
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
+    ) : loading ? (
+            <div style={{ textAlign: "center", marginTop: "50px" }}>
+                <i className="fas fa-spinner fa-spin fa-2x"></i>
+            </div>
+
+        ) : (
+        sortedBooks.length === 0 ? (
+                    <div style={{ textAlign: "center", marginTop: "50px" }}>
+                        <i className="fas fa-spinner fa-spin fa-2x"></i>
+                    </div>
+        ): (<table className = "table" aria- labelledby="tableLabel" >
+                    <thead>
+
+                        <tr>
+                            <th style={{ width: '10%' }} onClick={() => handleSort('bookId')}>ID</th>
+                            <th style={{ width: '20%' }} onClick={() => handleSort('createdDate')}>Created Date</th>
+                            <th style={{ width: '10%' }} onClick={() => handleSort('serialNumber')}>Serial Number</th>
+                            <th style={{ width: '10%' }} onClick={() => handleSort('available')}>Available</th>
+                            <th style={{ width: '20%' }} onClick={() => handleSort('name')}>Name</th>
+                            <th style={{ width: '20%' }} onClick={() => handleSort('authorId')}>Author Name</th>
+                            <th style={{ width: '10%' }}>#</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {sortedBooks.map(book => (
+                            <tr key={book.bookId}>
+                                <td>{book.bookId}</td>
+                                <td>{book.createdDate}</td>
+                                <td>{book.serialNumber}</td>
+                                <td>
+                                    <input
+                                        type="checkbox"
+                                        className="form-check-input"
+                                        disabled={true}
+                                        defaultChecked={book.available}
+                                    />
+                                </td>
+                                <td>{book.name}</td>
+                                <td>{book.authorId}</td>
+                                <td>
+                                    <div className="col-md-8 offset-md-2" style={{ display: 'flex', flexDirection: 'column' }}>
+                                        <Link
+                                            className="btn btn-outline-secondary"
+                                            to={`/BookUpdate/${book.bookId}`}
+                                            style={{
+                                                height: '2.5rem',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                padding: '0 1rem'
+                                            }}
+                                        >
+                                            <i className="fa-solid fa-pen-nib"></i>&nbsp;Update
+                                        </Link>
+                                        <button
+                                            className="btn btn-outline-primary"
+                                            onClick={(event) => deleteBook(event, book.bookId)}
+                                            style={{
+                                                height: '2.5rem',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                padding: '0 1rem'
+                                            }}
+                                        >
+                                            <i className="fa fa-trash"></i>&nbsp;Remove
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>)
     );
 
     return (

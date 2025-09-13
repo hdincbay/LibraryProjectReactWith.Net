@@ -225,7 +225,7 @@ function Book() {
         <p><em>{error}</em></p>
     ) : loading ? (
             <div style={{ textAlign: "center", marginTop: "50px" }}>
-                <i className="fas fa-spinner fa-spin fa-2x"></i>
+                <i className="fas fa-spinner fa-spin fa-3x"></i>
             </div>
 
         ) : (

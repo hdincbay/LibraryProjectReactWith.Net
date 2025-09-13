@@ -230,9 +230,7 @@ function Book() {
 
         ) : (
         sortedBooks.length === 0 ? (
-                    <div style={{ textAlign: "center", marginTop: "50px" }}>
-                        <i className="fas fa-spinner fa-spin fa-2x"></i>
-                    </div>
+                    <p>No records found.</p>
         ): (<table className = "table" aria- labelledby="tableLabel" >
                     <thead>
 

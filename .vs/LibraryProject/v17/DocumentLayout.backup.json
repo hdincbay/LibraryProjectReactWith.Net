@@ -1,7 +1,20 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\book\\book.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\book\\book.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\src\\user\\user.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\src\\user\\user.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|c:\\users\\hdinc\\source\\repos\\libraryprojectreactwith.net\\libraryproject.client\\config.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{99E1AB99-907D-44D6-A4FA-24F30EF44312}|libraryproject.client\\libraryproject.client.esproj|solutionrelative:libraryproject.client\\config.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +22,49 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "User.jsx",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\User\\User.jsx",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\User\\User.jsx",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\User\\User.jsx",
+              "RelativeToolTip": "libraryproject.client\\src\\User\\User.jsx",
+              "ViewState": "AgIAAKIAAAAAAAAAAAAAALAAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-09-13T06:44:01.626Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Book.jsx",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Book\\Book.jsx",
+              "RelativeDocumentMoniker": "libraryproject.client\\src\\Book\\Book.jsx",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\src\\Book\\Book.jsx",
+              "RelativeToolTip": "libraryproject.client\\src\\Book\\Book.jsx",
+              "ViewState": "AgIAAHsAAAAAAAAAAADwv40AAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-09-02T18:45:13.704Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "config.json",
+              "DocumentMoniker": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\config.json",
+              "RelativeDocumentMoniker": "libraryproject.client\\config.json",
+              "ToolTip": "C:\\Users\\hdinc\\source\\repos\\LibraryProjectReactWith.Net\\libraryproject.client\\config.json",
+              "RelativeToolTip": "libraryproject.client\\config.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-08-10T10:47:44.603Z"
             }
           ]
         }
